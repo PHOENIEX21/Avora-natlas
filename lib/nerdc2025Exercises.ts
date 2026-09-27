@@ -66,6 +66,24 @@ function conceptQuestions(classLevel:'JSS1'|'JSS2',subject:'Mathematics'|'Englis
  return out;
 }
 
+const factorsAndMultiplesFoundationQuestions:NerdcExerciseQuestion[]=[
+ {id:'jss1-math-lcm-foundation-01',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'Which statement correctly describes a factor of a whole number?',type:'MULTIPLE_CHOICE',options:['It divides the number exactly with no remainder','It must be greater than the number','It is found only by addition','It always leaves a remainder'],correctAnswer:'It divides the number exactly with no remainder',explanation:'A factor divides a number exactly. If a remainder is left, that divisor is not a factor.',hint:'Use the exact-division test.',difficulty:1,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-02',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'Which of these is NOT a factor of 24?',type:'MULTIPLE_CHOICE',options:['3','4','5','6'],correctAnswer:'5',explanation:'24 ÷ 5 is not a whole number, so 5 is not a factor of 24.',hint:'Divide 24 by each option and look for a remainder.',difficulty:1,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-03',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'Which list contains all the positive factors of 18?',type:'MULTIPLE_CHOICE',options:['1, 2, 3, 6, 9, 18','1, 2, 3, 6, 18','2, 3, 6, 9','1, 3, 6, 9, 18'],correctAnswer:'1, 2, 3, 6, 9, 18',explanation:'The factor pairs of 18 are 1×18, 2×9 and 3×6, giving 1, 2, 3, 6, 9 and 18.',hint:'Build factor pairs from 1 upward.',difficulty:2,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-04',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'When finding factors in pairs from 1 upward, when can you stop testing new divisors?',type:'MULTIPLE_CHOICE',options:['When the two sides of the factor pairs meet or would cross','Immediately after finding 1','Only after testing the number itself','As soon as one divisor leaves a remainder'],correctAnswer:'When the two sides of the factor pairs meet or would cross',explanation:'After the pair values meet or cross, later exact divisions only repeat factor pairs already found in reverse.',hint:'Think about what happens after the pair 6×6 for 36.',difficulty:2,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-05',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'Which list shows the first five positive multiples of 7?',type:'MULTIPLE_CHOICE',options:['7, 14, 21, 28, 35','1, 7, 14, 21, 28','7, 8, 9, 10, 11','7, 21, 35, 49, 63'],correctAnswer:'7, 14, 21, 28, 35',explanation:'Positive multiples of 7 are 7×1, 7×2, 7×3, 7×4, 7×5 and so on.',hint:'Multiply 7 by 1, 2, 3, 4 and 5.',difficulty:1,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-06',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'Because 8 × 5 = 40, which statement is correct?',type:'MULTIPLE_CHOICE',options:['8 is a factor of 40 and 40 is a multiple of 8','40 is a factor of 8 and 8 is a multiple of 40','8 and 40 are both factors of 5','40 is not related to 8 by factors or multiples'],correctAnswer:'8 is a factor of 40 and 40 is a multiple of 8',explanation:'If a×b=c, then a and b are factors of c, while c is a multiple of each factor.',hint:'Ask which number divides the other exactly.',difficulty:2,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-07',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'What are the common factors of 12 and 18?',type:'MULTIPLE_CHOICE',options:['1, 2, 3, 6','1, 2, 6, 12','2, 3, 6, 9','1, 3, 9, 18'],correctAnswer:'1, 2, 3, 6',explanation:'The factors shared by both 12 and 18 are 1, 2, 3 and 6.',hint:'Write both complete factor lists, then keep only shared values.',difficulty:2,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-08',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'Which number is a common multiple of both 4 and 6?',type:'MULTIPLE_CHOICE',options:['12','8','18','20'],correctAnswer:'12',explanation:'12 appears in both multiple lists: 4×3=12 and 6×2=12.',hint:'Check whether each number can be divided exactly by both 4 and 6.',difficulty:1,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-09',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'A teacher has 30 counters. Which group size will NOT divide all 30 counters into equal groups with none left over?',type:'MULTIPLE_CHOICE',options:['4','2','5','6'],correctAnswer:'4',explanation:'30 ÷ 4 leaves a remainder, while 2, 5 and 6 are factors of 30.',hint:'Use exact division; any remainder means the group size is not a factor.',difficulty:2,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'},
+ {id:'jss1-math-lcm-foundation-10',classLevel:'JSS1',subject:'Mathematics',topic:'Lowest Common Multiple (LCM)',prompt:'Two lights flash every 3 seconds and every 4 seconds. Which sequence shows their first three positive common flash times?',type:'MULTIPLE_CHOICE',options:['12, 24, 36 seconds','3, 4, 7 seconds','6, 12, 18 seconds','4, 8, 12 seconds'],correctAnswer:'12, 24, 36 seconds',explanation:'Common multiples of 3 and 4 begin at 12 and continue 24, 36, and so on. This prepares the idea of LCM.',hint:'List multiples of 3 and 4 and identify values appearing in both lists.',difficulty:3,skill:'Factors and Multiples Foundation',source:'AVORA_AUTHORED_NERDC_BANK'}
+];
+
+function isJss1Lcm(classLevel:string,subject:string,topic:string){
+ const t=topic.toLowerCase();
+ return classLevel==='JSS1'&&subject==='Mathematics'&&(t==='lcm'||t.includes('lowest common multiple'));
+}
+
 export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topic:string,count=15):NerdcExerciseQuestion[]{
  if((classLevel!=='JSS1'&&classLevel!=='JSS2')||(subject!=='Mathematics'&&subject!=='English Language'))return [];
  const official=officialNerdc2025Topic(classLevel,subject,topic);if(!official)return [];
@@ -78,6 +96,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
    source:'AVORA_AUTHORED_NERDC_BANK' as const,
   }));
  }
+ const baseCount=isJss1Lcm(classLevel,subject,topic)&&count>15?15:count;
  const existing=compatibleBankQuestions(classLevel,subject,topic).map(q=>({
   id:`nerdc25-bank-${q.id}`,classLevel:q.classLevel,subject:q.subject,topic,
   prompt:q.prompt,type:'MULTIPLE_CHOICE' as const,options:q.options.map(String),correctAnswer:String(q.correctAnswer),
@@ -86,10 +105,12 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
   difficulty:Number(q.difficulty||1),skill:topic,source:'AVORA_REVIEWED_BANK' as const,
  }));
  const unique: NerdcExerciseQuestion[]=[];const prompts=new Set<string>();
- for(const q of existing){const k=q.prompt.toLowerCase().trim();if(prompts.has(k))continue;prompts.add(k);unique.push(q);if(unique.length>=count)break}
- const needed=Math.max(0,count-unique.length);
+ for(const q of existing){const k=q.prompt.toLowerCase().trim();if(prompts.has(k))continue;prompts.add(k);unique.push(q);if(unique.length>=baseCount)break}
+ const needed=Math.max(0,baseCount-unique.length);
  for(const q of conceptQuestions(classLevel,subject,topic,needed)){if(!prompts.has(q.prompt.toLowerCase())){prompts.add(q.prompt.toLowerCase());unique.push(q)}}
- return unique.slice(0,count);
+ const base=unique.slice(0,baseCount);
+ if(isJss1Lcm(classLevel,subject,topic)&&count>15)return [...base,...factorsAndMultiplesFoundationQuestions.slice(0,Math.min(10,count-15)).map(q=>({...q,topic}))];
+ return base;
 }
 
 export function publicNerdc2025ExerciseQuestions(classLevel:string,subject:string,topic:string,count=15):PublicNerdcExerciseQuestion[]{
@@ -98,7 +119,7 @@ export function publicNerdc2025ExerciseQuestions(classLevel:string,subject:strin
 
 export function checkNerdc2025Exercise(questionId:string,answer:string){
  for(const official of officialNerdc2025Topics('JSS1','Mathematics').concat(officialNerdc2025Topics('JSS1','English Language'),officialNerdc2025Topics('JSS2','Mathematics'),officialNerdc2025Topics('JSS2','English Language'))){
-  const q=nerdc2025ExerciseQuestions(official.classLevel,official.subject,official.topic,15).find(item=>item.id===questionId);
+  const q=nerdc2025ExerciseQuestions(official.classLevel,official.subject,official.topic,isJss1Lcm(official.classLevel,official.subject,official.topic)?25:15).find(item=>item.id===questionId);
   if(!q)continue;const correct=norm(answer).toLowerCase()===norm(q.correctAnswer).toLowerCase();
   return {correct,correctAnswer:q.correctAnswer,explanation:q.explanation,hint:correct?'Explain why the rule or evidence makes this answer valid.':q.hint,topic:q.topic,skill:q.skill};
  }
