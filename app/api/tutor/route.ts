@@ -77,7 +77,9 @@ export async function GET(req:Request){
   const topics=academicTopics.map(name=>{
    const aliases=assessmentAliases(classLevel,subject,name);
    const legacyQuestions=aliases.reduce((n,a)=>n+(counts.get(a.toLowerCase())||0),0);
-   return {name,questions:currentNerdc?(classLevel==='JSS1'&&subject==='Mathematics'&&name.toLowerCase()==='whole numbers'?10:15):legacyQuestions};
+   const lower=name.toLowerCase();
+   const nerdcCount=classLevel==='JSS1'&&subject==='Mathematics'?(lower==='whole numbers'?10:(lower==='lcm'||lower.includes('lowest common multiple')?25:15)):15;
+   return {name,questions:currentNerdc?nerdcCount:legacyQuestions};
   });
 
   if(!requestedTopic)return json({exam,subject,classLevel,topics,questions:[],exerciseQuestions:[],plan:null});
@@ -102,7 +104,9 @@ export async function GET(req:Request){
    LIMIT 4
   `);
 
-  const exerciseQuestions=currentNerdc?publicNerdc2025ExerciseQuestions(classLevel,subject,requestedTopic,15):[];
+  const requestedLower=requestedTopic.toLowerCase();
+  const exerciseCount=classLevel==='JSS1'&&subject==='Mathematics'&&(requestedLower==='lcm'||requestedLower.includes('lowest common multiple'))?25:15;
+  const exerciseQuestions=currentNerdc?publicNerdc2025ExerciseQuestions(classLevel,subject,requestedTopic,exerciseCount):[];
   return json({exam,subject,classLevel,topics,questions:questionRows.map(shapeQuestion),exerciseQuestions,plan});
  }catch(error){
   console.error('tutor GET',error);
