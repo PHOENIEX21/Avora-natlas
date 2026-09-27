@@ -247,14 +247,6 @@ const equationsAuthored=Q('Simple Equations','equations',[
 ]);
 
 
-const authoredJss1MathByTopic:Record<string,NerdcExerciseQuestion[]>={
- 'fractions':fractionsAuthored,'addition and subtraction':additionSubtractionAuthored,'addition and subtraction of fractions':fractionAddSubAuthored,'multiplication and division of fractions':fractionMulDivAuthored,
- 'estimation':estimationAuthored,'approximation':approximationAuthored,
- 'addition of numbers in base 2.':binaryAdditionAuthored,'subtraction of numbers in base 2.':binarySubtractionAuthored,'multiplication of numbers in base 2.':binaryMultiplicationAuthored,
- 'use of symbols':symbolsAuthored,'simplification of algebraic expressions':simplifyAuthored,'simple equations':equationsAuthored,
-};
-
-
 const coreLessonBanks:Record<string,AuthoredMathSpec[]>={
  'fractions':[
  ['01','Which pair shows equivalent fractions?',['1/2 and 2/4','1/2 and 2/3','2/5 and 3/5','3/4 and 3/8'],'1/2 and 2/4','Multiplying numerator and denominator of 1/2 by 2 gives 2/4.',1],
@@ -329,6 +321,14 @@ const fractionsAuthored=Q('Fractions','fractions',coreLessonBanks['fractions']);
 const additionSubtractionAuthored=Q('Addition and Subtraction','add-sub',coreLessonBanks['addition and subtraction']);
 const fractionAddSubAuthored=Q('Addition and Subtraction of fractions','fraction-add-sub',coreLessonBanks['addition and subtraction of fractions']);
 const fractionMulDivAuthored=Q('Multiplication and Division of Fractions','fraction-mul-div',coreLessonBanks['multiplication and division of fractions']);
+
+
+const authoredJss1MathByTopic:Record<string,NerdcExerciseQuestion[]>={
+ 'estimation':estimationAuthored,'approximation':approximationAuthored,
+ 'addition of numbers in base 2.':binaryAdditionAuthored,'subtraction of numbers in base 2.':binarySubtractionAuthored,'multiplication of numbers in base 2.':binaryMultiplicationAuthored,
+ 'use of symbols':symbolsAuthored,'simplification of algebraic expressions':simplifyAuthored,'simple equations':equationsAuthored,
+};
+
 
 const planeShapesAuthoredQuestions:NerdcExerciseQuestion[]=[
  ['01','A plane shape is best described as which of these?',['A flat two-dimensional figure','A figure with only height','Any physical object','A solid with length, width and height'],'A flat two-dimensional figure','A plane shape is flat and has two dimensions: length and width.'],
