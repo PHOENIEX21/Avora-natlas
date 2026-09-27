@@ -845,3 +845,7 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .scroll-lesson-section{scroll-margin-top:110px;padding:22px;border:1px solid #e1e5ee;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(25,43,84,.06)}
 .scroll-lesson-section .board-writing{margin-top:16px}
 @media(max-width:720px){.lesson-mode-toolbar{align-items:stretch;flex-direction:column}.explanation-tabs,.view-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-mode-toolbar button{min-height:44px;padding:9px 10px}.view-tabs .exercise-jump{grid-column:1/-1}.scroll-lesson-section{padding:17px;border-radius:16px}}
+
+/* V14.9.3 refinement: lesson controls stay compact and never cover teaching */
+.lesson-mode-toolbar{position:relative;top:auto;z-index:2}
+@media(max-width:720px){.lesson-mode-toolbar{padding:8px;margin:10px 0}.lesson-mode-toolbar button{min-height:40px;font-size:.82rem}.explanation-tabs,.view-tabs{gap:5px}}
