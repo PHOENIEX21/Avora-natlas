@@ -97,6 +97,29 @@ const countingInBaseTwoQuestions:NerdcExerciseQuestion[]=[
  {id:'jss1-math-base2-15',classLevel:'JSS1',subject:'Mathematics',topic:'Counting in Base Two',prompt:'A learner writes the count as 101₂, 110₂, 111₂, 1000₂. Is this part of the binary counting sequence correct?',type:'MULTIPLE_CHOICE',options:['Yes, it represents consecutive quantities 5, 6, 7 and 8','No, 110₂ must come before 101₂','No, 111₂ is not a binary numeral','No, 1000₂ must come immediately after 101₂'],correctAnswer:'Yes, it represents consecutive quantities 5, 6, 7 and 8',explanation:'101₂=5, 110₂=6, 111₂=7 and 1000₂=8, so the sequence is correct.',hint:'Use 4,2,1 and then 8,4,2,1 to check the values.',difficulty:3,skill:'Binary counting mastery',source:'AVORA_AUTHORED_NERDC_BANK'}
 ];
 
+
+const planeShapesAuthoredQuestions:NerdcExerciseQuestion[]=[
+ ['01','A plane shape is best described as which of these?',['A flat two-dimensional figure','A figure with only height','Any physical object','A solid with length, width and height'],'A flat two-dimensional figure','A plane shape is flat and has two dimensions: length and width.'],
+ ['02','Which of these is NOT a polygon?',['Triangle','Rectangle','Circle','Pentagon'],'Circle','A polygon is closed and made from straight line segments. A circle has a curved circumference.'],
+ ['03','What is the general name for a four-sided polygon?',['Triangle','Quadrilateral','Pentagon','Hexagon'],'Quadrilateral','A quadrilateral is any polygon with four sides.'],
+ ['04','A triangle has three equal sides. What type of triangle is it?',['Scalene','Isosceles','Equilateral','Right-angled only'],'Equilateral','An equilateral triangle has all three sides equal.'],
+ ['05','A triangle has side lengths 5 cm, 5 cm and 8 cm. How should it be classified by sides?',['Equilateral','Isosceles','Scalene','Square'],'Isosceles','Exactly two sides are equal, so the triangle is isosceles.'],
+ ['06','Which property distinguishes a square from a general rectangle?',['It has four sides','Its opposite sides are parallel','All four sides are equal','It has vertices'],'All four sides are equal','Both have four right angles, but a square additionally requires all four sides to be equal.'],
+ ['07','Which statement is correct?',['Every rectangle is a square','Every square is a rectangle','No square is a rectangle','A square has no parallel sides'],'Every square is a rectangle','A square satisfies every rectangle property: four right angles and equal, parallel opposite sides.'],
+ ['08','A quadrilateral has both pairs of opposite sides parallel. Which family must it belong to?',['Parallelogram','Triangle','Circle','Pentagon'],'Parallelogram','A parallelogram is defined by two pairs of parallel opposite sides.'],
+ ['09','Which property must a rhombus have?',['Four equal sides','Exactly three sides','No parallel sides','Four right angles in every case'],'Four equal sides','A rhombus has four equal sides; four right angles are not required.'],
+ ['10','Under the JSS1 convention taught in this lesson, a trapezium has which property?',['No sides','Three parallel sides','One pair of opposite sides parallel','Four equal sides and four right angles'],'One pair of opposite sides parallel','The lesson convention identifies a trapezium by one pair of opposite parallel sides.'],
+ ['11','What is the line segment from the centre of a circle to its circumference called?',['Chord','Radius','Tangent','Segment'],'Radius','A radius joins the centre of a circle to a point on its circumference.'],
+ ['12','A circle has radius 9 cm. What is its diameter?',['4.5 cm','9 cm','11 cm','18 cm'],'18 cm','Diameter is two radii: d=2r=2×9=18 cm.'],
+ ['13','Which statement about a diameter is correct?',['Every chord is a diameter','A diameter never passes through the centre','Every diameter is a chord','A diameter touches the circle at one point only'],'Every diameter is a chord','A diameter joins two circumference points, so it is a chord, and it additionally passes through the centre.'],
+ ['14','Which region of a circle is bounded by two radii and the arc between them?',['Sector','Segment','Tangent','Diameter'],'Sector','A sector is bounded by two radii and an arc. A segment is bounded by a chord and an arc.'],
+ ['15','A square is rotated so that it looks like a diamond. What is it now?',['A triangle','A different shape','Still a square because its properties are unchanged','A circle'],'Still a square because its properties are unchanged','Rotation changes orientation, not side lengths, angles or parallel relationships, so the figure remains a square.']
+].map(([n,prompt,options,correctAnswer,explanation],i)=>({id:`jss1-math-plane-shapes-${n}`,classLevel:'JSS1' as const,subject:'Mathematics' as const,topic:'Plane Shapes',prompt:prompt as string,type:'MULTIPLE_CHOICE' as const,options:options as string[],correctAnswer:correctAnswer as string,explanation:explanation as string,hint:'Use the defining property or marked relationship; do not classify from appearance alone.',difficulty:i<5?1:i<11?2:3,skill:'Plane Shapes',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+
+function isJss1PlaneShapes(classLevel:string,subject:string,topic:string){
+ return classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase().trim()==='plane shapes';
+}
+
 function isJss1CountingBaseTwo(classLevel:string,subject:string,topic:string){
  const t=topic.toLowerCase().trim();
  return classLevel==='JSS1'&&subject==='Mathematics'&&(t==='counting in base two'||t==='counting in base 2');
@@ -112,6 +135,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  const official=officialNerdc2025Topic(classLevel,subject,topic);if(!official)return [];
  if(classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers')return wholeNumbersAuthoredQuestions.slice(0,count).map((q,i)=>({id:q.id,classLevel:'JSS1' as const,subject:'Mathematics' as const,topic,prompt:q.prompt,type:'MULTIPLE_CHOICE' as const,options:Array.from(q.options),correctAnswer:q.correctAnswer,explanation:q.explanation,hint:'Return to the matching lesson section, identify the place-value or number-line rule, then try again.',difficulty:i<3?1:i<7?2:3,skill:'Whole Numbers',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(isJss1CountingBaseTwo(classLevel,subject,topic))return countingInBaseTwoQuestions.slice(0,count).map(q=>({...q,topic}));
+ if(isJss1PlaneShapes(classLevel,subject,topic))return planeShapesAuthoredQuestions.slice(0,count).map(q=>({...q,topic}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
