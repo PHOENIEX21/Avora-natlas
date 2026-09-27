@@ -4,6 +4,7 @@ import {evidenceIdsForOfficialTopic} from './nerdc2025TopicMap';
 import {nerdc2025EvidenceForTopic} from './nerdc2025Teaching';
 import {officialNerdc2025Topic,officialNerdc2025Topics} from './nerdc2025Official';
 import {authoredNerdc2025EnglishQuestions} from './nerdc2025AuthoredEnglishExercises';
+import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
 
 export type NerdcExerciseQuestion={
  id:string;classLevel:'JSS1'|'JSS2';subject:'Mathematics'|'English Language';topic:string;
@@ -68,6 +69,7 @@ function conceptQuestions(classLevel:'JSS1'|'JSS2',subject:'Mathematics'|'Englis
 export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topic:string,count=15):NerdcExerciseQuestion[]{
  if((classLevel!=='JSS1'&&classLevel!=='JSS2')||(subject!=='Mathematics'&&subject!=='English Language'))return [];
  const official=officialNerdc2025Topic(classLevel,subject,topic);if(!official)return [];
+ if(classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers')return wholeNumbersAuthoredQuestions.slice(0,count).map((q,i)=>({...q,classLevel:'JSS1' as const,subject:'Mathematics' as const,topic,type:'MULTIPLE_CHOICE' as const,hint:'Return to the matching lesson section, identify the place-value or number-line rule, then try again.',difficulty:i<3?1:i<7?2:3,skill:'Whole Numbers',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
