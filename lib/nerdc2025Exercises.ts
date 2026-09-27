@@ -98,6 +98,160 @@ const countingInBaseTwoQuestions:NerdcExerciseQuestion[]=[
 ];
 
 
+
+type AuthoredMathSpec=[string,string,string[],string,string,number];
+const Q=(topic:string,prefix:string,rows:AuthoredMathSpec[]):NerdcExerciseQuestion[]=>rows.map(([n,prompt,options,correctAnswer,explanation,difficulty])=>({id:`jss1-math-${prefix}-${n}`,classLevel:'JSS1',subject:'Mathematics',topic,prompt,type:'MULTIPLE_CHOICE',options,correctAnswer,explanation,hint:'Use the exact rule taught in the lesson and show the reasoning before choosing.',difficulty,skill:topic,source:'AVORA_AUTHORED_NERDC_BANK'}));
+
+const estimationAuthored=Q('Estimation','estimation',[
+['01','Which statement best describes estimation?',['Finding a reasonable approximate value without exact measurement','Always measuring exactly','Changing every number to zero','Guessing without evidence'],'Finding a reasonable approximate value without exact measurement','Estimation is a reasoned approximation supported by a reference, comparison or experience.',1],
+['02','Which is an appropriate unit for estimating the length of a classroom?',['metres','milligrams','litres','seconds'],'metres','Classroom length is a distance on the scale of metres.',1],
+['03','A door is about 2 m high. Which estimate for a similar door is most reasonable?',['1.9 m','19 m','190 m','2 km'],'1.9 m','A known 2 m reference makes 1.9 m plausible.',1],
+['04','Which action makes an estimate stronger?',['Compare with a familiar known reference','Choose the largest number','Ignore units','Use an unrelated object'],'Compare with a familiar known reference','A reference gives evidence for the approximate value.',2],
+['05','Which is an estimate rather than a measurement?',['The table is about 1.5 m long','A tape reads exactly 1.47 m','The scale reads 3.20 kg','A clock shows 8:15'],'The table is about 1.5 m long','“About” from comparison without exact measurement is estimation.',1],
+['06','Which unit is most suitable for estimating the capacity of a bucket?',['litres','kilometres','kilograms','minutes'],'litres','Capacity is commonly expressed in litres.',1],
+['07','Which unit is most suitable for estimating the mass of a bag of rice?',['kilograms','metres','litres','hours'],'kilograms','Mass of a bag of rice is appropriately estimated in kilograms.',1],
+['08','A 1 m ruler appears to fit along a bench about 2.5 times. What is a reasonable estimated length?',['2.5 m','25 m','0.25 m','250 m'],'2.5 m','1 m × about 2.5 gives about 2.5 m.',2],
+['09','Why should an estimate include a unit?',['The number alone does not state what quantity scale is meant','Units make every answer exact','Units are only decoration','Only teachers need units'],'The number alone does not state what quantity scale is meant','The unit gives meaning and scale to the estimated number.',2],
+['10','Which estimate is most reasonable for walking across a classroom?',['A few metres','A few kilometres','A few millimetres','Hundreds of kilometres'],'A few metres','A classroom is normally measured on the scale of metres.',2],
+['11','An estimate is very different from a known reference. What should you do?',['Recheck the comparison and unit','Accept it automatically','Remove the unit','Multiply it by 100'],'Recheck the comparison and unit','Reasonableness checking is part of estimation.',2],
+['12','Which is the best sequence?',['Identify quantity, choose unit, choose reference, compare, calculate if needed, check reasonableness','Guess, remove unit, stop','Measure exactly, then call it an estimate','Choose any number, then choose a reference'],'Identify quantity, choose unit, choose reference, compare, calculate if needed, check reasonableness','This is the taught evidence-based estimation method.',3],
+['13','A 500 mL bottle fills a container about four times. Estimate the capacity.',['2 L','20 L','200 L','0.2 L'],'2 L','4×500 mL=2000 mL=2 L.',3],
+['14','Which statement is correct?',['An estimate can be useful even when an exact value is unnecessary','Every estimate must equal the exact measurement','Estimation has no role in checking calculations','A reasonable estimate needs no context'],'An estimate can be useful even when an exact value is unnecessary','Estimation supports quick decisions and reasonableness checks.',2],
+['15','A learner estimates a pencil as 2 km long. What is the main problem?',['The value and unit are unreasonable for the object','The number is even','Kilometres cannot measure length','All estimates must be below 1'],'The value and unit are unreasonable for the object','A pencil requires a much smaller length scale.',3]
+]);
+
+const approximationAuthored=Q('Approximation','approximation',[
+['01','What does approximation do?',['Replaces a known value with a nearby simpler value at a stated accuracy','Measures an unknown object without tools','Always makes a number larger','Removes every decimal digit'],'Replaces a known value with a nearby simpler value at a stated accuracy','Approximation begins with a known value and rounds it to a specified accuracy.',1],
+['02','43 rounded to the nearest 10 is',['40','50','43','30'],'40','43 is 3 from 40 and 7 from 50, so it is nearer 40.',1],
+['03','48 rounded to the nearest 10 is',['50','40','48','60'],'50','48 is nearer 50 than 40.',1],
+['04','45 rounded to the nearest 10 using the school convention is',['50','40','45','55'],'50','45 is halfway; a deciding digit of 5 rounds upward.',1],
+['05','4582 rounded to the nearest 100 is',['4600','4500','4580','5000'],'4600','The hundreds digit is 5 and the tens deciding digit is 8, so the hundreds digit increases.',2],
+['06','7483 rounded to the nearest 1000 is',['7000','8000','7480','7500'],'7000','The thousands digit is 7 and the hundreds deciding digit is 4, so keep 7.',2],
+['07','Which symbol correctly shows an approximate equality?',['≈','=','≠','>'],'≈','The symbol ≈ means approximately equal.',1],
+['08','Why is 487≈500 acceptable to the nearest hundred?',['487 is closer to 500 than to 400','487 equals 500 exactly','87 is ignored without a rule','All numbers round to 500'],'487 is closer to 500 than to 400','Nearest rounding is based on distance to neighbouring multiples.',2],
+['09','3.46 rounded to 1 decimal place is',['3.5','3.4','3.46','4.0'],'3.5','The tenths digit is 4 and the hundredths deciding digit is 6, so increase 4 to 5.',2],
+['10','7.432 rounded to 2 decimal places is',['7.43','7.44','7.4','7.4320'],'7.43','The hundredths digit is 3 and the next digit is 2, so it stays 3.',2],
+['11','Estimate 49+31 by rounding each to the nearest ten.',['80','70','90','100'],'80','49≈50 and 31≈30, so 50+30=80.',2],
+['12','Estimate 198×5 by rounding 198 to the nearest hundred.',['1000','500','200','2000'],'1000','198≈200, then 200×5=1000.',2],
+['13','Which step comes first when rounding?',['Identify the requested place value','Always add 1','Delete all digits','Look only at the first digit'],'Identify the requested place value','You must know the required accuracy before choosing the deciding digit.',2],
+['14','When the deciding digit is 0–4, what happens to the rounding digit?',['It stays the same','It always increases','It becomes zero','It doubles'],'It stays the same','The standard rule keeps the rounding digit when the next digit is 0–4.',2],
+['15','Which statement correctly distinguishes estimation from approximation?',['Estimation can judge an unknown quantity; approximation rounds a known value','They are always identical','Approximation never uses place value','Estimation must be exact'],'Estimation can judge an unknown quantity; approximation rounds a known value','This is the key conceptual distinction taught across the two topics.',3]
+]);
+
+const binaryAdditionAuthored=Q('Addition of numbers in base 2.','binary-add',[
+['01','What is 1+1 in binary?',['10₂','2₂','11₂','1₂'],'10₂','Two units regroup as one unit in the 2¹ place and zero units in 2⁰.',1],
+['02','What is 1+1+1 in binary?',['11₂','10₂','3₂','100₂'],'11₂','Three in base ten is 2+1, written 11₂.',2],
+['03','Why are binary place values 1,2,4,8?',['They are 2⁰,2¹,2²,2³','They are multiples of 10','They are chosen randomly','They are decimal digits'],'They are 2⁰,2¹,2²,2³','Base-two positions are powers of two.',1],
+['04','2³ equals',['8','6','4','16'],'8','2³=2×2×2=8.',1],
+['05','1011₂ equals which base-ten value?',['11','9','13','7'],'11','(1×8)+(0×4)+(1×2)+(1×1)=11.',2],
+['06','What is 10₂+1₂?',['11₂','10₂','100₂','1₂'],'11₂','2+1=3, represented as 11₂.',1],
+['07','What is 11₂+1₂?',['100₂','10₂','101₂','12₂'],'100₂','3+1=4 and 4 is 100₂.',2],
+['08','What is 101₂+10₂?',['111₂','110₂','100₂','1010₂'],'111₂','5+2=7, which is 111₂.',2],
+['09','What is 110₂+11₂?',['1001₂','111₂','1010₂','1100₂'],'1001₂','6+3=9, and 9 is 1001₂.',2],
+['10','A carry in binary occurs because',['two units of a place regroup into one unit of the next place','ten units are always needed','the digit 2 is written in the answer','the number is odd'],'two units of a place regroup into one unit of the next place','Base two regroups whenever two units collect in one place.',2],
+['11','What is 111₂+1₂?',['1000₂','1111₂','110₂','1010₂'],'1000₂','7+1=8 and 8 is 1000₂.',2],
+['12','What is 101₂+101₂?',['1010₂','111₂','1001₂','1100₂'],'1010₂','5+5=10; 10₁₀ is 1010₂.',3],
+['13','Which is a valid way to verify a binary sum?',['Convert both addends and the result to base ten and compare','Check whether the result contains a 2','Remove all zeros','Reverse the digits'],'Convert both addends and the result to base ten and compare','Base-ten conversion independently checks the represented values.',2],
+['14','In the 2² column, two units of value 4 regroup as',['one unit of value 8','one unit of value 4','two units of value 8','one unit of value 2'],'one unit of value 8','4+4=8, which is one unit in the next binary place.',3],
+['15','What is 1011₂+110₂?',['10001₂','1111₂','10101₂','11001₂'],'10001₂','11+6=17; 17=16+1=10001₂.',3]
+]);
+
+const binarySubtractionAuthored=Q('Subtraction of numbers in base 2.','binary-sub',[
+['01','What is 1₂−1₂?',['0₂','1₂','10₂','11₂'],'0₂','One minus one is zero.',1],
+['02','What is 1₂−0₂?',['1₂','0₂','10₂','11₂'],'1₂','One minus zero remains one.',1],
+['03','Why must 0−1 sometimes borrow in binary?',['There is not enough value in the current column','Binary allows negative digits in every answer','1 becomes 2 automatically','Subtraction is multiplication'],'There is not enough value in the current column','A higher-place unit must be regrouped into the current place.',2],
+['04','Borrowing one 2¹ unit into the 2⁰ column gives how many 2⁰ units?',['2','1','10','4'],'2','2¹=2 and 2⁰=1, so one value-2 unit becomes two value-1 units.',2],
+['05','What is 10₂−1₂?',['1₂','0₂','10₂','11₂'],'1₂','2−1=1.',1],
+['06','What is 11₂−1₂?',['10₂','1₂','11₂','100₂'],'10₂','3−1=2, represented as 10₂.',1],
+['07','What is 101₂−10₂?',['11₂','10₂','1₂','100₂'],'11₂','5−2=3, represented as 11₂.',2],
+['08','What is 100₂−1₂?',['11₂','10₂','1₂','101₂'],'11₂','4−1=3; regrouping passes through the zero columns.',2],
+['09','What is 110₂−11₂?',['11₂','10₂','101₂','1₂'],'11₂','6−3=3, represented as 11₂.',2],
+['10','When borrowing through a zero, what should happen?',['Regroup one place at a time from the nearest higher place with value','Skip the zero without explanation','Write 2 as a binary digit','Change subtraction to addition'],'Regroup one place at a time from the nearest higher place with value','Each place-value exchange must be accounted for.',3],
+['11','What is 1000₂−1₂?',['111₂','110₂','101₂','100₂'],'111₂','8−1=7, represented as 111₂.',2],
+['12','What is 1010₂−11₂?',['111₂','101₂','110₂','1001₂'],'111₂','10−3=7, represented as 111₂.',3],
+['13','How can subtraction be checked by inverse operation?',['Add the difference to the subtrahend and recover the minuend','Subtract the answer again','Multiply all digits','Reverse the minuend'],'Add the difference to the subtrahend and recover the minuend','Subtraction and addition are inverse operations.',2],
+['14','Why does one 2³ unit become two 2² units when regrouped?',['8=2×4','8=4+4+4','3−2=1','Binary uses decimal ten'],'8=2×4','The value is conserved: one 8 equals two 4s.',3],
+['15','What is 1111₂−101₂?',['1010₂','1001₂','1100₂','111₂'],'1010₂','15−5=10, represented as 1010₂.',3]
+]);
+
+const binaryMultiplicationAuthored=Q('Multiplication of numbers in base 2.','binary-mul',[
+['01','What is 1×1 in binary?',['1','0','10','11'],'1','One group of one is one.',1],
+['02','What is 1×0?',['0','1','10','11'],'0','Any quantity multiplied by zero is zero.',1],
+['03','Why does multiplying a binary number by 10₂ shift occupied places one position left?',['10₂ equals 2, so every place value doubles','A zero is simply attached by magic','10₂ equals decimal ten','The digits reverse'],'10₂ equals 2, so every place value doubles','Multiplication by 2 moves each contribution to the next power of two.',2],
+['04','What is 11₂×10₂?',['110₂','11₂','100₂','111₂'],'110₂','3×2=6, represented as 110₂.',2],
+['05','What is 10₂×10₂?',['100₂','10₂','1000₂','11₂'],'100₂','2×2=4, represented as 100₂.',1],
+['06','What is 101₂×10₂?',['1010₂','111₂','1001₂','110₂'],'1010₂','5×2=10, represented as 1010₂.',2],
+['07','In vertical binary multiplication, why is the second partial product shifted left when multiplying by the 2¹ digit?',['That digit represents twice the unit place','All second rows are decorative','It represents one half','The first row is wrong'],'That digit represents twice the unit place','Position records the multiplier place value.',2],
+['08','What is 101₂×11₂?',['1111₂','1010₂','1001₂','1101₂'],'1111₂','5×3=15, represented as 1111₂.',2],
+['09','A zero digit inside the multiplier contributes',['a zero partial product','the same multiplicand','a carry of 1','an invalid row'],'a zero partial product','Zero groups contribute zero at that place.',2],
+['10','What is 110₂×101₂?',['11110₂','11011₂','10110₂','10010₂'],'11110₂','6×5=30, and 30 is 11110₂.',3],
+['11','When adding partial products, 1+1 equals',['10₂','2₂','1₂','11₂'],'10₂','Two units regroup into the next binary place.',2],
+['12','What is 111₂×11₂?',['10101₂','11111₂','10001₂','11001₂'],'10101₂','7×3=21, represented as 10101₂.',3],
+['13','What is 101₂×111₂?',['100011₂','11101₂','10111₂','110011₂'],'100011₂','5×7=35, represented as 100011₂.',3],
+['14','Which verification is valid for 101₂×11₂=1111₂?',['5×3=15','5+3=15','101×11=1111 in decimal','15×3=5'],'5×3=15','Converting to base ten confirms the represented product.',2],
+['15','Why should “just add a zero” not be the explanation for multiplying by 10₂?',['The real reason is a place-value shift caused by multiplying by 2','Zeros are forbidden in binary','It works only in base ten','10₂ equals zero'],'The real reason is a place-value shift caused by multiplying by 2','The rule must be grounded in powers and place value.',3]
+]);
+
+const symbolsAuthored=Q('Use of Symbols','symbols',[
+['01','In algebra, a letter such as x usually represents',['a number that may be unknown or variable','a multiplication sign only','a unit of length only','the number zero always'],'a number that may be unknown or variable','A symbol can stand for an unknown or changing number.',1],
+['02','Which is an equation?',['x+3=8','3x+5','7−2','4y'],'x+3=8','An equation states equality using an equals sign.',1],
+['03','If □+5=12, what is □?',['7','17','5','12'],'7','Subtract 5 from both sides: □=7.',1],
+['04','If 2x=10, what is x?',['5','8','12','20'],'5','Divide both sides by 2 to preserve equality.',1],
+['05','Which operation undoes adding 6?',['subtracting 6','adding 6 again','multiplying by 6','dividing by 6'],'subtracting 6','Subtraction is the inverse of addition.',1],
+['06','Which operation undoes multiplying by 4?',['dividing by 4','adding 4','subtracting 4','multiplying by 4 again'],'dividing by 4','Division is the inverse of multiplication.',1],
+['07','Solve x−4=9.',['13','5','36','−13'],'13','Add 4 to both sides: x=13.',2],
+['08','Solve x/3=5.',['15','8','2','5/3'],'15','Multiply both sides by 3: x=15.',2],
+['09','Why must the same operation be performed on both sides of an equation?',['To preserve equality','To make x disappear by magic','Because every equation must get larger','To change the equals sign'],'To preserve equality','An equation behaves like a balance.',2],
+['10','Which statement correctly translates “a number plus 7 is 15”?',['x+7=15','7x=15','x−7=15','x/7=15'],'x+7=15','The unknown number plus seven equals fifteen.',2],
+['11','Solve 2x+3=11.',['4','7','14','3'],'4','Subtract 3 to get 2x=8, then divide by 2.',2],
+['12','Which line correctly follows 3x−5=16?',['3x=21','3x=11','x−5=13','3x=80'],'3x=21','Add 5 to both sides: 3x=21.',2],
+['13','If a symbol is replaced by its solution in the original equation, what should happen?',['Both sides should have equal values','The equals sign should disappear','The variable must become negative','The left side must be larger'],'Both sides should have equal values','Substitution into the original equation verifies the solution.',2],
+['14','Which is the best reason for x=8−3 from x+3=8?',['3 was subtracted from both sides','3 moved across by itself','The sign changes whenever we want','8 must always be first'],'3 was subtracted from both sides','The balance operation is the reason behind the shorthand.',3],
+['15','Solve 4x+2=18.',['4','5','8','16'],'4','Subtract 2 to get 4x=16, then divide by 4.',3]
+]);
+
+const simplifyAuthored=Q('Simplification of Algebraic Expressions','simplify',[
+['01','In 5x+3, what is the coefficient of x?',['5','3','x','8'],'5','The coefficient is the numerical factor multiplying the variable.',1],
+['02','What coefficient is understood in x?',['1','0','x','−1'],'1','x=1x because 1×x=x.',1],
+['03','Which pair are like terms?',['3x and 5x','3x and 5y','3x and 5x²','3 and 5x'],'3x and 5x','Like terms have exactly the same variable part.',1],
+['04','Simplify 3x+5x.',['8x','8x²','15x','8'],'8x','Add coefficients 3+5 and keep x.',1],
+['05','Simplify 7x−3x.',['4x','4','10x','4x²'],'4x','(7−3)x=4x.',1],
+['06','Can 3x+5y be combined into one like term?',['No','Yes, as 8x','Yes, as 8y','Yes, as 15xy'],'No','x-terms and y-terms have different variable parts.',2],
+['07','Simplify 3x+4+2x+5.',['5x+9','5x+20','10x+9','5x²+9'],'5x+9','Combine x terms and constants separately.',2],
+['08','Simplify 4x+3y+2x+5y.',['6x+8y','14xy','9x+5y','6x+5y'],'6x+8y','4x+2x=6x and 3y+5y=8y.',2],
+['09','Simplify 5x−x.',['4x','5','6x','4'],'4x','x means 1x, so (5−1)x=4x.',2],
+['10','What are the terms in 7x−2+3x−5?',['7x, −2, 3x, −5','7x, 2, 3x, 5','7, x, 2, 3, x, 5','10x, 7'],'7x, −2, 3x, −5','Each sign belongs to the term that follows it.',2],
+['11','Expand 3(x+2).',['3x+6','3x+2','x+6','6x'],'3x+6','Distribute 3 to both x and 2.',2],
+['12','Simplify 2(x+4)+3x.',['5x+8','5x+4','2x+12','6x+8'],'5x+8','Expand to 2x+8+3x, then combine like terms.',3],
+['13','Simplify 6x−6x.',['0','x','6','12x'],'0','(6−6)x=0x=0.',2],
+['14','Why can 5a and 3a² not be combined as like terms?',['a and a² are different variable parts','Their coefficients are odd','They both contain a','All powers can be ignored'],'a and a² are different variable parts','Like terms require the same variable raised to the same power.',3],
+['15','Which substitution can check 3x+2x=5x?',['Choose any value such as x=4 and compare both sides','Replace x by another letter only','Delete x','Check coefficients without values'],'Choose any value such as x=4 and compare both sides','For x=4, both expressions equal 20.',3]
+]);
+
+const equationsAuthored=Q('Simple Equations','equations',[
+['01','What does the equals sign in an equation mean?',['The two sides have the same value','Move everything right','The answer is always positive','Add the sides'],'The two sides have the same value','An equation states a balance of equal values.',1],
+['02','Solve x+3=8.',['5','11','3','8'],'5','Subtract 3 from both sides.',1],
+['03','Solve x−4=7.',['11','3','28','−11'],'11','Add 4 to both sides.',1],
+['04','Solve 3x=12.',['4','9','15','36'],'4','Divide both sides by 3.',1],
+['05','Solve x/5=3.',['15','8','2','5/3'],'15','Multiply both sides by 5.',1],
+['06','Solve 2x+3=11.',['4','7','14','3'],'4','Subtract 3 to get 2x=8, then divide by 2.',2],
+['07','Solve 3x−5=16.',['7','11','21','3'],'7','Add 5 to get 3x=21, then divide by 3.',2],
+['08','Solve 14=x+6.',['8','20','6','14'],'8','Subtract 6 from both sides, giving 8=x, so x=8.',2],
+['09','Solve 2x+3x=20.',['4','5','10','20'],'4','Combine like terms: 5x=20, then divide by 5.',2],
+['10','Solve 2(x+3)=14.',['4','10','7','11'],'4','Divide by 2 to get x+3=7, then subtract 3.',2],
+['11','Why is “move across and change sign” incomplete as an explanation?',['The valid reason is performing the same inverse operation on both sides','Signs never change','Equations have no sides','It works only for multiplication'],'The valid reason is performing the same inverse operation on both sides','Balance and inverse operations justify each transformation.',3],
+['12','Tunde has x pencils, receives 5 and now has 12. Which equation models this?',['x+5=12','5x=12','x−5=12','x/5=12'],'x+5=12','Starting amount plus five equals twelve.',2],
+['13','Three identical books cost ₦1500. What is the cost x of one book?',['₦500','₦1500','₦4500','₦503'],'₦500','3x=1500, so x=1500÷3=500.',2],
+['14','A taxi charges ₦200 plus ₦100 per kilometre and the total is ₦700. How many kilometres were travelled?',['5','7','9','3'],'5','100x+200=700; subtract 200 to get 100x=500; divide by 100.',3],
+['15','What is the best final check after solving an equation?',['Substitute the value into the original equation and verify both sides match','Look only at the last line','Change the answer sign','Round every answer'],'Substitute the value into the original equation and verify both sides match','Checking the original equation confirms the solution satisfies the starting condition.',3]
+]);
+
+const authoredJss1MathByTopic:Record<string,NerdcExerciseQuestion[]>={
+ 'estimation':estimationAuthored,'approximation':approximationAuthored,
+ 'addition of numbers in base 2.':binaryAdditionAuthored,'subtraction of numbers in base 2.':binarySubtractionAuthored,'multiplication of numbers in base 2.':binaryMultiplicationAuthored,
+ 'use of symbols':symbolsAuthored,'simplification of algebraic expressions':simplifyAuthored,'simple equations':equationsAuthored,
+};
+
 const planeShapesAuthoredQuestions:NerdcExerciseQuestion[]=[
  ['01','A plane shape is best described as which of these?',['A flat two-dimensional figure','A figure with only height','Any physical object','A solid with length, width and height'],'A flat two-dimensional figure','A plane shape is flat and has two dimensions: length and width.'],
  ['02','Which of these is NOT a polygon?',['Triangle','Rectangle','Circle','Pentagon'],'Circle','A polygon is closed and made from straight line segments. A circle has a curved circumference.'],
@@ -136,6 +290,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers')return wholeNumbersAuthoredQuestions.slice(0,count).map((q,i)=>({id:q.id,classLevel:'JSS1' as const,subject:'Mathematics' as const,topic,prompt:q.prompt,type:'MULTIPLE_CHOICE' as const,options:Array.from(q.options),correctAnswer:q.correctAnswer,explanation:q.explanation,hint:'Return to the matching lesson section, identify the place-value or number-line rule, then try again.',difficulty:i<3?1:i<7?2:3,skill:'Whole Numbers',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(isJss1CountingBaseTwo(classLevel,subject,topic))return countingInBaseTwoQuestions.slice(0,count).map(q=>({...q,topic}));
  if(isJss1PlaneShapes(classLevel,subject,topic))return planeShapesAuthoredQuestions.slice(0,count).map(q=>({...q,topic}));
+ if(classLevel==='JSS1'&&subject==='Mathematics'){const exact=authoredJss1MathByTopic[topic.toLowerCase().trim()];if(exact)return exact.slice(0,count).map(q=>({...q,topic}));}
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
