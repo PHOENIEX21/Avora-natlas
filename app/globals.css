@@ -832,3 +832,16 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 
 /* In-lesson checks reuse real CBT questions; they are visually distinct from teaching and from the final mastery exercise. */
 .lesson-quick-check-cbt{margin:14px 0;padding:16px;border:1px solid #d8c78f;border-left:5px solid #b88721;border-radius:14px;background:#fffaf0}.lesson-quick-check-cbt>span{font-size:10px;font-weight:900;letter-spacing:.12em;color:#765817}.lesson-quick-check-cbt>h3{margin:7px 0 12px;color:#342b18}.lesson-quick-check-cbt .teacher-question{background:#fff;border:1px solid #e2d6b2;border-radius:12px;padding:14px}.lesson-quick-check-cbt .teacher-options{display:grid;gap:8px}.lesson-quick-check-cbt .teacher-options button{min-height:52px;text-align:left}
+
+
+/* V14.9.3 — clean learner explanation/view controls */
+.lesson-mode-toolbar{position:sticky;top:0;z-index:12;display:flex;justify-content:space-between;gap:12px;align-items:center;margin:14px 0;padding:10px;border:1px solid rgba(27,52,111,.14);border-radius:18px;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(25,43,84,.08)}
+.explanation-tabs,.view-tabs{display:flex;gap:7px;flex-wrap:wrap}
+.lesson-mode-toolbar button{border:1px solid #d8deeb;background:#fff;color:#1b346f;border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}
+.lesson-mode-toolbar button.active{background:#1b346f;color:#fff;border-color:#1b346f}
+.lesson-mode-toolbar .exercise-jump{background:#9b6b08;color:#fff;border-color:#9b6b08}
+.explanation-picker small{display:block;margin-top:4px;font-weight:600;opacity:.72}
+.lesson-scroll-view{display:grid;gap:18px}
+.scroll-lesson-section{scroll-margin-top:110px;padding:22px;border:1px solid #e1e5ee;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(25,43,84,.06)}
+.scroll-lesson-section .board-writing{margin-top:16px}
+@media(max-width:720px){.lesson-mode-toolbar{align-items:stretch;flex-direction:column}.explanation-tabs,.view-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-mode-toolbar button{min-height:44px;padding:9px 10px}.view-tabs .exercise-jump{grid-column:1/-1}.scroll-lesson-section{padding:17px;border-radius:16px}}
