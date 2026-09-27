@@ -247,16 +247,88 @@ const equationsAuthored=Q('Simple Equations','equations',[
 ]);
 
 
-function lessonAlignedCoreQuestions(topic:string){
- const key=topic.toLowerCase().trim();
- if(!['fractions','addition and subtraction','addition and subtraction of fractions','multiplication and division of fractions'].includes(key))return [];
- return conceptQuestions('JSS1','Mathematics',topic,15).map(q=>({...q,source:'AVORA_AUTHORED_NERDC_BANK' as const}));
-}
 const authoredJss1MathByTopic:Record<string,NerdcExerciseQuestion[]>={
+ 'fractions':fractionsAuthored,'addition and subtraction':additionSubtractionAuthored,'addition and subtraction of fractions':fractionAddSubAuthored,'multiplication and division of fractions':fractionMulDivAuthored,
  'estimation':estimationAuthored,'approximation':approximationAuthored,
  'addition of numbers in base 2.':binaryAdditionAuthored,'subtraction of numbers in base 2.':binarySubtractionAuthored,'multiplication of numbers in base 2.':binaryMultiplicationAuthored,
  'use of symbols':symbolsAuthored,'simplification of algebraic expressions':simplifyAuthored,'simple equations':equationsAuthored,
 };
+
+
+const coreLessonBanks:Record<string,AuthoredMathSpec[]>={
+ 'fractions':[
+ ['01','Which pair shows equivalent fractions?',['1/2 and 2/4','1/2 and 2/3','2/5 and 3/5','3/4 and 3/8'],'1/2 and 2/4','Multiplying numerator and denominator of 1/2 by 2 gives 2/4.',1],
+ ['02','Which fraction is equivalent to 3/5?',['6/10','6/5','3/10','9/10'],'6/10','Multiply both numerator and denominator by 2.',1],
+ ['03','Simplify 12/18 to lowest terms.',['2/3','6/9','3/4','4/5'],'2/3','HCF(12,18)=6; 12÷6=2 and 18÷6=3.',2],
+ ['04','Which is larger?',['3/4','2/3','They are equal','Cannot be compared'],'3/4','Using denominator 12: 3/4=9/12 and 2/3=8/12.',2],
+ ['05','Arrange 1/2, 3/4, 2/3 from smallest to largest.',['1/2, 2/3, 3/4','3/4, 2/3, 1/2','2/3, 1/2, 3/4','1/2, 3/4, 2/3'],'1/2, 2/3, 3/4','With denominator 12 they are 6/12, 8/12 and 9/12.',2],
+ ['06','Convert 3/4 to a decimal.',['0.75','0.34','0.8','0.25'],'0.75','3÷4=0.75.',1],
+ ['07','Convert 0.6 to a fraction in lowest terms.',['3/5','6/5','1/6','2/3'],'3/5','0.6=6/10; divide top and bottom by 2 to get 3/5.',2],
+ ['08','Convert 2/5 to a percentage.',['40%','20%','25%','50%'],'40%','2/5=0.4 and 0.4×100%=40%.',1],
+ ['09','Convert 35% to a fraction in lowest terms.',['7/20','35/10','3/5','7/10'],'7/20','35%=35/100; divide by 5 to get 7/20.',2],
+ ['10','What is 3/4 of ₦800?',['₦600','₦200','₦400','₦750'],'₦600','800÷4=200, then 200×3=600.',2],
+ ['11','To generate an equivalent fraction, you must',['multiply or divide numerator and denominator by the same non-zero number','change only the numerator','change only the denominator','add the same number to top and bottom'],'multiply or divide numerator and denominator by the same non-zero number','Changing both by the same factor preserves the value.',2],
+ ['12','Which fraction equals 0.25?',['1/4','1/2','2/5','3/4'],'1/4','1÷4=0.25.',1],
+ ['13','Which method safely compares several unlike fractions?',['Rewrite them with a common denominator','Compare denominators only','Compare numerators only','Add all denominators'],'Rewrite them with a common denominator','Equal denominators create equal-sized parts, so numerators can then be compared.',2],
+ ['14','A class shares 24 oranges and Ada receives 3/8. How many oranges does she receive?',['9','8','6','3'],'9','24÷8=3, then 3×3=9.',3],
+ ['15','Why is 2/4 the same amount as 1/2?',['Both numerator and denominator of 1/2 were multiplied by 2','Only the numerator doubled','Their denominators are even','All fractions with 2 are equal'],'Both numerator and denominator of 1/2 were multiplied by 2','The same scaling of top and bottom preserves the fraction value.',3]
+ ],
+ 'addition and subtraction':[
+ ['01','What is 4,582+2,307?',['6,889','6,789','6,899','7,889'],'6,889','Align place values and add each column.',1],
+ ['02','What is 9,000−3,475?',['5,525','6,525','5,575','6,475'],'5,525','Subtract with regrouping while preserving place values.',2],
+ ['03','In 47,326, the digit 7 has value',['7,000','700','70,000','7'],'7,000','7 is in the thousands place.',1],
+ ['04','What is −3+5?',['2','−8','8','−2'],'2','Start at −3 and move 5 units right on the number line.',1],
+ ['05','What is 4+(−7)?',['−3','11','3','−11'],'−3','From 4 move 7 units left, landing at −3.',2],
+ ['06','What is −2−5?',['−7','3','7','−3'],'−7','Subtracting 5 means move 5 units left from −2.',2],
+ ['07','What is −6−(−4)?',['−2','−10','10','2'],'−2','Subtracting −4 is equivalent to adding 4: −6+4=−2.',3],
+ ['08','Which everyday situation can represent a negative number?',['A temperature 5°C below zero','Five books on a desk','A height of 5 m','Five new pupils'],'A temperature 5°C below zero','Values below a reference zero can be represented negatively.',1],
+ ['09','On a number line, adding a positive integer means generally moving',['right','left','nowhere','up'],'right','Values increase to the right.',1],
+ ['10','On a number line, subtracting a positive integer means generally moving',['left','right','up','nowhere'],'left','Subtraction decreases the value.',1],
+ ['11','What is 15−23?',['−8','8','38','−38'],'−8','Moving 23 left from 15 passes zero and ends at −8.',2],
+ ['12','A bank balance changes from ₦2,000 to ₦1,250. What is the change?',['−₦750','₦750','−₦1,250','₦3,250'],'−₦750','1250−2000=−750, so the balance decreased by ₦750.',2],
+ ['13','Which calculation requires regrouping?',['402−178','800−100','65−20','44−11'],'402−178','A zero place must be regrouped so smaller digits can be subtracted.',2],
+ ['14','Why must digits be aligned by place value in column addition?',['So units combine with units, tens with tens, and so on','To make numbers look equal','Because commas are operations','Only for even numbers'],'So units combine with units, tens with tens, and so on','Each column represents a different power of ten.',2],
+ ['15','A temperature is −4°C and rises by 9°C. What is the new temperature?',['5°C','−13°C','13°C','−5°C'],'5°C','−4+9=5.',3]
+ ],
+ 'addition and subtraction of fractions':[
+ ['01','What is 2/7+3/7?',['5/7','5/14','1/7','6/7'],'5/7','Equal denominators mean equal-sized parts; add the numerators.',1],
+ ['02','What is 5/8−1/8?',['1/2','4/16','4/8','3/8'],'1/2','5/8−1/8=4/8, then simplify to 1/2.',1],
+ ['03','What is the LCM of 2 and 3 for 1/2+1/3?',['6','5','3','2'],'6','6 is the smallest number divisible by both 2 and 3.',1],
+ ['04','What is 1/2+1/3?',['5/6','2/5','1/5','2/6'],'5/6','LCM=6. 6÷2=3, so 1/2=3/6; 6÷3=2, so 1/3=2/6; total 5/6.',2],
+ ['05','What is 3/4−1/6?',['7/12','2/2','1/2','5/12'],'7/12','LCM(4,6)=12: 3/4=9/12 and 1/6=2/12; 9/12−2/12=7/12.',2],
+ ['06','When converting 2/5 to denominator 20, the new numerator is',['8','4','10','2'],'8','20÷5=4, then 4×2=8.',2],
+ ['07','Why can you not simply add denominators in 1/2+1/3?',['Halves and thirds are different-sized parts','Denominators are never numbers','The answer must be a whole number','Only numerators matter'],'Halves and thirds are different-sized parts','The fractions must first be renamed using equal-sized parts.',2],
+ ['08','What is 3/4+1/2−1/3?',['11/12','5/12','13/12','3/4'],'11/12','LCM=12: 9/12+6/12−4/12=11/12.',3],
+ ['09','What is 1 1/2+2 1/4?',['3 3/4','3 1/4','2 3/4','4'],'3 3/4','Add whole parts and fraction parts: 1+2=3 and 1/2+1/4=3/4.',2],
+ ['10','For 4 1/5−2 3/5, why is exchange needed?',['1/5 is smaller than 3/5','4 is smaller than 2','The denominators differ','Mixed numbers cannot be subtracted'],'1/5 is smaller than 3/5','Exchange one whole as 5/5, making 4 1/5 into 3 6/5.',2],
+ ['11','What is 4 1/5−2 3/5?',['1 3/5','2 2/5','1 2/5','2 3/5'],'1 3/5','4 1/5=3 6/5; then 3 6/5−2 3/5=1 3/5.',3],
+ ['12','After finding an LCM, what should be done to each fraction?',['LCM÷old denominator, then multiply that result by the numerator','Add LCM to numerator','Multiply only the denominator','Change numerator randomly'],'LCM÷old denominator, then multiply that result by the numerator','This shows exactly where every new numerator comes from.',2],
+ ['13','What is 2/3+5/9?',['1 2/9','7/12','7/9','1 1/9'],'1 2/9','2/3=6/9; 6/9+5/9=11/9=1 2/9.',2],
+ ['14','A learner uses denominator 12 for 1/3+1/4. What are the equivalent fractions?',['4/12 and 3/12','3/12 and 4/12','1/12 and 1/12','4/3 and 3/4'],'4/12 and 3/12','12÷3=4, 4×1=4; 12÷4=3, 3×1=3.',2],
+ ['15','A tank is 2/5 full and another 1/4 of its capacity is added. How full is it?',['13/20','3/9','3/5','7/20'],'13/20','LCM(5,4)=20: 2/5=8/20 and 1/4=5/20; total 13/20.',3]
+ ],
+ 'multiplication and division of fractions':[
+ ['01','What is 2/3×3/5?',['2/5','6/8','5/8','1/5'],'2/5','Multiply numerators and denominators: 6/15, then simplify to 2/5.',1],
+ ['02','Do you need a common denominator before multiplying fractions?',['No','Yes, always','Only when numerators differ','Only for proper fractions'],'No','Multiplication combines numerators and denominators directly.',1],
+ ['03','What is 3/4 of 20?',['15','5','12','16'],'15','“Of” means multiply: 3/4×20=15.',1],
+ ['04','Convert 1 1/2 to an improper fraction.',['3/2','2/1','1/2','4/2'],'3/2','1×2=2; 2+1=3; keep denominator 2.',1],
+ ['05','What is 1 1/2×2?',['3','2 1/2','4','1'],'3','3/2×2/1=3.',2],
+ ['06','What operation undoes multiplication by a non-zero fraction?',['Division by that fraction','Addition','Subtraction','Rounding'],'Division by that fraction','Division is the inverse of multiplication.',1],
+ ['07','To divide by 2/3, multiply by',['3/2','2/3','1/3','3'],'3/2','The reciprocal of 2/3 is 3/2.',1],
+ ['08','What is 3/4÷2/5?',['15/8','6/20','8/15','5/6'],'15/8','Keep 3/4, change ÷ to ×, flip 2/5 to 5/2: 3/4×5/2=15/8.',2],
+ ['09','Why does multiplying by the reciprocal perform division?',['A number times its reciprocal equals 1, undoing the divisor factor','Because fractions must be flipped at random','Because denominators cannot divide','It only works for 2'],'A number times its reciprocal equals 1, undoing the divisor factor','The reciprocal is the multiplicative inverse.',3],
+ ['10','What is 2 1/3÷1/2?',['4 2/3','1 1/6','2 2/3','3 1/3'],'4 2/3','2 1/3=7/3; 7/3×2/1=14/3=4 2/3.',2],
+ ['11','What is 2/5×15/4 after cancellation?',['3/2','30/20','17/9','2/3'],'3/2','Cancel 2 with 4 and 15 with 5 before multiplying, giving 1×3/(1×2)=3/2.',2],
+ ['12','Which phrase usually signals multiplication of fractions?',['“of”','“difference between”','“how many groups fit into”','“less than”'],'“of”','In fraction problems, “of” commonly means multiply.',1],
+ ['13','How many 1/4-litre portions fit into 2 litres?',['8','2','4','6'],'8','2÷1/4=2×4=8.',2],
+ ['14','What is 3/5÷9/10?',['2/3','27/50','3/2','6/5'],'2/3','3/5×10/9; cancel 3 with 9 and 10 with 5 to get 2/3.',3],
+ ['15','A recipe uses 2/3 cup per batch. How many batches can be made from 4 cups?',['6','2 2/3','4 2/3','8'],'6','4÷2/3=4×3/2=6.',3]
+ ]
+};
+const fractionsAuthored=Q('Fractions','fractions',coreLessonBanks['fractions']);
+const additionSubtractionAuthored=Q('Addition and Subtraction','add-sub',coreLessonBanks['addition and subtraction']);
+const fractionAddSubAuthored=Q('Addition and Subtraction of fractions','fraction-add-sub',coreLessonBanks['addition and subtraction of fractions']);
+const fractionMulDivAuthored=Q('Multiplication and Division of Fractions','fraction-mul-div',coreLessonBanks['multiplication and division of fractions']);
 
 const planeShapesAuthoredQuestions:NerdcExerciseQuestion[]=[
  ['01','A plane shape is best described as which of these?',['A flat two-dimensional figure','A figure with only height','Any physical object','A solid with length, width and height'],'A flat two-dimensional figure','A plane shape is flat and has two dimensions: length and width.'],
@@ -296,7 +368,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers')return wholeNumbersAuthoredQuestions.slice(0,count).map((q,i)=>({id:q.id,classLevel:'JSS1' as const,subject:'Mathematics' as const,topic,prompt:q.prompt,type:'MULTIPLE_CHOICE' as const,options:Array.from(q.options),correctAnswer:q.correctAnswer,explanation:q.explanation,hint:'Return to the matching lesson section, identify the place-value or number-line rule, then try again.',difficulty:i<3?1:i<7?2:3,skill:'Whole Numbers',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(isJss1CountingBaseTwo(classLevel,subject,topic))return countingInBaseTwoQuestions.slice(0,count).map(q=>({...q,topic}));
  if(isJss1PlaneShapes(classLevel,subject,topic))return planeShapesAuthoredQuestions.slice(0,count).map(q=>({...q,topic}));
- if(classLevel==='JSS1'&&subject==='Mathematics'){const key=topic.toLowerCase().trim();const exact=authoredJss1MathByTopic[key]||lessonAlignedCoreQuestions(topic);if(exact.length)return exact.slice(0,count).map(q=>({...q,topic}));}
+ if(classLevel==='JSS1'&&subject==='Mathematics'){const key=topic.toLowerCase().trim();const exact=authoredJss1MathByTopic[key];if(exact)return exact.slice(0,count).map(q=>({...q,topic}));}
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
