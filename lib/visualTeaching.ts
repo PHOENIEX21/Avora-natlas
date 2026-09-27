@@ -1,6 +1,6 @@
 export type VisualKind =
   | 'aligned-equations' | 'coordinate-plane' | 'number-line' | 'fraction-model'
-  | 'place-value' | 'binary-place-value' | 'triangle' | 'polygon' | 'solid'
+  | 'place-value' | 'binary-place-value' | 'triangle' | 'polygon' | 'plane-shapes' | 'solid'
   | 'construction' | 'bearing' | 'angle' | 'data-chart' | 'bar-model' | 'none';
 
 export type VisualSpec = {
@@ -10,6 +10,7 @@ export type VisualSpec = {
 };
 
 const rules: Array<{test: RegExp; kind: VisualKind; title: string; caption: string}> = [
+  {test:/plane shapes?|quadrilateral family|square vs rectangle|rhombus|trapezium|kite|circle foundation|circumference|radius|diameter|chord|sector|segment|tangent|rotation does not change|diagonals and bisection/i,kind:'plane-shapes',title:'Exact plane-shape diagram',caption:'Property marks—not appearance—identify the shape: equal-side ticks, parallel arrows, right-angle squares and labelled circle parts are drawn exactly.'},
   {test:/simultaneous|linear equation|equations involving|equations with brackets/i,kind:'aligned-equations',title:'Equation board',caption:'Corresponding terms stay aligned so every operation and change can be followed.'},
   {test:/statistics|data|bar chart|pie chart|line graph|frequency/i,kind:'data-chart',title:'Data representation',caption:'Tables and charts are used when the lesson is about reading or presenting data.'},
   {test:/graph|tables, graphs|coordinate/i,kind:'coordinate-plane',title:'Coordinate plane',caption:'Axes, scale, plotted evidence and intersections belong on the board—not hidden in prose.'},
