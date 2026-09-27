@@ -849,3 +849,7 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 /* V14.9.3 refinement: lesson controls stay compact and never cover teaching */
 .lesson-mode-toolbar{position:relative;top:auto;z-index:2}
 @media(max-width:720px){.lesson-mode-toolbar{padding:8px;margin:10px 0}.lesson-mode-toolbar button{min-height:40px;font-size:.82rem}.explanation-tabs,.view-tabs{gap:5px}}
+
+/* Direct exercise action: visible but compact; never overlays lesson content */
+.lesson-mode-toolbar .exercise-jump{background:#9b6b08;color:#fff;border-color:#9b6b08;padding-inline:12px}
+@media(max-width:720px){.view-tabs .exercise-jump{grid-column:auto;font-size:.78rem;padding:7px 9px}}
