@@ -77,7 +77,7 @@ export async function GET(req:Request){
   const topics=academicTopics.map(name=>{
    const aliases=assessmentAliases(classLevel,subject,name);
    const legacyQuestions=aliases.reduce((n,a)=>n+(counts.get(a.toLowerCase())||0),0);
-   return {name,questions:currentNerdc?15:legacyQuestions};
+   return {name,questions:currentNerdc?(classLevel==='JSS1'&&subject==='Mathematics'&&name.toLowerCase()==='whole numbers'?10:15):legacyQuestions};
   });
 
   if(!requestedTopic)return json({exam,subject,classLevel,topics,questions:[],exerciseQuestions:[],plan:null});
