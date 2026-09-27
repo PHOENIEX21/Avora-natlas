@@ -1334,6 +1334,50 @@ independentPractice:[
 'Two datasets both have 5 values. Dataset A: 4,5,6,7,8 (median 6). Dataset B: 4,5,6,7,100 (also median 6). Explain, referencing the median’s resistance to extreme values, why both datasets share the same median despite Dataset B containing a much larger maximum value.'
 ],
 mastery:{criterion:'Learner correctly orders data before finding the median, uses the correct middle-position rule for odd datasets and correctly averages the two middle values for even datasets, and can explain why the median resists distortion from extreme values.',status:'DEEP_WHEN_PASSED'},boardReady:true
+},
+{
+topic:'Addition of Binary Numbers',source:{authority:'NERDC',url:sourceUrl,page:8},
+objectives:['Explain binary place values using powers of 2','Derive binary addition facts','Add binary numbers with and without carrying','Explain every carry as regrouping','Check binary sums by conversion to base ten'],
+prerequisites:['Counting in Base Two','Conversion of Base 10 to Binary Numbers (1–10)','powers of 2 and place value'],
+teaching:[
+'FOUNDATION FIRST: binary is base 2, so every position is a power of 2. Starting at the rightmost position, exponents begin at zero: 2⁰, 2¹, 2², 2³, 2⁴, 2⁵. Do not jump straight to 1,2,4,8,16,32; derive each value.',
+'WHERE THE PLACE VALUES COME FROM. 2⁰=1, so 1×2⁰=1×1=1. Next, 2¹=2, so 1×2¹=2. Next, 2²=2×2=4, so 1×2²=4. Next, 2³=2×2×2=8, so 1×2³=8. Next, 2⁴=2×2×2×2=16. Next, 2⁵=32. Therefore right-to-left place values are 1,2,4,8,16,32,... and each new place is twice the previous because the base is 2.',
+'READ 1011₂ WITHOUT ASSUMPTION. Assign powers from right: digits 1,0,1,1 correspond left-to-right to 2³,2²,2¹,2⁰. Thus 1011₂=(1×2³)+(0×2²)+(1×2¹)+(1×2⁰). Now derive: 2³=8, 2²=4, 2¹=2, 2⁰=1. Therefore =(1×8)+(0×4)+(1×2)+(1×1)=8+0+2+1=11₁₀.',
+'CARRYING MEANS REGROUPING. In base ten, enough units are regrouped into the next place when ten are collected. Binary is base two, so TWO units of any binary place regroup into ONE unit of the next place. This is the reason for every binary carry.',
+'DERIVE 0+0, 0+1 AND 1+0: 0+0=0; 0+1=1; 1+0=1. None reaches two, so no regrouping is required.',
+'DERIVE 1+1. In the 2⁰ column, (1×2⁰)+(1×2⁰)=1+1=2. Since 2=1×2¹, the two 2⁰ units regroup into one 2¹ unit. Therefore write 0 in the current column and carry 1 into the next column: 1+1=10₂. This is not decimal ten; 10₂=(1×2¹)+(0×2⁰)=2.',
+'THE SAME CARRY PRINCIPLE AT EVERY PLACE. Two 2¹ units give 2+2=4=2²; two 2² units give 4+4=8=2³; two 2³ units give 8+8=16=2⁴. A carried 1 means one unit of the NEXT place value, not always the quantity one.',
+'DERIVE 1+1+1. The quantity is 3. Since 3=2+1=(1×2¹)+(1×2⁰), 3=11₂. Therefore when a column contains 1+1 plus an incoming carried 1, write 1 in the current column and carry 1. Distinguish this from 1+1=10₂, where we write 0 and carry 1.',
+'ALIGNMENT. Binary numbers are aligned from the right so equal place values share a column. For 101₂+11₂, write 101₂+011₂. The leading zero is a placeholder and does not change value: 011₂=(0×2²)+(1×2¹)+(1×2⁰)=0+2+1=3.',
+'WITHOUT CARRY: 100₂+011₂. From right: 0+1=1; next 0+1=1; next 1+0=1. Result 111₂. Check: 100₂=4, 011₂=3, 4+3=7; 111₂=(1×2²)+(1×2¹)+(1×2⁰)=4+2+1=7.',
+'ONE CARRY: 101₂+001₂. Right column: 1+1=2=10₂, so write 0 and carry 1 into 2¹. Middle: original 0+0 plus carried 1 gives 1, so write 1. Left: 1+0=1. Result 110₂. Check: 101₂=5, 001₂=1, total 6; 110₂=4+2=6.',
+'CONSECUTIVE CARRIES: 111₂+001₂. Right: 1+1=10₂, write 0 carry 1. Middle: 1+0+carry1=2=10₂, write 0 carry 1. Left: 1+0+carry1=2=10₂, write 0 carry 1. No original column remains, so the final carry creates a new leftmost place. Result 1000₂. Check: 7+1=8 and 1000₂=1×2³=8.',
+'THREE ONES IN A COLUMN: 1011₂+0111₂. Right: 1+1=2=10₂, write0 carry1. Next: 1+1+1=3=11₂, write1 carry1. Next: 0+1+1=2=10₂, write0 carry1. Next: 1+0+1=2=10₂, write0 carry1. Final carry becomes new leftmost 1. Result 10010₂. Check: 1011₂=11, 0111₂=7, total18; 10010₂=16+2=18.',
+'FULL EXAMPLE: 1101₂+1011₂. 1s:1+1=10₂→write0 carry1. 2s:0+1+1=2→write0 carry1. 4s:1+0+1=2→write0 carry1. 8s:1+1+1=3=11₂→write1 carry1. Final carry is written left. Result 11000₂. Check: 1101₂=13, 1011₂=11, 13+11=24; 11000₂=16+8=24.',
+'COMMON ERRORS: never leave digit 2 or 3 in a finished binary numeral; do not treat 10₂ as decimal ten; do not forget an incoming carry; do not write1-and-carry1 for 1+1 because that would represent 3; do not drop a final carry; and always align numbers by their rightmost/place-value columns.',
+'STANDARD METHOD: align by place value; start at right; add every digit including incoming carry; translate column total into binary; 0→write0, 1→write1, 2=10₂→write0 carry1, 3=11₂→write1 carry1; continue left; write any final carry; then check difficult sums by converting both sides to base ten.',
+'PERMANENT NO-ASSUMPTION RULE: whenever 1,2,4,8,16 or another place value appears, show its power-of-two origin when first introduced. Whenever a carry appears, state which current-place units formed it and what next power/place it represents. No unexplained numbers or mechanical “carry 1” instructions.',
+'MASTERY TARGET: learner explains powers 2⁰ upward, derives 1+1=10₂ and 1+1+1=11₂, adds aligned binary numbers with repeated carries, explains each carry as regrouping two current-place units into one next-place unit, and verifies results in base ten.'
+],
+workedExamples:[
+'Explain 1011₂: (1×2³)+(0×2²)+(1×2¹)+(1×2⁰)=8+0+2+1=11₁₀.',
+'100₂+011₂=111₂; no carrying is needed.',
+'101₂+001₂=110₂; the rightmost 1+1 creates one carry.',
+'111₂+001₂=1000₂; show each consecutive carry and the final new place.',
+'1011₂+0111₂=10010₂; explicitly distinguish 1+1=10₂ from 1+1+1=11₂.',
+'1101₂+1011₂=11000₂; verify 13+11=24 and 11000₂=24.'
+],
+misconceptions:[
+'Memorising 1+1=10₂ without knowing that two 2⁰ units regroup as one 2¹ unit.',
+'Using place values 1,2,4,8 without explaining that they come from 2⁰,2¹,2²,2³.',
+'Writing decimal digit 2 in a finished binary numeral.',
+'Forgetting an incoming carry when adding a column.',
+'Writing 1 and carrying 1 for 1+1; that is 11₂=3, not 2.',
+'Dropping the final carry or aligning unequal-length binary numbers from the left.'
+],
+guidedPractice:['Add 101₂+010₂ and verify in base ten.','Add 101₂+001₂, naming the power/place that receives the carry.','Add 110₂+011₂, showing every column total.','Add 111₂+001₂ and explain why a new place appears.','Add 1011₂+0101₂ and verify by powers of 2.','Add 1110₂+0011₂ and explain every carry.'],
+independentPractice:['Add 1001₂+0010₂.','Add 1010₂+0101₂.','Add 1101₂+0011₂.','Add 1111₂+0001₂.','Add 1011₂+0111₂.','Add 1101₂+1011₂.','Add 1111₂+1111₂ and verify in base ten.','Explain why 1+1 cannot remain as digit 2 in a binary answer.','Explain using powers of 2 why a carry from the 4s place enters the 8s place.','Correct a learner who writes 1+1=11₂.','Align and add 101₂+11₂ correctly.','Convert your answer to one difficult binary sum to base ten and prove it is correct.'],
+mastery:{criterion:'Learner derives binary place values from powers of 2, explains every regroup/carry, accurately adds binary numerals with repeated carries, and verifies difficult results in base ten.',status:'DEEP_WHEN_PASSED'},boardReady:true
 }
 ];
 
