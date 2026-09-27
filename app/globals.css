@@ -853,3 +853,8 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 /* Direct exercise action: visible but compact; never overlays lesson content */
 .lesson-mode-toolbar .exercise-jump{background:#9b6b08;color:#fff;border-color:#9b6b08;padding-inline:12px}
 @media(max-width:720px){.view-tabs .exercise-jump{grid-column:auto;font-size:.78rem;padding:7px 9px}}
+
+/* V14.9.3 — direct exercise action at the top of Tutor */
+.tutor-top-actions{display:flex;justify-content:flex-end;margin:10px 0 14px}
+.exercise-top-button{border:1px solid #9b6b08;background:#9b6b08;color:#fff;border-radius:999px;padding:10px 16px;font-weight:850;cursor:pointer;box-shadow:0 5px 14px rgba(25,43,84,.08)}
+@media(max-width:720px){.tutor-top-actions{margin:8px 0 12px}.exercise-top-button{width:100%;min-height:42px;padding:9px 13px;font-size:.88rem}}
