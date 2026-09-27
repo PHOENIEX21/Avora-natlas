@@ -247,14 +247,11 @@ const equationsAuthored=Q('Simple Equations','equations',[
 ]);
 
 
-const lessonAlignedCoreAuthored:Record<string,NerdcExerciseQuestion[]>=Object.fromEntries(
- ['fractions','addition and subtraction','addition and subtraction of fractions','multiplication and division of fractions'].map(topic=>{
-  const official=officialNerdc2025Topic('JSS1','Mathematics',topic);
-  if(!official)return [topic,[]];
-  const qs=conceptQuestions('JSS1','Mathematics',official.topic,15).map(q=>({...q,source:'AVORA_AUTHORED_NERDC_BANK' as const}));
-  return [topic,qs];
- })
-);
+function lessonAlignedCoreQuestions(topic:string){
+ const key=topic.toLowerCase().trim();
+ if(!['fractions','addition and subtraction','addition and subtraction of fractions','multiplication and division of fractions'].includes(key))return [];
+ return conceptQuestions('JSS1','Mathematics',topic,15).map(q=>({...q,source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+}
 const authoredJss1MathByTopic:Record<string,NerdcExerciseQuestion[]>={
  'estimation':estimationAuthored,'approximation':approximationAuthored,
  'addition of numbers in base 2.':binaryAdditionAuthored,'subtraction of numbers in base 2.':binarySubtractionAuthored,'multiplication of numbers in base 2.':binaryMultiplicationAuthored,
@@ -299,7 +296,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers')return wholeNumbersAuthoredQuestions.slice(0,count).map((q,i)=>({id:q.id,classLevel:'JSS1' as const,subject:'Mathematics' as const,topic,prompt:q.prompt,type:'MULTIPLE_CHOICE' as const,options:Array.from(q.options),correctAnswer:q.correctAnswer,explanation:q.explanation,hint:'Return to the matching lesson section, identify the place-value or number-line rule, then try again.',difficulty:i<3?1:i<7?2:3,skill:'Whole Numbers',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(isJss1CountingBaseTwo(classLevel,subject,topic))return countingInBaseTwoQuestions.slice(0,count).map(q=>({...q,topic}));
  if(isJss1PlaneShapes(classLevel,subject,topic))return planeShapesAuthoredQuestions.slice(0,count).map(q=>({...q,topic}));
- if(classLevel==='JSS1'&&subject==='Mathematics'){const key=topic.toLowerCase().trim();const exact=authoredJss1MathByTopic[key]||lessonAlignedCoreAuthored[key];if(exact)return exact.slice(0,count).map(q=>({...q,topic}));}
+ if(classLevel==='JSS1'&&subject==='Mathematics'){const key=topic.toLowerCase().trim();const exact=authoredJss1MathByTopic[key]||lessonAlignedCoreQuestions(topic);if(exact.length)return exact.slice(0,count).map(q=>({...q,topic}));}
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
