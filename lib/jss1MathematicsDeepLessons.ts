@@ -11,6 +11,7 @@ guidedPractice:string[];
 independentPractice:string[]; mastery:
 {criterion:string;status:'DEEP_WHEN_PASSED'
 }; boardReady:true;
+visualStandard?:{rendering:string;productionRule:string;mobile:string;notation:string[];progressiveReveal:boolean;diagramSets:string[]};
 };
 const
 sourceUrl='https://www.nerdc.gov.ng/';
