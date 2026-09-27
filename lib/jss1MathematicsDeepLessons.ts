@@ -978,55 +978,94 @@ mastery:{criterion:'Learner correctly distinguishes an expression from an equati
 },
 {
 topicId:'nerdc-jss1-math-mensuration-and-geometry-shapes-1',classLevel:'JSS1',subject:'Mathematics',
-topic:'Plane shapes',source:
-{authority:'NERDC',url:sourceUrl,page:14},
-objectives:['Compare square, rectangle, triangle, trapezium, parallelogram, circle','Find perimeters','Find areas of plane shapes','Find area of real-life plane objects'],
-prerequisites:['multiplication of whole numbers and decimals','the meaning of "sides," "angles" and "parallel"'],
+topic:'Plane shapes',source:{authority:'NERDC',url:sourceUrl,page:14},
+objectives:[
+'Explain a plane shape as a two-dimensional figure with length and width',
+'Identify sides, vertices, angles, adjacent/opposite sides, parallel/perpendicular lines and diagonals from standard diagrams',
+'Classify polygons and triangles from defining properties rather than appearance',
+'Compare square, rectangle, parallelogram, rhombus, trapezium and kite using exact geometric properties',
+'Identify centre, radius, diameter, circumference, chord, arc, sector, segment and tangent of a circle',
+'Find perimeter and area of standard plane shapes and real-life plane surfaces',
+'Interpret diagrams even when a shape is rotated or presented in an unfamiliar orientation'
+],
+prerequisites:['whole-number and decimal multiplication','basic length units','meaning of a right angle'],
 teaching:[
-'A shape is classified by its PROPERTIES — number of sides, whether opposite sides are parallel, whether sides are equal, and what its angles are — never by how it looks at a glance.\n\n```\n SQUARE RECTANGLE PARALLELOGRAM TRAPEZIUM\n ┌───┐ ┌─────┐ ╱────╱ ───────\n │ │ │ │ ╱ ╱ ╱ ╲\n └───┘ └─────┘ ╱────╱ ╱──────╲\n 4 equal sides 2 pairs equal 2 pairs equal, only ONE pair\n 4 right angles 4 right angles parallel, angles of sides\n not nec. 90° parallel\n```',
-'PERIMETER is the total distance around the OUTSIDE (a length, in cm/m). AREA is the surface covered (a squared unit, cm²/m²), because it counts how many unit squares fit inside:\n\n```\n ┌─────────────┐\n │□□□□□□□□│ 5cm Perimeter = walk all the way around the edge\n │□□□□□□□□│ the outline: 2(8+5)=26cm\n └─────────────┘\n 8cm Area = count the unit squares inside: 8×5=40cm²\n```',
-
-'For a PARALLELOGRAM, area = base × PERPENDICULAR height — NOT the slanted side:\n\n```\n ╱─────╱\n ╱: ╱\n ╱ h : (perpendicular,╱ slant side (do NOT use this in the formula)\n ╱ : straight up)╱\n ╱────────╱\n base\n```\nThe dotted vertical line (h) is the true height used in Area=base×h. The slanted side of the parallelogram is longer than h and must never be substituted into the formula.',
-'For a TRIANGLE, area = ½ × base × height — exactly half of the rectangle that would enclose it:\n\n```\n ▲\n ╱:╲\n ╱ :h╲\n ╱ : ╲\n ╱────╱\n base\n```',
-'For real physical objects (a classroom floor, a garden plot), the same formulas apply exactly — measure the needed dimensions first, and make sure every measurement is in the SAME unit before calculating.'
+'PLANE SHAPE FOUNDATION. A plane is a flat surface. A plane shape is a flat TWO-DIMENSIONAL figure: it has length and width. A real door is a 3D object, but its flat front face can be modelled as a rectangle. Never confuse the mathematical 2D model with the physical object.',
+'DIAGRAM STANDARD — this topic MUST be rendered with exact responsive geometry diagrams, never ASCII art or font symbols. Every learner-facing shape uses a mathematically controlled SVG: labelled vertices A, B, C, D; standard matching tick marks for equal sides; matching arrow marks for parallel sides; a square marker for a 90° angle; angle arcs where needed; exact diagonals and intersection points. Diagram properties are the evidence used to classify the shape, not decoration.',
+'GEOMETRY VOCABULARY. A SIDE is a straight boundary segment. A VERTEX is a point where sides meet; plural: vertices. An ANGLE is formed when two sides/rays meet. ADJACENT sides share a vertex. OPPOSITE sides of a quadrilateral do not share a vertex. PARALLEL lines remain the same distance apart and do not meet when extended; matching arrow marks show parallelism. PERPENDICULAR lines meet at 90°, shown with the standard right-angle square. A DIAGONAL joins two non-adjacent vertices.',
+'POLYGONS. A polygon is a CLOSED plane figure whose boundary consists of straight line segments. A circle is not a polygon because its boundary is curved. Name polygons by side count: 3 triangle, 4 quadrilateral, 5 pentagon, 6 hexagon, 7 heptagon, 8 octagon, 9 nonagon, 10 decagon. A regular polygon has all sides equal AND all interior angles equal; a neat-looking figure is not automatically regular.',
+'TRIANGLES. Every triangle has 3 sides, 3 vertices and 3 interior angles. By side lengths: EQUILATERAL has 3 equal sides and therefore 3 equal 60° angles; ISOSCELES has 2 equal sides and the angles opposite those sides are equal; SCALENE has no equal sides. Side classification and angle classification describe different properties, so a triangle may be both right-angled and isosceles. The diagrams must show equality ticks and the right-angle square rather than relying on appearance.',
+'QUADRILATERAL FAMILY. A quadrilateral is a four-sided polygon. SQUARE: four equal sides and four 90° angles; opposite sides parallel. RECTANGLE: four 90° angles; opposite sides equal and parallel. PARALLELOGRAM: both pairs of opposite sides equal and parallel; opposite angles equal; angles need not be 90°. RHOMBUS: four equal sides; opposite sides parallel; angles need not be 90°. TRAPEZIUM in this JSS1 convention: one pair of opposite sides parallel. KITE: two pairs of ADJACENT equal sides. Each comparison must use separate exact diagrams with standard property marks.',
+'SHAPE RELATIONSHIPS. Every square satisfies the definition of a rectangle, rhombus and parallelogram, and all are quadrilaterals. Every rectangle is a parallelogram, but not every parallelogram is a rectangle. Every square is a rhombus, but not every rhombus is a square. Explain these conclusions by checking definitions one property at a time; never teach the names as unrelated pictures.',
+'ROTATION DOES NOT CHANGE CLASSIFICATION. If an exact square is rotated 45°, its side lengths and 90° angles remain unchanged, so it remains a square. The learner diagram must use the SAME square geometry transformed by rotation and retain identical equality/right-angle marks.',
+'DIAGONALS AND BISECTION. To bisect means to divide into two equal parts. If diagonals AC and BD meet at O and bisect each other, then AO=OC and BO=OD. The SVG must place O at the true intersection and use matching segment marks so the statement is visually and mathematically exact.',
+'CIRCLE FOUNDATION. A circle consists of points in a plane at the same distance from a fixed point, the CENTRE. CIRCUMFERENCE is the complete curved boundary. A RADIUS joins the centre to the circumference. A DIAMETER joins two circumference points and passes through the centre. Therefore diameter d=2r. A CHORD joins two points on the circumference but need not pass through the centre. Every diameter is a chord, but not every chord is a diameter.',
+'CIRCLE REGIONS AND LINES. An ARC is a curved portion of the circumference. A SECTOR is the region bounded by two radii and the arc between them. A SEGMENT is the region bounded by a chord and its corresponding arc. A TANGENT is a straight line touching the circle at exactly one point. These concepts require separate focused diagrams: do not crowd every label into one unreadable circle.',
+'PROGRESSIVE VISUAL TEACHING. Diagrams reveal the property currently being explained. When AVORA says "four equal sides", all four equality ticks highlight; when it says "opposite sides are parallel", the matching parallel arrows highlight; when it teaches a diameter, the line visibly passes through centre O. On mobile, comparison shapes become separate full-width cards rather than shrinking into a broken row.',
+'PERIMETER AND AREA. Perimeter is total distance around a boundary and uses a length unit such as cm or m. Area measures surface covered and uses square units such as cm² or m² because it counts unit squares. Rectangle: P=2(l+w), A=l×w. Square: P=4s, A=s². Triangle: A=½×base×PERPENDICULAR height. Parallelogram: A=base×PERPENDICULAR height. Never use a slanted side as the height unless it is actually perpendicular to the base.',
+'REAL-LIFE MEASUREMENT. The same formulas apply to flat surfaces such as a classroom floor or garden plot. First identify the mathematical shape, measure the required dimensions, convert every measurement to the SAME unit, then calculate and state the correct unit. The final answer must be checked for reasonableness.',
+'PERMANENT NO-ASSUMPTION RULE. Whenever a property, formula, measurement or intermediate number appears, explain where it came from. Learners classify from marked properties, not visual guesswork; choose a formula only after identifying the shape and the required dimensions; show substitutions before calculating.'
 ],
 workedExamples:[
-'State one similarity and one difference between a rectangle and a parallelogram, using the shape diagrams above. Similarity: both have two pairs of equal, parallel opposite sides. Difference: a rectangle’s angles are always exactly 90° (as drawn with square corners), while a parallelogram’s angles lean (as drawn slanted) and are not necessarily 90°.',
-'Find the perimeter and area of a rectangle measuring 8cm by 5cm.\n\n```\n ┌─────────────┐\n │ │ 5cm\n └─────────────┘\n 8cm\n```\nPerimeter=2×(8+5)=26cm. Area=8×5=40cm².',
-'Find the area of a parallelogram with base 7cm and PERPENDICULAR height 4cm (slanted side is 6cm, and must be ignored).\n\n```\n ╱───────╱\n ╱ :6cm╱\n ╱ 4cm: ╱ ← use the dotted 4cm, NOT the slanted 6cm\n ╱ : ╱\n ╱───────╱\n 7cm\n```\nArea=base×height=7×4=28cm² (the 6cm slant plays no part in this formula).',
-'A square garden has sides of 6cm on a scale drawing. Find its perimeter and area on the drawing.\n\n```\n ┌───┐\n │ │6cm\n └───┘\n 6cm\n```\nPerimeter=4×6=24cm. Area=6×6=36cm².',
-'A student calculates a parallelogram’s area using its slanted side (5cm) instead of its perpendicular height (4cm), with base 7cm, getting 7×5=35cm². Using the perpendicular-height diagram from the teaching section, identify the error and give the correct area. The formula requires the PERPENDICULAR (straight-up) height, not the slanted side — using the slant overstates the area since it is longer than the true height. Correct area, using height=4cm: 7×4=28cm².',
-'A classroom floor is measured as 9m long and 6m wide. Find the actual floor area, and how many square metres of tiling are needed (no wastage).\n\n```\n ┌───────────────────┐\n │ │ 6m\n └───────────────────┘\n 9m\n```\nArea=9×6=54m². Tiling needed: exactly 54m².'
+'Triangle classification: a triangle has side lengths 6cm, 6cm and 4cm. Compare one side at a time: 6=6, while 4 differs. Exactly two sides are equal, so the triangle is isosceles. The diagram shows matching tick marks only on the two 6cm sides.',
+'Square versus rectangle: both have four right angles, two pairs of parallel opposite sides and equal opposite sides. A square additionally has all four sides equal. Therefore every square satisfies the rectangle definition, but a rectangle with length 8cm and width 5cm does not satisfy the four-equal-sides requirement for a square.',
+'Parallelogram reasoning: a marked quadrilateral has AB∥DC and AD∥BC. Both pairs of opposite sides are parallel, so it belongs to the parallelogram family. The answer comes from the two pairs of matching parallel-arrow marks, not because the drawing looks slanted.',
+'Circle: radius r=6cm. Diameter means two radii end-to-end through centre O. d=2r. Substitute r=6: d=2×6=12cm. The diagram shows A—O—B collinear so AB is visibly a true diameter.',
+'Chord versus diameter: both join two points on the circumference. A diameter additionally passes through centre O. Therefore every diameter is a chord, but a chord drawn above O and not through O is not a diameter.',
+'Rectangle 8cm by 5cm: perimeter means walk around all four sides, so 8+5+8+5=26cm, equivalently 2(8+5)=26cm. Area counts unit squares: 8 rows/columns by 5 gives 8×5=40cm².',
+'Parallelogram base 7cm, perpendicular height 4cm and slanted side 6cm: the SVG shows a 90° marker where the 4cm height meets the base. Area=base×perpendicular height=7×4=28cm². The 6cm slanted side is not used because it is not perpendicular to the base.',
+'Triangle base 10cm and perpendicular height 6cm: a matching rectangle/parallelogram visual demonstrates that the triangle occupies half of base×height. A=½×10×6. First 10×6=60, then half of 60=30. Area=30cm².',
+'Real floor: 9m long and 6m wide. Model the flat floor as a rectangle. Area=9×6=54m², so 54m² of tiling covers it if there is no wastage.'
 ],
 misconceptions:[
-'Using a parallelogram’s slanted side as its "height" instead of the true perpendicular height — look for the dotted vertical line in the diagram; that is always the true height.',
-'Mixing up perimeter and area units, writing an area answer in cm or a perimeter answer in cm² — perimeter is a plain length unit, area is that unit SQUARED.',
-'Assuming a rotated or tilted square/rectangle is a "different" shape — orientation on the page never changes a shape’s classification or properties.',
-'Assuming every four-sided shape with some equal sides must be a square or rectangle, without checking whether angles are actually 90° — compare against the property diagrams, not appearance.',
-'Forgetting to convert all measurements to the same unit before calculating in real-life problems — always convert everything to one consistent unit first.'
+'Classifying by appearance instead of marked properties. A rotated square remains a square because its four equal sides and four right angles are unchanged.',
+'Calling a circle a polygon. A polygon boundary is made of straight line segments; a circle has a curved circumference.',
+'Thinking every rectangle is a square. Every square is a rectangle, but a rectangle does not require all four sides to be equal.',
+'Thinking every rhombus is a square. A rhombus has four equal sides but does not require four right angles.',
+'Confusing adjacent and opposite sides. Adjacent sides meet at a vertex; opposite sides do not share a vertex.',
+'Calling every chord a diameter. Only a chord that passes through the centre is a diameter.',
+'Confusing sector and segment. Sector=two radii+arc; segment=chord+arc.',
+'Using a parallelogram slanted side as height. Height must be perpendicular to the chosen base and should be shown with a 90° marker.',
+'Mixing perimeter and area units. Perimeter is length (cm, m); area is square units (cm², m²).',
+'Using measurements in different units without conversion. Convert all dimensions to one consistent unit before calculation.'
 ],
 guidedPractice:[
-
-'State two similarities and two differences between a rectangle and a square, sketching both.',
-'Find the perimeter and area of a rectangle measuring 9cm by 4cm, drawing the labelled rectangle.',
-'Find the area of a parallelogram with base 10cm and perpendicular height 6cm, drawing the diagram with the height marked as a dotted line.'
+'Use the property marks on a triangle diagram to decide whether it is equilateral, isosceles or scalene, and justify the answer from the marks.',
+'Compare a square and rectangle diagram: state two similarities and the one defining side-length difference.',
+'Use a marked quadrilateral diagram to identify a parallelogram from its two pairs of parallel opposite sides.',
+'On a circle diagram labelled O, identify one radius, one diameter and one chord and explain why each label is correct.',
+'Distinguish a shaded sector from a shaded segment by naming the lines/curve that bound each region.',
+'Find the perimeter and area of a 9cm by 4cm rectangle, showing formula, substitution, calculation and units.',
+'Find the area of a parallelogram with base 10cm and perpendicular height 6cm; explain why a separately marked slanted side is not used.'
 ],
 independentPractice:[
-'State one similarity and one difference between a square and a rhombus-like parallelogram.',
-'State one similarity and one difference between a trapezium and a parallelogram.',
-'Find the perimeter of a regular pentagon (5 equal sides) with each side 7cm.',
-'Find the area of a square with side length 12cm.',
-'Find the area of a triangle with base 10cm and height 6cm, sketching the triangle with height marked.',
-'Find the area of a parallelogram with base 15cm and perpendicular height 8cm, given a slanted side of 10cm (which should NOT be used).',
-'A rectangular plot of land measures 24m by 18m. Find its perimeter and area.',
-'A student calculates a triangle’s area as base×height (10×6=60cm²) without halving it. Identify the error and give the correct area.',
-
-'A circular flower bed has radius 7m. Using π≈22/7, find its area.',
-'A classroom floor measuring 8m by 5m needs a rug covering exactly half its area. Find the area of the rug.',
-'Compare the perimeters of a square with side 6cm and a rectangle measuring 8cm by 4cm. Which has the larger perimeter, and by how much?',
-'A real garden plot is measured with a tape as 1,200cm long and 8m wide. Convert to consistent units and find the area in square metres.'
+'Name polygons with 3, 4, 5, 6, 7, 8, 9 and 10 sides.',
+'A triangle has sides 5cm, 5cm and 8cm. Classify it and justify your answer.',
+'Explain why a square rotated 45° is still a square.',
+'State why every square is a rectangle but not every rectangle is a square.',
+'State why every square is a rhombus but not every rhombus is a square.',
+'From a marked diagram, distinguish a parallelogram from a trapezium by the number of pairs of parallel opposite sides.',
+'From a marked kite diagram, identify the two pairs of adjacent equal sides.',
+'If a circle radius is 9cm, find its diameter and show where every number in the calculation comes from.',
+'Explain why every diameter is a chord but not every chord is a diameter.',
+'From separate circle diagrams, identify an arc, sector, segment and tangent.',
+'Find the perimeter of a regular pentagon with side 7cm.',
+'Find the area of a square with side 12cm.',
+'Find the area of a triangle with base 10cm and perpendicular height 6cm.',
+'Find the area of a parallelogram with base 15cm and perpendicular height 8cm when a slanted side of 10cm is also shown.',
+'A rectangular plot measures 24m by 18m. Find perimeter and area with correct units.',
+'A garden is 1,200cm long and 8m wide. Convert to consistent units first, then find area in m².'
 ],
-mastery:{criterion:'Learner correctly compares shape properties using accurate diagrams, calculates perimeter and area with correct formulas and units, and correctly identifies the perpendicular height (not slanted side) in every parallelogram/triangle example.',status:'DEEP_WHEN_PASSED'},boardReady:true
+mastery:{criterion:'Learner accurately interprets standard geometry diagrams and markings; classifies triangles and quadrilaterals from defining properties rather than appearance; explains shape-family relationships; identifies all required circle parts; and calculates perimeter/area with correct perpendicular dimensions and units.',status:'DEEP_WHEN_PASSED'},
+boardReady:true,
+visualStandard:{
+rendering:'responsive-svg',
+productionRule:'No ASCII, Unicode-shape, raster screenshot or approximate learner-facing geometry. Render exact SVG geometry from controlled coordinates.',
+mobile:'One focused diagram/card at a time; comparisons stack responsively rather than shrink.',
+notation:['vertex labels','equal-side ticks','parallel arrows','90-degree square markers','angle arcs','diagonal/intersection labels','dimension labels'],
+progressiveReveal:true,
+diagramSets:['geometry-vocabulary','polygon-side-count','regular-vs-irregular','triangle-types','right-isosceles-triangle','square-properties','rectangle-properties','parallelogram-properties','rhombus-properties','trapezium-properties','kite-properties','quadrilateral-comparisons','rotated-square','diagonal-bisection','circle-master','radius-vs-diameter','chord-vs-diameter','arc','sector','segment','tangent','shape-family','perimeter-vs-area','triangle-height','parallelogram-height']
+}
 },
 {
 topicId:'nerdc-jss1-math-mensuration-and-geometry-shapes-2',classLevel:'JSS1',subject:'Mathematics',
