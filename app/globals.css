@@ -819,3 +819,9 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 }
 @media(max-height:700px) and (max-width:700px){.lesson-slide-deck-v1492 .animated-board-v1{min-height:145px}.lesson-slide-deck-v1492 .avora-teacher-copy p{font-size:15.5px}.lesson-slide-deck-v1492 .teacher-interrupt-actions button{min-height:34px}.lesson-slide-strip-v1492 small{display:none}}
 @media(prefers-reduced-motion:reduce){.lesson-slide-deck-v1492{scroll-behavior:auto}}
+
+/* V14.9.3 — one structured reading surface with strong section/example boundaries */
+.lesson-reading-section{scroll-margin-top:130px;border-top:5px solid var(--navy);border-radius:16px!important;margin-top:12px!important;box-shadow:0 12px 32px rgba(23,32,51,.06)}
+.lesson-reading-section .board-step-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #e8e3d7}.lesson-reading-section .board-step-meta small{font:800 10px/1.2 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7a6d52;white-space:nowrap}
+.lesson-example-boundary{border-top-color:#b88721!important;background:linear-gradient(180deg,#fffdf6,#faf8f0)!important}.lesson-example-boundary .board-step-meta>span{color:#765817}.lesson-example-boundary .board-step-meta{border-bottom-color:#e7d39a}
+@media(max-width:700px){.lesson-reading-section{scroll-margin-top:92px;margin-top:9px!important}.lesson-reading-section .board-step-meta{align-items:flex-start}.lesson-reading-section .board-step-meta small{font-size:8px}.lesson-slide-deck-v1492 .animated-board-v1.lesson-reading-section{padding:15px 14px 42px}}
