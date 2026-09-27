@@ -1376,7 +1376,7 @@ independentPractice:[
 mastery:{criterion:'Learner correctly orders data before finding the median, uses the correct middle-position rule for odd datasets and correctly averages the two middle values for even datasets, and can explain why the median resists distortion from extreme values.',status:'DEEP_WHEN_PASSED'},boardReady:true
 },
 {
-topicId:'jss1-math-t2-addition-of-binary-numbers-2-3-digit',classLevel:'JSS1',subject:'Mathematics',topic:'Addition of Binary Numbers',source:{authority:'NERDC',url:sourceUrl,page:8},
+topicId:'jss1-math-t2-addition-of-binary-numbers-2-3-digit',classLevel:'JSS1',subject:'Mathematics',topic:'Addition of Binary Numbers (2–3 digit)',source:{authority:'NERDC',url:sourceUrl,page:8},
 objectives:['Explain binary place values using powers of 2','Derive binary addition facts','Add binary numbers with and without carrying','Explain every carry as regrouping','Check binary sums by conversion to base ten'],
 prerequisites:['Counting in Base Two','Conversion of Base 10 to Binary Numbers (1–10)','powers of 2 and place value'],
 teaching:[
@@ -1420,7 +1420,7 @@ independentPractice:['Add 1001₂+0010₂.','Add 1010₂+0101₂.','Add 1101₂+
 mastery:{criterion:'Learner derives binary place values from powers of 2, explains every regroup/carry, accurately adds binary numerals with repeated carries, and verifies difficult results in base ten.',status:'DEEP_WHEN_PASSED'},boardReady:true
 },
 {
-topicId:'jss1-math-t2-subtraction-of-binary-numbers-2-3-digit',classLevel:'JSS1',subject:'Mathematics',topic:'Subtraction of Binary Numbers',source:{authority:'NERDC',url:sourceUrl,page:8},
+topicId:'jss1-math-t2-subtraction-of-binary-numbers-2-3-digit',classLevel:'JSS1',subject:'Mathematics',topic:'Subtraction of Binary Numbers (2–3 digit)',source:{authority:'NERDC',url:sourceUrl,page:8},
 objectives:['Derive binary place values from powers of 2','Subtract binary numbers vertically with and without borrowing','Explain exactly why a borrowed higher-place unit becomes two next-lower-place units','Regroup through zero one place at a time','Verify binary subtraction in base ten and by inverse addition'],
 prerequisites:['Counting in Base Two','Conversion of Base 10 to Binary Numbers (1–10)','Addition of Binary Numbers','powers of 2 and place value'],
 teaching:[
