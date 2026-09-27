@@ -231,28 +231,25 @@ export function nerdc2025EvidenceForTopic(classLevel:string,subject:string,topic
 
 function clean(text:string){return String(text||'').replace(/\s+/g,' ').trim()}
 function deepEvidenceUnit(item:NerdcDeepEvidence,officialTopic:string):TutorUnit{
+ // Learners see only the approved authored lesson. Curriculum provenance, prerequisites,
+ // mastery criteria and authoring instructions remain metadata; they are not lesson narration.
  const steps:string[]=[
-  `NERDC objective connection — this lesson unit supports the official topic “${officialTopic}”.`,
-  ...item.prerequisites.map(x=>`Prerequisite — ${clean(x)}. If this is not secure, rebuild it before using it.`),
+  'What you will learn',
+  ...item.objectives.map(x=>clean(x)),
   ...item.teaching.map(x=>clean(x)),
-  ...item.workedExamples.flatMap((x,i)=>[`Worked example ${i+1}: ${clean(x)}`,`Why this example matters — identify the rule, language evidence or relationship that makes the working valid before copying the result.`]),
-  ...item.misconceptions.map((x,i)=>`Common error ${i+1}: ${clean(x)}. Explain exactly which rule, definition, evidence or relationship this mistake breaks.`),
-  `Mastery standard — ${clean(item.mastery.criterion)}`,
+  ...item.workedExamples.map((x,i)=>`Worked example ${i+1}: ${clean(x)}`),
+  ...item.misconceptions.map((x,i)=>`Common mistake ${i+1}: ${clean(x)}`),
  ];
- const checks=[
-  ...item.guidedPractice.map(x=>clean(x)),
-  ...item.independentPractice.map(x=>clean(x)),
- ];
+ const checks=[...item.guidedPractice.map(x=>clean(x)),...item.independentPractice.map(x=>clean(x))];
  return {
-  title:`NERDC deep lesson · ${item.topic}`,
-  terms:[],why:`This unit explicitly teaches the knowledge and reasoning needed for the official NERDC topic “${officialTopic}”.`,
-  prerequisites:item.prerequisites,outcomes:item.objectives,explain:item.teaching.join(' '),example:item.workedExamples[0]||'',check:checks[0]||`Explain the governing idea in ${item.topic}.`,
+  title:item.topic,
+  terms:[],why:'',prerequisites:item.prerequisites,outcomes:item.objectives,
+  explain:item.teaching.join(' '),example:item.workedExamples[0]||'',check:checks[0]||`Explain the governing idea in ${item.topic}.`,
   commonMistakes:item.misconceptions,sourceOrigin:`NERDC September 2025 alignment · ${item.topicId}`,
   sourceSteps:steps,sourceChecks:checks,structuredSteps:structureTeachingSteps(steps,checks),
   noJumpChecks:['define terms before using them','explain why each transformation is valid','work examples from simple to harder forms','teach misconceptions explicitly','require learner reasoning before mastery']
  };
 }
-
 function officialScopeUnit(classLevel:string,subject:string,topic:string):TutorUnit|undefined{
  const official=officialNerdc2025Topic(classLevel,subject,topic);if(!official)return undefined;
  const steps=[
@@ -271,8 +268,8 @@ export function getNerdc2025DeepUnits(classLevel:string,subject:string,topic:str
  const official=officialNerdc2025Topic(classLevel,subject,topic);if(!official)return [];
  const ids=evidenceIdsForOfficialTopic(classLevel,subject,topic);
  const mapped=ids.map(id=>evidenceById.get(id)).filter((x):x is NerdcDeepEvidence=>Boolean(x));
- const scope=officialScopeUnit(classLevel,subject,topic);
- return [...(scope?[scope]:[]),...mapped.map(item=>deepEvidenceUnit(item,topic))];
+ // Official scope is retained for audit/validation, not exposed as a second learner lesson.
+ return mapped.map(item=>deepEvidenceUnit(item,topic));
 }
 
 export function nerdc2025TeachingAudit(){
