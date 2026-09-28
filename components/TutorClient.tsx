@@ -235,9 +235,11 @@ export default function TutorClient(){
  const topicKey=String(topic||'').trim().toLowerCase().replace(/\s+/g,' ');
  const unitKey=String(unit?.title||'').trim().toLowerCase().replace(/\s+/g,' ');
  const useAuthoredWholeNumbers=classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers';
- const useJSS2WholeNumbers=classLevel==='JSS2'&&subject==='Mathematics'&&(topicKey==='whole numbers'||unitKey==='whole numbers');
- const useJSS2PremiumMath=classLevel==='JSS2'&&subject==='Mathematics'&&!useJSS2WholeNumbers&&jss2PremiumMathTopics.includes(topic);
  const requestedTopicKey=String(requestedTopic||'').trim().toLowerCase().replace(/\s+/g,' ');
+ const jss2RouteTopicKey=requestedTopicKey||topicKey;
+ const useJSS2WholeNumbers=classLevel==='JSS2'&&subject==='Mathematics'&&jss2RouteTopicKey==='whole numbers';
+ const jss2PremiumTopic=jss2PremiumMathTopics.find(t=>t.trim().toLowerCase().replace(/\s+/g,' ')===jss2RouteTopicKey);
+ const useJSS2PremiumMath=classLevel==='JSS2'&&subject==='Mathematics'&&!useJSS2WholeNumbers&&Boolean(jss2PremiumTopic);
  const lcmRouteText=(requestedTopicKey+' '+topicKey+' '+unitKey).trim();
  const hcfRouteText=(requestedTopicKey+' '+topicKey+' '+unitKey).trim();
  const useCleanLCM=subject==='Mathematics'&&(requestedTopicKey==='lcm'||topicKey==='lcm'||unitKey==='lcm'||lcmRouteText.includes('lowest common multiple')||/(^|[^a-z])lcm([^a-z]|$)/.test(lcmRouteText));
@@ -414,7 +416,7 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
 
   {phase==='teach'&&useJSS2WholeNumbers&&<JSS2WholeNumbersLesson onExercise={startExercise}/>}
 
-  {phase==='teach'&&useJSS2PremiumMath&&<JSS2PremiumMathLesson topic={topic} onExercise={startExercise}/>}
+  {phase==='teach'&&useJSS2PremiumMath&&<JSS2PremiumMathLesson topic={jss2PremiumTopic||topic} onExercise={startExercise}/>}
 
   {phase==='teach'&&useCleanLCM&&<LCMLesson onExercise={startExercise}/>}
 
