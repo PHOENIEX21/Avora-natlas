@@ -876,3 +876,9 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .binary-division-row span{font-size:17px;font-weight:800}.binary-division-row strong{font-size:18px}
 .binary-division>p{margin:0;padding:12px 14px;border-top:1px solid #e3e6eb;line-height:1.5;color:#303b4c}
 @media(max-width:700px){.base-ten-binary-lesson .wn-section{padding:18px}.base-ten-binary-lesson .wn-section h3{font-size:22px}.binary-division-head{font-size:11px}.binary-division-head span,.binary-division-row span,.binary-division-row strong{padding:10px 4px}.binary-division-row span{font-size:15px}.binary-division-row strong{font-size:16px}}
+
+/* Premium binary lesson blocks */
+.binary-reference{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}.binary-reference span{padding:10px 12px;border:1px solid #e0e4eb;border-radius:10px;background:#f8fafc;color:#172b52;font-weight:800;text-align:center}
+.binary-mistake{margin-top:14px;padding:17px;border-left:4px solid #b88721;border-radius:0 14px 14px 0;background:#fff9ea}.binary-mistake-label{display:inline-block;margin-bottom:9px;padding:5px 9px;border-radius:999px;background:#f1e4bd;color:#6d5113;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.binary-mistake p{margin:0;color:#3d382b;line-height:1.7}
+.pwa-install-offer{position:relative;padding-right:48px!important}.pwa-install-close{position:absolute!important;right:8px!important;top:8px!important;min-width:34px!important;width:34px!important;height:34px!important;padding:0!important;border-radius:50%!important;background:transparent!important;color:#344054!important;font-size:25px!important;line-height:1!important}
+@media(max-width:700px){.binary-reference{grid-template-columns:1fr 1fr}.binary-mistake{padding:15px}.pwa-install-offer{padding-right:44px!important}}
