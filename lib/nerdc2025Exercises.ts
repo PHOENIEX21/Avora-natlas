@@ -5,6 +5,7 @@ import {nerdc2025EvidenceForTopic} from './nerdc2025Teaching';
 import {officialNerdc2025Topic,officialNerdc2025Topics} from './nerdc2025Official';
 import {authoredNerdc2025EnglishQuestions} from './nerdc2025AuthoredEnglishExercises';
 import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
+import {jss2PremiumMathQuestions} from './jss2PremiumMathExercises';
 
 export type NerdcExerciseQuestion={
  id:string;classLevel:'JSS1'|'JSS2';subject:'Mathematics'|'English Language';topic:string;
@@ -403,6 +404,7 @@ function isJss1Lcm(classLevel:string,subject:string,topic:string){
 export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topic:string,count=15):NerdcExerciseQuestion[]{
  if((classLevel!=='JSS1'&&classLevel!=='JSS2')||(subject!=='Mathematics'&&subject!=='English Language'))return [];
  const official=officialNerdc2025Topic(classLevel,subject,topic);if(!official)return [];
+ if(classLevel==='JSS2'&&subject==='Mathematics'){const premium=jss2PremiumMathQuestions(topic);if(premium.length)return premium.slice(0,count);}
  if(classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers')return wholeNumbersAuthoredQuestions.slice(0,count).map((q,i)=>({id:q.id,classLevel:'JSS1' as const,subject:'Mathematics' as const,topic,prompt:q.prompt,type:'MULTIPLE_CHOICE' as const,options:Array.from(q.options),correctAnswer:q.correctAnswer,explanation:q.explanation,hint:'Return to the matching lesson section, identify the place-value or number-line rule, then try again.',difficulty:i<3?1:i<7?2:3,skill:'Whole Numbers',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(isJss1CountingBaseTwo(classLevel,subject,topic))return countingInBaseTwoQuestions.slice(0,count).map(q=>({...q,topic}));
  if(isJss1PlaneShapes(classLevel,subject,topic))return planeShapesAuthoredQuestions.slice(0,count).map(q=>({...q,topic}));
