@@ -342,7 +342,8 @@ const fractionMulDivAuthored=Q('Multiplication and Division of Fractions','fract
 
 
 const authoredJss1MathByTopic:Record<string,NerdcExerciseQuestion[]>={
- 'highest common factor (hcf)':hcfAuthored,'hcf':hcfAuthored,\n 'estimation':estimationAuthored,'approximation':approximationAuthored,
+ 'highest common factor (hcf)':hcfAuthored,'hcf':hcfAuthored,
+ 'estimation':estimationAuthored,'approximation':approximationAuthored,
  'addition of numbers in base 2.':binaryAdditionAuthored,'subtraction of numbers in base 2.':binarySubtractionAuthored,'multiplication of numbers in base 2.':binaryMultiplicationAuthored,
  'use of symbols':symbolsAuthored,'simplification of algebraic expressions':simplifyAuthored,'simple equations':equationsAuthored,
 };
