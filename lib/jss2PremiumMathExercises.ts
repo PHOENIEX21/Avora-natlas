@@ -17,7 +17,17 @@ const D:Record<string,Raw[]>={
 {p:"Find the positive square root of 1,024.",o:["16","24","32","64"],a:"32",e:"32 × 32 = 1,024, therefore √1,024 = 32."},
 {p:"If √x = 19, find x.",o:["38","181","361","380"],a:"361",e:"Square both sides: x = 19² = 361."},
 {p:"A square tile has area 625 cm². What is its perimeter?",o:["25 cm","50 cm","75 cm","100 cm"],a:"100 cm",e:"Side = √625 = 25 cm. Perimeter = 4 × 25 = 100 cm."}
-],
+,
+{p:"Find √11,025.",o:["95","105","115","125"],a:"105",e:"105²=11,025, so √11,025=105. A larger perfect square tests the same factor-pair idea with JSS2-level numbers."},
+{p:"Find √(49/81).",o:["7/9","9/7","49/9","7/81"],a:"7/9",e:"√(49/81)=√49/√81=7/9."},
+{p:"Find √(2 1/4).",o:["1 1/2","1 1/4","2 1/2","3/4"],a:"1 1/2",e:"2 1/4=9/4, so √(9/4)=3/2=1 1/2."},
+{p:"A square has area 2,025 cm². Find its perimeter.",o:["45 cm","90 cm","135 cm","180 cm"],a:"180 cm",e:"Side=√2025=45 cm. Perimeter=4×45=180 cm."},
+{p:"Which number must multiply 72 to make a perfect square?",o:["2","3","6","8"],a:"2",e:"72=2³×3². One more factor 2 makes 2⁴×3², so 72×2=144=12²."},
+{p:"Between which integers does √150 lie?",o:["10 and 11","11 and 12","12 and 13","13 and 14"],a:"12 and 13",e:"12²=144 and 13²=169, so 12<√150<13."},
+{p:"If √x=2.5, find x.",o:["5","6.25","12.5","25"],a:"6.25",e:"Square both sides: x=2.5²=6.25."},
+{p:"Find √0.0081.",o:["0.009","0.09","0.9","9"],a:"0.09",e:"0.09×0.09=0.0081."},
+{p:"A square plot has area 10,000 m². Its side is?",o:["10 m","100 m","1,000 m","2,500 m"],a:"100 m",e:"Side=√10,000=100 m."},
+{p:"Which is closest to √85?",o:["8.2","9.2","10.2","11.2"],a:"9.2",e:"9²=81 and 10²=100; √85 is just above 9, and 9.2²=84.64."}],
 "Fractions":[
 {p:"Convert 3/5 to a decimal.",o:["0.3","0.5","0.6","0.8"],a:"0.6",e:"3/5 means 3 ÷ 5 = 0.6."},
 {p:"Convert 7/20 to a percentage.",o:["20%","28%","35%","70%"],a:"35%",e:"7/20 × 100% = 35%."},
@@ -34,7 +44,17 @@ const D:Record<string,Raw[]>={
 {p:"If 30% of a number is 24, find the number.",o:["72","80","90","120"],a:"80",e:"0.30x=24, so x=24/0.30=80."},
 {p:"A ratio 2:5 represents what fraction when interpreted as first quantity to second quantity?",o:["2/5","3/5","5/2","2/7"],a:"2/5",e:"The numerical ratio a:b corresponds to a/b when comparing the first quantity directly with the second."},
 {p:"Convert 125% to a decimal.",o:["0.125","1.25","12.5","125"],a:"1.25",e:"Divide a percentage by 100: 125% = 125/100 = 1.25."}
-],
+,
+{p:"Share ₦84,000 in the ratio 3:4. What is the larger share?",o:["₦24,000","₦36,000","₦48,000","₦56,000"],a:"₦48,000",e:"Total parts=7. One part=₦84,000÷7=₦12,000. Larger share=4×₦12,000=₦48,000."},
+{p:"A map scale is 1:50,000. What actual distance is represented by 6 cm?",o:["300 m","3 km","30 km","300 km"],a:"3 km",e:"6×50,000=300,000 cm=3,000 m=3 km."},
+{p:"If 5/8 of a class is 25 learners, how many learners are in the class?",o:["30","35","40","45"],a:"40",e:"If 5 parts=25, one part=5; 8 parts=40."},
+{p:"A price increases from ₦24,000 to ₦30,000. Find the percentage increase.",o:["20%","25%","30%","80%"],a:"25%",e:"Increase=₦6,000. Percentage increase=6,000/24,000×100%=25%."},
+{p:"After a 20% reduction, a quantity is 64. What was the original quantity?",o:["76.8","80","84","128"],a:"80",e:"After 20% reduction, 80% remains. 0.8x=64, so x=80."},
+{p:"Express 2.5:4 as a ratio of whole numbers in simplest form.",o:["2:4","5:8","10:4","25:4"],a:"5:8",e:"Multiply both terms by 2 to remove the decimal: 5:8."},
+{p:"A tank is 3/5 full. After 120 L is added it is 9/10 full. Find its capacity.",o:["200 L","300 L","400 L","600 L"],a:"400 L",e:"Increase in fraction=9/10−3/5=3/10. If 3/10=120 L, capacity=120×10/3=400 L."},
+{p:"What fraction of 2 hours is 45 minutes?",o:["3/8","3/4","5/8","45/2"],a:"3/8",e:"2 hours=120 minutes. Fraction=45/120=3/8."},
+{p:"A school has boys:girls=7:9 and 480 learners. How many are girls?",o:["210","240","270","300"],a:"270",e:"Total parts=16; one part=480÷16=30; girls=9×30=270."},
+{p:"A number is increased by 25% to 250. Find the original.",o:["187.5","200","225","312.5"],a:"200",e:"125% of original=250, so original=250÷1.25=200."}],
 "Commercial Arithmetic":[
 {p:"An item costs ₦8,000 and sells for ₦9,600. Find the profit.",o:["₦1,200","₦1,600","₦8,800","₦17,600"],a:"₦1,600",e:"Profit = selling price − cost price = ₦9,600 − ₦8,000 = ₦1,600."},
 {p:"For the same sale, find the profit percentage.",o:["16%","20%","25%","80%"],a:"20%",e:"Profit%=1,600/8,000×100%=20%. Profit percentage is based on cost price."},
@@ -51,7 +71,17 @@ const D:Record<string,Raw[]>={
 {p:"A worker receives 6% commission of ₦500,000 plus ₦40,000 salary. Total earning?",o:["₦30,000","₦46,000","₦70,000","₦540,000"],a:"₦70,000",e:"Commission=₦30,000. Total=₦30,000+₦40,000=₦70,000."},
 {p:"Which formula gives simple interest when R is percent per annum?",o:["PRT/100","P+R+T","P/R×T","100P/RT"],a:"PRT/100",e:"Simple interest I=PRT/100 when R is a percentage rate per year."},
 {p:"A budget has ₦50,000 food, ₦20,000 transport and ₦15,000 utilities. Total?",o:["₦70,000","₦75,000","₦85,000","₦95,000"],a:"₦85,000",e:"Total expenditure=50,000+20,000+15,000=₦85,000."}
-],
+,
+{p:"A trader sells an article for ₦54,000 at 20% profit. Find the cost price.",o:["₦43,200","₦45,000","₦48,000","₦64,800"],a:"₦45,000",e:"Selling price is 120% of cost price. CP=54,000÷1.20=₦45,000."},
+{p:"An article is sold for ₦42,500 at a loss of 15%. Find its cost price.",o:["₦36,125","₦47,500","₦50,000","₦57,500"],a:"₦50,000",e:"Selling price is 85% of CP. CP=42,500÷0.85=₦50,000."},
+{p:"A shop marks an item ₦80,000 and allows 12.5% discount. Find the selling price.",o:["₦10,000","₦67,500","₦70,000","₦90,000"],a:"₦70,000",e:"Discount=12.5% of ₦80,000=₦10,000. SP=₦80,000−₦10,000=₦70,000."},
+{p:"Simple interest on ₦60,000 for 2 years is ₦9,000. Find the annual rate.",o:["5%","7.5%","9%","15%"],a:"7.5%",e:"I=PRT/100. R=100I/(PT)=900,000/(120,000)=7.5%."},
+{p:"At 8% simple interest per annum, how long will ₦25,000 earn ₦6,000?",o:["2 years","3 years","4 years","6 years"],a:"3 years",e:"T=100I/(PR)=600,000/(25,000×8)=3 years."},
+{p:"A salesperson gets 2.5% commission on ₦840,000 sales. Find commission.",o:["₦2,100","₦21,000","₦33,600","₦81,900"],a:"₦21,000",e:"Commission=2.5/100×₦840,000=₦21,000."},
+{p:"A rent collector receives 4.5% commission on ₦842,800. Find the commission.",o:["₦33,712","₦37,926","₦42,140","₦379,260"],a:"₦37,926",e:"Commission=4.5/100×₦842,800=₦37,926."},
+{p:"A trader buys 40 items at ₦1,250 each and sells all for ₦60,000. Find profit percent.",o:["10%","20%","25%","50%"],a:"20%",e:"Total CP=40×₦1,250=₦50,000. Profit=₦10,000. Profit%=10,000/50,000×100%=20%."},
+{p:"A family income is ₦240,000. Rent is 25%, food ₦72,000, transport ₦30,000 and utilities ₦18,000. Find balance.",o:["₦40,000","₦60,000","₦72,000","₦120,000"],a:"₦60,000",e:"Rent=25% of ₦240,000=₦60,000. Total expenses=₦180,000. Balance=₦60,000."},
+{p:"An item is marked 25% above its ₦48,000 cost, then discounted by 10% of marked price. Find selling price.",o:["₦52,800","₦54,000","₦55,200","₦60,000"],a:"₦54,000",e:"Marked price=₦48,000×1.25=₦60,000. After 10% discount, customer pays 90%=₦54,000."}],
 "Approximation":[
 {p:"Round 47.386 to 2 decimal places.",o:["47.38","47.39","47.40","47.4"],a:"47.39",e:"Keep 47.38 and inspect the next digit 6. Since 6≥5, increase the hundredths digit 8 to 9."},
 {p:"Round 0.007846 to 2 significant figures.",o:["0.0078","0.00785","0.0079","0.008"],a:"0.0078",e:"The first two significant digits are 7 and 8; the next digit is 4, so 78 stays unchanged."},
@@ -68,7 +98,17 @@ const D:Record<string,Raw[]>={
 {p:"Round 3.14159 to 4 significant figures.",o:["3.141","3.142","3.140","3.15"],a:"3.142",e:"Keep 3.141; the next digit is 5, so the fourth significant digit 1 increases to 2."},
 {p:"Round 0.995 to 2 decimal places.",o:["0.99","1.00","0.10","1.0"],a:"1.00",e:"The third decimal is 5, so 0.99 rounds up through carrying to 1.00."},
 {p:"An exact answer is 398. Which is a sensible estimate obtained by rounding to hundreds?",o:["4","40","400","4,000"],a:"400",e:"398 is nearer 400 than 300, so to the nearest hundred it is 400."}
-],
+,
+{p:"Round 0.003867 to 3 significant figures.",o:["0.00386","0.00387","0.00390","0.004"],a:"0.00387",e:"First significant digits are 3,8,6; next digit is 7, so 6 rounds to 7."},
+{p:"Round 59,094 to the nearest hundred.",o:["59,000","59,100","59,900","60,000"],a:"59,100",e:"Hundreds digit is 0 and tens digit is 9, so round the hundreds up: 59,100."},
+{p:"Round 45.34672 to 2 decimal places.",o:["45.34","45.35","45.347","45.40"],a:"45.35",e:"Keep 45.34; the third decimal digit is 6, so hundredths 4 rounds to 5."},
+{p:"Estimate 398×21 by rounding each number to 1 significant figure.",o:["800","4,000","8,000","80,000"],a:"8,000",e:"398≈400 and 21≈20; 400×20=8,000."},
+{p:"Estimate 5,982÷29.7 using convenient 1 s.f. values.",o:["20","200","2,000","20,000"],a:"200",e:"5,982≈6,000 and 29.7≈30; 6,000÷30=200."},
+{p:"A population is 2,748,391. Give it to 3 significant figures.",o:["2,740,000","2,748,000","2,750,000","2,800,000"],a:"2,750,000",e:"Keep 274; next digit 8 rounds 4 upward, giving 2,750,000."},
+{p:"A length is 7.85 cm correct to 2 decimal places. Which could be the unrounded value?",o:["7.844","7.846","7.855","7.861"],a:"7.846",e:"Values from 7.845 up to but not including 7.855 round to 7.85; 7.846 qualifies."},
+{p:"Which interval describes x=36 correct to the nearest whole number?",o:["35≤x<36","35.5≤x<36.5","36≤x<37","35.9≤x≤36.1"],a:"35.5≤x<36.5",e:"Numbers from 35.5 up to but not including 36.5 round to 36."},
+{p:"A calculator gives 19.84×4.96=98.4064. Which estimate best checks it?",o:["20×5=100","19×4=76","200×50=10,000","2×5=10"],a:"20×5=100",e:"Rounding 19.84≈20 and 4.96≈5 gives 100, close to 98.4064."},
+{p:"Round 0.09995 to 3 significant figures.",o:["0.0999","0.100","0.0100","0.999"],a:"0.100",e:"The first three significant digits 9,9,9 are followed by 5, so carrying gives 0.100, which displays 3 significant figures."}],
 "Multiplication and Division of Directed Numbers":[
 {p:"Calculate (−8)×7.",o:["−56","−15","15","56"],a:"−56",e:"Different signs give a negative product; 8×7=56, so the result is −56."},
 {p:"Calculate (−9)×(−6).",o:["−54","−15","15","54"],a:"54",e:"Same signs give a positive product; 9×6=54."},
@@ -85,7 +125,17 @@ const D:Record<string,Raw[]>={
 {p:"A chart records a change of −3 units per hour for 6 hours. Total change?",o:["−18","−9","9","18"],a:"−18",e:"6×−3=−18 units."},
 {p:"What is (−1)×(−1)×(−1)?",o:["−3","−1","0","1"],a:"−1",e:"First two negatives give +1; +1×−1=−1."},
 {p:"Which check confirms −63÷9=−7?",o:["−7×9=−63","7×9=63 only","−7+9=2","−63−9=−72"],a:"−7×9=−63",e:"Division is checked by multiplication: quotient×divisor=dividend."}
-]
+,
+{p:"Evaluate (−3/4)×(−2 2/3).",o:["−2","−1/2","1/2","2"],a:"2",e:"Convert 2 2/3=8/3. Same signs give positive: (3/4)×(8/3)=2."},
+{p:"Evaluate (−1 1/2)÷(+3/4).",o:["−2","−9/8","9/8","2"],a:"−2",e:"−1 1/2=−3/2. Divide by 3/4 by multiplying by 4/3: −3/2×4/3=−2."},
+{p:"Simplify (−4)+(+9)−(−3).",o:["2","8","10","16"],a:"8",e:"−4+9=5; subtracting −3 is adding 3, so 5+3=8."},
+{p:"Evaluate (−2)×(+3)×(−4)×(−5).",o:["−120","−24","24","120"],a:"−120",e:"There are three negative factors, an odd number, so result is negative. Magnitude=2×3×4×5=120."},
+{p:"A submarine is at −36 m and changes depth by −4 m each minute for 6 minutes. What is its new position?",o:["−60 m","−40 m","−24 m","12 m"],a:"−60 m",e:"Total change=6×−4=−24 m. New position=−36+(−24)=−60 m."},
+{p:"A temperature falls equally from +8°C to −12°C over 5 hours. Find the change per hour.",o:["−5°C","−4°C","4°C","5°C"],a:"−4°C",e:"Total change=−12−8=−20°C. Per hour=−20÷5=−4°C."},
+{p:"If (−6)x=−54, find x.",o:["−9","−8","8","9"],a:"9",e:"x=−54÷−6=+9. Same signs in division give positive."},
+{p:"Evaluate 18−(−3)×4.",o:["6","30","60","84"],a:"30",e:"Multiply first: −3×4=−12. Then 18−(−12)=18+12=30."},
+{p:"A record shows +12, −7, −9, +15 and −6. Find the net change.",o:["−5","5","11","49"],a:"5",e:"Add sequentially:12−7−9+15−6=5."},
+{p:"A table value claims √90=10.5. Which statement is correct?",o:["It is reasonable","It is too small","It is too large","√90 is exactly 9"],a:"It is too large",e:"9²=81 and 10²=100, so √90 must lie between 9 and 10. Therefore 10.5 is too large."}]
 };
 const topics=["Algebraic Expressions","Simple Equations","Linear Inequalities","Graph","Plane Figure/ Shapes","Angles","Bearing","Construction","Data Presentation","Probability"];
 const seeds:Record<string,Raw[]>={
