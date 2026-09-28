@@ -438,7 +438,8 @@ export function publicNerdc2025ExerciseQuestions(classLevel:string,subject:strin
 
 export function checkNerdc2025Exercise(questionId:string,answer:string){
  for(const official of officialNerdc2025Topics('JSS1','Mathematics').concat(officialNerdc2025Topics('JSS1','English Language'),officialNerdc2025Topics('JSS2','Mathematics'),officialNerdc2025Topics('JSS2','English Language'))){
-  const exerciseCount=isJss1Lcm(official.classLevel,official.subject,official.topic)?25:(official.classLevel==='JSS1'&&official.subject==='Mathematics'&&official.topic.toLowerCase().trim()==='simplification of algebraic expressions'?30:15);\n  const q=nerdc2025ExerciseQuestions(official.classLevel,official.subject,official.topic,exerciseCount).find(item=>item.id===questionId);
+  const exerciseCount=isJss1Lcm(official.classLevel,official.subject,official.topic)?25:(official.classLevel==='JSS1'&&official.subject==='Mathematics'&&official.topic.toLowerCase().trim()==='simplification of algebraic expressions'?30:15);
+  const q=nerdc2025ExerciseQuestions(official.classLevel,official.subject,official.topic,exerciseCount).find(item=>item.id===questionId);
   if(!q)continue;const correct=norm(answer).toLowerCase()===norm(q.correctAnswer).toLowerCase();
   return {correct,correctAnswer:q.correctAnswer,explanation:q.explanation,hint:correct?'Explain why the rule or evidence makes this answer valid.':q.hint,topic:q.topic,skill:q.skill};
  }
