@@ -9,8 +9,9 @@ function notation(s:string){
 }
 function Paragraphs({text}:{text:string}){return <>{notation(text).split(/\n+/).filter(Boolean).map((p,i)=><p key={i}>{p}</p>)}</>}
 function DivisionTable({n,rows,answer}:{n:number;rows:[number,number,number][],answer:string}){
- return <div className="wn-table-scroll" role="region" aria-label={`Repeated division of ${n} by 2`} tabIndex={0}>
-  <table className="wn-place-table compact"><thead><tr><th>Division</th><th>Quotient</th><th>Remainder</th></tr></thead><tbody>{rows.map(([a,q,r])=><tr key={a}><td>{a} ÷ 2</td><td>{q}</td><td>{r}</td></tr>)}</tbody></table>
+ return <div className="binary-division" role="region" aria-label={`Repeated division of ${n} by 2`}>
+  <div className="binary-division-head"><span>Division</span><span>Quotient</span><span>Remainder</span></div>
+  {rows.map(([a,q,r])=><div className="binary-division-row" key={a}><span>{a} ÷ 2</span><strong>{q}</strong><strong>{r}</strong></div>)}
   <p><b>Read the remainder column from bottom to top ↑</b></p><p><b>{answer}</b></p>
  </div>
 }
@@ -28,7 +29,7 @@ export default function BaseTenToBinaryLesson({unit,onExercise}:{unit:LessonUnit
   <header className="wn-hero"><span>JSS1 MATHEMATICS · NERDC-ALIGNED LESSON</span><h2>Conversion of Base 10 Numerals to Binary Numbers</h2><p>Learn two reliable conversion methods, understand why they work, and verify every answer using binary place value.</p></header>
   <section className="wn-objectives"><h3>What you will learn</h3><ul>{(unit.outcomes||[]).map(x=><li key={x}>{notation(x)}</li>)}</ul></section>
   <section className="wn-section"><h3>Before you begin</h3><p>You should already understand binary counting, powers of two such as <b>2⁰ = 1, 2¹ = 2, 2² = 4, 2³ = 8 and 2⁴ = 16</b>, and division with remainders.</p></section>
-  {steps.map((text,i)=>{const t=notation(String(text)).replace(/```/g,'').trim();const m=t.match(/^((?:\d+\.\s*)?[^.]+\.)\s*(.*)$/s);return <section key={i} className="wn-section">{m&&/^\d+\./.test(m[1])?<><h3>{m[1]}</h3><Paragraphs text={m[2]}/></>:<Paragraphs text={t}/>}</section>})}
+  {steps.map((text,i)=>{const t=notation(String(text)).replace(/```/g,'').trim();const m=t.match(/^((?:\d+\.\s*)?[^.]+\.)\s*(.*)$/s);return <section key={i} className="wn-section">{m&&/^\d+\./.test(m[1])?<><h3>{m[1]}</h3><Paragraphs text={m[2]}/></>:<>{/^[A-Z][A-Z\s?—-]+\./.test(t)?(()=>{const k=t.indexOf('.');return <><h3>{t.slice(0,k)}</h3><Paragraphs text={t.slice(k+1)}/></>})():<Paragraphs text={t}/>}</>}</section>})}
   <section className="wn-section"><h3>Worked Examples</h3><p>Follow each example one line at a time. Keep the quotient and remainder in separate columns.</p></section>
   {examples.map((x,i)=><section key={i} className="wn-section"><h3>{x.title}</h3><div className="wn-examples">{x.body}</div></section>)}
   <section className="wn-section"><h3>Common Misconceptions</h3>{(unit.sourceSteps||[]).filter(x=>/^Common mistake/i.test(x)).map((x,i)=><div className="wn-examples" key={i}><Paragraphs text={x}/></div>)}</section>
