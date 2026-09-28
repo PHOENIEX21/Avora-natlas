@@ -102,6 +102,24 @@ const countingInBaseTwoQuestions:NerdcExerciseQuestion[]=[
 type AuthoredMathSpec=[string,string,string[],string,string,number];
 const Q=(topic:string,prefix:string,rows:AuthoredMathSpec[]):NerdcExerciseQuestion[]=>rows.map(([n,prompt,options,correctAnswer,explanation,difficulty])=>({id:`jss1-math-${prefix}-${n}`,classLevel:'JSS1',subject:'Mathematics',topic,prompt,type:'MULTIPLE_CHOICE',options,correctAnswer,explanation,hint:'Use the exact rule taught in the lesson and show the reasoning before choosing.',difficulty,skill:topic,source:'AVORA_AUTHORED_NERDC_BANK'}));
 
+const hcfAuthored=Q('Highest Common Factor (HCF)','hcf',[
+['01','Which statement correctly describes a factor of a whole number?',['A whole number that divides it exactly with no remainder','A number that must be larger than it','Any decimal less than it','A number that always leaves a remainder'],'A whole number that divides it exactly with no remainder','A factor passes the exact-division test.',1],
+['02','Which list contains all the positive factors of 28?',['1, 2, 4, 7, 14, 28','1, 2, 4, 7, 28','2, 4, 7, 14','1, 3, 4, 7, 14, 28'],'1, 2, 4, 7, 14, 28','The factor pairs are 1×28, 2×14 and 4×7.',1],
+['03','What are the common factors of 12 and 18?',['1, 2, 3, 6','1, 2, 6, 12','2, 3, 6, 9','1, 3, 9, 18'],'1, 2, 3, 6','A common factor must divide both numbers exactly.',1],
+['04','What is the HCF of 12 and 18?',['6','3','12','36'],'6','The common factors are 1, 2, 3 and 6; the highest is 6.',1],
+['05','What is the HCF of 20 and 30?',['10','5','20','60'],'10','The common factors include 1, 2, 5 and 10; the greatest is 10.',2],
+['06','Given 36=2²×3² and 48=2⁴×3, what is their HCF?',['12','24','72','144'],'12','Use only shared primes at their lower powers: 2²×3=12.',2],
+['07','Why does the prime-factor method for HCF use the lower shared power?',['The HCF must divide every original number exactly','The HCF must be larger than both numbers','Higher powers are never prime','The rule is only a shortcut with no reason'],'The HCF must divide every original number exactly','A common factor cannot contain more copies of a prime than any original number contains.',2],
+['08','Find the HCF of 24, 36 and 60.',['12','6','24','120'],'12','24=2³×3, 36=2²×3², 60=2²×3×5. Shared lower powers are 2²×3=12.',2],
+['09','What is the HCF of 9 and 16?',['1','3','4','144'],'1','Their only common positive factor is 1, so they are co-prime.',2],
+['10','Which statement correctly distinguishes HCF from LCM?',['HCF uses greatest shared factor; LCM uses least shared positive multiple','HCF and LCM are always equal','HCF uses the highest prime powers from every number','LCM divides every original number'],'HCF uses greatest shared factor; LCM uses least shared positive multiple','HCF is about common divisors; LCM is about common multiples.',2],
+['11','A trader has 24 oranges and 36 mangoes and wants the greatest possible number of identical baskets using everything. How many baskets?',['12','6','24','36'],'12','This is an equal-grouping HCF problem. HCF(24,36)=12.',2],
+['12','In the 12 baskets from the previous problem, what goes in each basket?',['2 oranges and 3 mangoes','12 oranges and 12 mangoes','3 oranges and 2 mangoes','24 oranges and 36 mangoes'],'2 oranges and 3 mangoes','24÷12=2 oranges and 36÷12=3 mangoes per basket.',2],
+['13','Simplify 36/48 completely using HCF.',['3/4','6/8','12/16','18/24'],'3/4','HCF(36,48)=12; 36÷12=3 and 48÷12=4.',2],
+['14','Which situation most directly calls for HCF?',['Cutting 18 m and 24 m ropes into the greatest equal lengths with none left','Finding when two bells ringing every 6 and 8 minutes next ring together','Listing multiples of 7','Converting a fraction to a decimal'],'Cutting 18 m and 24 m ropes into the greatest equal lengths with none left','Dividing fixed quantities into greatest equal pieces with no remainder signals HCF.',3],
+['15','A learner says HCF(24,36)=72. Which check proves the answer is impossible immediately?',['An HCF cannot be greater than the smallest original number','An HCF must always be even','72 is not a whole number','Every HCF must equal the LCM'],'An HCF cannot be greater than the smallest original number','The HCF must divide 24, so it cannot exceed 24.',3]
+]);
+
 const estimationAuthored=Q('Estimation','estimation',[
 ['01','Which statement best describes estimation?',['Finding a reasonable approximate value without exact measurement','Always measuring exactly','Changing every number to zero','Guessing without evidence'],'Finding a reasonable approximate value without exact measurement','Estimation is a reasoned approximation supported by a reference, comparison or experience.',1],
 ['02','Which is an appropriate unit for estimating the length of a classroom?',['metres','milligrams','litres','seconds'],'metres','Classroom length is a distance on the scale of metres.',1],
@@ -324,7 +342,7 @@ const fractionMulDivAuthored=Q('Multiplication and Division of Fractions','fract
 
 
 const authoredJss1MathByTopic:Record<string,NerdcExerciseQuestion[]>={
- 'estimation':estimationAuthored,'approximation':approximationAuthored,
+ 'highest common factor (hcf)':hcfAuthored,'hcf':hcfAuthored,\n 'estimation':estimationAuthored,'approximation':approximationAuthored,
  'addition of numbers in base 2.':binaryAdditionAuthored,'subtraction of numbers in base 2.':binarySubtractionAuthored,'multiplication of numbers in base 2.':binaryMultiplicationAuthored,
  'use of symbols':symbolsAuthored,'simplification of algebraic expressions':simplifyAuthored,'simple equations':equationsAuthored,
 };
