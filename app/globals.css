@@ -996,3 +996,10 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .median-position{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:500px;margin:18px auto 4px;text-align:center;color:#64748b;font-size:.78rem}.median-position.six{grid-template-columns:repeat(6,1fr)}.median-position .median-label{color:#0369a1;font-weight:800}
 .formula-card{display:flex;flex-direction:column;align-items:center;gap:7px;margin:18px auto;padding:18px;max-width:520px;border:1px solid #bae6fd;border-radius:18px;background:#f0f9ff;text-align:center}.formula-card span{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#0369a1}.formula-card strong{font-size:1.2rem;color:#172554}
 @media(max-width:600px){.median-chips{gap:7px}.median-chips span{min-width:43px;height:45px}.median-position{gap:3px;font-size:.68rem}.formula-card{padding:14px}}
+
+.numberline-card{margin:18px 0;padding:10px;border:1px solid #dbe4ee;border-radius:18px;background:#fff;overflow-x:auto}
+.numberline-card svg{display:block;width:100%;min-width:520px;height:auto}
+.numberline-card .nl-axis,.numberline-card .nl-tick{stroke:#334155;stroke-width:3}
+.numberline-card .nl-start{fill:#f59e0b;stroke:#92400e;stroke-width:2}
+.numberline-card .nl-move{fill:none;stroke:#0284c7;stroke-width:4;stroke-linecap:round}
+.numberline-card text{fill:#334155;font-weight:700}
