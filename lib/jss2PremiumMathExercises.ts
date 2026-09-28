@@ -1,6 +1,28 @@
 import type {NerdcExerciseQuestion} from './nerdc2025Exercises';
 type Raw={p:string;o:[string,string,string,string];a:string;e:string;h?:string};
 const D:Record<string,Raw[]>={
+"Whole Numbers":[
+{p:"Write 4,720,000 in standard form.",o:["4.72×10⁴","4.72×10⁵","4.72×10⁶","47.2×10⁶"],a:"4.72×10⁶",e:"Move the decimal point 6 places left to obtain a number from 1 to 10: 4.72×10⁶."},
+{p:"Write 0.000583 in standard form.",o:["5.83×10⁻⁴","5.83×10⁻³","58.3×10⁻⁴","0.583×10⁻³"],a:"5.83×10⁻⁴",e:"Move the decimal 4 places right to obtain 5.83, so the power is −4."},
+{p:"Express 7.04×10⁵ as an ordinary number.",o:["7,040","70,400","704,000","7,040,000"],a:"704,000",e:"10⁵=100,000, so 7.04×100,000=704,000."},
+{p:"Which is a prime number?",o:["51","57","61","69"],a:"61",e:"61 has no whole-number factors other than 1 and 61; the others are divisible by 3."},
+{p:"Find the prime factorisation of 180.",o:["2²×3²×5","2×3²×10","2³×3×5","18×10"],a:"2²×3²×5",e:"180=2×2×3×3×5=2²×3²×5."},
+{p:"Find the HCF of 72 and 108.",o:["12","18","36","54"],a:"36",e:"72=2³×3² and 108=2²×3³. Common lowest powers give 2²×3²=36."},
+{p:"Find the LCM of 24 and 36.",o:["48","60","72","144"],a:"72",e:"24=2³×3 and 36=2²×3². Highest powers give 2³×3²=72."},
+{p:"Find the HCF of 84, 126 and 210.",o:["14","21","42","84"],a:"42",e:"84=2²×3×7, 126=2×3²×7, 210=2×3×5×7. Common factors give 2×3×7=42."},
+{p:"Find the LCM of 18, 24 and 30.",o:["120","180","240","360"],a:"360",e:"18=2×3², 24=2³×3, 30=2×3×5. Highest powers:2³×3²×5=360."},
+{p:"Two bells ring every 18 minutes and 24 minutes. If they ring together now, after how many minutes will they next ring together?",o:["6","42","72","432"],a:"72",e:"The next common time is the LCM of 18 and 24, which is 72 minutes."},
+{p:"84 oranges and 126 apples are packed into identical groups with no fruit left, using the greatest possible number of groups. How many groups?",o:["14","21","42","63"],a:"42",e:"The greatest number of identical groups is HCF(84,126)=42."},
+{p:"Which pair is relatively prime?",o:["14 and 21","15 and 28","18 and 27","24 and 36"],a:"15 and 28",e:"15=3×5 and 28=2²×7; they share no prime factor, so HCF=1."},
+{p:"If the HCF of two numbers is 6 and their LCM is 180, and one number is 30, find the other.",o:["24","30","36","60"],a:"36",e:"For two positive integers, product of numbers=HCF×LCM. Other number=(6×180)÷30=36."},
+{p:"Evaluate (3×10⁵)+(4×10⁵).",o:["7×10⁵","7×10¹⁰","12×10⁵","7×10⁰"],a:"7×10⁵",e:"The powers of ten are the same, so add coefficients: (3+4)×10⁵=7×10⁵."},
+{p:"Evaluate (6×10⁷)÷(2×10³).",o:["3×10⁴","3×10¹⁰","4×10⁴","12×10⁴"],a:"3×10⁴",e:"Divide coefficients 6÷2=3 and subtract powers 7−3=4."},
+{p:"A number has prime factorisation 2³×3²×5. What is the number?",o:["180","240","360","720"],a:"360",e:"2³×3²×5=8×9×5=360."},
+{p:"What least number is divisible by 12, 15 and 20?",o:["30","60","120","240"],a:"60",e:"The least common multiple of 12,15,20 is 60."},
+{p:"Three buses leave a station every 20, 30 and 45 minutes. If they leave together at 8:00 a.m., when next will they leave together?",o:["9:00 a.m.","10:00 a.m.","11:00 a.m.","2:00 p.m."],a:"11:00 a.m.",e:"LCM(20,30,45)=180 minutes=3 hours. 8:00 a.m.+3 hours=11:00 a.m."},
+{p:"Find the greatest number that divides 252 and 378 exactly.",o:["42","63","126","189"],a:"126",e:"The required greatest exact divisor is HCF(252,378)=126."},
+{p:"A rectangular floor 420 cm by 300 cm is to be covered with the largest possible identical square tiles without cutting. Find the side of each tile.",o:["30 cm","40 cm","60 cm","120 cm"],a:"60 cm",e:"The largest square side must divide both dimensions: HCF(420,300)=60 cm."}
+],
 "Square Root of Numbers":[
 {p:"Which of these is a perfect square?",o:["72","81","90","108"],a:"81",e:"81 is a perfect square because 9 × 9 = 81. A perfect square is the product of a whole number multiplied by itself."},
 {p:"Find 13².",o:["26","139","169","196"],a:"169",e:"13² means 13 × 13, which equals 169."},
