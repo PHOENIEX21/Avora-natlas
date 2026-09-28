@@ -1,4 +1,4 @@
-const VERSION='14.1.0';
+const VERSION='14.9.3-hcf-lcm-rebuild-2';
 const CACHE=`avora-shell-v${VERSION}`;
 const STATIC=['/offline.html','/manifest.webmanifest','/avora-mark.svg','/icons/avora-192.png','/icons/avora-512.png','/version.json'];
 
@@ -29,7 +29,7 @@ self.addEventListener('fetch',event=>{
   event.respondWith(fetch(request).catch(()=>caches.match('/offline.html')));
   return;
  }
- const staticAsset=url.pathname.startsWith('/_next/static/')||url.pathname.startsWith('/icons/')||url.pathname==='/avora-mark.svg'||url.pathname==='/manifest.webmanifest'||url.pathname==='/version.json';
+ const staticAsset=url.pathname.startsWith('/_next/static/')||url.pathname.startsWith('/icons/')||url.pathname==='/avora-mark.svg'||url.pathname==='/manifest.webmanifest';
  if(!staticAsset)return;
  event.respondWith(caches.match(request).then(cached=>{
   const network=fetch(request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(request,copy))}return response});
