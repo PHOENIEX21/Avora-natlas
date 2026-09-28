@@ -1016,3 +1016,10 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .fractions-premium-lesson .math-stack>.math-line:not(.math-result)::before{counter-increment:tutor-step;content:counter(tutor-step);position:absolute;left:.15rem;top:.82rem;display:grid;place-items:center;width:1.55rem;height:1.55rem;border-radius:50%;background:#eef2f8;color:#172d62;font-size:.76rem;font-weight:900}
 .fractions-premium-lesson .math-stack>.math-result{margin-top:.7rem;padding:.95rem .3rem .15rem;border-top:2px solid #dce3ee;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.18rem,2.8vw,1.42rem);font-weight:900;line-height:1.5;color:#172d62}
 @media(max-width:700px){.fractions-premium-lesson .wn-section>p{font-size:1rem;line-height:1.72}.fractions-premium-lesson .formula-board{padding:.9rem}.fractions-premium-lesson .fraction-working{padding:1rem}.fractions-premium-lesson .math-stack>.math-line:not(.math-result){padding-left:2.35rem}}
+
+.fractions-premium-lesson .math-teaching-step{display:block!important;padding:1rem 0 1.15rem!important}
+.fractions-premium-lesson .step-explanation{font-size:1rem;font-weight:650;line-height:1.65;color:#243650;margin:0 0 .8rem}
+.fractions-premium-lesson .vertical-working{display:inline-flex;flex-direction:column;align-items:stretch;max-width:100%;margin:.15rem 0 .55rem;padding:.9rem 1.1rem;background:#fbfcfe;border-left:3px solid #b88718;border-radius:0 .55rem .55rem 0;overflow-x:auto}
+.fractions-premium-lesson .vertical-equation{white-space:pre;font-family:Georgia,'Times New Roman',serif;font-size:1.18rem;font-weight:700;line-height:1.55;color:#071f4a}
+.fractions-premium-lesson .step-note{max-width:68ch;margin:.15rem 0 0;font-size:.94rem;font-weight:520;line-height:1.6;color:#52627a}
+@media(max-width:640px){.fractions-premium-lesson .vertical-working{width:100%;padding:.8rem .7rem}.fractions-premium-lesson .vertical-equation{font-size:1.03rem}.fractions-premium-lesson .step-explanation{font-size:.98rem}}
