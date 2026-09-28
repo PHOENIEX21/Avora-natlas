@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 const W=({q,children}:{q:string;children:React.ReactNode})=><div className="fraction-working"><div className="example-question"><span>WORKED EXAMPLE</span><strong>{q}</strong></div><div className="math-stack">{children}</div></div>;
-const L=({children,strong=false}:{children:React.ReactNode;strong?:boolean})=><div className={strong?'math-line math-result':'math-line'}>{children}</div>;
+const L=({children,strong=false}:{children:React.ReactNode;strong?:boolean})=>{const raw=typeof children==='string'?children:'';const mathematical=/[=×÷<>≈√²³⁴⁵⁶⁷⁸⁹⁰]|\d\s*[+−-]\s*\d|\d(?:,\d{3})+/.test(raw);if(strong)return <div className="math-line math-result">{children}</div>;return mathematical?<div className="math-line math-teaching-step whole-number-math-step"><div className="vertical-working whole-number-board"><div className="vertical-equation">{children}</div></div></div>:<div className="math-line legacy-explanation">{children}</div>};
 const Rule=({children}:{children:React.ReactNode})=><div className="lesson-rule">{children}</div>;
 const V=({children}:{children:React.ReactNode})=><div className="vertical-working whole-number-board">{children}</div>;
 const E=({children,strong=false}:{children:React.ReactNode;strong?:boolean})=><div className={strong?'vertical-equation math-result':'vertical-equation'}>{children}</div>;
