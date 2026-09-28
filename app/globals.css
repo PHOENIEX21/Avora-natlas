@@ -965,3 +965,9 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .construction-premium-lesson .tool-set-square.ghost{fill:rgba(14,165,233,.04);stroke-dasharray:6 4}
 .construction-premium-lesson .tool-ruler{fill:rgba(245,158,11,.09);stroke:#b45309;stroke-width:2}
 @media(max-width:600px){.construction-step-body{padding:12px}.construction-step-head{padding:12px}.construction-premium-lesson .construction-figure{margin:12px auto 4px}}
+
+/* AVORA JSS1 angle diagrams */
+.angles-premium-lesson .angle-figure{max-width:610px}
+.angles-premium-lesson .angle-arc{fill:none;stroke:#0284c7;stroke-width:3;stroke-linecap:round}
+.angles-premium-lesson .angle-highlight{fill:none;stroke:#0284c7;stroke-width:7;stroke-linecap:round}
+.angles-premium-lesson .protractor-shell{fill:rgba(14,165,233,.04);stroke:#94a3b8;stroke-width:2;stroke-dasharray:4 3}
