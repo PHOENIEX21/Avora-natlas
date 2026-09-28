@@ -916,3 +916,7 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .binary-addition-lesson .column-sign{text-align:left;font-weight:900}
 .binary-addition-lesson .math-stack{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;width:100%}
 .binary-addition-lesson .math-working{overflow-x:auto;max-width:100%}
+
+/* Binary multiplication: factors vertical, partial products vertical, one rule after each complete stack */
+.binary-multiplication .column-partials{display:flex;flex-direction:column;align-items:stretch;padding:.3rem .45rem;border-bottom:2px solid currentColor}
+.binary-multiplication .column-partials .column-row{display:grid;grid-template-columns:1.25rem 1fr;column-gap:.3rem;text-align:right;white-space:nowrap}
