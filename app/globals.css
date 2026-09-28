@@ -886,3 +886,14 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 /* Premium maths typography: equations and worked steps stay vertical and readable */
 .math-working,.fraction-working{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin:14px 0;padding:16px;border:1px solid #e1e5ec;border-radius:14px;background:#fbfcfe}.math-working .math-line,.fraction-working .math-line{display:block;width:100%;font-size:clamp(18px,4.7vw,22px);font-weight:750;line-height:1.55;color:#172b52;overflow-wrap:anywhere}.math-working .math-label,.fraction-working .math-label{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#87620e}.math-working .math-result,.fraction-working .math-result{padding-top:10px;border-top:1px solid #e0e4eb;font-weight:900}.wn-section p{white-space:normal}.wn-section .equation-stack{display:flex;flex-direction:column;gap:8px;align-items:flex-start}.wn-section .equation-stack>*{width:100%}
 @media(max-width:700px){.math-working,.fraction-working{padding:14px;gap:8px}.math-working .math-line,.fraction-working .math-line{font-size:18px}}
+
+/* Premium authored mathematics: vertical fractions and board rules */
+.fractions-premium-lesson .stacked-fraction{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;text-align:center;line-height:1.05;min-width:1.45em;margin:0 .12em;font-variant-numeric:tabular-nums}
+.fractions-premium-lesson .stacked-fraction>span:first-child{padding:0 .18em .12em;border-bottom:1.7px solid currentColor}
+.fractions-premium-lesson .stacked-fraction>span:last-child{padding:.12em .18em 0}
+
+.fractions-premium-lesson .math-stack{display:flex;flex-direction:column;align-items:flex-start;gap:.72rem;width:100%}
+.fractions-premium-lesson .math-line{display:block;width:100%;font-size:clamp(1.08rem,4.4vw,1.35rem);font-weight:650;line-height:1.65;overflow-wrap:anywhere}
+.fractions-premium-lesson .lesson-rule{display:flex;flex-direction:column;gap:.55rem;margin:1rem 0;padding:1rem 1.05rem;border:1px solid #e6d9ad;border-left:4px solid #bd8b13;border-radius:16px;background:#fffaf0}
+.fractions-premium-lesson .lesson-rule>b{font-family:var(--font-display,Georgia,serif);font-size:1.08rem;color:#172d62}
+.fractions-premium-lesson .lesson-rule>span{font-weight:650;line-height:1.55}
