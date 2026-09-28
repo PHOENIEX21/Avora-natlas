@@ -49,12 +49,14 @@ export async function GET(req:Request){
   const url=new URL(req.url);
   const requestedTopic=url.searchParams.get('topic')?.trim()||'';
   const requestedSubject=url.searchParams.get('subject')?.trim()||'';
+  const previewClass=url.searchParams.get('previewClass')?.trim()||'';
   const [profile]=await withDbRetry(()=>sql`SELECT class_level,target_exam,preferred_subject FROM student_profiles WHERE user_id=${session.userId}`);
   const exam=String(profile?.target_exam||'BECE');
   const preferred=String(profile?.preferred_subject||'Mathematics');
   const subject=requestedSubject==='English Language'||requestedSubject==='Mathematics'?requestedSubject:subjectLabel(preferred);
   const subSlug=subjectSlug(subject);
-  const classLevel=String(profile?.class_level||(exam==='BECE'?'JSS3':'Primary 6'));
+  const profileClassLevel=String(profile?.class_level||(exam==='BECE'?'JSS3':'Primary 6'));
+  const classLevel=['JSS1','JSS2','JSS3'].includes(previewClass)?previewClass:profileClassLevel;
 
   // Keep the picker fast: one grouped query returns only topics that really have reviewed content.
   const topicRows=await withDbRetry(()=>sql`
