@@ -441,7 +441,11 @@ export function checkNerdc2025Exercise(questionId:string,answer:string){
   const exerciseCount=isJss1Lcm(official.classLevel,official.subject,official.topic)?25:(official.classLevel==='JSS1'&&official.subject==='Mathematics'&&official.topic.toLowerCase().trim()==='simplification of algebraic expressions'?30:15);
   const q=nerdc2025ExerciseQuestions(official.classLevel,official.subject,official.topic,exerciseCount).find(item=>item.id===questionId);
   if(!q)continue;const correct=norm(answer).toLowerCase()===norm(q.correctAnswer).toLowerCase();
-  return {correct,correctAnswer:q.correctAnswer,explanation:q.explanation,hint:correct?'Explain why the rule or evidence makes this answer valid.':q.hint,topic:q.topic,skill:q.skill};
+  const explanation=norm(q.explanation)||`The correct answer is ${q.correctAnswer}.`;
+  const steps=explanation.split(/(?<=[.!?])\\s+|\\s*→\\s*|\\s*;\\s*/).map(norm).filter(Boolean);
+  const chosen=q.options.find(x=>norm(x).toLowerCase()===norm(answer).toLowerCase())||answer;
+  const optionReview=q.options.map(option=>({option,correct:norm(option).toLowerCase()===norm(q.correctAnswer).toLowerCase(),note:norm(option).toLowerCase()===norm(q.correctAnswer).toLowerCase()?'This matches the rule, calculation or evidence required by the question.':norm(option).toLowerCase()===norm(chosen).toLowerCase()&&!correct?`This was your choice. Recheck it against the governing rule: ${q.hint}`:'This option does not match the required result when the taught rule or evidence is applied.'}));
+  return {correct,correctAnswer:q.correctAnswer,explanation,hint:correct?'Now connect the result to the rule so you know it was not a guess.':q.hint,topic:q.topic,skill:q.skill,concept:q.skill,solutionSteps:steps.length?steps:[explanation],misconception:correct?'Your answer is correct; still verify the reasoning so the same method transfers to a new question.':`Your choice was ${chosen}. The key correction is: ${q.hint}`,optionReview,finalAnswer:`Therefore, the correct answer is ${q.correctAnswer}.`};
  }
  return undefined;
 }
