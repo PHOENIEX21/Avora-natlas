@@ -80,7 +80,7 @@ export async function GET(req:Request){
    const aliases=assessmentAliases(classLevel,subject,name);
    const legacyQuestions=aliases.reduce((n,a)=>n+(counts.get(a.toLowerCase())||0),0);
    const lower=name.toLowerCase();
-   const jss2Calibrated=['whole numbers','square root of numbers','fractions','commercial arithmetic','approximation','multiplication and division of directed numbers','algebraic expressions'].includes(lower); const nerdcCount=classLevel==='JSS1'&&subject==='Mathematics'?(lower==='whole numbers'?10:(lower==='lcm'||lower.includes('lowest common multiple')?25:15)):classLevel==='JSS2'&&subject==='Mathematics'&&jss2Calibrated?(lower==='whole numbers'?20:lower==='algebraic expressions'?35:25):15;
+   const jss2Calibrated=['whole numbers','square root of numbers','fractions','commercial arithmetic','approximation','multiplication and division of directed numbers','algebraic expressions','simple equations'].includes(lower); const nerdcCount=classLevel==='JSS1'&&subject==='Mathematics'?(lower==='whole numbers'?10:(lower==='lcm'||lower.includes('lowest common multiple')?25:15)):classLevel==='JSS2'&&subject==='Mathematics'&&jss2Calibrated?(lower==='whole numbers'?20:lower==='algebraic expressions'?35:25):15;
    return {name,questions:currentNerdc?nerdcCount:legacyQuestions};
   });
 
@@ -107,7 +107,7 @@ export async function GET(req:Request){
   `);
 
   const requestedLower=requestedTopic.toLowerCase();
-  const jss2CalibratedExercise=['whole numbers','square root of numbers','fractions','commercial arithmetic','approximation','multiplication and division of directed numbers','algebraic expressions'].includes(requestedLower); const exerciseCount=classLevel==='JSS1'&&subject==='Mathematics'&&(requestedLower==='lcm'||requestedLower.includes('lowest common multiple'))?25:classLevel==='JSS1'&&subject==='Mathematics'&&requestedLower==='simplification of algebraic expressions'?30:classLevel==='JSS2'&&subject==='Mathematics'&&jss2CalibratedExercise?(requestedLower==='whole numbers'?20:requestedLower==='algebraic expressions'?35:25):15;
+  const jss2CalibratedExercise=['whole numbers','square root of numbers','fractions','commercial arithmetic','approximation','multiplication and division of directed numbers','algebraic expressions','simple equations'].includes(requestedLower); const exerciseCount=classLevel==='JSS1'&&subject==='Mathematics'&&(requestedLower==='lcm'||requestedLower.includes('lowest common multiple'))?25:classLevel==='JSS1'&&subject==='Mathematics'&&requestedLower==='simplification of algebraic expressions'?30:classLevel==='JSS2'&&subject==='Mathematics'&&jss2CalibratedExercise?(requestedLower==='whole numbers'?20:requestedLower==='algebraic expressions'?35:25):15;
   const exerciseQuestions=currentNerdc?publicNerdc2025ExerciseQuestions(classLevel,subject,requestedTopic,exerciseCount):[];
   return json({exam,subject,classLevel,topics,questions:questionRows.map(shapeQuestion),exerciseQuestions,plan});
  }catch(error){
