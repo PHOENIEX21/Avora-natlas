@@ -231,10 +231,11 @@ export default function TutorClient(){
  const topicKey=String(topic||'').trim().toLowerCase().replace(/\s+/g,' ');
  const unitKey=String(unit?.title||'').trim().toLowerCase().replace(/\s+/g,' ');
  const useAuthoredWholeNumbers=classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers';
- const lcmRouteText=(topicKey+' '+unitKey).trim();
- const hcfRouteText=(topicKey+' '+unitKey).trim();
- const useCleanLCM=classLevel==='JSS1'&&subject==='Mathematics'&&(topicKey==='lcm'||unitKey==='lcm'||lcmRouteText.includes('lowest common multiple')||/(^|[^a-z])lcm([^a-z]|$)/.test(lcmRouteText));
- const useCleanHCF=classLevel==='JSS1'&&subject==='Mathematics'&&(topicKey==='hcf'||unitKey==='hcf'||hcfRouteText.includes('highest common factor')||/(^|[^a-z])hcf([^a-z]|$)/.test(hcfRouteText));
+ const requestedTopicKey=String(requestedTopic||'').trim().toLowerCase().replace(/\s+/g,' ');
+ const lcmRouteText=(requestedTopicKey+' '+topicKey+' '+unitKey).trim();
+ const hcfRouteText=(requestedTopicKey+' '+topicKey+' '+unitKey).trim();
+ const useCleanLCM=subject==='Mathematics'&&(requestedTopicKey==='lcm'||topicKey==='lcm'||unitKey==='lcm'||lcmRouteText.includes('lowest common multiple')||/(^|[^a-z])lcm([^a-z]|$)/.test(lcmRouteText));
+ const useCleanHCF=subject==='Mathematics'&&(requestedTopicKey==='hcf'||topicKey==='hcf'||unitKey==='hcf'||hcfRouteText.includes('highest common factor')||/(^|[^a-z])hcf([^a-z]|$)/.test(hcfRouteText));
  const useCleanCountingBaseTwo=classLevel==='JSS1'&&subject==='Mathematics'&&['counting in base 2','counting in base two'].includes(topic.trim().toLowerCase())||['counting in base 2','counting in base two'].includes(String(unit?.title||'').trim().toLowerCase());
  const useCleanBaseTenToBinary=classLevel==='JSS1'&&subject==='Mathematics'&&(['conversion of base 10 numerals to binary numbers','conversion of base 10 to binary numbers'].includes(topic.trim().toLowerCase())||['conversion of base 10 numerals to binary numbers','conversion of base 10 to binary numbers'].includes(String(unit?.title||'').trim().toLowerCase()));
  const useCleanFractions=classLevel==='JSS1'&&subject==='Mathematics'&&['fractions','fractions: types, simplification and equivalent fractions'].includes(topic.trim().toLowerCase());
