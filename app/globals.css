@@ -975,3 +975,12 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .angles-premium-lesson .angle-arc{fill:none;stroke:#0284c7;stroke-width:3;stroke-linecap:round}
 .angles-premium-lesson .angle-highlight{fill:none;stroke:#0284c7;stroke-width:7;stroke-linecap:round}
 .angles-premium-lesson .protractor-shell{fill:rgba(14,165,233,.04);stroke:#94a3b8;stroke-width:2;stroke-dasharray:4 3}
+
+/* AVORA JSS1 Need for Statistics */
+.statistics-premium-lesson .stats-card{margin:18px 0;padding:18px;border:1px solid #dbe4ee;border-radius:20px;background:#fff;box-shadow:0 10px 28px rgba(15,23,42,.05)}
+.statistics-premium-lesson .stats-card h4{margin:0 0 16px;color:#172554;font-size:1.05rem}
+.stats-bars{display:grid;gap:12px}.stats-bar-row{display:grid;grid-template-columns:58px 1fr 40px;gap:10px;align-items:center}.stats-bar-row>div{height:15px;border-radius:999px;background:#eef2f7;overflow:hidden}.stats-bar-row i{display:block;height:100%;border-radius:999px;background:#0ea5e9}.stats-caption{margin:16px 0 0!important}
+.stats-purpose-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.stats-purpose-grid>div{padding:16px;border:1px solid #dbe4ee;border-radius:16px;background:#f8fafc}.stats-purpose-grid b{color:#172554}.stats-purpose-grid p{margin:6px 0 0!important}
+.chance-scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:18px 0}.chance-scale>div{padding:14px 9px;text-align:center;border:1px solid #dbe4ee;border-radius:14px;background:#f8fafc}.chance-scale b,.chance-scale span,.chance-scale small{display:block}.chance-scale b{color:#172554}.chance-scale span{margin:6px 0;color:#0369a1;font-weight:800}.chance-scale small{line-height:1.35;color:#64748b}
+.mini-data{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.mini-data span{padding:12px 6px;border-radius:12px;background:#f1f5f9;text-align:center}.mini-data b{display:block;margin-top:3px;color:#172554;font-size:1.15rem}
+@media(max-width:600px){.stats-purpose-grid{grid-template-columns:1fr}.chance-scale{grid-template-columns:1fr}.chance-scale>div{text-align:left;display:grid;grid-template-columns:100px 70px 1fr;align-items:center;gap:8px}.chance-scale span{margin:0}.mini-data{grid-template-columns:repeat(5,minmax(48px,1fr));font-size:.82rem}.statistics-premium-lesson .stats-card{padding:14px}}
