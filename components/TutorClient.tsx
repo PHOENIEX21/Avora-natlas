@@ -371,7 +371,7 @@ function explanationName(unit:any,index:number){const title=String(unit?.title||
  function nextExercise(){
   if(!exerciseFeedback)return;
   if(exerciseIndex<exerciseQuestions.length-1){setExerciseIndex(i=>i+1);setExerciseAnswer('');setExerciseFeedback(null);setError('');return}
-  const finalCorrect=exerciseCorrect+(exerciseFeedback?.correct?1:0);setExerciseFinished(true);trackEvent('TUTOR_TOPIC_EXERCISE_COMPLETED',{subject,topic,exam,classLevel,score:finalCorrect,total:exerciseQuestions.length});
+  const finalCorrect=exerciseCorrect;setExerciseFinished(true);trackEvent('TUTOR_TOPIC_EXERCISE_COMPLETED',{subject,topic,exam,classLevel,score:finalCorrect,total:exerciseQuestions.length});
   if(finalCorrect>=Math.ceil(exerciseQuestions.length*.8)){setPhase('success');void logInteraction('LESSON_COMPLETE','','NERDC topic teaching and end-of-topic exercise completed.','MASTERED');trackEvent('TUTOR_LESSON_COMPLETED',{subject,topic,exam,classLevel,outcome:'MASTERED'})}
  }
  function reteachAfterExercise(){setExerciseIndex(0);setExerciseAnswer('');setExerciseFeedback(null);setExerciseCorrect(0);setExerciseFinished(false);setUnitIndex(0);setEventIndex(0);setCovered([]);setPhase('teach');setPaused(false);pausedRef.current=false;trackEvent('TUTOR_RETEACH_TRIGGERED',{subject,topic,exam,reason:'NERDC_EXERCISE_BELOW_80'})}
