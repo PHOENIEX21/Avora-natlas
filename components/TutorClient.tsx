@@ -275,6 +275,7 @@ export default function TutorClient(){
  const lessonQuickCheck=useMemo(()=>{if(!unit||!exerciseQuestions.length)return undefined;const ranked=[...exerciseQuestions].filter(q=>q.type==='MULTIPLE_CHOICE'&&Array.isArray(q.options)&&q.options.length>=2).map(q=>({q,score:questionFit(q,unit)})).sort((a,b)=>b.score-a.score);return ranked.find(x=>x.score>=1)?.q},[exerciseQuestions,unit]);
 
  useEffect(()=>{setSubject(requestedSubject==='English Language'?'English Language':'Mathematics');},[requestedSubject]);
+ useEffect(()=>{if(requestedTopic&&requestedTopic!==topic)setTopic(requestedTopic);},[requestedTopic,topic]);
  // The lesson loader intentionally re-runs only when the selected topic/subject changes.
  // eslint-disable-next-line react-hooks/exhaustive-deps
  useEffect(()=>{void load(topic,subject)},[subject,topic]);
