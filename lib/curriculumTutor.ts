@@ -19,7 +19,7 @@ export type MasterDeepLesson={
 export function getDeepCurriculumLesson(classLevel:string,subject:string,topic:string):MasterDeepLesson|undefined{
  const master=masterTopicByName(classLevel,subject,topic);
  if(!master)return undefined;
- const units=isNerdc2025Class(classLevel)?mergeUnits(getSentCurriculumUnits(classLevel,subject,topic),getNerdc2025DeepUnits(classLevel,subject,topic)):getSentCurriculumUnits(classLevel,subject,topic);
+ const units=isNerdc2025Class(classLevel)?getNerdc2025DeepUnits(classLevel,subject,topic):getSentCurriculumUnits(classLevel,subject,topic);
  if(!units.length)return undefined;
  return {topicId:master.id,classLevel,subject,topic,term:master.term,units};
 }
@@ -60,7 +60,9 @@ export function getCurriculumTutorPlan(classLevel:string,subject:string,topic:st
  const master=masterTopicByName(classLevel,subject,topic);
  if(!master)return undefined; // old/parallel curriculum names cannot silently enter runtime.
  const sent=getSentCurriculumUnits(classLevel,subject,topic);
- const units=isNerdc2025Class(classLevel)?mergeUnits(sent,getNerdc2025DeepUnits(classLevel,subject,topic)):sent;
+ // Revised JSS1/JSS2 topics must expose only the newly authored NERDC deep lesson.
+ // Do not merge legacy/sent curriculum units into learner teaching.
+ const units=isNerdc2025Class(classLevel)?getNerdc2025DeepUnits(classLevel,subject,topic):sent;
  if(!units.length)return undefined; // launch audit treats this as a release blocker.
  const official=officialNerdc2025Topic(classLevel,subject,topic);
  return {
