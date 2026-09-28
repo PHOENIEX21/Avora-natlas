@@ -1036,3 +1036,10 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .fractions-premium-lesson .cancelled{text-decoration-color:currentColor;text-decoration-thickness:1.7px;text-decoration-skip-ink:none;opacity:.82}
 .fractions-premium-lesson .cancelled .true-fraction{text-decoration-color:currentColor;text-decoration-thickness:1.7px}
 @media(max-width:640px){.fractions-premium-lesson .legacy-structured-step .vertical-working,.fractions-premium-lesson .whole-number-math-step .vertical-working{width:100%}}
+
+/* Keep tutor step markers in their own gutter so they never cover teaching text. */
+.fractions-premium-lesson .math-stack>.math-line:not(.math-result){padding-left:3.25rem!important;}
+.fractions-premium-lesson .math-stack>.math-line.math-teaching-step:not(.math-result){padding-left:3.25rem!important;}
+.fractions-premium-lesson .math-stack>.math-line:not(.math-result)::before{left:.55rem!important;top:1rem!important;width:1.65rem;height:1.65rem;z-index:1;}
+.fractions-premium-lesson .math-teaching-step .step-explanation{display:block;width:100%;padding-left:0;margin-left:0;}
+@media(max-width:700px){.fractions-premium-lesson .math-stack>.math-line:not(.math-result),.fractions-premium-lesson .math-stack>.math-line.math-teaching-step:not(.math-result){padding-left:3rem!important;padding-right:.2rem!important}.fractions-premium-lesson .math-stack>.math-line:not(.math-result)::before{left:.45rem!important;}}
