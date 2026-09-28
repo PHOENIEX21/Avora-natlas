@@ -246,6 +246,25 @@ const simplifyAuthored=Q('Simplification of Algebraic Expressions','simplify',[
 ['15','Which substitution can check 3x+2x=5x?',['Choose any value such as x=4 and compare both sides','Replace x by another letter only','Delete x','Check coefficients without values'],'Choose any value such as x=4 and compare both sides','For x=4, both expressions equal 20.',3]
 ]);
 
+const simplifyNewAuthored=Q('Simplification of Algebraic Expressions','simplify-new',[
+['01','What is the coefficient of x in 7x?',['x','1','7','0'],'7','The coefficient is the numerical factor multiplying x.',1],
+['02','What is the coefficient of y in −5y?',['5','−5','y','−y'],'−5','The sign belongs to the coefficient, so the coefficient is −5.',1],
+['03','What coefficient is understood in m?',['0','m','1','−1'],'1','m=1m, so the hidden coefficient is 1.',1],
+['04','Which pair contains like terms?',['3x and 3y','5a and −2a','4m and 4m²','2x and 2xy'],'5a and −2a','Like terms have exactly the same variable part.',1],
+['05','Simplify 4x+7x.',['11x','11x²','28x','11'],'11x','Add the coefficients and keep the common variable x.',1],
+['06','Simplify 9a−4a+2a.',['3a','7a','15a','7'],'7a','(9−4+2)a=7a.',2],
+['07','Simplify 5x+3y+2x−y.',['7x+2y','10xy','7x+4y','9xy'],'7x+2y','Collect x-terms and y-terms separately.',2],
+['08','Simplify 8m+5−3m+2.',['5m+7','11m+7','5m+3','12m'],'5m+7','8m−3m=5m and 5+2=7.',2],
+['09','Simplify 6+(x+4).',['x+10','x+2','6x+4','10x'],'x+10','A positive sign before the bracket keeps the signs inside unchanged.',2],
+['10','Simplify 8−(x+3).',['5−x','11−x','x+5','8−x+3'],'5−x','The minus changes both signs: 8−x−3=5−x.',2],
+['11','Expand 3(x+5).',['3x+5','3x+15','8x','15x'],'3x+15','Distribute 3 to every term inside the bracket.',2],
+['12','Simplify 4(2a−3).',['8a−3','6a−12','8a−12','8a+12'],'8a−12','4×2a=8a and 4×(−3)=−12.',2],
+['13','Simplify (7x+4)−(2x+1).',['5x+3','9x+5','5x+5','9x+3'],'5x+3','The second bracket is subtracted: 7x+4−2x−1=5x+3.',3],
+['14','Simplify 2(x+3)+3x.',['5x+3','5x+6','6x+6','5x'],'5x+6','Expand first: 2x+6+3x, then collect like terms.',3],
+['15','A packet contains x+4 sweets. What is the simplified expression for three identical packets?',['x+12','3x+4','3x+12','7x'],'3x+12','Three packets give 3(x+4)=3x+12.',3]
+]);
+const simplifyCombinedAuthored=[...simplifyAuthored,...simplifyNewAuthored];
+
 const equationsAuthored=Q('Simple Equations','equations',[
 ['01','What does the equals sign in an equation mean?',['The two sides have the same value','Move everything right','The answer is always positive','Add the sides'],'The two sides have the same value','An equation states a balance of equal values.',1],
 ['02','Solve x+3=8.',['5','11','3','8'],'5','Subtract 3 from both sides.',1],
@@ -345,7 +364,7 @@ const authoredJss1MathByTopic:Record<string,NerdcExerciseQuestion[]>={
  'highest common factor (hcf)':hcfAuthored,'hcf':hcfAuthored,
  'estimation':estimationAuthored,'approximation':approximationAuthored,
  'addition of numbers in base 2.':binaryAdditionAuthored,'subtraction of numbers in base 2.':binarySubtractionAuthored,'multiplication of numbers in base 2.':binaryMultiplicationAuthored,
- 'use of symbols':symbolsAuthored,'simplification of algebraic expressions':simplifyAuthored,'simple equations':equationsAuthored,
+ 'use of symbols':symbolsAuthored,'simplification of algebraic expressions':simplifyCombinedAuthored,'simple equations':equationsAuthored,
 };
 
 
