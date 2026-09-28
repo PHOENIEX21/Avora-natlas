@@ -899,3 +899,11 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .fractions-premium-lesson .lesson-rule>span{font-weight:650;line-height:1.55}
 
 .fractions-premium-lesson .example-question{display:flex;flex-direction:column;gap:.5rem;width:100%;padding:0 0 1rem;border-bottom:1px solid #e2e7ef}.fractions-premium-lesson .example-question>span{font-size:.78rem;font-weight:900;letter-spacing:.11em;color:#936b0c}.fractions-premium-lesson .example-question>strong{font-family:Georgia,serif;font-size:clamp(1.18rem,5vw,1.55rem);line-height:1.42;color:#172d62}.fractions-premium-lesson .fraction-working>.math-label{display:block;width:100%;font-size:clamp(1.05rem,4.6vw,1.28rem)!important;line-height:1.45!important;text-transform:none!important;color:#172d62!important;font-weight:900!important;padding-bottom:.8rem;border-bottom:1px solid #e2e7ef}
+
+/* School-style column arithmetic: operands first, operation on final operand, rule before answer */
+.fractions-premium-lesson .column-working{display:grid;grid-template-columns:auto minmax(4.8ch,auto);width:max-content;min-width:7.5rem;margin:.35rem 0 .65rem;font-variant-numeric:tabular-nums;font-size:clamp(1.3rem,5.2vw,1.7rem);font-weight:800;line-height:1.35;color:#172d62}
+.fractions-premium-lesson .column-row{display:contents}
+.fractions-premium-lesson .column-row .column-op{padding-right:.45rem;text-align:right}
+.fractions-premium-lesson .column-row>span:last-child{text-align:right}
+.fractions-premium-lesson .column-rule{grid-column:1/-1;border-top:2px solid currentColor;margin:.18rem 0 .22rem}
+.fractions-premium-lesson .column-result{grid-column:2;text-align:right;font-weight:900}

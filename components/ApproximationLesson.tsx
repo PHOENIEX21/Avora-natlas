@@ -2,6 +2,7 @@
 const O=['explain approximation and distinguish it from estimation','explain what it means to round to the nearest value','identify the rounding digit and deciding digit','round whole numbers to the nearest 10, 100 and 1,000','round decimals to stated decimal places','approximate to significant figures where required','handle carrying correctly during rounding','approximate addition, subtraction, multiplication and division','use approximation to check exact answers','apply approximation to money, measurement and everyday situations','solve quantitative-reasoning problems','use ≈ correctly'];
 function W({q,children}:{q:string;children:React.ReactNode}){return <div className="fraction-working"><div className="example-question"><span>WORKED EXAMPLE</span><strong>{q}</strong></div><div className="math-stack">{children}</div></div>}
 function L({children}:{children:React.ReactNode}){return <div className="math-line">{children}</div>}
+function Column({rows,result}:{rows:{value:string;op?:string}[];result:string}){return <div className="column-working">{rows.map((r,i)=><div className="column-row" key={i}><span className="column-op">{r.op||''}</span><span>{r.value}</span></div>)}<div className="column-rule"/><div className="column-result">{result}</div></div>}
 function M({n,t,children}:{n:number;t:string;children:React.ReactNode}){return <div className="binary-mistake"><span className="binary-mistake-label">Common mistake {n}</span><h4>{t}</h4>{children}</div>}
 export default function ApproximationLesson({onExercise}:{onExercise:()=>void}){return <article className="wn-lesson fractions-premium-lesson">
 <header className="wn-hero"><span>JSS1 MATHEMATICS</span><h1>Approximation</h1><p>Replace a known number with a nearby simpler value at a stated level of accuracy.</p></header>
@@ -29,18 +30,18 @@ export default function ApproximationLesson({onExercise}:{onExercise:()=>void}){
 <W q="Round 4,782 to 1 significant figure."><L>First significant digit = 4</L><L>Deciding digit = 7</L><L>7 ≥ 5 → 4 + 1 = 5</L><L><b>4,782 ≈ 5,000</b></L></W>
 <W q="Round 4,782 to 2 significant figures."><L>Keep 47; deciding digit = 8</L><L>8 ≥ 5 → 7 becomes 8</L><L><b>4,782 ≈ 4,800</b></L></W></section>
 <section className="wn-section"><h3>11. Approximation of Addition and Subtraction</h3>
-<W q="Find an approximate value of 198 + 304."><L>198 ≈ 200</L><L>304 ≈ 300</L><L>200 + 300 = <b>500</b></L><L>Exact answer = 502, so the approximation is close.</L></W>
-<W q="Find an approximate value of 792 − 308."><L>792 ≈ 800</L><L>308 ≈ 300</L><L>800 − 300 = <b>500</b></L><L>Exact answer = 484, which is reasonably close.</L></W></section>
+<W q="Find an approximate value of 198 + 304."><L>First approximate each number:</L><L>198 ≈ 200</L><L>304 ≈ 300</L><L>Now arrange the approximate numbers by place value:</L><Column rows={[{value:"200"},{op:"+",value:"300"}]} result="500"/><L>Therefore, <b>198 + 304 ≈ 500</b>.</L><L>Exact answer = 502, so the approximation is close.</L></W>
+<W q="Find an approximate value of 792 − 308."><L>First approximate each number:</L><L>792 ≈ 800</L><L>308 ≈ 300</L><L>Now arrange the approximate numbers by place value:</L><Column rows={[{value:"800"},{op:"−",value:"300"}]} result="500"/><L>Therefore, <b>792 − 308 ≈ 500</b>.</L><L>Exact answer = 484, which is reasonably close.</L></W></section>
 <section className="wn-section"><h3>12. Approximation of Multiplication and Division</h3>
 <W q="Find an approximate value of 49 × 21."><L>49 ≈ 50</L><L>21 ≈ 20</L><L>50 × 20 = <b>1,000</b></L><L>Exact answer = 1,029.</L></W>
 <W q="Find an approximate value of 398 ÷ 21."><L>398 ≈ 400</L><L>21 ≈ 20</L><L>400 ÷ 20 = <b>20</b></L></W></section>
 <section className="wn-section"><h3>13. Approximation as an Error Check</h3>
-<W q="A learner writes 198 + 304 = 5,020. Is that answer reasonable?"><L>198 ≈ 200</L><L>304 ≈ 300</L><L>200 + 300 = 500</L><L>5,020 is nowhere near 500.</L><L><b>The calculation must be checked.</b></L></W></section>
+<W q="A learner writes 198 + 304 = 5,020. Is that answer reasonable?"><L>198 ≈ 200</L><L>304 ≈ 300</L><Column rows={[{value:"200"},{op:"+",value:"300"}]} result="500"/><L>5,020 is nowhere near 500.</L><L><b>The calculation must be checked.</b></L></W></section>
 <section className="wn-section"><h3>14. Money and Measurement</h3>
 <W q="Approximate ₦487 to the nearest ₦100."><L>Hundreds = 4; deciding tens = 8</L><L>8 ≥ 5 → 4 + 1 = 5</L><L><b>₦487 ≈ ₦500</b></L></W>
 <W q="A rope measures 12.68 m. Approximate its length to 1 decimal place."><L>Tenths = 6; deciding hundredths = 8</L><L>8 ≥ 5 → 6 + 1 = 7</L><L><b>12.68 m ≈ 12.7 m</b></L></W></section>
 <section className="wn-section"><h3>15. Quantitative Reasoning</h3>
-<W q="A school bought 198 exercise books in one month and 307 the next. Approximately how many were bought altogether?"><L>198 ≈ 200</L><L>307 ≈ 300</L><L>200 + 300 = <b>500 books</b></L></W>
+<W q="A school bought 198 exercise books in one month and 307 the next. Approximately how many were bought altogether?"><L>198 ≈ 200</L><L>307 ≈ 300</L><Column rows={[{value:"200"},{op:"+",value:"300"}]} result="500"/><L><b>Approximately 500 books.</b></L></W>
 <W q="A trader packs about 48 oranges in each box. About how many oranges are in 21 boxes?"><L>48 ≈ 50</L><L>21 ≈ 20</L><L>50 × 20 = <b>1,000 oranges</b></L></W></section>
 <section className="wn-section"><h3>Common Misconceptions</h3>
 <M n={1} t="Looking at the wrong digit"><p>For 4,372 to nearest hundred, the deciding digit is the tens digit 7, so 4,372 ≈ 4,400.</p></M>
