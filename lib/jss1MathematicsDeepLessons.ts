@@ -193,7 +193,7 @@ mastery:{criterion:'Learner finds HCF using both the factor-pair and prime-facto
 topicId:'nerdc-jss1-math-numbers-and-numeration-whole-numbers-4',classLevel:'JSS1',subject:'Mathematics',
 topic:'Counting in Base 2',source:
 {authority:'NERDC',url:sourceUrl,page:3},
-objectives:['Count in groups of two'],
+objectives:['Explain what base two means','Identify the digits used in base two','Group objects repeatedly in twos','State and use binary place values','Count correctly in base two','Explain carrying in binary numbers','Interpret simple binary numerals using place value','Explain the importance of zero in a binary numeral','Identify valid and invalid binary numerals'],
 prerequisites:['counting whole objects one at a time','the idea of "grouping" (e.g. counting in tens using bundles)'],
 teaching:[
 'START HERE — CONNECT BASE TWO TO WHAT YOU ALREADY KNOW. Our everyday number system is base ten. It uses ten digits, 0 to 9, and its place values are 1, 10, 100, 1000 and so on. After 9 we do not invent a new single digit; we regroup and write 10. Base two follows the same place-value idea, but groups in twos instead of tens.',
