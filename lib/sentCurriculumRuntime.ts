@@ -4,7 +4,7 @@ import type {TutorPlan,TutorUnit} from './tutorCurriculum';
 import {legacyTargetsForOfficialTopic} from './nerdc2025TopicMap';
 
 type SentUnit={classLevel:string;subject:string;term:number;title:string;sourceFile:string;steps:string[];checks:string[];sourceSolutions?:string[];targets:string[]};
-const sentUnits:SentUnit[
+const sentUnits:SentUnit[]=[
   {
     "classLevel": "JSS1",
     "subject": "English Language",
