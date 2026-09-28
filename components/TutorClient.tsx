@@ -197,12 +197,13 @@ export default function TutorClient(){
  async function readJson(r:Response,label:string){try{return await parseJson(r,label)}catch(e:any){if(e?.code==='SESSION_EXPIRED'){router.replace('/login');router.refresh()}throw e}}
  const requestedTopic=params.get('topic')||'';
  const requestedSubject=params.get('subject')||'';
+ const requestedPreviewClass=params.get('previewClass')||'';
  const [subject,setSubject]=useState(requestedSubject==='English Language'?'English Language':'Mathematics');
  const [topic,setTopic]=useState(requestedTopic);
  const [topics,setTopics]=useState<Topic[]>([]);
  const [plan,setPlan]=useState<TutorPlan|undefined>(undefined);
  const [exam,setExam]=useState('BECE');const [classLevel,setClassLevel]=useState('JSS3');
- const [previewClass,setPreviewClass]=useState('');
+ const [previewClass,setPreviewClass]=useState(['JSS1','JSS2','JSS3'].includes(requestedPreviewClass)?requestedPreviewClass:'');
  const [questions,setQuestions]=useState<Q[]>([]);const [exerciseQuestions,setExerciseQuestions]=useState<Q[]>([]);const [loading,setLoading]=useState(true);const [error,setError]=useState('');
  const [phase,setPhase]=useState<Phase>('probe');const [unitIndex,setUnitIndex]=useState(0);const [covered,setCovered]=useState<number[]>([]);
  const [answer,setAnswer]=useState('');const [feedback,setFeedback]=useState<Feedback|null>(null);const [checking,setChecking]=useState(false);
