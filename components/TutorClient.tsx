@@ -223,11 +223,13 @@ export default function TutorClient(){
  const useCleanFractionMultiplyDivide=classLevel==='JSS1'&&subject==='Mathematics'&&['multiplications and divisions of fractions','multiplication and division of fractions','multiplication and division of fraction'].includes(topic.trim().toLowerCase());
  const useCleanEstimation=classLevel==='JSS1'&&subject==='Mathematics'&&topic.trim().toLowerCase()==='estimation';
  const useCleanApproximation=classLevel==='JSS1'&&subject==='Mathematics'&&topic.trim().toLowerCase()==='approximation';
- const authoredTopicKey=String(unit?.title||topic||'').trim().toLowerCase().replace(/\s+/g,' ');
- const useCleanBinaryAddition=classLevel==='JSS1'&&subject==='Mathematics'&&authoredTopicKey.includes('addition')&&authoredTopicKey.includes('base')&&authoredTopicKey.includes('2');
- const useCleanBinarySubtraction=classLevel==='JSS1'&&subject==='Mathematics'&&authoredTopicKey.includes('subtraction')&&authoredTopicKey.includes('base')&&authoredTopicKey.includes('2');
- const useCleanBinaryMultiplication=classLevel==='JSS1'&&subject==='Mathematics'&&authoredTopicKey.includes('multiplication')&&authoredTopicKey.includes('base')&&authoredTopicKey.includes('2');
- const useCleanUseOfSymbols=classLevel==='JSS1'&&subject==='Mathematics'&&['use of symbols','use of symbol'].includes(authoredTopicKey);
+ const topicKey=String(topic||'').trim().toLowerCase().replace(/\\s+/g,' ');
+ const unitKey=String(unit?.title||'').trim().toLowerCase().replace(/\\s+/g,' ');
+ const authoredTopicKey=topicKey||unitKey;
+ const isBinaryAdditionKey=(s:string)=>s.includes('addition')&&s.includes('base')&&(s.includes('2')||s.includes('two'));\n const useCleanBinaryAddition=classLevel==='JSS1'&&subject==='Mathematics'&&(isBinaryAdditionKey(topicKey)||isBinaryAdditionKey(unitKey));
+ const isBinarySubtractionKey=(s:string)=>s.includes('subtraction')&&s.includes('base')&&(s.includes('2')||s.includes('two'));\n const useCleanBinarySubtraction=classLevel==='JSS1'&&subject==='Mathematics'&&(isBinarySubtractionKey(topicKey)||isBinarySubtractionKey(unitKey));
+ const isBinaryMultiplicationKey=(s:string)=>s.includes('multiplication')&&s.includes('base')&&(s.includes('2')||s.includes('two'));\n const useCleanBinaryMultiplication=classLevel==='JSS1'&&subject==='Mathematics'&&(isBinaryMultiplicationKey(topicKey)||isBinaryMultiplicationKey(unitKey));
+ const useCleanUseOfSymbols=classLevel==='JSS1'&&subject==='Mathematics'&&(['use of symbols','use of symbol'].includes(topicKey)||['use of symbols','use of symbol'].includes(unitKey));
  const probeQ=questions.find(q=>q.type==='MULTIPLE_CHOICE'&&Array.isArray(q.options)&&q.options.length>=2);
  const exerciseQ=exerciseQuestions[exerciseIndex];
  const guidedQ=useMemo(()=>{if(!unit||!questions.length)return undefined;const ranked=[...questions].map(q=>({q,score:questionFit(q,unit)})).sort((a,b)=>b.score-a.score);const matched=ranked.filter(x=>x.score>=1);if(matched.length)return matched[unitIndex%matched.length].q;return questions[unitIndex%questions.length]},[questions,unit,unitIndex]);
