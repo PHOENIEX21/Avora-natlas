@@ -378,7 +378,25 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
 
   {phase==='teach'&&useCleanCountingBaseTwo&&unit&&<CountingBaseTwoLesson unit={unit} onExercise={startExercise}/>}
 
-  {phase==='teach'&&useCleanBaseTenToBinary&&unit&&<BaseTenToBinaryLesson unit={unit} onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanFractions&&<FractionsLesson onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanFractionAddSubtract&&<FractionAddSubtractLesson onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanFractionMultiplyDivide&&<FractionMultiplyDivideLesson onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanEstimation&&<EstimationLesson onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanApproximation&&<ApproximationLesson onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanBinaryAddition&&<BinaryAdditionLesson onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanBinarySubtraction&&<BinarySubtractionLesson onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanBinaryMultiplication&&<BinaryMultiplicationLesson onExercise={startExercise}/>}\n\n  {phase==='teach'&&useCleanUseOfSymbols&&<UseOfSymbolsLesson onExercise={startExercise}/>}
+  {phase==='teach'&&useCleanBaseTenToBinary&&unit&&<BaseTenToBinaryLesson unit={unit} onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanFractions&&<FractionsLesson onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanFractionAddSubtract&&<FractionAddSubtractLesson onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanFractionMultiplyDivide&&<FractionMultiplyDivideLesson onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanEstimation&&<EstimationLesson onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanApproximation&&<ApproximationLesson onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanBinaryAddition&&<BinaryAdditionLesson onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanBinarySubtraction&&<BinarySubtractionLesson onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanBinaryMultiplication&&<BinaryMultiplicationLesson onExercise={startExercise}/>}
+
+  {phase==='teach'&&useCleanUseOfSymbols&&<UseOfSymbolsLesson onExercise={startExercise}/>}
 
   {phase==='teach'&&useCleanSimplificationAlgebra&&<SimplificationAlgebraLesson onExercise={startExercise}/>}
 
