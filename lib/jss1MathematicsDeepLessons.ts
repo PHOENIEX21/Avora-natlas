@@ -359,63 +359,6 @@ independentPractice:[
 mastery:{criterion:'Learner generates equivalent fractions correctly, orders fractions using a common denominator, converts confidently between fractions/decimals/percentages in both directions with correct simplification via HCF, and solves realistic sharing/money problems.',status:'DEEP_WHEN_PASSED'},boardReady:true
 },
 {
-topicId:'nerdc-jss1-math-basic-operations-basic-operations-1',classLevel:'JSS1',subject:'Mathematics',
-topic:'Addition and subtraction',source:
-{authority:'NERDC',url:sourceUrl,page:5},
-objectives:['Add and subtract given numbers correctly','State place values in sums/differences','Use a number line for directed numbers','Add/subtract positive and negative integers','Relate directed numbers to everyday life'],
-prerequisites:['column addition/subtraction with regrouping (primary level)','place value of digits within a whole number','the idea of zero as a starting reference point'],
-teaching:[
-'START WITH PLACE VALUE. In column addition or subtraction, units must be under units, tens under tens, hundreds under hundreds and thousands under thousands. Correct alignment is part of the calculation, not just presentation.',
-'ADDITION WITH REGROUPING. Work from the units. If a column totals 10 or more, keep the units belonging in that column and regroup the remaining ten as one unit of the next place. For example, 7+5=12 means 12 units = 1 ten + 2 units. Write 2 in the units column and regroup 1 ten. The carried 1 therefore has a real place-value meaning.',
-'SUBTRACTION WITH EXCHANGING. If the top digit in a column is too small, exchange one unit from the next place. One ten becomes 10 units; one hundred becomes 10 tens. Across zeros, move left until a non-zero place can be exchanged, then pass the value through the intervening places. This explains borrowing instead of making it a mysterious rule.',
-'DIRECTED NUMBERS — SIMPLE MEANING FIRST. Positive can be thought of as what you HAVE and negative as what you OWE. For −3+4, imagine owing 3 but having 4. Use 3 of the 4 to clear the debt and 1 remains, so −3+4=1. For 3+(−5), you have 3 but owe 5; after using the 3, a debt of 2 remains, so the answer is −2.',
-'THE NUMBER LINE CONFIRMS THE MEANING. Positive movement goes right and negative movement goes left. Numbers farther right are greater. Therefore −1>−4 even though 4 has the larger unsigned digit.',
-'RULES OF SIGNS. Learners should know: (+)×(+)=+, (+)×(−)=−, (−)×(+) = −, and (−)×(−)=+. First understand what the signs mean; then use these rules as the standard shortcut.',
-'WHERE THE “TIMES” COMES FROM WHEN OPENING BRACKETS. In 2−(−3), the first minus is the operation outside the bracket and the second minus is the sign belonging to 3. When the bracket is removed, apply the rule of signs to these adjacent signs: (−)×(−)=+. Therefore 2−(−3) becomes 2+3=5. We are simplifying/multiplying the SIGNS; we are NOT calculating 2×(−3).',
-'Likewise 4+(−2): the adjacent signs give (+)×(−)=−, so 4+(−2)=4−2=2. For 5−(+3), (−)×(+) = −, so 5−(+3)=5−3=2. For 6−(−4), (−)×(−)=+, so 6−(−4)=6+4=10.',
-'DIFFERENT SIGNS IN A SUM. For −8+3, think “owe 8, have 3”: the 3 clears part of the debt and 5 is still owed, so the result is −5. As a shortcut, find the difference of the magnitudes and keep the sign of the number with the greater magnitude.',
-'SAME SIGNS IN A SUM. For −4+(−3), both amounts are debts/negative movements, so combine their magnitudes and keep the negative sign: −7. For +4+(+3), both are positive, so the result is +7.',
-'REAL-LIFE MEANING. Directed numbers can model temperature above/below zero, money in credit/debt, elevation above/below sea level, and forward/backward movement. Define the zero reference and positive direction before calculating.',
-'CHECK FOR REASONABLENESS. After calculating, interpret the sign in the context. A negative bank position means debt/overdrawn; a negative elevation means below the chosen zero level. For ordinary subtraction, addition can be used to check the result.',
-'MASTERY TARGET. Learners can add/subtract multi-digit whole numbers with place-value understanding, explain regrouping/exchanging, order directed numbers, use the have/owe and number-line meanings, state and apply the sign rules, explain why 2−(−3) becomes 2+3, and solve practical directed-number problems.'
-],
-workedExamples:[
-'Add 3,748 and 2,596 using column addition with correct place-value alignment. Line up: ones (8+6=14, write 4 carry 1), tens (4+9+1carry=14, write 4 carry 1), hundreds (7+5+1carry=13, write 3 carry 1), thousands (3+2+1carry=6). Result: 6,344.',
-'Show 5−9 on a number line and state the result. Start at 5. Subtracting 9 means moving left 9 places: 5,4,3,2,1,0,−1,−2,−3,−4. Landing point: −4. So 5−9=−4.',
-'Calculate −3−(−7) and explain using the "subtracting a negative" rule. Subtracting −7 means adding its opposite, +7: −3− (−7)=−3+7. Starting at −3 and moving right 7: −3,−2,−1,0,1,2,3,4. Result: 4.',
-'The temperature at 6am was −4°C. By noon it had risen by 9°C. What was the noon temperature? This is −4+9. Starting at −4 and moving right 9 (since a rise is a positive movement): −4,−3,−2,−1,0,1,2,3,4,5. Noon temperature: 5°C.',
-'A bank account has a balance of ₦2,000. A withdrawal of ₦5,500 is made. What is the new balance, and what does a negative result mean here? Balance after withdrawal: 2,000−5,500=−3,500. A negative balance here means the account is overdrawn by ₦3,500 — the account owes the bank that amount, which is the real-world meaning of "negative" in a banking context.',
-'A submarine is at −80m (80m below sea level) and rises by 35m, then descends by 50m. Find its final depth relative to sea level. Start: −80. Rise (positive movement): −80+35=−45. Descend (negative movement): −45−50=−95. Final position: 95m below sea level (−95).'
-],
-misconceptions:[
-'Misaligning digits by place value in column addition/subtraction — always write numbers so ones sit under ones, tens under tens, regardless of how many digits each number has.',
-'Believing a negative number with a larger digit is automatically "bigger" (e.g. thinking −9 is bigger than −3 because 9>3) — on the number line, the FURTHER LEFT a number sits, the smaller it actually is; −9 is further left than −3, so −9 is smaller.',
-'Treating "subtracting a negative" as if it stayed subtraction, instead of recognising it flips into addition — always rewrite −(−x) as +x before doing anything else.',
-'Forgetting to explicitly define which direction is "positive" in a real-world context before assigning signs to values — without this step, a correct calculation can still end up with the wrong sign in the final answer.',
-'Assuming every subtraction must produce a smaller result — subtracting a negative number (or adding a negative to a very negative starting point going the "wrong" way) can produce a LARGER result than you started with.'
-],
-guidedPractice:[
-'Calculate 4,306 − 1,978.',
-'What is −2+6 on a number line?',
-'A hiker starts at 120m elevation, descends 180m, then climbs 60m. What is the final elevation relative to the start, and is the hiker above or below start?'
-],
-independentPractice:[
-'Add 7,529 and 3,864.',
-'Subtract 6,203 from 9,050.',
-'Calculate −7+4 using a number line.',
-'Calculate 6−(−11).',
-'Calculate −5−(−5). Why is the answer 0?',
-'The temperature drops from 3°C by 8°C. What is the new temperature?',
-'A trader owes ₦1,200 (balance −₦1,200). A payment of ₦900 is made toward the debt. What is the new balance, and does the trader still owe money?',
-'Order from smallest to largest: −8, 3, −1, −5, 0.',
-'A plane at 2,000m altitude descends by 2,600m. What is its final altitude relative to sea level, and what would a negative result mean?',
-'A student calculates 4−(−6) and gets −2 by "subtracting as normal." What is the exact error, and the correct answer?',
-'Two game scores are −4 and −7. Which is actually better (higher)?',
-'A lift starts at the 3rd floor above ground (+3) and travels to the 2nd basement level (−2). How many floors did it travel, and in which direction?'
-],
-mastery:{criterion:'Learner performs multi-digit column addition/subtraction accurately, models directed-number operations correctly on a number line, and correctly assigns and interprets signs in real-world contexts (temperature, money, elevation).',status:'DEEP_WHEN_PASSED'},boardReady:true
-},
-{
 topicId:'nerdc-jss1-math-basic-operations-basic-operations-2',classLevel:'JSS1',subject:'Mathematics',
 topic:'Addition and Subtraction of fractions',source:
 {authority:'NERDC',url:sourceUrl,page:6},
