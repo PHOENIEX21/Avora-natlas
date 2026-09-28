@@ -227,6 +227,8 @@ export default function TutorClient(){
  const narrationProgress=spokenSegments.length?Math.min(100,Math.round(((narrationSegment+(activeSpokenSegment?Math.min(1,narrationChar/Math.max(1,activeSpokenSegment.length)):0))/spokenSegments.length)*100)):0;
  const visibleBoardLineCount=!VOICE_TEACHING_ENABLED?(event?.lines?.length||0):syncing&&voiceOn&&event?.lines?.length>1?Math.max(1,Math.ceil(((narrationSegment+1)/Math.max(1,spokenSegments.length))*event.lines.length)):(event?.lines?.length||0);
  const visualSpec=useMemo(()=>subject==='Mathematics'&&event?visualFor(topic,event.label,event.lines):{kind:'none' as const,title:'',caption:''},[subject,topic,event]);
+ const topicKey=String(topic||'').trim().toLowerCase().replace(/\s+/g,' ');
+ const unitKey=String(unit?.title||'').trim().toLowerCase().replace(/\s+/g,' ');
  const useAuthoredWholeNumbers=classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers';
  const lcmRouteText=(topicKey+' '+unitKey).trim();
  const hcfRouteText=(topicKey+' '+unitKey).trim();
@@ -240,8 +242,6 @@ export default function TutorClient(){
  const useCleanFractionMultiplyDivide=classLevel==='JSS1'&&subject==='Mathematics'&&['multiplications and divisions of fractions','multiplication and division of fractions','multiplication and division of fraction'].includes(topic.trim().toLowerCase());
  const useCleanEstimation=classLevel==='JSS1'&&subject==='Mathematics'&&topic.trim().toLowerCase()==='estimation';
  const useCleanApproximation=classLevel==='JSS1'&&subject==='Mathematics'&&topic.trim().toLowerCase()==='approximation';
- const topicKey=String(topic||'').trim().toLowerCase().replace(/\s+/g,' ');
- const unitKey=String(unit?.title||'').trim().toLowerCase().replace(/\s+/g,' ');
  const authoredTopicKey=topicKey||unitKey;
  const isBinaryAdditionKey=(s:string)=>s.includes('addition')&&s.includes('base')&&(s.includes('2')||s.includes('two'));
  const useCleanBinaryAddition=classLevel==='JSS1'&&subject==='Mathematics'&&(isBinaryAdditionKey(topicKey)||isBinaryAdditionKey(unitKey));
