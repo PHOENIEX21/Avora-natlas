@@ -359,6 +359,18 @@ independentPractice:[
 mastery:{criterion:'Learner generates equivalent fractions correctly, orders fractions using a common denominator, converts confidently between fractions/decimals/percentages in both directions with correct simplification via HCF, and solves realistic sharing/money problems.',status:'DEEP_WHEN_PASSED'},boardReady:true
 },
 {
+topicId:'nerdc-jss1-math-basic-operations-basic-operations-1',classLevel:'JSS1',subject:'Mathematics',
+topic:'Addition and Subtraction',source:{authority:'NERDC',url:sourceUrl,page:5},
+objectives:['Add and subtract numbers up to four digits and state place value of results','Solve word problems involving addition and subtraction','Use a number line to illustrate directed numbers','Add and subtract positive and negative integers on a number line','Apply directed numbers to everyday situations'],
+prerequisites:['whole-number place value','basic addition and subtraction facts'],
+teaching:['Addition and subtraction extend from whole-number place value into directed numbers. Learners align place values for four-digit calculations, then use zero as the reference point on a number line: positive numbers lie to the right and negative numbers to the left. Addition and subtraction are represented as movement so the direction of each operation is visible rather than memorised.'],
+workedExamples:['2468 + 1357 = 3825','4203 - 2786 = 1417','-2 + 5 = 3','3 + (-5) = -2','2 - 6 = -4'],
+misconceptions:['misaligning place values','treating a negative sign as decoration','moving in the wrong direction on the number line'],
+guidedPractice:['Use the number line to solve directed-number additions and subtractions.'],
+independentPractice:['Solve four-digit and directed-number problems and explain the direction of movement.'],
+mastery:{criterion:'Learner calculates accurately and represents directed-number operations correctly on a number line.',status:'DEEP_WHEN_PASSED'},boardReady:true
+},
+{
 topicId:'nerdc-jss1-math-basic-operations-basic-operations-2',classLevel:'JSS1',subject:'Mathematics',
 topic:'Addition and Subtraction of fractions',source:
 {authority:'NERDC',url:sourceUrl,page:6},
