@@ -1003,3 +1003,16 @@ main,section,article,aside,header,footer,nav,form,div{min-width:0}
 .numberline-card .nl-start{fill:#f59e0b;stroke:#92400e;stroke-width:2}
 .numberline-card .nl-move{fill:none;stroke:#0284c7;stroke-width:4;stroke-linecap:round}
 .numberline-card text{fill:#334155;font-weight:700}
+
+
+/* JSS2 deep-tutor reading hierarchy: explanation first, mathematics second */
+.fractions-premium-lesson .wn-section>p{max-width:76ch;margin:.72rem 0;font-size:clamp(1.02rem,2.1vw,1.12rem);font-weight:520;line-height:1.78;color:#243650}
+.fractions-premium-lesson .wn-section>p+p{margin-top:.9rem}
+.fractions-premium-lesson .formula-board{display:flex;flex-direction:column;align-items:flex-start;gap:.34rem;margin:1.15rem 0 1.35rem;padding:1.05rem 1.15rem;border:1px solid #dce3ee;border-left:4px solid #bd8b13;border-radius:14px;background:#f8fafc;width:100%}
+.fractions-premium-lesson .formula-line{width:100%;min-height:1.2em;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.04rem,2.4vw,1.22rem);font-weight:700;line-height:1.62;color:#172d62;overflow-wrap:anywhere}
+.fractions-premium-lesson .fraction-working{margin:1.35rem 0 1.7rem;padding:1.15rem 1.25rem;background:#fff;box-shadow:0 8px 24px rgba(23,45,98,.045)}
+.fractions-premium-lesson .math-stack{counter-reset:tutor-step;gap:0}
+.fractions-premium-lesson .math-stack>.math-line:not(.math-result){position:relative;padding:.82rem .3rem .82rem 2.55rem;border-bottom:1px solid #edf0f5;font-family:Arial,Helvetica,sans-serif;font-size:clamp(1rem,2.2vw,1.12rem);font-weight:560;line-height:1.72;color:#243650}
+.fractions-premium-lesson .math-stack>.math-line:not(.math-result)::before{counter-increment:tutor-step;content:counter(tutor-step);position:absolute;left:.15rem;top:.82rem;display:grid;place-items:center;width:1.55rem;height:1.55rem;border-radius:50%;background:#eef2f8;color:#172d62;font-size:.76rem;font-weight:900}
+.fractions-premium-lesson .math-stack>.math-result{margin-top:.7rem;padding:.95rem .3rem .15rem;border-top:2px solid #dce3ee;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.18rem,2.8vw,1.42rem);font-weight:900;line-height:1.5;color:#172d62}
+@media(max-width:700px){.fractions-premium-lesson .wn-section>p{font-size:1rem;line-height:1.72}.fractions-premium-lesson .formula-board{padding:.9rem}.fractions-premium-lesson .fraction-working{padding:1rem}.fractions-premium-lesson .math-stack>.math-line:not(.math-result){padding-left:2.35rem}}
