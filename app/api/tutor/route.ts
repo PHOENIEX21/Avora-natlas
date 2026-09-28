@@ -105,7 +105,7 @@ export async function GET(req:Request){
   `);
 
   const requestedLower=requestedTopic.toLowerCase();
-  const exerciseCount=classLevel==='JSS1'&&subject==='Mathematics'&&(requestedLower==='lcm'||requestedLower.includes('lowest common multiple'))?25:15;
+  const exerciseCount=classLevel==='JSS1'&&subject==='Mathematics'&&(requestedLower==='lcm'||requestedLower.includes('lowest common multiple'))?25:classLevel==='JSS1'&&subject==='Mathematics'&&requestedLower==='simplification of algebraic expressions'?30:15;
   const exerciseQuestions=currentNerdc?publicNerdc2025ExerciseQuestions(classLevel,subject,requestedTopic,exerciseCount):[];
   return json({exam,subject,classLevel,topics,questions:questionRows.map(shapeQuestion),exerciseQuestions,plan});
  }catch(error){
