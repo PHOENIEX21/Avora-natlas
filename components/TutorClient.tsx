@@ -205,7 +205,7 @@ export default function TutorClient(){
  const visibleBoardLineCount=!VOICE_TEACHING_ENABLED?(event?.lines?.length||0):syncing&&voiceOn&&event?.lines?.length>1?Math.max(1,Math.ceil(((narrationSegment+1)/Math.max(1,spokenSegments.length))*event.lines.length)):(event?.lines?.length||0);
  const visualSpec=useMemo(()=>subject==='Mathematics'&&event?visualFor(topic,event.label,event.lines):{kind:'none' as const,title:'',caption:''},[subject,topic,event]);
  const useAuthoredWholeNumbers=classLevel==='JSS1'&&subject==='Mathematics'&&topic.toLowerCase()==='whole numbers';
- const useCleanCountingBaseTwo=classLevel==='JSS1'&&subject==='Mathematics'&&['counting in base 2','counting in base two'].includes(topic.toLowerCase());
+ const useCleanCountingBaseTwo=classLevel==='JSS1'&&subject==='Mathematics'&&['counting in base 2','counting in base two'].includes(topic.trim().toLowerCase())||['counting in base 2','counting in base two'].includes(String(unit?.title||'').trim().toLowerCase());
  const probeQ=questions.find(q=>q.type==='MULTIPLE_CHOICE'&&Array.isArray(q.options)&&q.options.length>=2);
  const exerciseQ=exerciseQuestions[exerciseIndex];
  const guidedQ=useMemo(()=>{if(!unit||!questions.length)return undefined;const ranked=[...questions].map(q=>({q,score:questionFit(q,unit)})).sort((a,b)=>b.score-a.score);const matched=ranked.filter(x=>x.score>=1);if(matched.length)return matched[unitIndex%matched.length].q;return questions[unitIndex%questions.length]},[questions,unit,unitIndex]);
