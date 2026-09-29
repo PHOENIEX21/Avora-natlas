@@ -37,7 +37,7 @@ const entries:[string,NerdcTopicMapEntry][]=[
  [K('JSS1','English Language','Conversation on Various Issues'),m([],['revised2025-jss1-english-conversation'])],
  [K('JSS1','English Language','Speech Sounds (Vowels and Consonants)'),m(['Speech Work: speech organs and sound production; monophthongs (long/short vowel contrasts)','Speech Work: consonant clusters; diphthongs','Speech Work: mixed vowel discrimination (monophthongs + diphthongs)'],['nerdc-jss1-english-listening-and-speaking-1','nerdc-jss1-english-listening-and-speaking-2'])],
  [K('JSS1','English Language','Reading Short passages with fluency'),m([],['revised2025-jss1-english-fluency'])],
- [K('JSS1','English Language','Reading passages for meaning'),m([],['nerdc-jss1-english-reading-2'])],
+ [K('JSS1','English Language','Reading passages for meaning'),m([],['revised2025-jss1-english-reading-for-meaning'])],
  [K('JSS1','English Language','Reading Passages to Answer Literal, Inferential and Critical Questions'),m(['Comprehension: SPQ3R reading strategy; answering comprehension questions using textual evidence','Comprehension: full SPQ3R application; fact vs opinion'],['nerdc-jss1-english-reading-3','nerdc-jss1-english-reading-4'])],
  [K('JSS1','English Language','Reading for Summary'),m([],['revised2025-jss1-english-summary'])],
  [K('JSS1','English Language','Parts of speech: Nouns, Verbs and Adjectives'),m(['Grammar: nouns (common/proper, countable/uncountable); verbs (action/state); adjectives (comparison); adverbs; present tense & subject-verb agreement; pronouns (subject/object); prepositions & conjunctions (introductory)'],['nerdc-jss1-english-grammatical-accuracy-1'])],
