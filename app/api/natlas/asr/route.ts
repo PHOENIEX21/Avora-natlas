@@ -4,7 +4,7 @@ export const runtime='nodejs';
 export const dynamic='force-dynamic';
 
 const MAX_AUDIO_BYTES=8*1024*1024;
-const ALLOWED_TYPES=new Set(['audio/webm','audio/wav','audio/x-wav','audio/mpeg','audio/mp4','audio/ogg','audio/flac','audio/x-flac']);
+const ALLOWED_TYPES=new Set(['audio/webm','audio/webm;codecs=opus','audio/ogg','audio/ogg;codecs=opus','audio/wav','audio/x-wav','audio/mpeg','audio/mp4','audio/flac','audio/x-flac','application/ogg']);
 
 export async function POST(req:Request){
  try{
@@ -12,10 +12,12 @@ export async function POST(req:Request){
   const audio=form.get('audio');
   if(!(audio instanceof File))return NextResponse.json({error:'Record or attach an audio sample first.'},{status:400});
   if(audio.size===0||audio.size>MAX_AUDIO_BYTES)return NextResponse.json({error:'Audio must be between 1 byte and 8 MB.'},{status:400});
-  if(audio.type&&!ALLOWED_TYPES.has(audio.type))return NextResponse.json({error:'Unsupported audio format.'},{status:415});
+  const audioType=(audio.type||'').toLowerCase().replace(/\s/g,'');
+  const baseAudioType=audioType.split(';')[0];
+  if(audioType&&!ALLOWED_TYPES.has(audioType)&&!ALLOWED_TYPES.has(baseAudioType))return NextResponse.json({error:`Unsupported audio format: ${audio.type}`},{status:415});
   const endpoint=process.env.NATLAS_ASR_ENDPOINT?.trim();
   if(!endpoint)return NextResponse.json({error:'N-ATLAS ASR runtime is not configured yet.',code:'NATLAS_NOT_CONFIGURED',model:'NCAIR1/NigerianAccentedEnglish'},{status:503});
-  const headers:Record<string,string>={'Content-Type':audio.type||'application/octet-stream','Accept':'application/json'};
+  const headers:Record<string,string>={'Content-Type':baseAudioType||'application/octet-stream','Accept':'application/json'};
   const token=process.env.NATLAS_ASR_TOKEN?.trim();
   if(token)headers.Authorization=`Bearer ${token}`;
   const started=Date.now();
