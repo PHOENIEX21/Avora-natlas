@@ -20,6 +20,7 @@ import {jss1CreativeWritingQuestions} from './jss1EnglishCreativeWritingExercise
 import {jss1IntroductionLiteratureQuestions} from './jss1EnglishIntroductionLiteratureExercises';
 import {jss1FolktaleQuestions} from './jss1EnglishFolktalesExercises';
 import {jss1MythsLegendsQuestions} from './jss1EnglishMythsLegendsExercises';
+import {jss1ProseFictionQuestions} from './jss1EnglishProseFictionExercises';
 import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
 import {jss2PremiumMathQuestions} from './jss2PremiumMathExercises';
 
@@ -441,6 +442,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Introduction to Literature')return jss1IntroductionLiteratureQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Separate category (oral/written) from genre (prose/drama/poetry), then support interpretations about life or values with evidence.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Folktales')return jss1FolktaleQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Use evidence from the tale: identify features, preserve event sequence when retelling, and distinguish the theme from the moral lesson.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Myths and Legends')return jss1MythsLegendsQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify what the narrative presents, separate feature/theme/moral, and distinguish traditional claims from independently verified facts.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+ if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Introduction to Prose Fiction')return jss1ProseFictionQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify the prose type or element, then support your interpretation with a concrete event/detail from the text.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
