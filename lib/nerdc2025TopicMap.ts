@@ -49,7 +49,7 @@ const entries:[string,NerdcTopicMapEntry][]=[
  [K('JSS1','English Language','Introduction to Literature'),m([],['revised2025-jss1-english-introduction-literature-deep'])],
  [K('JSS1','English Language','Folktales'),m([],['revised2025-jss1-english-folktales-deep'])],
  [K('JSS1','English Language','Myths and Legends'),m([],['revised2025-jss1-english-myths-legends-deep'])],
- [K('JSS1','English Language','Introduction to Prose Fiction'),m(['Literature: elements of prose (plot, setting, theme, characterisation); introduction to drama (dialogue, stage directions)'],['nerdc-jss1-english-literature-4'])],
+ [K('JSS1','English Language','Introduction to Prose Fiction'),m([],['revised2025-jss1-english-prose-fiction-deep'])],
 
  // JSS2 Mathematics.
  [K('JSS2','Mathematics','Whole Numbers'),m(['Whole Numbers — Standard Form; Indices (introductory laws)','Revision: Prime Factors, LCM, HCF; Squares and Square Roots'],['nerdc-jss2-math-numbers-and-numeration-whole-numbers-1'])],
