@@ -133,3 +133,174 @@ export const jss3WholeNumbersQuestions:Jss3ProvisionalQuestion[]=[
  {id:'jss3-whole-21',prompt:'Which numeral is valid in base five?',options:['148₅','253₅','404₅','517₅'],correctAnswer:'404₅',explanation:'Base five permits only digits 0,1,2,3,4.',difficulty:2,skill:'number-bases'},
  {id:'jss3-whole-22',prompt:'What is the best first step when solving a verbal quantitative problem?',options:['Use every number immediately','Translate the relationships and identify what is required','Choose multiplication because it is usually harder','Enter the numbers into a calculator'],correctAnswer:'Translate the relationships and identify what is required',explanation:'Correct modelling comes before calculation.',difficulty:3,skill:'problem-solving'}
 ];
+
+
+export const jss3RationalNonRationalTopic='Rational and Irrational (Non-Rational) Numbers';
+
+export const jss3RationalNonRationalPlan:TutorPlan={
+ goal:'Identify, explain, compare and approximate rational and non-rational numbers, including the practical meaning of π and square roots, with the depth needed for JSS3 and BECE problem solving.',
+ why:'NERDC requires learners to identify rational and non-rational numbers and determine π practically. New General Mathematics additionally matches this topic to distinguishing the two classes and approximating π and square roots. AVORA therefore teaches the definitions, recognition tests and applications behind those outcomes.',
+ outcomes:[
+  'Define and identify rational numbers as numbers expressible as p/q where p and q are integers and q ≠ 0.',
+  'Define and identify non-rational (irrational) numbers.',
+  'Recognise integers, fractions, terminating decimals and recurring decimals as rational numbers.',
+  'Recognise common irrational numbers such as π and square roots of positive non-perfect squares.',
+  'Distinguish perfect-square roots from irrational square roots.',
+  'Determine an approximate value of π experimentally from circumference and diameter.',
+  'Approximate irrational values sensibly and place them between neighbouring rational numbers.',
+  'Classify mixed BECE-style examples and justify each classification.'
+ ],
+ examFocus:[
+  'Classification answers should include a reason, not only the word rational or irrational.',
+  'Remember that every integer is rational because n = n/1.',
+  'A terminating decimal is rational; a recurring decimal is also rational.',
+  'A non-terminating decimal is irrational only when it does not repeat in a fixed pattern.',
+  '√n is not automatically irrational: √49 = 7 is rational.',
+  'π is irrational even though 22/7 and 3.142 are useful rational approximations.',
+  'For practical π work, measure circumference and diameter of several circular objects and compare C÷d.',
+  'In approximation questions, state the requested degree of accuracy.'
+ ],
+ units:[
+  {
+   title:'The real-number family and where this topic fits',
+   terms:[['natural numbers','counting numbers such as 1,2,3,…'],['whole numbers','0 and the positive counting numbers'],['integers','…,−3,−2,−1,0,1,2,3,…'],['real numbers','all rational and irrational numbers represented on the ordinary number line']],
+   explain:'Before separating rational from non-rational numbers, organise familiar numbers. Natural numbers lie inside whole numbers; whole numbers lie inside integers; integers are rational because every integer n can be written n/1. Rational and irrational numbers together make the real numbers studied at this level. This hierarchy prevents the common mistake of thinking a number can belong to only one useful set.',
+   example:'−8 is an integer and also rational because −8 = −8/1. It is therefore a real number. It is not a whole number.',
+   check:'Classify 0 as natural/whole/integer/rational wherever appropriate, and explain why it is rational.',
+   commonMistakes:['thinking integers and rational numbers are completely separate groups','thinking negative numbers cannot be rational','forgetting that zero can be written 0/1']
+  },
+  {
+   title:'Meaning of a rational number: the p/q test',
+   terms:[['rational number','a number expressible as p/q where p and q are integers and q is not zero'],['numerator','the integer p in p/q'],['denominator','the non-zero integer q in p/q']],
+   explain:'The decisive definition is the fraction or ratio test. A number is rational if it can be written exactly as p/q, with p and q integers and q≠0. “Exactly” matters. The fraction need not already be visible: 7 is 7/1; −2.5 is −5/2; 0 is 0/1.',
+   example:'3¾ = 15/4, so it is rational. −0.6 = −6/10 = −3/5, so it is rational. 18 = 18/1, so it is rational.',
+   check:'Show explicitly why −1.25 is rational.',
+   commonMistakes:['believing rational means positive','requiring p/q to be a proper fraction','allowing q=0']
+  },
+  {
+   title:'Fractions, integers and zero as rational numbers',
+   terms:[['proper fraction','a fraction whose numerator magnitude is smaller than its denominator in the usual positive-fraction setting'],['improper fraction','a fraction whose numerator is at least as large as its denominator'],['mixed number','a whole-number part combined with a proper fraction']],
+   explain:'Ordinary fractions with non-zero denominators are rational. Mixed numbers become improper fractions. Integers are fractions over 1. Zero is rational because 0/q=0 for every non-zero integer q. However, a/0 is undefined and cannot be used as a rational representation.',
+   example:'2⅓ = 7/3; −11 = −11/1; 0 = 0/5. Each is rational. By contrast, 7/0 is undefined.',
+   check:'Which of 5/8, −13, 0 and 9/0 are rational numbers? Justify each answer.',
+   commonMistakes:['calling 0 irrational','treating division by zero as an ordinary fraction','thinking only proper fractions are rational']
+  },
+  {
+   title:'Terminating decimals are rational',
+   terms:[['terminating decimal','a decimal expansion that ends after finitely many digits'],['place-value fraction','a fraction with denominator 10,100,1000,… obtained directly from a terminating decimal']],
+   explain:'Every terminating decimal can be written exactly as a fraction with denominator 10, 100, 1000 and so on, then simplified. Therefore every terminating decimal is rational.',
+   example:'0.375 = 375/1000 = 3/8. Also 2.45 = 245/100 = 49/20. Both are rational.',
+   check:'Convert 0.625 to its simplest fraction and use the result to classify it.',
+   commonMistakes:['assuming a decimal must recur to be rational','rounding a terminating decimal before converting it','forgetting to simplify when asked for simplest form']
+  },
+  {
+   title:'Recurring decimals are rational',
+   terms:[['recurring decimal','a decimal in which a digit or block repeats forever'],['repetend','the repeating digit or block']],
+   explain:'A recurring decimal does not terminate, but it is still rational because it can be converted exactly to a fraction. For a one-digit recurrence x=0.333…, then 10x=3.333…; subtracting gives 9x=3, so x=1/3. The same subtraction idea works for repeating blocks.',
+   example:'Let x=0.272727…. Then 100x=27.272727…. Subtract x: 99x=27, so x=27/99=3/11. Hence 0.272727… is rational.',
+   check:'Convert 0.666… to a fraction using an algebraic step, not by guessing.',
+   commonMistakes:['calling every endless decimal irrational','confusing recurring with rounded decimal notation','subtracting before multiplying by the correct power of 10']
+  },
+  {
+   title:'Meaning of non-rational or irrational numbers',
+   terms:[['irrational number','a real number that cannot be expressed exactly as p/q for integers p,q with q≠0'],['non-terminating non-recurring decimal','an endless decimal with no repeating fixed block']],
+   explain:'NERDC uses the expression non-rational; standard mathematics also calls these numbers irrational. Their decimal expansions neither terminate nor settle into a repeating pattern. Irrational does not mean unreasonable or undefined: these are valid real numbers with precise positions on the number line.',
+   example:'π = 3.14159265… continues without a repeating block. √2 = 1.41421356… also continues without a repeating block. Both are irrational.',
+   check:'Explain the single most important decimal-pattern difference between 0.333… and √2.',
+   commonMistakes:['thinking “irrational” means the number has no value','calling every long decimal irrational','confusing undefined expressions such as 1/0 with irrational numbers']
+  },
+  {
+   title:'Perfect squares and rational square roots',
+   terms:[['perfect square','a number that is the square of an integer'],['square root','a number which multiplied by itself gives the stated number']],
+   explain:'Do not classify every square root as irrational. If the radicand is a perfect square, its principal square root is an integer and therefore rational. Useful perfect squares include 1,4,9,16,25,36,49,64,81,100,121,144 and 169.',
+   example:'√144=12, so √144 is rational. √0.81=0.9=9/10, also rational.',
+   check:'Classify √64, √121 and √0.25 and explain the common reason.',
+   commonMistakes:['saying any expression with √ is irrational','forgetting decimal perfect squares','confusing √49 with ±7; the principal square root symbol √49 denotes 7']
+  },
+  {
+   title:'Square roots of non-perfect squares',
+   terms:[['non-perfect square','a number that is not the square of an integer'],['bounds','known lower and upper values between which an unknown value lies']],
+   explain:'For a positive integer that is not a perfect square, its square root is irrational. To estimate it, trap it between nearby perfect squares. If 16<20<25, then 4<√20<5. Refine using decimals or an approved table/calculator where the task allows it.',
+   example:'49<50<64, so 7<√50<8. Since 7.0²=49 and 7.1²=50.41, √50 lies between 7.0 and 7.1 and is about 7.07.',
+   check:'Without a calculator, show between which two consecutive integers √70 lies.',
+   commonMistakes:['rounding before establishing sensible bounds','assuming √20=√16+√4','treating an approximation such as 4.47 as the exact value']
+  },
+  {
+   title:'π as a non-rational number',
+   terms:[['pi (π)','the constant ratio of a circle’s circumference to its diameter'],['circumference','distance around a circle'],['diameter','straight distance across a circle through its centre'],['approximation','a value close to, but not exactly equal to, another value']],
+   explain:'π is the same constant for every ideal circle: π=C/d. Its decimal expansion does not terminate or repeat, so π is irrational. Values such as 22/7, 3.14 and 3.142 are rational approximations used for calculations; they are not exactly π.',
+   example:'If a circular object has circumference about 62.8 cm and diameter about 20.0 cm, C/d≈62.8/20=3.14. Measurement error means practical results may be a little above or below the true value.',
+   check:'Why is 22/7 rational even though it is often used in calculations involving π?',
+   commonMistakes:['writing π=22/7 as an exact equality in a classification lesson','thinking each circle has a different π','dividing diameter by circumference instead of circumference by diameter']
+  },
+  {
+   title:'NERDC practical investigation of π',
+   terms:[['measurement error','difference introduced by limitations of measuring instruments or technique'],['experimental ratio','a ratio calculated from measured quantities']],
+   explain:'NERDC specifically expects learners to determine an approximate value of π practically. Wrap thread once around a cylindrical object and measure the thread length as circumference C. Measure the diameter d across the centre. Calculate C/d. Repeat with several circular objects. The ratios should cluster near 3.14. Averaging several careful measurements reduces the effect of random measurement errors.',
+   example:'Object A: C=31.5 cm,d=10.0 cm → 3.15. Object B: C=47.0 cm,d=15.0 cm → 3.13. Object C: C=62.9 cm,d=20.0 cm → 3.145. The results support a common ratio close to 3.14.',
+   check:'A learner obtains 2.2 for C/d. Give two things that should be checked before accepting the result.',
+   commonMistakes:['measuring radius but calling it diameter','letting thread overlap or leave a gap','expecting experimental measurements to equal π to many decimal places']
+  },
+  {
+   title:'Approximating irrational numbers accurately',
+   terms:[['decimal place','position to the right of a decimal point'],['significant figure','a digit contributing to the precision of a number'],['rounding','replacing a number by a nearby value at a stated accuracy']],
+   explain:'Irrational numbers cannot be written completely as decimals, so calculations often use approximations. Keep enough digits during working and round at the end. The requested accuracy may be decimal places or significant figures. The approximation is rational even though the exact number is irrational.',
+   example:'√17≈4.1231056. To 3 significant figures it is 4.12. π≈3.14159265; to 3 decimal places it is 3.142.',
+   check:'Round √29≈5.3851648 to 2 decimal places and to 3 significant figures.',
+   commonMistakes:['rounding too early in a multi-step problem','confusing decimal places with significant figures','claiming the rounded decimal becomes the exact irrational value']
+  },
+  {
+   title:'Placing rational and irrational numbers on the number line',
+   terms:[['number line','a line on which numbers are positioned according to magnitude'],['order','relative size of numbers']],
+   explain:'Rational and irrational numbers share the same real number line. Approximation helps locate irrational numbers. Since 1²<2<2², 1<√2<2; since 1.4²=1.96 and 1.5²=2.25, √2 lies between 1.4 and 1.5. This supports comparisons without pretending the decimal terminates.',
+   example:'Compare √10 and 3.2. Since 3.2²=10.24>10 and both are positive, √10<3.2. Numerically √10≈3.162.',
+   check:'Arrange 3, √10 and 3.5 in ascending order.',
+   commonMistakes:['comparing only the written symbols rather than their values','squaring negative comparison values without considering sign','writing an approximate decimal as if it were exact']
+  },
+  {
+   title:'Classification decision strategy',
+   terms:[['classification','placing an item in the correct mathematical set'],['justification','a mathematical reason supporting an answer']],
+   explain:'Use a consistent test. First simplify the number if possible. An integer is rational. An ordinary fraction with non-zero denominator is rational. A terminating or recurring decimal is rational. A square root of a perfect square is rational. π and square roots of positive non-perfect-square integers are irrational. If a decimal is described as non-terminating and non-recurring, it is irrational.',
+   example:'Classify: −5 → rational (−5/1); 0.125 → rational (1/8); 0.181818… → rational (recurring); √81 → rational (=9); √11 → irrational; π → irrational; 22/7 → rational.',
+   check:'Classify −3, 5/9, 0.121212…, √36, √37, π and 3.142, giving a reason for each.',
+   commonMistakes:['classifying by appearance before simplifying','treating π and 3.142 as the same type of number','assuming a fraction-looking expression is valid when its denominator is zero']
+  },
+  {
+   title:'BECE-style mixed reasoning',
+   terms:[['exact value','a value represented without rounding error'],['approximate value','a nearby numerical representation'],['counterexample','an example showing a general claim is false']],
+   explain:'Exam questions may disguise the classification. Simplify first, then apply the definition. To disprove “every square root is irrational,” use √25=5. To distinguish exact from approximate values, remember π is exact as the symbol π while 3.142 is an approximation. A question may also combine ordering, rounding and classification.',
+   example:'Which is irrational: √(9/16), √18, 0.45, 0.272727…? √(9/16)=3/4 rational; 0.45=9/20 rational; 0.272727…=3/11 rational; √18=3√2 is irrational. Therefore √18 is the required number.',
+   check:'A student says “√0.09 is irrational because it contains a root sign.” Correct the student with complete working.',
+   commonMistakes:['choosing the most complicated-looking option','failing to simplify before classifying','giving a classification without evidence']
+  }
+ ]
+};
+
+export const jss3RationalNonRationalQuestions:Jss3ProvisionalQuestion[]=[
+ {id:'jss3-rnr-01',prompt:'Which definition correctly describes a rational number?',options:['A number expressible as p/q where p and q are integers and q≠0','Any positive fraction only','Any decimal that has many digits','Any number containing a square-root sign'],correctAnswer:'A number expressible as p/q where p and q are integers and q≠0',explanation:'This is the defining fraction test for rational numbers.',difficulty:1,skill:'definition'},
+ {id:'jss3-rnr-02',prompt:'Why is −7 rational?',options:['It is negative','It can be written −7/1','It has no decimal point','Every negative number is irrational'],correctAnswer:'It can be written −7/1',explanation:'Both −7 and 1 are integers and the denominator is non-zero.',difficulty:1,skill:'classification'},
+ {id:'jss3-rnr-03',prompt:'Which expression is undefined rather than an irrational number?',options:['√2','π','7/0','√11'],correctAnswer:'7/0',explanation:'Division by zero is undefined; it is not a real irrational number.',difficulty:2,skill:'classification'},
+ {id:'jss3-rnr-04',prompt:'Which decimal is rational because it terminates?',options:['0.625','π','√3','1.4142135… with no repeating block'],correctAnswer:'0.625',explanation:'0.625=625/1000=5/8.',difficulty:1,skill:'terminating-decimals'},
+ {id:'jss3-rnr-05',prompt:'0.272727… is:',options:['irrational because it never ends','rational because 27 repeats','undefined','an integer'],correctAnswer:'rational because 27 repeats',explanation:'Recurring decimals are rational; 0.272727…=3/11.',difficulty:1,skill:'recurring-decimals'},
+ {id:'jss3-rnr-06',prompt:'Which is irrational?',options:['√49','√50','0.75','−12'],correctAnswer:'√50',explanation:'50 is not a perfect square, so √50 is irrational; √49=7.',difficulty:1,skill:'square-roots'},
+ {id:'jss3-rnr-07',prompt:'Which statement about π is correct?',options:['π=22/7 exactly','π is irrational and 22/7 is a rational approximation','π is a recurring decimal','π changes with the size of a circle'],correctAnswer:'π is irrational and 22/7 is a rational approximation',explanation:'π is non-terminating and non-recurring; 22/7 is rational.',difficulty:2,skill:'pi'},
+ {id:'jss3-rnr-08',prompt:'In the practical NERDC investigation of π, which ratio should be calculated?',options:['diameter/circumference','circumference/diameter','radius/circumference','circumference/radius²'],correctAnswer:'circumference/diameter',explanation:'For every circle π=C/d.',difficulty:1,skill:'pi-investigation'},
+ {id:'jss3-rnr-09',prompt:'A circle has measured circumference 31.4 cm and diameter 10 cm. What experimental value of π is obtained?',options:['0.314','3.14','31.4','314'],correctAnswer:'3.14',explanation:'C/d=31.4/10=3.14.',difficulty:1,skill:'pi-investigation'},
+ {id:'jss3-rnr-10',prompt:'Which number lies between 4 and 5?',options:['√15','√20','√26','√36'],correctAnswer:'√20',explanation:'16<20<25, so 4<√20<5.',difficulty:2,skill:'bounding-roots'},
+ {id:'jss3-rnr-11',prompt:'√17≈4.1231056. What is √17 to 3 significant figures?',options:['4.12','4.13','4.123','4.1'],correctAnswer:'4.12',explanation:'The first three significant digits are 4,1,2 and the next digit is 3.',difficulty:2,skill:'approximation'},
+ {id:'jss3-rnr-12',prompt:'π≈3.14159265. What is π to 3 decimal places?',options:['3.141','3.142','3.140','3.150'],correctAnswer:'3.142',explanation:'The fourth decimal digit is 5, so the third decimal digit rounds upward.',difficulty:2,skill:'approximation'},
+ {id:'jss3-rnr-13',prompt:'Which list contains only rational numbers?',options:['3, 1/4, 0.2, 0.333…','π, √2, √3','√5, 7, π','√11, 0.5, 2/3'],correctAnswer:'3, 1/4, 0.2, 0.333…',explanation:'Integers, fractions, terminating decimals and recurring decimals are rational.',difficulty:2,skill:'classification'},
+ {id:'jss3-rnr-14',prompt:'Which statement is false?',options:['Every integer is rational','Every terminating decimal is rational','Every square root is irrational','Every recurring decimal is rational'],correctAnswer:'Every square root is irrational',explanation:'For example √25=5, which is rational.',difficulty:2,skill:'misconceptions'},
+ {id:'jss3-rnr-15',prompt:'Convert 0.375 to its simplest fraction.',options:['3/8','3/5','5/8','375/10'],correctAnswer:'3/8',explanation:'375/1000 simplifies by 125 to 3/8.',difficulty:2,skill:'decimal-to-fraction'},
+ {id:'jss3-rnr-16',prompt:'If x=0.666…, which equation follows after multiplying by 10 and subtracting x?',options:['9x=6','10x=6','x=6','11x=6'],correctAnswer:'9x=6',explanation:'10x=6.666… and x=0.666…; subtraction gives 9x=6.',difficulty:2,skill:'recurring-to-fraction'},
+ {id:'jss3-rnr-17',prompt:'Which is the best reason √81 is rational?',options:['81 is odd','√81=9 and 9=9/1','It contains a radical sign','All roots are rational'],correctAnswer:'√81=9 and 9=9/1',explanation:'81 is a perfect square, so its square root is the rational integer 9.',difficulty:2,skill:'perfect-squares'},
+ {id:'jss3-rnr-18',prompt:'Between which consecutive integers does √70 lie?',options:['6 and 7','7 and 8','8 and 9','9 and 10'],correctAnswer:'8 and 9',explanation:'64<70<81, so 8<√70<9.',difficulty:2,skill:'bounding-roots'},
+ {id:'jss3-rnr-19',prompt:'Arrange 3, √10 and 3.5 in ascending order.',options:['3, √10, 3.5','√10, 3, 3.5','3.5, √10, 3','3, 3.5, √10'],correctAnswer:'3, √10, 3.5',explanation:'√10≈3.162, so it lies between 3 and 3.5.',difficulty:3,skill:'number-line'},
+ {id:'jss3-rnr-20',prompt:'Which is irrational after simplification?',options:['√(9/16)','√18','0.45','0.121212…'],correctAnswer:'√18',explanation:'√(9/16)=3/4 and the decimals are rational; √18=3√2 is irrational.',difficulty:3,skill:'bece-classification'},
+ {id:'jss3-rnr-21',prompt:'A learner measures C/d as 3.13, 3.15 and 3.14 for three circular objects. What conclusion is most reasonable?',options:['π is approximately 3.14 and small measurement errors explain the variation','Each circle has a different value of π','π is exactly 3.13','Diameter is always equal to circumference'],correctAnswer:'π is approximately 3.14 and small measurement errors explain the variation',explanation:'Repeated measurements should cluster near the common constant π.',difficulty:3,skill:'pi-investigation'},
+ {id:'jss3-rnr-22',prompt:'Which statement correctly compares π and 3.142?',options:['Both are irrational','π is irrational while 3.142 is rational','π is rational while 3.142 is irrational','They are exactly equal'],correctAnswer:'π is irrational while 3.142 is rational',explanation:'3.142 is a terminating decimal and therefore rational; it only approximates π.',difficulty:2,skill:'exact-vs-approximate'},
+ {id:'jss3-rnr-23',prompt:'A decimal continues forever without any repeating block. How is it classified?',options:['rational','irrational','integer','undefined'],correctAnswer:'irrational',explanation:'A non-terminating, non-recurring real decimal is irrational.',difficulty:1,skill:'decimal-patterns'},
+ {id:'jss3-rnr-24',prompt:'Which counterexample disproves the claim “every number written with √ is irrational”?',options:['√2','√3','√25=5','π'],correctAnswer:'√25=5',explanation:'5 is an integer and hence rational.',difficulty:3,skill:'reasoning'},
+ {id:'jss3-rnr-25',prompt:'√29≈5.3851648. What is it to the nearest tenth?',options:['5.3','5.4','5.38','5.39'],correctAnswer:'5.4',explanation:'The hundredths digit is 8, so 5.3 rounds to 5.4.',difficulty:2,skill:'approximation'},
+ {id:'jss3-rnr-26',prompt:'Which classification is correct for 0?',options:['irrational because it is neither positive nor negative','rational because 0=0/1','undefined because it has no reciprocal','irrational because it has no recurring digits'],correctAnswer:'rational because 0=0/1',explanation:'Zero satisfies the p/q definition with any non-zero denominator.',difficulty:2,skill:'classification'}
+];
