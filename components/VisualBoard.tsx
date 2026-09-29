@@ -55,6 +55,32 @@ function SimilarShapes({context}:{context:string}){
  </svg>
 }
 
+
+function TrigonometryDiagram({context}:{context:string}){
+ const t=context.toLowerCase();
+ const L=(x:number,y:number,s:string)=><text x={x} y={y} className="v-label">{s}</text>;
+ if(/ladder/.test(t))return <svg viewBox="0 0 420 270" role="img" aria-label="Ladder against a vertical wall forming a labelled right triangle">
+  <title>Ladder application of right-triangle trigonometry</title><line x1="85" y1="225" x2="385" y2="225" className="v-stroke"/><line x1="330" y1="225" x2="330" y2="35" className="v-stroke"/><line x1="115" y1="225" x2="330" y2="65" className="v-accent"/>
+  <path d="M312 225v-18h18" className="v-thin"/><path d="M155 225 A40 40 0 0 0 147 201" className="v-guide"/>{L(151,199,'θ')}{L(200,130,'ladder = H')}{L(337,145,'height = O')}{L(190,247,'ground distance = A')}
+ </svg>;
+ if(/guy wire|cable|rope/.test(t))return <svg viewBox="0 0 420 270" role="img" aria-label="Vertical pole and supporting cable forming a labelled right triangle">
+  <title>Cable or guy-wire application</title><line x1="45" y1="225" x2="390" y2="225" className="v-stroke"/><line x1="300" y1="225" x2="300" y2="45" className="v-stroke"/><line x1="85" y1="225" x2="300" y2="45" className="v-accent"/>
+  <path d="M282 225v-18h18" className="v-thin"/><path d="M128 225 A43 43 0 0 0 118 198" className="v-guide"/>{L(125,197,'θ')}{L(178,126,'wire = H')}{L(307,140,'pole = O')}{L(172,247,'ground = A')}
+ </svg>;
+ if(/height|tower|pole|observer|distance/.test(t))return <svg viewBox="0 0 420 285" role="img" aria-label="Observer viewing the top of a vertical object across level ground">
+  <title>Height and distance application</title><line x1="35" y1="235" x2="395" y2="235" className="v-stroke"/><line x1="335" y1="235" x2="335" y2="35" className="v-stroke"/><circle cx="80" cy="188" r="9" className="v-shape"/><line x1="80" y1="197" x2="80" y2="235" className="v-thin"/><line x1="80" y1="188" x2="335" y2="35" className="v-accent"/><line x1="80" y1="188" x2="335" y2="188" className="v-guide"/>
+  <path d="M320 235v-15h15" className="v-thin"/><path d="M125 188 A45 45 0 0 0 119 165" className="v-guide"/>{L(122,163,'θ')}{L(342,132,'vertical rise = O')}{L(176,213,'horizontal distance = A')}{L(184,92,'line of sight = H')}
+ </svg>;
+ if(/ramp|inclination/.test(t))return <svg viewBox="0 0 420 250" role="img" aria-label="Ramp represented as a labelled right triangle">
+  <title>Ramp and angle of inclination</title><path d="M60 205L350 205L350 65Z" className="v-shape"/><path d="M332 205v-18h18" className="v-thin"/><path d="M110 205 A50 50 0 0 0 104 181" className="v-guide"/>{L(108,178,'θ')}{L(184,225,'horizontal run = A')}{L(356,142,'rise = O')}{L(195,124,'ramp = H')}
+ </svg>;
+ return <svg viewBox="0 0 420 280" role="img" aria-label="Right-angled triangle labelled relative to reference angle theta">
+  <title>Opposite, adjacent and hypotenuse relative to θ</title><path d="M55 225L355 225L355 55Z" className="v-shape"/><path d="M335 225v-20h20" className="v-accent"/>{L(326,250,'90°')}
+  <path d="M112 225 A57 57 0 0 0 104 193" className="v-guide"/>{L(111,190,'θ')}{L(178,249,'ADJACENT (A)')}{L(360,145,'OPPOSITE (O)')}{L(176,126,'HYPOTENUSE (H)')}
+  {L(40,25,'sin θ = O/H')}{L(164,25,'cos θ = A/H')}{L(292,25,'tan θ = O/A')}
+ </svg>
+}
+
 function NumberLine(){return <svg viewBox="0 0 360 150" role="img" aria-label="Number line"><line x1="35" y1="75" x2="330" y2="75" className="v-stroke"/><path d="M330 75l-10-5v10zM35 75l10-5v10z" className="v-fill"/>{[-3,-2,-1,0,1,2,3].map((n,i)=>{const x=60+i*42;return <g key={n}><line x1={x} y1="68" x2={x} y2="82" className="v-thin"/><text x={x-6} y="105">{n}</text></g>})}</svg>}
 function Fraction(){return <svg viewBox="0 0 360 190" role="img" aria-label="Fraction area model"><rect x="55" y="45" width="250" height="90" rx="4" className="v-shape"/>{[1,2,3].map(i=><line key={i} x1={55+i*62.5} y1="45" x2={55+i*62.5} y2="135" className="v-thin"/>)}<rect x="55" y="45" width="125" height="90" className="v-soft"/><text x="115" y="165">equal parts of one whole</text></svg>}
 function Place({binary=false}:{binary?:boolean}){const labels=binary?['8','4','2','1']:['1000','100','10','1'];return <div className="visual-place-grid">{labels.map((x,i)=><div key={x}><small>{binary?'2'+['³','²','¹','⁰'][i]:x}</small><strong>{x}</strong></div>)}</div>}
@@ -85,5 +111,6 @@ export default function VisualBoard({spec}:{spec:VisualSpec}){
  else if(spec.kind==='data-chart') body=<DataChart/>;
  else if(spec.kind==='bar-model') body=<BarModel/>;
  else if(spec.kind==='similar-shapes') body=<SimilarShapes context={spec.context||`${spec.title} ${spec.caption}`}/>;
+ else if(spec.kind==='trigonometry') body=<TrigonometryDiagram context={spec.context||`${spec.title} ${spec.caption}`}/>;
  return <section className="avora-visual-board"><header><b>{spec.title}</b><span>LIVE VISUAL</span></header><div className="avora-visual-stage">{body}</div><p>{spec.caption}</p></section>
 }
