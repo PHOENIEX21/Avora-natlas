@@ -2,14 +2,14 @@ import type {TutorPlan} from './tutorCurriculum';
 
 export const JSS3_PROVISIONAL_SOURCE = {
   key: 'nerdc-jss3-provisional-prior-cycle',
-  status: 'PROVISIONAL_NERDC_BASELINE',
-  authority: 'NERDC prior-cycle JSS3 Mathematics curriculum',
+  status: 'OFFICIAL_NERDC_PRIOR_CYCLE_VERIFIED',
+  authority: 'Official NERDC JSS1–JSS3 Mathematics curriculum, JSS3 prior-cycle cohort',
   enrichment: ['New General Mathematics JSS3', 'BECE-level worked application'],
-  warning: 'Do not label this lesson as the September 2025 revised NERDC curriculum. Replace or migrate objective-by-objective when the new official JSS3 tables are available.'
+  warning: 'Verified against the official NERDC JSS1–JSS3 Mathematics PDF. This is the preserved JSS3 prior-cycle authority, not the September 2025 revised JSS1/JSS2 cohort.'
 } as const;
 
 export const jss3WholeNumbersTopic =
-  'Whole Numbers (binary operations and base conversion, quantitative reasoning, computer/calculator use, word problems → numerical expressions)';
+  'Whole Numbers (binary operations and base conversion, quantitative reasoning, computer/calculator use, word problems → numerical expressions; brackets/fractions; direct/inverse proportion; compound interest)';
 
 export const jss3WholeNumbersPlan:TutorPlan={
   goal:'Master the JSS3 NERDC Whole Numbers outcomes through binary operations and base conversion, quantitative reasoning, calculator/computer use, and translation of word problems into numerical expressions.',
