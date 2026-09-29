@@ -5,6 +5,7 @@ import {nerdc2025EvidenceForTopic} from './nerdc2025Teaching';
 import {officialNerdc2025Topic,officialNerdc2025Topics} from './nerdc2025Official';
 import {authoredNerdc2025EnglishQuestions} from './nerdc2025AuthoredEnglishExercises';
 import {jss1OralComprehensionQuestions} from './jss1EnglishOralComprehensionExercises';
+import {jss1ConversationQuestions} from './jss1EnglishConversationExercises';
 import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
 import {jss2PremiumMathQuestions} from './jss2PremiumMathExercises';
 
@@ -411,6 +412,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(isJss1PlaneShapes(classLevel,subject,topic))return planeShapesAuthoredQuestions.slice(0,count).map(q=>({...q,topic}));
  if(classLevel==='JSS1'&&subject==='Mathematics'){const key=topic.toLowerCase().trim();const exact=authoredJss1MathByTopic[key];if(exact)return exact.slice(0,count).map(q=>({...q,topic}));}
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Oral Comprehension')return jss1OralComprehensionQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Return to the oral text: decide whether the question asks for a directly heard detail, an evidence-based inference, or a reasoned critical judgement.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+ if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Conversation on Various Issues')return jss1ConversationQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Check whether the response is relevant, respectful and suitable for the topic, audience and situation; then apply the issue-specific vocabulary or problem-solving rule taught in the lesson.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
