@@ -21,6 +21,40 @@ function PlaneShapes({caption}:{caption:string}){
  return <svg viewBox="0 0 360 285" role="img" aria-label="Accurate comparison of square, rectangle, parallelogram, rhombus, trapezium and kite with standard property markings"><title>Quadrilateral property comparison</title>{common}<g transform="translate(12 18)"><rect x="5" y="5" width="72" height="72" className="v-shape"/><path d="M5 5h12v12M39 5v9M39 77v-9M5 41h9M77 41h-9" className="v-accent"/><text x="18" y="98">square</text></g><g transform="translate(105 18)"><rect x="5" y="12" width="105" height="58" className="v-shape"/><path d="M5 12h12v12" className="v-accent"/><text x="25" y="98">rectangle</text></g><g transform="translate(235 18)"><path d="M25 12h92L97 72H5z" className="v-shape"/><text x="16" y="98">parallelogram</text></g><g transform="translate(10 150)"><path d="M45 5l42 42-42 42L3 47z" className="v-shape"/><path d="M23 26l8 8M59 26l8-8M23 68l8-8M59 68l8 8" className="v-accent"/><text x="20" y="112">rhombus</text></g><g transform="translate(120 150)"><path d="M25 8h75l20 78H5z" className="v-shape"/><text x="24" y="112">trapezium</text></g><g transform="translate(260 150)"><path d="M45 5l40 48-40 38L5 53z" className="v-shape"/><path d="M22 31l8 6M60 31l8-6M23 72l8-6M59 72l8 6" className="v-accent"/><text x="30" y="112">kite</text></g></svg>;
 }
 
+
+function SimilarShapes({context}:{context:string}){
+ const t=context.toLowerCase();
+ const label=(x:number,y:number,s:string)=><text x={x} y={y} className="v-label">{s}</text>;
+ if(/cube|cuboid|volume|capacity/.test(t))return <svg viewBox="0 0 420 250" role="img" aria-label="Two similar solids with corresponding dimensions and scale factor">
+   <title>Similar solids: linear dimensions scale by k and volume by k cubed</title>
+   <g transform="translate(18 65)"><path d="M20 45h82v78H20zM20 45l28-23h82l-28 23M102 45l28-23v78l-28 23M20 123l28-23h82" className="v-shape"/>{label(43,148,'small solid')}</g>
+   <path d="M166 125h48" className="v-accent"/><path d="M214 125l-11-6v12z" className="v-fill"/>{label(173,112,'× k')}
+   <g transform="translate(225 38)"><path d="M20 45h125v120H20zM20 45l38-30h125l-38 30M145 45l38-30v120l-38 30M20 165l38-30h125" className="v-shape"/>{label(55,190,'large solid')}</g>
+   {label(18,22,'length factor = k')}{label(155,22,'area factor = k²')}{label(292,22,'volume factor = k³')}
+ </svg>;
+ if(/coordinate|origin/.test(t))return <svg viewBox="0 0 420 270" role="img" aria-label="Triangle enlarged from the origin on coordinate axes">
+   <title>Coordinate enlargement about the origin</title><line x1="35" y1="225" x2="395" y2="225" className="v-stroke"/><line x1="70" y1="250" x2="70" y2="20" className="v-stroke"/>
+   <path d="M105 190L165 190L105 135Z" className="v-guide"/><path d="M140 155L260 155L140 45Z" className="v-shape"/>
+   {label(93,207,'A')}{label(166,207,'B')}{label(92,130,'C')}{label(127,174,"A′")}{label(263,174,"B′")}{label(126,40,"C′")}{label(255,238,'x')}{label(78,28,'y')}{label(278,78,'same centre O, every coordinate × k')}
+ </svg>;
+ if(/rectangle|square|area|perimeter|distortion|photo/.test(t))return <svg viewBox="0 0 420 250" role="img" aria-label="Two corresponding similar rectangles showing proportional side lengths">
+   <title>Similar rectangles: corresponding dimensions use one scale factor</title>
+   <rect x="35" y="85" width="105" height="70" className="v-shape"/><rect x="235" y="55" width="150" height="100" className="v-shape"/>
+   {label(63,78,'length a')}{label(7,125,'width b')}{label(278,48,'length ka')}{label(190,110,'width kb')}
+   <path d="M155 118h55" className="v-accent"/><path d="M210 118l-11-6v12z" className="v-fill"/>{label(169,105,'× k')}
+   {label(42,183,'Original')}{label(273,183,'Similar image')}{label(93,220,'Area A')}{label(288,220,'Area k²A')}
+ </svg>;
+ return <svg viewBox="0 0 420 260" role="img" aria-label="Two similar labelled triangles showing corresponding vertices, sides and scale factor">
+   <title>Similar triangles with corresponding vertices and proportional sides</title>
+   <path d="M35 205L155 205L75 85Z" className="v-shape"/><path d="M225 205L390 205L280 40Z" className="v-shape"/>
+   {label(20,224,'A')}{label(157,224,'B')}{label(65,78,'C')}{label(210,224,'P')}{label(393,224,'Q')}{label(270,34,'R')}
+   {label(72,225,'AB')}{label(295,225,'PQ = k·AB')}{label(42,145,'AC')}{label(226,127,'PR = k·AC')}
+   <path d="M166 133h45" className="v-accent"/><path d="M211 133l-11-6v12z" className="v-fill"/>{label(175,120,'× k')}
+   <path d="M42 198 A18 18 0 0 1 54 184M232 198 A24 24 0 0 1 248 180" className="v-accent"/>
+   {label(34,248,'A ↔ P   B ↔ Q   C ↔ R     corresponding angles equal; corresponding sides proportional')}
+ </svg>
+}
+
 function NumberLine(){return <svg viewBox="0 0 360 150" role="img" aria-label="Number line"><line x1="35" y1="75" x2="330" y2="75" className="v-stroke"/><path d="M330 75l-10-5v10zM35 75l10-5v10z" className="v-fill"/>{[-3,-2,-1,0,1,2,3].map((n,i)=>{const x=60+i*42;return <g key={n}><line x1={x} y1="68" x2={x} y2="82" className="v-thin"/><text x={x-6} y="105">{n}</text></g>})}</svg>}
 function Fraction(){return <svg viewBox="0 0 360 190" role="img" aria-label="Fraction area model"><rect x="55" y="45" width="250" height="90" rx="4" className="v-shape"/>{[1,2,3].map(i=><line key={i} x1={55+i*62.5} y1="45" x2={55+i*62.5} y2="135" className="v-thin"/>)}<rect x="55" y="45" width="125" height="90" className="v-soft"/><text x="115" y="165">equal parts of one whole</text></svg>}
 function Place({binary=false}:{binary?:boolean}){const labels=binary?['8','4','2','1']:['1000','100','10','1'];return <div className="visual-place-grid">{labels.map((x,i)=><div key={x}><small>{binary?'2'+['³','²','¹','⁰'][i]:x}</small><strong>{x}</strong></div>)}</div>}
@@ -50,5 +84,6 @@ export default function VisualBoard({spec}:{spec:VisualSpec}){
  else if(spec.kind==='solid') body=<Solid/>;
  else if(spec.kind==='data-chart') body=<DataChart/>;
  else if(spec.kind==='bar-model') body=<BarModel/>;
+ else if(spec.kind==='similar-shapes') body=<SimilarShapes context={spec.context||`${spec.title} ${spec.caption}`}/>;
  return <section className="avora-visual-board"><header><b>{spec.title}</b><span>LIVE VISUAL</span></header><div className="avora-visual-stage">{body}</div><p>{spec.caption}</p></section>
 }
