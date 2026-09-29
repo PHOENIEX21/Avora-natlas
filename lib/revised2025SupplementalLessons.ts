@@ -305,44 +305,80 @@ export const revised2025SupplementalLessons:Revised2025SupplementalLesson[]=[
     "strand": "Reading",
     "topic": "Reading Short Passages with Fluency",
     "objectives": [
-      "Read age-appropriate passages accurately",
-      "Use suitable pace, phrasing and expression",
-      "Self-correct errors that affect meaning"
+      "Explain reading fluency and its major components",
+      "Read short age-appropriate passages accurately and with understanding",
+      "Read at an appropriate speed without sacrificing meaning",
+      "Group words into meaningful phrases rather than reading word by word",
+      "Use punctuation, stress and intonation to support meaning",
+      "Avoid habits that unnecessarily slow or disrupt reading",
+      "Self-correct important reading errors and reread smoothly",
+      "Improve oral reading through modelled and repeated reading"
     ],
-    "prerequisites": [
-      "word recognition",
-      "basic punctuation"
-    ],
+    "prerequisites": ["word recognition","basic punctuation","sentence meaning","basic pronunciation"],
     "teaching": [
-      "Fluent reading combines accuracy, appropriate pace and meaningful phrasing; speed alone is not fluency.",
-      "Punctuation and grammar help group words into meaningful phrases. A comma signals a lighter pause than a full stop, while questions often need a different intonation contour.",
-      "When a word is misread, use its letters and sentence meaning together, then reread the whole phrase so meaning remains intact.",
-      "Repeated reading of a short passage can improve fluency when each repetition targets accuracy and expression rather than racing."
+      "Reading fluency means reading a text accurately, at a suitable pace, with meaningful phrasing and expression, while still understanding what is read. Fluency is not a race. A reader who moves very fast but changes words, ignores punctuation or cannot explain the passage is not reading fluently.",
+      "Five ideas work together in fluent reading: ACCURACY—saying the printed words correctly; RATE—moving at an appropriate speed; COMPREHENSION—understanding the message; PHRASING—grouping words that belong together; and PROSODY—using stress, rhythm, pauses and intonation so the reading reflects meaning.",
+      "Accuracy comes first. Look carefully at the whole word. If you misread a word, check its letters and the meaning of the sentence, correct it, then reread the whole phrase. Self-correction is a reading skill; silently noticing an error but continuing with broken meaning is not enough.",
+      "Appropriate speed is neither painfully slow nor uncontrolled. Slow word-by-word reading can overload attention because the reader reaches the end of a sentence after forgetting its beginning. Excessive speed can cause skipped words and lost meaning. The goal is an efficient pace at which words, phrases and ideas remain clear.",
+      "Comprehension is part of fluency. Before reading, know your purpose. During reading, keep asking: What is happening? What is the main point? Does this sentence make sense with what came before? After reading, you should be able to state the central message or answer basic questions.",
+      "Phrasing means reading words in sense groups. Compare: “After / the / rain / the / children / returned / to / the / field” with “After the rain, / the children returned to the field.” The second grouping carries meaning more naturally. Do not pause mechanically after every word.",
+      "Punctuation guides phrasing and expression. A full stop normally signals the end of a complete statement and a clear pause. A comma often marks a shorter boundary. A question mark tells us the sentence is a question. An exclamation mark can signal strong feeling or emphasis. Punctuation guides meaning; it is not merely decoration.",
+      "Prosody is the expressive side of fluent reading. It includes appropriate stress, rhythm, pausing and intonation. A warning, question, exciting announcement and sad statement should not all sound flat and identical. Expression should come from the meaning of the text, not from random dramatic shouting.",
+      "Word stress also affects clarity. Important content words may receive natural emphasis in a sentence, while function words are often lighter. However, do not exaggerate every important word. Read for the thought being communicated.",
+      "Before reading a short passage, preview it. Notice the title, paragraphing, unfamiliar names, difficult words and punctuation. Decide why you are reading. A brief preview reduces avoidable stumbling and gives the mind a framework for meaning.",
+      "NERDC identifies conditions and habits that support faster, more efficient reading: good eyesight, avoiding unnecessary vocalisation during silent speed reading, avoiding regressive reading, increasing eye span and reading phrases rather than isolated words.",
+      "Good eyesight matters because the eyes must recognise print clearly. Persistent difficulty seeing the board or page should not be treated as laziness or a reading fault; the learner should tell a responsible adult so that vision can be checked.",
+      "Vocalisation means saying every word aloud or moving the lips while trying to read silently. Oral reading is necessary when practising pronunciation and expression, but unnecessary vocalisation can restrict speed when the task specifically requires efficient silent reading.",
+      "Regressive reading means repeatedly jumping backward to words already read even when there is no genuine need. Occasional rereading is useful when meaning is unclear; the problem is habitual backtracking that breaks the flow. Train yourself to move forward while monitoring meaning.",
+      "Eye span refers to how much useful print the eyes can take in at one fixation. Fluent readers increasingly recognise groups of words rather than fixing separately on every tiny unit. Phrase reading supports both wider visual grouping and better meaning.",
+      "Finger, pencil or ruler tracking can help a beginning reader temporarily, but habitual pointing at every single word can encourage word-by-word reading. As recognition improves, practise allowing the eyes to move through meaningful groups.",
+      "Do not confuse skimming or scanning with fluent passage reading. Scanning searches rapidly for a specific item; skimming gathers the broad idea. Fluent reading of a short passage aims to carry the connected meaning accurately and naturally.",
+      "Repeated reading is purposeful rereading, not empty repetition. First reading: secure the words and meaning. Second reading: improve phrase grouping and punctuation. Third reading: improve smoothness and expression. Feedback should identify a specific target rather than simply saying “read faster.”",
+      "A useful self-check after reading is ACCURACY—Did I change or omit important words? PHRASING—Did I group ideas naturally? EXPRESSION—Did punctuation and meaning affect my voice? MEANING—Can I explain what I read? CORRECTION—Did I repair important mistakes?",
+      "Fluency develops through practice with many texts. A learner should eventually transfer the skill from a practised passage to a fresh passage. Memorising one passage is not evidence that the learner can read unfamiliar text fluently."
     ],
     "workedExamples": [
-      "“After the rain, / the children returned to the field.” is read in sense groups rather than word-by-word.",
-      "A reader who says “form” for “from” notices the sentence sounds wrong, checks the spelling and rereads correctly.",
-      "A question ending “Are you ready?” should sound like a question, not a flat list."
+      "Phrase grouping: “Before the match, / our coach reminded us / to remain calm.” The slashes mark sense groups, not compulsory long pauses. Read each group as one connected idea.",
+      "Punctuation: “Stop!” should not sound like “Stop?” The exclamation mark and question mark communicate different purposes. Let the voice reflect the sentence meaning.",
+      "Self-correction: Printed text: “The pupils planted trees beside the road.” If a learner reads “plants,” the grammar and print do not match. Correct “planted,” then reread: “The pupils planted trees / beside the road.”",
+      "Rate versus meaning: Racing through “Because the bridge was flooded, the driver turned back” and missing “flooded” destroys the cause of the action. A slightly slower accurate reading is more fluent than a faster inaccurate one.",
+      "Repeated reading target 1: First attempt has several hesitations. Before the second attempt, practise only the difficult words. Then reread the complete sentence so the repaired words fit smoothly into meaning.",
+      "Repeated reading target 2: Accurate but robotic reading. Mark phrase groups: “At sunrise, / the farmers entered the field / and began their work.” Reread without stopping after every word.",
+      "Expression: “Did you lock the gate?” is a genuine question. “What a beautiful performance!” expresses a reaction. “Please remain seated until the bus stops.” is an instruction. Their delivery should not be identical.",
+      "Comprehension check: Passage: “Amina noticed dark clouds before school. She carried an umbrella. At noon, heavy rain began.” Main point: Amina prepared for expected rain. Fluency includes retaining this connected meaning while reading.",
+      "Eye movement: Instead of visually treating “the / new / science / laboratory” as four disconnected stops, practise recognising “the new science laboratory” as a meaningful group.",
+      "Useful rereading versus regression: Going back once because a pronoun is unclear is strategic rereading. Jumping backward after nearly every phrase from habit is regressive reading and disrupts flow."
     ],
     "misconceptions": [
-      "equating fluency with fastest reading",
-      "pausing after every word",
-      "ignoring punctuation",
-      "continuing after a meaning-changing error without correction"
+      "believing the fastest reader is automatically the most fluent",
+      "thinking fluency means oral speed only and has nothing to do with comprehension",
+      "pausing after every printed word",
+      "ignoring commas, full stops, question marks and exclamation marks",
+      "reading every sentence in a flat voice regardless of meaning",
+      "guessing difficult words from their first letter and continuing without checking",
+      "refusing to self-correct because correction feels like failure",
+      "believing repeated reading means racing through the same passage several times",
+      "thinking all rereading is bad; strategic rereading for lost meaning can be useful",
+      "using finger or ruler tracking forever even when it prevents phrase reading",
+      "assuming a memorised performance proves fluency on unfamiliar text",
+      "sacrificing accuracy and understanding merely to improve a timer score"
     ],
     "guidedPractice": [
-      "Teacher models a 100-word passage; learner marks phrase boundaries and performs two readings with feedback."
+      "MODEL PASSAGE — The School Garden: “Early on Saturday, members of the Environmental Club gathered behind the science block. / Some loosened the soil, / while others planted vegetable seeds. / Their teacher showed them how to water the beds without washing the seeds away. / By noon, the tired pupils were smiling / because the neglected corner had begun to look like a real garden.” First listen to/model the passage, then identify difficult words, mark sense groups, read aloud, answer what the pupils did and why they smiled, receive one specific fluency target, and reread.",
+      "PUNCTUATION PRACTICE — Read: “Wait, Tunde!” “Wait, Tunde?” and “Wait, Tunde.” Discuss how punctuation and intended meaning change the delivery without changing the words.",
+      "PHRASE PRACTICE — Re-group: “When the bell rang the students who had finished their work walked quietly to the hall.” Suggested grouping: “When the bell rang, / the students who had finished their work / walked quietly to the hall.” Explain why each group belongs together.",
+      "ERROR REPAIR — Teacher/AVORA deliberately substitutes, omits or repeats a word in a short sentence. Learner identifies the mismatch, checks print and meaning, corrects it, and rereads the whole phrase.",
+      "REPEATED READING — Read one 100–140 word passage three times. Attempt 1 targets accurate word recognition and meaning; attempt 2 targets phrasing/punctuation; attempt 3 targets smoothness/expression. Compare improvement rather than merely comparing speed."
     ],
     "independentPractice": [
-      "Read three unfamiliar passages aloud, record miscues and self-corrections, then repeat one passage to improve accuracy and phrasing."
+      "PASSAGE A — The Library Card: “Bola had visited the school library many times, but she had never borrowed a book. On Monday, the librarian explained how the borrowing system worked. Bola completed a small form and received her library card. She chose a book about Nigerian wildlife, checked the return date carefully, and placed the card inside her purse. On her way home, she decided to read one chapter before dinner. She was pleased that the library could now become part of her weekly study routine.” Read once for meaning, mark phrase boundaries, practise difficult words, then make two oral readings. Afterwards state why Bola was pleased.",
+      "PASSAGE B — A Sudden Change: “The football practice began under a bright sky. Half an hour later, the wind became stronger and dark clouds gathered above the field. The coach blew his whistle and asked everyone to move into the hall. Moments after the last player entered, rain swept across the playground. The team could not continue outside, so the coach used the remaining time to discuss their next match.” Read naturally and explain the sequence of events without looking back at every sentence.",
+      "Record or have a partner listen to one fresh passage. Mark each omitted, substituted or added word; note unnecessary pauses and successful self-corrections; then reread once with one clear improvement goal.",
+      "Silent-reading transfer: read a short unfamiliar passage without lip movement or word-by-word pointing, then give the main idea and two supporting details. Reread strategically only where meaning was genuinely unclear."
     ],
-    "source": {
-      "authority": "NERDC Revised BEC 2025",
-      "url": authorityUrl,
-      "verified": "OFFICIAL_PLUS_SCHEME_CROSSCHECK"
-    },
+    "source": {"authority":"NERDC Revised BEC 2025","url":authorityUrl,"verified":"OFFICIAL_PLUS_TEXTBOOK_AND_READING_RESEARCH_CROSSCHECK"},
     "mastery": {
-      "criterion": "At least 95% word accuracy on an age-appropriate passage with meaningful phrasing and self-correction of major miscues.",
+      "criterion": "On an unfamiliar age-appropriate short passage, learner reads with high word accuracy, appropriate pace, meaningful phrase grouping, punctuation-sensitive expression and successful comprehension, while self-correcting major miscues; learner also demonstrates efficient silent-reading habits and achieves at least 80% on the associated mastery exercise.",
       "status": "DEEP_WHEN_PASSED"
     },
     "boardReady": true
