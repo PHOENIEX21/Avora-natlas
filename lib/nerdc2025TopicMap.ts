@@ -71,9 +71,9 @@ const entries:[string,NerdcTopicMapEntry][]=[
 
  // JSS2 English Studies.
  [K('JSS2','English Language','Debate'),m([],['nerdc2025-special-jss2-english-debate'])],
- [K('JSS2','English Language','Oral Comprehension'),m([],['nerdc-jss2-english-listening-and-speaking-2','nerdc2025-special-jss2-english-oral-comprehension-current'])],
+ [K('JSS2','English Language','Oral Comprehension'),m([],['nerdc2025-special-jss2-english-oral-comprehension-current'])],
  [K('JSS2','English Language','Oral Summary'),m([],['nerdc2025-special-jss2-english-oral-summary'])],
- [K('JSS2','English Language','Reading with Fluency'),m([],['nerdc2025-special-jss2-english-reading-fluency-current','nerdc-jss2-english-reading-4'])],
+ [K('JSS2','English Language','Reading with Fluency'),m([],['nerdc2025-special-jss2-english-reading-fluency-current'])],
  [K('JSS2','English Language','Reading to Understand the Writer’s Purpose'),m(["Comprehension: writer's purpose (extended, mixed-purpose texts); word families (Science/Technology-type topics)"],['nerdc-jss2-english-reading-1'])],
  [K('JSS2','English Language','Reading to Identify the Meanings of Words in Various Contexts'),m(["Comprehension: critical reading (claims vs evidence); reading words in context (context clues)"],['nerdc-jss2-english-reading-2'])],
  [K('JSS2','English Language','Critical Reading'),m(["Comprehension: critical reading (claims vs evidence); reading words in context (context clues)"],['nerdc-jss2-english-reading-3'])],
@@ -83,7 +83,7 @@ const entries:[string,NerdcTopicMapEntry][]=[
  [K('JSS2','English Language','Direct and Indirect Speeches'),m([],['nerdc-jss2-english-grammatical-accuracy-5'])],
  [K('JSS2','English Language','Sentence Types (function): Declarative, Interrogative, Imperative (command) and Exclamatory'),m([],['nerdc2025-special-jss2-english-sentence-function'])],
  [K('JSS2','English Language','Structural Sentence Types (simple, compound and complex)'),m([],['nerdc2025-special-jss2-english-sentence-structure'])],
- [K('JSS2','English Language','Tenses'),m([],['nerdc2025-special-jss2-english-tense-system-current','nerdc-jss2-english-grammatical-accuracy-3'])],
+ [K('JSS2','English Language','Tenses'),m([],['nerdc2025-special-jss2-english-tense-system-current'])],
  [K('JSS2','English Language','Composition Writing: Expository and Argumentative Essays'),m([],['nerdc-jss2-english-writing-2'])],
  [K('JSS2','English Language','Letter Writing: Informal and Formal'),m(['Composition: formal letter writing (full structure)','Composition: informal/personal letter writing; report writing (introductory)'],['nerdc-jss2-english-writing-3'])],
  [K('JSS2','English Language','Reading class-appropriate plays'),m(['Literature: drama elements extended (conflict, climax, resolution); figures of speech extended (irony, paradox, onomatopoeia)'],['nerdc-jss2-english-literature-5'])],
