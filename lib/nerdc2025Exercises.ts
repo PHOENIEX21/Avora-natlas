@@ -444,12 +444,18 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Myths and Legends')return jss1MythsLegendsQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify what the narrative presents, separate feature/theme/moral, and distinguish traditional claims from independently verified facts.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Introduction to Prose Fiction')return jss1ProseFictionQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify the prose type or element, then support your interpretation with a concrete event/detail from the text.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
- if(authored.length){
-  return authored.slice(0,count).map(q=>({
+ if(classLevel==='JSS2'&&subject==='English Language'){
+  const authoredMapped=authored.map(q=>({
    ...q,type:'MULTIPLE_CHOICE' as const,
    hint:'Use the exact rule, purpose or evidence established in the NERDC-aligned lesson; eliminate options that contradict the taught meaning or context.',
    source:'AVORA_AUTHORED_NERDC_BANK' as const,
   }));
+  if(authoredMapped.length>=count)return authoredMapped.slice(0,count);
+  const generated=conceptQuestions(classLevel,subject,topic,Math.max(20,count));
+  const seen=new Set(authoredMapped.map(q=>q.prompt.toLowerCase().trim()));
+  const merged:NerdcExerciseQuestion[]=[...authoredMapped];
+  for(const q of generated){const key=q.prompt.toLowerCase().trim();if(seen.has(key))continue;seen.add(key);merged.push(q);if(merged.length>=Math.max(20,count))break}
+  return merged.slice(0,Math.max(20,count));
  }
  const baseCount=isJss1Lcm(classLevel,subject,topic)&&count>15?15:count;
  const existing=compatibleBankQuestions(classLevel,subject,topic).map(q=>({
