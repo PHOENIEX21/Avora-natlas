@@ -445,10 +445,18 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
   }
   if(!navigator.mediaDevices?.getUserMedia||typeof MediaRecorder==='undefined'){setNatlasStatus('Voice recording is not supported in this browser.');return;}
   try{
-   const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-   const preferred=['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];
+   const stream=await navigator.mediaDevices.getUserMedia({audio:{
+    channelCount:{ideal:1},
+    sampleRate:{ideal:48000},
+    sampleSize:{ideal:16},
+    echoCancellation:{ideal:true},
+    noiseSuppression:{ideal:true},
+    autoGainControl:{ideal:true}
+   }});
+   const preferred=['audio/webm;codecs=opus','audio/ogg;codecs=opus','audio/webm'];
    const mimeType=preferred.find(type=>MediaRecorder.isTypeSupported(type))||'';
-   const recorder=new MediaRecorder(stream,mimeType?{mimeType}:undefined);
+   const recorderOptions:MediaRecorderOptions=mimeType?{mimeType,audioBitsPerSecond:128000}:{audioBitsPerSecond:128000};
+   const recorder=new MediaRecorder(stream,recorderOptions);
    natlasChunksRef.current=[];
    recorder.ondataavailable=e=>{if(e.data.size)natlasChunksRef.current.push(e.data)};
    recorder.onerror=()=>{setNatlasStatus('Recording failed. Please try again.');setNatlasRecording(false);stream.getTracks().forEach(track=>track.stop())};
@@ -465,7 +473,7 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
      setAsk(transcript);setShowAskPanel(true);setNatlasStatus('N-ATLAS understood your question. AVORA is preparing an answer…');voiceSubmitRef.current=true;await askTeacher(transcript);
     }catch(e:any){setNatlasStatus(e.message||'N-ATLAS could not transcribe that recording. Please retry.')}finally{setNatlasTranscribing(false)}
    };
-   natlasRecorderRef.current=recorder;recorder.start();setNatlasRecording(true);setNatlasStatus('Listening… tap Stop when you finish.');
+   natlasRecorderRef.current=recorder;recorder.start(250);setNatlasRecording(true);setNatlasStatus('Listening clearly… speak naturally, then tap Stop when you finish.');
   }catch{setNatlasStatus('Microphone permission was not granted. Allow microphone access and try again.')}
  }
  async function askTeacher(presetQuestion?:string){
