@@ -23,6 +23,11 @@ MAX_AUDIO_BYTES = 8 * 1024 * 1024
 
 app = modal.App("avora-natlas-asr")
 
+hf_secret = modal.Secret.from_name(
+    "huggingface-secret",
+    required_keys=["HF_TOKEN"],
+)
+
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .apt_install("ffmpeg")
@@ -36,7 +41,8 @@ image = (
     )
     .run_commands(
         "python -c \"from huggingface_hub import snapshot_download; "
-        "snapshot_download('NCAIR1/NigerianAccentedEnglish')\""
+        "snapshot_download('NCAIR1/NigerianAccentedEnglish', token=True)\"",
+        secrets=[hf_secret],
     )
 )
 
