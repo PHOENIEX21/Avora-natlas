@@ -462,7 +462,7 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
      const d=await readJson(await fetch('/api/natlas/asr',{method:'POST',body:form}),'N-ATLAS');
      const transcript=String(d.transcript||'').trim();
      if(!transcript)throw new Error('N-ATLAS returned no transcript.');
-     setAsk(transcript);setShowAskPanel(true);setNatlasStatus('N-ATLAS transcript ready — check it, edit if needed, then ask AVORA.');
+     setAsk(transcript);setShowAskPanel(true);setNatlasStatus('N-ATLAS understood your question. AVORA is preparing a lesson-grounded answer…');await askTeacher(transcript);setNatlasStatus('N-ATLAS voice question sent to AVORA.');
     }catch(e:any){setNatlasStatus(e.message||'N-ATLAS could not transcribe that recording. Please retry.')}finally{setNatlasTranscribing(false)}
    };
    natlasRecorderRef.current=recorder;recorder.start();setNatlasRecording(true);setNatlasStatus('Listening… tap Stop when you finish.');
