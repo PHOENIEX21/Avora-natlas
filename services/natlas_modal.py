@@ -90,7 +90,6 @@ def _decode_audio(audio_bytes: bytes):
 
 @app.function(
     image=image,
-    gpu="T4",
     timeout=120,
     scaledown_window=60,
     min_containers=0,
