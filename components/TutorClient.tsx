@@ -14,6 +14,7 @@ import WholeNumbersLesson from '@/components/WholeNumbersLesson';
 import JSS2WholeNumbersLesson from '@/components/JSS2WholeNumbersLesson';
 import JSS2PremiumMathLesson,{jss2PremiumMathTopics} from '@/components/JSS2PremiumMathLesson';
 import JSS2DebateLesson from '@/components/JSS2DebateLesson';
+import JSS1SpeechSoundsLesson from '@/components/JSS1SpeechSoundsLesson';
 import JSS2OralComprehensionLesson from '@/components/JSS2OralComprehensionLesson';
 import JSS2OralSummaryLesson from '@/components/JSS2OralSummaryLesson';
 import JSS2ReadingFluencyLesson from '@/components/JSS2ReadingFluencyLesson';
@@ -260,6 +261,7 @@ export default function TutorClient(){
  const useJSS2WholeNumbers=classLevel==='JSS2'&&subject==='Mathematics'&&jss2RouteTopicKey==='whole numbers';
  const jss2PremiumTopic=jss2PremiumMathTopics.find(t=>t.trim().toLowerCase().replace(/\s+/g,' ')===jss2RouteTopicKey);
  const useJSS2PremiumMath=classLevel==='JSS2'&&subject==='Mathematics'&&!useJSS2WholeNumbers&&Boolean(jss2PremiumTopic);
+ const useJSS1SpeechSounds=classLevel==='JSS1'&&subject.toLowerCase().includes('english')&&['speech sounds (vowels and consonants)','speech sounds vowels and consonants'].includes(jss2RouteTopicKey);
  const useJSS2Debate=classLevel==='JSS2'&&subject.toLowerCase().includes('english')&&['debate','debates'].includes(jss2RouteTopicKey);
  const useJSS2OralComprehension=classLevel==='JSS2'&&subject.toLowerCase().includes('english')&&['oral comprehension','oral comprehensi on'].includes(jss2RouteTopicKey);
  const useJSS2OralSummary=classLevel==='JSS2'&&subject.toLowerCase().includes('english')&&['oral summary'].includes(jss2RouteTopicKey);
@@ -458,6 +460,8 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
   {phase==='teach'&&useJSS2WholeNumbers&&<JSS2WholeNumbersLesson onExercise={startExercise}/>}
 
   {phase==='teach'&&useJSS2PremiumMath&&<JSS2PremiumMathLesson topic={jss2PremiumTopic||topic} onExercise={startExercise}/>}
+
+  {phase==='teach'&&useJSS1SpeechSounds&&<JSS1SpeechSoundsLesson onExercise={startExercise}/>}
 
   {phase==='teach'&&useJSS2Debate&&<JSS2DebateLesson onExercise={startExercise}/>}
 
