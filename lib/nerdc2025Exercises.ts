@@ -16,6 +16,7 @@ import {jss1ACPIQuestions} from './jss1EnglishAdverbsConjunctionsPrepositionsInt
 import {jss1SVAQuestions} from './jss1EnglishSubjectVerbAgreementExercises';
 import {jss1WordFormationQuestions} from './jss1EnglishWordFormationExercises';
 import {jss1LetterQuestions} from './jss1EnglishLetterWritingExercises';
+import {jss1CreativeWritingQuestions} from './jss1EnglishCreativeWritingExercises';
 import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
 import {jss2PremiumMathQuestions} from './jss2PremiumMathExercises';
 
@@ -433,6 +434,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Subject-Verb Agreement')return jss1SVAQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Find the true subject first, determine its number/person, then choose the finite verb form that agrees with it.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Use of Prefixes, Suffixes and Compounds')return jss1WordFormationQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify the meaningful base and affix or compound parts, then check meaning, spelling and use in context.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Writing Informal and Formal Letters')return jss1LetterQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Start with audience and purpose, choose the correct letter type, then check its required format, tone and task content.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+ if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Introduction to Creative writing')return jss1CreativeWritingQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify the creative form or story element, then ask what effect the writer’s language or technique creates.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
