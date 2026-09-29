@@ -207,44 +207,93 @@ export const revised2025SupplementalLessons:Revised2025SupplementalLesson[]=[
     "strand": "Listening and Speaking",
     "topic": "Conversation on Various Issues",
     "objectives": [
-      "Initiate and sustain age-appropriate conversations",
-      "Take turns and respond relevantly",
-      "Use polite expressions and appropriate register"
+      "Explain conversation as purposeful two-way spoken communication",
+      "Initiate, sustain and close age-appropriate conversations",
+      "Listen actively, take turns and respond relevantly",
+      "Ask useful questions and build on another speaker's contribution",
+      "Agree and disagree respectfully while giving reasons",
+      "Discuss current national and global issues including the economy, security, education, out-of-school children and climate change",
+      "Select and use appropriate registers and issue-specific vocabulary"
     ],
     "prerequisites": [
       "basic sentence formation",
-      "listening for meaning"
+      "listening for meaning",
+      "basic polite expressions"
     ],
     "teaching": [
-      "Conversation is cooperative spoken interaction: listen, respond to what was actually said, then add information or a question that moves the exchange forward.",
-      "Turn-taking avoids both interruption and long silence. Verbal signals such as “I agree because…”, “Could you explain…?” and “What do you think?” help manage turns.",
-      "Register changes with situation: language used with a close friend may be unsuitable for a teacher, visitor or formal group.",
-      "Disagreement should target an idea rather than a person; give a reason and, where useful, an alternative."
+      "Conversation is a two-way exchange of spoken ideas, information, feelings or opinions. Unlike a speech, it requires participants to listen and respond to one another. A successful conversation therefore has both speaking and listening.",
+      "Every conversation has a topic, participants, purpose and situation. The topic is what is being discussed; the participants are the speakers; the purpose may be to inform, ask, explain, solve a problem or exchange opinions; the situation helps determine the language that is appropriate.",
+      "A conversation normally develops through opening, development and closing. An opening introduces the topic or greets the other speaker. The development contains connected turns, questions, explanations and responses. A closing ends the exchange politely or summarises what has been agreed.",
+      "Turn-taking means speakers share the conversation. Listen while another person speaks, avoid unnecessary interruption, respond to the point made, then allow the other person another opportunity to speak. Good turn-taking makes discussion cooperative rather than competitive.",
+      "Active listening can be shown through relevant responses and follow-up questions: “I understand.” “Why do you think that happened?” “Could you explain what you mean?” “You mentioned school attendance; how can the community help?” These responses prove that the next turn grows from the previous one.",
+      "A relevant response answers or develops what was actually said. If A says, “Many pupils are absent because the road floods during heavy rain,” B might ask, “Could better drainage make the route safer?” A reply about a football match would break the flow because it does not connect to the topic.",
+      "Questions keep conversation moving. Closed questions often request a short fact: “When did the programme begin?” Open questions invite explanation: “Why do you think some children remain out of school?” Follow-up questions connect directly to an earlier answer: “You said cost is a problem; which school expenses create the greatest difficulty?”",
+      "Agreement should be meaningful. Instead of only saying “Yes,” a learner can say, “I agree that keeping drains clear can reduce local flooding because blocked drains prevent water from flowing away.” The reason shows understanding.",
+      "Respectful disagreement attacks the idea, not the person. Useful patterns include “I understand your point, but…”, “I see it differently because…”, “That may be true in some cases; however…”, and “Could we also consider…?” Insults and ridicule weaken discussion.",
+      "Register means the kind of language chosen for a particular subject, audience and situation. Register includes vocabulary, expressions and level of formality. A conversation with a close friend may be informal; a discussion with a teacher, public official or invited expert normally requires more formal and respectful language.",
+      "Register is also connected to subject matter. Each field has useful vocabulary. In a discussion of the economy, words such as income, prices, goods, services, employment, budget and cost of living may be relevant. In security, words such as safety, prevention, emergency, reporting, protection and community may be appropriate.",
+      "Do not force difficult vocabulary into every sentence. Appropriate register means choosing words that make the idea accurate and suitable for the audience. Clear ordinary English is better than impressive words used incorrectly.",
+      "Before discussing a current issue, separate facts from opinions. A fact is a claim that can be checked against reliable evidence; an opinion expresses a judgement or view. Current issues can change, so learners should use recent, trustworthy sources and avoid presenting rumours as facts.",
+      "When introducing information from a source, use responsible expressions such as “According to the report…”, “The article states that…”, or “The information we found suggests…”. If the information has not been verified, do not present it confidently as established fact.",
+      "A productive issue discussion can follow ISSUE → CAUSES → EFFECTS → POSSIBLE SOLUTIONS. First state the problem clearly, discuss reasons it may occur, explain its consequences, then propose realistic responses. Different speakers may disagree about causes or solutions while still remaining respectful.",
+      "ECONOMY refers broadly to how people and institutions produce, exchange and use goods, services and resources. At JSS1 level, a conversation can discuss prices, family budgeting, employment, saving, needs and wants, local businesses and cost of living without requiring advanced economic theory.",
+      "Useful economy register includes economy, income, expenditure, budget, savings, price, cost, goods, services, employment, business, production and consumer. Example: “If food prices rise while a family's income stays the same, the family may need to revise its budget and prioritise essential needs.”",
+      "SECURITY concerns protection from danger and actions that improve safety. School-level discussion may cover personal safety, road safety, school security, cyber safety, community awareness and responsible reporting. Learners should discuss prevention and safe help-seeking, not dangerous operational details.",
+      "Useful security register includes safety, security, risk, prevention, emergency, protect, report, authority, suspicious, alert and community. Example: “Students should report a serious safety concern to a trusted adult or appropriate authority rather than spread an unverified rumour.”",
+      "OUT-OF-SCHOOL CHILDREN are children of school age who are not attending school. A discussion may explore barriers such as poverty, distance, displacement, disability, family circumstances or lack of access, while avoiding the assumption that every child's situation has the same cause.",
+      "Useful education and out-of-school register includes education, enrolment, attendance, access, learning, school-age child, barrier, support, inclusion, fees/costs, classroom and community. Possible solutions should match the cause being discussed; one solution cannot solve every barrier.",
+      "CLIMATE CHANGE refers to long-term changes in climate patterns. A JSS1 conversation can focus on observable impacts and responsible responses such as heat, changing rainfall patterns, flooding risks, environmental care, waste management, tree protection and community preparedness, while distinguishing long-term climate from today's weather.",
+      "Useful climate register includes climate, weather, rainfall, temperature, flooding, drought, environment, pollution, emissions, waste, adaptation and conservation. Example: “Heavy rain on one day is weather; climate discussion concerns patterns and changes observed over much longer periods.”",
+      "EDUCATION discussions may cover attendance, learning materials, teacher support, reading habits, safe learning environments and access to school. DRUG ABUSE may be discussed using health- and safety-focused language such as misuse, harmful effects, prevention, support and trusted adult, without glamorising harmful substances.",
+      "Problem-solving conversation should move beyond complaining. After identifying a problem, ask: What can an individual do? What can a school or family do? What may require community or government action? Which suggestion is realistic, safe and relevant to the cause?",
+      "To prepare for a group discussion, research the issue, note a few reliable facts, learn the important vocabulary, decide the main point you want to contribute, and prepare questions for other speakers. During the discussion, listen and adjust your response instead of reciting a memorised speech.",
+      "After a conversation, evaluate four things: relevance—did each turn stay connected to the issue? register—were words suitable for topic and audience? interaction—did speakers listen, question and take turns? reasoning—were claims explained and solutions supported?"
     ],
     "workedExamples": [
-      "Friend: “The match starts at four.” Response: “Thanks. Should we leave by three-thirty?” is relevant and advances the exchange.",
-      "Teacher: “Why were you absent?” A respectful response gives the reason directly rather than slang or an unrelated story.",
-      "“I see your point, but I think the school should add bins because…” models respectful disagreement."
+      "Conversation structure: A: “Good afternoon. Our group is discussing why some learners miss school regularly.” B: “One possible barrier is transport. Some learners live far from school.” A: “That is important. How might distance affect attendance during heavy rain?” B: “Travel may become more difficult, so safer transport or a closer learning option could help.” The exchange opens a topic, develops it through connected turns and uses a follow-up question.",
+      "Relevant versus irrelevant response: A: “Food prices have increased in the market.” Relevant B: “How has that affected what families can buy with the same budget?” Irrelevant B: “My favourite subject is English.” The relevant response develops the economic issue.",
+      "Register example: Informal friend-to-friend: “I think we should talk to the teacher about the broken gate.” More formal school meeting: “I suggest that we report the damaged gate to the school management because it may create a safety risk.” Both can communicate the same basic idea, but audience and situation change the register.",
+      "Economy dialogue: A: “What does a budget help a family do?” B: “It helps the family plan how available income will be spent.” A: “What might happen when prices rise?” B: “The same amount of money may buy fewer goods, so the family may need to prioritise needs and reduce some non-essential spending.”",
+      "Security dialogue: A: “Should students forward every alarming message they receive?” B: “No. They should first check whether the information is reliable and tell a trusted adult if there is a genuine safety concern.” A: “Why?” B: “Because spreading an unverified warning can create confusion or panic.”",
+      "Out-of-school children dialogue: A: “Why might a child of school age be out of school?” B: “There can be different barriers, including cost, distance, displacement or lack of suitable access.” A: “So is one solution enough for every child?” B: “No. The response should address the particular barrier affecting the child.”",
+      "Climate dialogue: A: “Is one very hot afternoon enough to prove climate change?” B: “No. A single day's condition is weather. Climate refers to patterns over a much longer period.” A: “What can communities still discuss?” B: “They can discuss long-term changes, flooding risk, waste management, tree protection and ways to prepare for environmental effects.”",
+      "Respectful disagreement: A: “I think punishment alone will solve school lateness.” B: “I understand why rules matter, but I do not think punishment alone addresses every cause. A learner who arrives late because of transport difficulties may need a different solution.” B disagrees with the proposal without insulting A.",
+      "Fact and opinion: “The report recorded 120 pupils” is a checkable factual claim if the report exists. “The programme is the best solution” is an evaluation that needs reasons. A good speaker does not present both statements as if they have the same kind of evidence.",
+      "Problem-solving model: Issue—plastic waste blocks a drain. Cause—waste is dumped carelessly and collection is inadequate. Effect—water flow is obstructed and local flooding risk may increase. Possible responses—better disposal habits, reliable collection, clearing blocked drains safely and community education. Speakers can then discuss which response is practical and who is responsible."
     ],
     "misconceptions": [
-      "preparing a speech instead of listening",
-      "interrupting to prove a point",
-      "using the same register in every setting",
-      "answering with unrelated memorised sentences"
+      "thinking conversation means delivering a memorised speech while others wait",
+      "interrupting or dominating the exchange instead of sharing turns",
+      "replying with an unrelated point because it was prepared beforehand",
+      "using slang or casual expressions in every situation regardless of audience",
+      "believing register means using unnecessarily difficult vocabulary",
+      "disagreeing by insulting the speaker rather than examining the idea",
+      "presenting rumours or outdated claims as facts during discussion of current issues",
+      "assuming every out-of-school child has the same reason for not attending school",
+      "confusing one day's weather with long-term climate",
+      "listing problems without discussing causes, effects or realistic solutions"
     ],
     "guidedPractice": [
-      "Role-play greeting, requesting help, disagreeing politely and giving directions; partner checks relevance, turn-taking and register."
+      "Sort twelve expressions into suitable formal, informal or issue-specific registers and explain the audience or situation for each.",
+      "Complete four short dialogues by choosing the response that most logically follows the previous speaker.",
+      "Practise asking closed, open and follow-up questions about one school issue.",
+      "In pairs, discuss rising household costs for six turns using at least four appropriate economy terms and one respectful agreement or disagreement.",
+      "In groups, choose security, education, out-of-school children or climate change and organise the discussion as issue → causes → effects → possible solutions.",
+      "Use a recent teacher-approved newspaper, magazine or online source to identify one checkable fact and one opinion about a current issue, then practise attributing the information accurately."
     ],
     "independentPractice": [
-      "Hold two 2-minute conversations on school/community issues and complete a self-check on listening, relevance, politeness and clarity."
+      "Prepare and perform an eight-turn conversation on a current national or global issue. Include an opening, at least two follow-up questions, relevant responses, appropriate register, one supported agreement/disagreement and a polite closing.",
+      "Choose one issue from economy, security, education, out-of-school children, climate change or drug abuse. Create a vocabulary bank of twelve relevant words, then use at least eight correctly in a conversation.",
+      "Research one current issue using two reliable sources. Record source/date, three verified facts and two possible solutions; then discuss the issue without presenting opinion as fact.",
+      "Self-assess a recorded conversation for relevance, turn-taking, register, vocabulary, clarity, evidence and respectful interaction."
     ],
     "source": {
       "authority": "NERDC Revised BEC 2025",
       "url": authorityUrl,
-      "verified": "OFFICIAL_PLUS_SCHEME_CROSSCHECK"
+      "verified": "OFFICIAL_PLUS_TEXTBOOK_CROSSCHECK"
     },
     "mastery": {
-      "criterion": "Learner sustains a coherent conversation for at least six turns with relevant responses, appropriate register and respectful turn-taking.",
+      "criterion": "Learner sustains an issue-based conversation for at least eight connected turns, uses appropriate issue-specific register, asks and answers relevant questions, disagrees respectfully, distinguishes sourced facts from opinions, and contributes a reasoned solution with at least 80% on the associated mastery exercise.",
       "status": "DEEP_WHEN_PASSED"
     },
     "boardReady": true
