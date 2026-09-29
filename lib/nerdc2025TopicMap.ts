@@ -44,7 +44,7 @@ const entries:[string,NerdcTopicMapEntry][]=[
  [K('JSS1','English Language','Parts of speech: Adverbs, Conjunctions, Prepositions and Interjections'),m([],['revised2025-jss1-english-adverbs-conjunctions-prepositions-interjections'])],
  [K('JSS1','English Language','Subject-Verb Agreement'),m([],['revised2025-jss1-english-agreement'])],
  [K('JSS1','English Language','Use of Prefixes, Suffixes and Compounds'),m([],['revised2025-jss1-english-word-formation-deep'])],
- [K('JSS1','English Language','Writing Informal and Formal Letters'),m([],['nerdc-jss1-english-writing-3'])],
+ [K('JSS1','English Language','Writing Informal and Formal Letters'),m([],['revised2025-jss1-english-formal-informal-letters'])],
  [K('JSS1','English Language','Introduction to Creative writing'),m(['Composition: types of composition (narrative, descriptive, argumentative, expository); elements (introduction, body, conclusion) — full 5-part narrative structure'],['revised2025-jss1-english-creative-writing','nerdc-jss1-english-writing-2'])],
  [K('JSS1','English Language','Introduction to Literature'),m(['Literature: functions of literature; genres (prose, poetry, drama); introduction to folktales'],['nerdc-jss1-english-literature-1'])],
  [K('JSS1','English Language','Folktales'),m(['Literature: functions of literature; genres (prose, poetry, drama); introduction to folktales'],['nerdc-jss1-english-literature-2'])],
