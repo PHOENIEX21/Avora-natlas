@@ -12,6 +12,7 @@ import {jss1LetterWritingDeepLessons} from './jss1EnglishLetterWritingDeepLesson
 import {jss1CreativeWritingDeepLessons} from './jss1EnglishCreativeWritingDeepLessons';
 import {jss1IntroductionLiteratureDeepLessons} from './jss1EnglishIntroductionLiteratureDeepLessons';
 import {jss1FolktalesDeepLessons} from './jss1EnglishFolktalesDeepLessons';
+import {jss1MythsLegendsDeepLessons} from './jss1EnglishMythsLegendsDeepLessons';
 
 export type NerdcDeepEvidence={
  topicId:string; classLevel:'JSS1'|'JSS2'; subject:'Mathematics'|'English Language'; topic:string;
@@ -249,6 +250,7 @@ const evidence:NerdcDeepEvidence[]=[
  ...jss1CreativeWritingDeepLessons,
  ...jss1IntroductionLiteratureDeepLessons,
  ...jss1FolktalesDeepLessons,
+ ...jss1MythsLegendsDeepLessons,
  ...special,
 ] as NerdcDeepEvidence[];
 const evidenceById=new Map(evidence.map(item=>[item.topicId,item]));
