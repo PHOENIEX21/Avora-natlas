@@ -9,7 +9,7 @@ export const JSS3_PROVISIONAL_SOURCE = {
 } as const;
 
 export const jss3WholeNumbersTopic =
-  'Whole Numbers (word problems, brackets/fractions, direct/inverse proportion, compound interest)';
+  'Whole Numbers (binary operations and base conversion, quantitative reasoning, computer/calculator use, word problems → numerical expressions)';
 
 export const jss3WholeNumbersPlan:TutorPlan={
   goal:'Master the JSS3 NERDC Whole Numbers outcomes through binary operations and base conversion, quantitative reasoning, calculator/computer use, and translation of word problems into numerical expressions.',
