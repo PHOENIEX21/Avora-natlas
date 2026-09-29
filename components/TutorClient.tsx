@@ -15,6 +15,7 @@ import JSS2WholeNumbersLesson from '@/components/JSS2WholeNumbersLesson';
 import JSS2PremiumMathLesson,{jss2PremiumMathTopics} from '@/components/JSS2PremiumMathLesson';
 import JSS2DebateLesson from '@/components/JSS2DebateLesson';
 import JSS2OralComprehensionLesson from '@/components/JSS2OralComprehensionLesson';
+import JSS2OralSummaryLesson from '@/components/JSS2OralSummaryLesson';
 import LCMLesson from '@/components/LCMLesson';
 import HCFLesson from '@/components/HCFLesson';
 import AdditionSubtractionLesson from '@/components/AdditionSubtractionLesson';
@@ -244,6 +245,7 @@ export default function TutorClient(){
  const useJSS2PremiumMath=classLevel==='JSS2'&&subject==='Mathematics'&&!useJSS2WholeNumbers&&Boolean(jss2PremiumTopic);
  const useJSS2Debate=classLevel==='JSS2'&&subject.toLowerCase().includes('english')&&['debate','debates'].includes(jss2RouteTopicKey);
  const useJSS2OralComprehension=classLevel==='JSS2'&&subject.toLowerCase().includes('english')&&['oral comprehension','oral comprehensi on'].includes(jss2RouteTopicKey);
+ const useJSS2OralSummary=classLevel==='JSS2'&&subject.toLowerCase().includes('english')&&['oral summary'].includes(jss2RouteTopicKey);
  const lcmRouteText=(requestedTopicKey+' '+topicKey+' '+unitKey).trim();
  const hcfRouteText=(requestedTopicKey+' '+topicKey+' '+unitKey).trim();
  const useCleanLCM=subject==='Mathematics'&&(requestedTopicKey==='lcm'||topicKey==='lcm'||unitKey==='lcm'||lcmRouteText.includes('lowest common multiple')||/(^|[^a-z])lcm([^a-z]|$)/.test(lcmRouteText));
@@ -427,6 +429,8 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
 
   {phase==='teach'&&useJSS2OralComprehension&&<JSS2OralComprehensionLesson onExercise={startExercise}/>}
 
+  {phase==='teach'&&useJSS2OralSummary&&<JSS2OralSummaryLesson onExercise={startExercise}/>}
+
   {phase==='teach'&&useCleanLCM&&<LCMLesson onExercise={startExercise}/>}
 
   {phase==='teach'&&useCleanHCF&&<HCFLesson onExercise={startExercise}/>}
@@ -473,7 +477,7 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
 
   {phase==='teach'&&useCleanDataPresentation&&<DataPresentationLesson onExercise={startExercise}/>}
 
-  {phase==='teach'&&!useAuthoredWholeNumbers&&!useJSS2WholeNumbers&&!useJSS2PremiumMath&&!useJSS2Debate&&!useJSS2OralComprehension&&!useCleanLCM&&!useCleanHCF&&!useCleanAdditionSubtraction&&!useCleanCountingBaseTwo&&!useCleanBaseTenToBinary&&!useCleanFractions&&!useCleanFractionAddSubtract&&!useCleanFractionMultiplyDivide&&!useCleanEstimation&&!useCleanApproximation&&!useCleanBinaryAddition&&!useCleanBinarySubtraction&&!useCleanBinaryMultiplication&&!useCleanUseOfSymbols&&!useCleanSimplificationAlgebra&&!useCleanSimpleEquations&&!useCleanPlaneShapes&&!useCleanThreeDimensionalFigures&&!useCleanConstruction&&!useCleanAngles&&!useCleanNeedForStatistics&&!useCleanDataCollection&&!useCleanDataPresentation&&unit&&event&&<article ref={lessonStageRef} className={`live-teacher-stage lesson-slide-deck-v1492${useCleanCountingBaseTwo?' clean-counting-base-two':''}`} tabIndex={0} onTouchStart={handleLessonTouchStart} onTouchEnd={handleLessonTouchEnd} onKeyDown={handleLessonKeyDown}>
+  {phase==='teach'&&!useAuthoredWholeNumbers&&!useJSS2WholeNumbers&&!useJSS2PremiumMath&&!useJSS2Debate&&!useJSS2OralComprehension&&!useJSS2OralSummary&&!useCleanLCM&&!useCleanHCF&&!useCleanAdditionSubtraction&&!useCleanCountingBaseTwo&&!useCleanBaseTenToBinary&&!useCleanFractions&&!useCleanFractionAddSubtract&&!useCleanFractionMultiplyDivide&&!useCleanEstimation&&!useCleanApproximation&&!useCleanBinaryAddition&&!useCleanBinarySubtraction&&!useCleanBinaryMultiplication&&!useCleanUseOfSymbols&&!useCleanSimplificationAlgebra&&!useCleanSimpleEquations&&!useCleanPlaneShapes&&!useCleanThreeDimensionalFigures&&!useCleanConstruction&&!useCleanAngles&&!useCleanNeedForStatistics&&!useCleanDataCollection&&!useCleanDataPresentation&&unit&&event&&<article ref={lessonStageRef} className={`live-teacher-stage lesson-slide-deck-v1492${useCleanCountingBaseTwo?' clean-counting-base-two':''}`} tabIndex={0} onTouchStart={handleLessonTouchStart} onTouchEnd={handleLessonTouchEnd} onKeyDown={handleLessonKeyDown}>
    <div className="teacher-stage-title"><div><h2>{learnerTopicTitle(unit.title)}</h2></div></div>
    <div className="lesson-scroll-view approved-lesson-scroll">{useCleanCountingBaseTwo&&unit?<section className="clean-authored-lesson"><h1>JSS1 Mathematics — Counting in Base Two</h1><h2>Learning Objectives</h2><ul>{(unit.outcomes||[]).map((x:string,i:number)=><li key={i}>{x}</li>)}</ul>{(unit.sourceSteps||[]).filter((x:string)=>x!=='What you will learn'&&!String(x).toLowerCase().startsWith('counting groups of two')).map((text:string,i:number)=><div key={i} className="clean-authored-section"><p>{text}</p></div>)}<div className="teacher-actions"><button type="button" className="primary" onClick={startExercise}>Go to Exercise →</button></div></section>:events.map((item,i)=>{const spec=subject==='Mathematics'?visualFor(topic,item.label,item.lines):{kind:'none' as const,title:'',caption:''};return <section key={item.stepId} id={`lesson-section-${i+1}`} className={`scroll-lesson-section ${item.kind==='example'?'lesson-example-boundary':''}`}><div className="board-step-meta"><span>{learnerSessionTitle(item.label)}</span></div><div className="board-writing">{item.lines.map((line,j)=><div key={j} className={`board-line line-${j}`}>{line}</div>)}</div><VisualBoard spec={spec}/></section>})}</div>
    {VOICE_TEACHING_ENABLED&&<div className="voice-runtime-v139"><div className="voice-runtime-copy"><b>{speechAvailable?(speaking?'AVORA is speaking':paused?'Voice paused':'Voice ready'):'Voice unavailable in this browser'}</b><span>{voiceOn&&activeSpokenSegment?activeSpokenSegment:'Board-first teaching remains available with voice off.'}</span></div><div className="voice-runtime-progress" role="progressbar" aria-label="Narration progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={narrationProgress}><i style={{width:`${narrationProgress}%`}} /></div>{speechAvailable&&voiceChoices.length>0&&<label>Teacher voice<select value={voiceURI} onChange={e=>chooseVoice(e.target.value)}>{voiceChoices.map(v=><option key={v.uri} value={v.uri}>{v.name} · {v.lang}{v.local?'':' · online'}</option>)}</select></label>}</div>}
