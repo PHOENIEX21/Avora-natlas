@@ -35,7 +35,7 @@ const entries:[string,NerdcTopicMapEntry][]=[
  // JSS1 English Studies.
  [K('JSS1','English Language','Oral Comprehension'),m([],['nerdc2025-special-jss1-english-oral-comprehension-current'])],
  [K('JSS1','English Language','Conversation on Various Issues'),m([],['revised2025-jss1-english-conversation'])],
- [K('JSS1','English Language','Speech Sounds (Vowels and Consonants)'),m(['Speech Work: speech organs and sound production; monophthongs (long/short vowel contrasts)','Speech Work: consonant clusters; diphthongs','Speech Work: mixed vowel discrimination (monophthongs + diphthongs)'],['nerdc-jss1-english-listening-and-speaking-1','nerdc-jss1-english-listening-and-speaking-2'])],
+ [K('JSS1','English Language','Speech Sounds (Vowels and Consonants)'),m([],['nerdc-jss1-english-listening-and-speaking-1','nerdc-jss1-english-listening-and-speaking-2'])],
  [K('JSS1','English Language','Reading Short passages with fluency'),m([],['revised2025-jss1-english-fluency'])],
  [K('JSS1','English Language','Reading passages for meaning'),m([],['revised2025-jss1-english-reading-for-meaning'])],
  [K('JSS1','English Language','Reading Passages to Answer Literal, Inferential and Critical Questions'),m([],['revised2025-jss1-english-literal-inferential-critical'])],
