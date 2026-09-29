@@ -19,7 +19,7 @@ export async function POST(req:Request){
   const token=process.env.NATLAS_ASR_TOKEN?.trim();
   if(token)headers.Authorization=`Bearer ${token}`;
   const started=Date.now();
-  const response=await fetch(endpoint,{method:'POST',headers,body:await audio.arrayBuffer(),signal:AbortSignal.timeout(45_000)});
+  const response=await fetch(endpoint,{method:'POST',headers,body:await audio.arrayBuffer(),signal:AbortSignal.timeout(120_000)});
   const latencyMs=Date.now()-started;
   const contentType=response.headers.get('content-type')||'';
   const payload:any=contentType.includes('application/json')?await response.json():{text:await response.text()};
