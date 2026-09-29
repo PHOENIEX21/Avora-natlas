@@ -1,4 +1,5 @@
 import type {StructuredTeachingStep} from './lessonStepEngine';
+import {jss3WholeNumbersPlan,jss3WholeNumbersTopic} from './jss3ProvisionalMathematics';
 export type TutorUnit={title:string;terms:Array<[string,string]>;explain:string;example:string;check:string;why?:string;prerequisites?:string[];outcomes?:string[];commonMistakes?:string[];teachingTypes?:string[];noJumpChecks?:string[];sourceOrigin?:string;sourceSteps?:string[];sourceChecks?:string[];sourceSolutions?:string[];structuredSteps?:StructuredTeachingStep[]};
 export type TutorPlan={goal:string;why:string;units:TutorUnit[];examFocus?:string[];outcomes?:string[]};
 
@@ -316,6 +317,7 @@ export const nceeEnglishPlans:Record<string,TutorPlan>={
 };
 
 export function getTutorPlan(exam:string,subject:string,topic:string):TutorPlan|undefined{
+  if(exam!=='NCEE'&&subject==='Mathematics'&&topic===jss3WholeNumbersTopic)return jss3WholeNumbersPlan;
   const plans=exam==='NCEE'?(subject==='English Language'?nceeEnglishPlans:nceeMathPlans):(subject==='English Language'?beceEnglishPlans:beceTutorPlans);
   // Prefer an exact curriculum topic before applying a cross-bank alias. This keeps
   // NCEE Concord/Comprehension and BECE specialist topics from being accidentally
