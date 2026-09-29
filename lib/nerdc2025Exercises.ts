@@ -11,6 +11,7 @@ import {jss1FluencyQuestions} from './jss1EnglishReadingFluencyExercises';
 import {jss1MeaningQuestions} from './jss1EnglishReadingForMeaningExercises';
 import {jss1ThreeLevelQuestions} from './jss1EnglishThreeLevelComprehensionExercises';
 import {jss1SummaryQuestions} from './jss1EnglishSummaryExercises';
+import {jss1NVAQuestions} from './jss1EnglishNounsVerbsAdjectivesExercises';
 import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
 import {jss2PremiumMathQuestions} from './jss2PremiumMathExercises';
 
@@ -423,6 +424,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Reading passages for meaning')return jss1MeaningQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify the topic, decide what the writer says about it, then test the proposed main idea against the supporting details.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Reading Passages to Answer Literal, Inferential and Critical Questions')return jss1ThreeLevelQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'First classify the thinking required: FIND IT for literal, WORK IT OUT from clues for inference, or EVALUATE IT WITH EVIDENCE for critical comprehension.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Reading for Summary')return jss1SummaryQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Keep the essential meaning: identify the scope and key ideas, remove repetition/examples, paraphrase accurately, combine related points, then check against the source.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+ if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Parts of speech: Nouns, Verbs and Adjectives')return jss1NVAQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Use context and grammatical function: identify the predicate/verb, noun phrases and the words that modify or describe them.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
