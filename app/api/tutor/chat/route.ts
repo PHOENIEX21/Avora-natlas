@@ -75,7 +75,7 @@ export async function POST(req:Request){
     maxOutputTokens:900,
     schema:{type:'object',additionalProperties:false,properties:{reply:{type:'string'},board:{type:'array',items:{type:'string'},maxItems:3},reguideStepId:{type:['string','null']},assistanceLevel:{type:'string',enum:['HINT','RETEACH','ANSWER']},requiresFreshEvidence:{type:'boolean'}},required:['reply','board','reguideStepId','assistanceLevel','requiresFreshEvidence']}
   });
-  if(!ai.ok){await completeAiRequest(aiClaim.eventId,null,'FAILED');console.warn('AVORA AI tutor unavailable',ai.error,ai.status||'',ai.detail||'');return NextResponse.json({...withGuidanceMeta(d,fallbackReply(d),'HINT'),mode:'grounded-fallback'});}
+  if(!ai.ok){await completeAiRequest(aiClaim.eventId,null,'FAILED');console.warn('AVORA AI tutor unavailable',ai.error,ai.status||'',ai.detail||'');return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I could not generate a reliable answer just now, so I will not replace it with a generic ${d.topic} explanation. Please try the question again.`,board:[]},'HINT'),mode:'answer-unavailable',answerUnavailable:true});}
   await completeAiRequest(aiClaim.eventId,ai.usage,'COMPLETED');
   const parsed=ai.json as any;
   return NextResponse.json({...parsed,reguideStepId:safeReguideStep(d,parsed?.reguideStepId),mode:`ai-${ai.usage.provider}`});
