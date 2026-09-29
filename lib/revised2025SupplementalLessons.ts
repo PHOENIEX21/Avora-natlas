@@ -477,6 +477,95 @@ export const revised2025SupplementalLessons:Revised2025SupplementalLesson[]=[
     "boardReady": true
   },
   {
+    "topicId": "revised2025-jss1-english-literal-inferential-critical",
+    "classLevel": "JSS1",
+    "subject": "English Language",
+    "strand": "Reading",
+    "topic": "Reading Passages to Answer Literal, Inferential and Critical Questions",
+    "objectives": [
+      "Explain literal, inferential and critical comprehension",
+      "Identify what level of comprehension a question requires",
+      "Answer literal questions with precise evidence from a passage",
+      "Make reasonable inferences by combining textual clues with prior knowledge or logic",
+      "Answer critical questions by making evidence-based judgements about ideas in a text",
+      "Distinguish an inference from an unsupported guess",
+      "Distinguish critical evaluation from personal preference",
+      "Use prediction before reading and revise predictions when textual evidence changes",
+      "Support comprehension answers with relevant textual evidence"
+    ],
+    "prerequisites": ["reading for meaning","main and supporting ideas","basic vocabulary in context"],
+    "teaching": [
+      "Comprehension is more than remembering words. A strong reader can recover information the writer states, work out reasonable meanings the writer implies, and examine ideas critically. NERDC therefore requires three levels: LITERAL, INFERENTIAL and CRITICAL comprehension.",
+      "Use the AVORA memory rule: LITERAL = FIND IT. INFERENTIAL = WORK IT OUT. CRITICAL = EVALUATE IT WITH EVIDENCE. These are not three unrelated tricks; they are increasingly demanding ways of thinking about the same text.",
+      "LITERAL comprehension asks for information stated directly in the passage. Typical prompts include who, what, when, where, how many, according to the passage, or what happened first. The answer should be traceable to specific words or sentences.",
+      "Literal does not mean careless copying. Read the exact question, locate the relevant sentence, and select only the information requested. If the passage says, “At 7:30 a.m., Aisha boarded the bus at Unity Road,” the question “Where did Aisha board the bus?” requires “at Unity Road,” not every detail in the sentence.",
+      "A useful literal strategy is QUESTION → KEY WORDS → LOCATE → CHECK → ANSWER. Identify the important words in the question, scan the passage for the matching idea, reread the surrounding sentence, and answer precisely.",
+      "Inferential comprehension asks for a meaning that is not stated completely in one sentence. Use INFERENCE = TEXTUAL CLUES + REASONING. The clue must come from the passage; reasoning connects the clues to a conclusion.",
+      "Example: “Kunle entered the room shaking water from his umbrella. Drops ran from the shoulders of his jacket.” The passage never says, “It was raining outside,” but that is a reasonable inference because the umbrella and wet jacket are textual clues.",
+      "An inference is not a wild guess. If a learner says Kunle had just won a football match, the passage supplies no supporting clue. A defensible inference should answer the challenge: “Which words in the text helped you think that?”",
+      "Common inference tasks include working out a character's likely feeling or motive, cause and effect, the meaning of an unfamiliar word from context, what probably happened before or may happen next, and what an unstated relationship between ideas suggests.",
+      "Be careful with feelings. If a character “smiled, thanked everyone and held the prize tightly,” it is reasonable to infer pleasure or pride. It would be much weaker to diagnose a complex emotional condition that the passage does not support.",
+      "Critical comprehension asks the reader to examine, evaluate or judge something about the text. A critical answer should use CRITERION + TEXTUAL EVIDENCE + REASON. It is not simply “I like it” or “I don't like it.”",
+      "Critical questions may ask whether a decision was sensible, whether evidence is sufficient, whether an argument is convincing, whether a title is suitable, whether information seems reliable, what alternative action might be better, or whether the writer has supported a claim adequately.",
+      "Example: Passage: “The club cancelled its outdoor event after an official warning of severe weather.” Critical question: “Was the cancellation reasonable?” Strong answer: “Yes. The passage says there was an official severe-weather warning, so avoiding the outdoor event reduced an identified safety risk.” The judgement is tied to evidence and a clear criterion: safety.",
+      "Critical thinking does not mean automatically disagreeing with the writer. You may agree, disagree or partly agree, but your conclusion must follow from the passage and a defensible reason.",
+      "Some questions can look similar. “Why did Ada leave?” may be literal if the passage directly says, “Ada left because she was ill.” It becomes inferential if the reason is only suggested by clues. Classify the question by what the TEXT requires, not by one question word alone.",
+      "Question stems provide clues, not guarantees. “According to the passage...” often signals literal retrieval. “What can you infer/suggest...” usually signals inference. “Do you think... Give a reason,” “How effective...?” or “Was this justified?” often requires critical evaluation.",
+      "PRE-READING PREDICTION prepares the mind. Look at a title, picture or heading and predict what the passage may discuss. Then read to confirm, reject or revise the prediction. A prediction is provisional; evidence from the text has final authority.",
+      "For every answer, practise an EVIDENCE HABIT. Literal: point to the exact statement. Inferential: name the clues and explain the connection. Critical: state the judgement, identify the relevant evidence and explain the criterion or reason.",
+      "Do not overquote. Unless exact wording is requested, answer in a clear sentence using the relevant information. Copying an entire paragraph can hide whether you understood the question.",
+      "When a question contains an unfamiliar word, reread the sentence and nearby sentences. Definition clues, examples, contrast, cause/effect and synonyms can help. Then test the possible meaning in the original sentence.",
+      "For multiple-choice comprehension, answer from the passage before being attracted by the options. Eliminate answers that contradict the text, are unsupported, are only partly correct, or answer a different question.",
+      "For written comprehension, use complete, economical answers. Include enough information to answer fully, but avoid unrelated details. If evidence or a reason is requested, provide it explicitly.",
+      "After answering, verify: LITERAL—Can I point to where the text states it? INFERENTIAL—Can I show clues plus reasoning? CRITICAL—Can I show judgement plus evidence plus reason? If not, revise the answer."
+    ],
+    "workedExamples": [
+      "ONE TEXT, THREE LEVELS: “After two days of heavy rain, the stream beside Oke School rose above its normal level. On Wednesday morning, the head teacher saw water covering part of the footpath and asked pupils to use the longer paved route. Some pupils complained that the new route added ten minutes to their journey, but everyone reached the school safely.” LITERAL: Why did pupils use the longer route? Because water covered part of the footpath. INFERENTIAL: What was probably the head teacher's main concern? Pupil safety—the flooded path and the safer alternative are clues. CRITICAL: Was the decision reasonable? Yes; although inconvenient, it avoided a path partly covered by rising water.",
+      "LITERAL PRECISION: “The science exhibition begins at 10 a.m. in the assembly hall.” Question: Where will it hold? Answer: In the assembly hall. Do not answer “at 10 a.m.” because that answers when, not where.",
+      "INFERENCE FROM ACTION: “Bisi read the message twice, frowned, and immediately called her mother instead of clicking the link.” Reasonable inference: Bisi was suspicious or concerned about the message. Evidence: rereading, frowning and avoiding the link.",
+      "UNSUPPORTED GUESS: From Bisi's example, “Bisi's phone was stolen yesterday” is not a valid inference. Nothing in the passage points to theft.",
+      "CRITICAL RELIABILITY: A post says, “Everyone should take this medicine; my neighbour says it works,” but gives no qualified source or evidence. A critical reader can judge the support as weak because a neighbour's claim alone is insufficient evidence for a general health recommendation.",
+      "CONTEXT CLUE: “The path was treacherous; loose stones made several walkers slip.” Even if “treacherous” is unfamiliar, the example of loose stones and slipping suggests dangerous or unsafe.",
+      "PREDICTION: Title: “The Unexpected Visitor.” Predicting that someone arrives unexpectedly is sensible. Predicting that the visitor is a famous musician is possible but unsupported until the passage provides evidence.",
+      "MIXED QUESTION WORD: Passage directly states, “Tunde stayed indoors because he had a fever.” “Why did Tunde stay indoors?” is LITERAL, even though it asks “why,” because the reason is explicitly stated.",
+      "CRITICAL TITLE: If a passage mainly explains three ways students can verify online information, “Checking Before Sharing” is more suitable than “My Favourite Website” because the first title represents the central content.",
+      "PARTIAL AGREEMENT: A character decides never to use the internet again after receiving one suspicious message. Critical response: The caution is understandable, but completely avoiding the internet may be excessive; the passage's safer strategies—verification and trusted help—address the risk without requiring total avoidance."
+    ],
+    "misconceptions": [
+      "thinking every 'why' question is inferential",
+      "thinking literal answers must copy whole sentences word for word",
+      "treating an inference as permission to guess anything",
+      "giving an inference without identifying textual clues",
+      "confusing prior knowledge with evidence from the passage",
+      "thinking critical comprehension means criticising or finding fault",
+      "answering critical questions with unsupported personal preference",
+      "assuming a prediction must remain unchanged after reading",
+      "choosing an option because it sounds generally true even when the passage does not support it",
+      "over-interpreting a character's behaviour beyond what textual evidence reasonably supports",
+      "answering only one part of a two-part question",
+      "copying large sections of text instead of selecting the precise answer"
+    ],
+    "guidedPractice": [
+      "GUIDED PASSAGE 1 — The Lost Purse: “As Ngozi approached the school gate, she noticed a small purse beneath a bench. She opened only the outer pocket and found an identification card bearing Mrs Bello's name. Instead of taking the purse home, Ngozi carried it to the school office. Twenty minutes later, Mrs Bello arrived looking worried. When the secretary handed her the purse, she smiled with relief and thanked Ngozi.” Literal: Where did Ngozi find the purse? Inferential: Why was Mrs Bello probably worried? Critical: Was Ngozi's decision appropriate? For each answer, mark the exact evidence or clues.",
+      "GUIDED PASSAGE 2 — The Online Notice: “A message in a class group claimed that school would close the next day. Femi noticed that the message had no date and did not come from the school's official account. He checked the school's verified notice board and found no closure announcement. He then asked the class representative to confirm with a teacher.” Ask three literal, three inferential and two critical questions; classify each before answering.",
+      "GUIDED PASSAGE 3 — Community Water: “For weeks, a leaking pipe sent clean water into the gutter. Residents first placed a container beneath the leak, but this did not stop the waste. A youth group photographed the damaged pipe, recorded its location and reported it to the responsible office. Two days later, workers repaired it.” Determine what is directly stated, infer why the group recorded the location, and critically compare the temporary container with reporting the fault.",
+      "QUESTION-SORTING DRILL: Sort twelve question cards into FIND IT, WORK IT OUT and EVALUATE IT WITH EVIDENCE. Then explain what feature of the required answer—not merely the question word—determines each category.",
+      "EVIDENCE LADDER: For each inference, write CLUE 1 + CLUE 2 → CONCLUSION. For each critical answer, write JUDGEMENT + EVIDENCE → REASON."
+    ],
+    "independentPractice": [
+      "PASSAGE A — The Debate Trip: “The debate team was due to leave at 7 a.m. At 6:40, the driver called to report a mechanical problem with the bus. The teacher informed the students and contacted another approved transport provider. The replacement bus arrived at 7:35. Although the team reached the venue later than planned, their debate had not yet begun.” Answer: (1) What caused the original bus delay? [literal] (2) What can you infer about why the teacher contacted another approved provider? [inferential] (3) Was waiting for approved replacement transport a defensible decision? Give evidence and a reason. [critical]",
+      "PASSAGE B — A Viral Photograph: “A photograph circulated online with a caption claiming that it showed yesterday's flood in a nearby town. Sade noticed a shop sign in the image carrying the name of a different country. She used a trusted image-search tool with her older sister and found the same photograph in a news report published three years earlier. Sade decided not to forward the post.” Answer literal questions about what Sade noticed and found; infer why she stopped sharing; critically assess whether the original caption was reliable and justify the judgement.",
+      "PASSAGE C — The Reading Club: “Only eight pupils attended the first meeting of the new reading club. Rather than cancel it, the members selected short books and displayed brief recommendations on the class notice board. They also invited classmates to a ten-minute lunchtime reading session. By the fourth week, twenty-three pupils were attending regularly.” Identify two literal facts, make two supported inferences about the club's actions, and evaluate whether the members' strategy appears effective using evidence from the passage.",
+      "Create one literal, one inferential and one critical question from a fresh teacher-approved passage. Exchange questions with a partner, answer them, and require the partner to show the evidence/reasoning for each answer."
+    ],
+    "source": {"authority":"NERDC Revised BEC 2025","url":authorityUrl,"verified":"OFFICIAL_PLUS_TEXTBOOK_AND_COMPREHENSION_PEDAGOGY_CROSSCHECK"},
+    "mastery": {
+      "criterion": "On unfamiliar age-appropriate passages, learner accurately classifies and answers literal, inferential and critical questions, supports inferences with textual clues, supports critical judgements with evidence and reasons, and achieves at least 80% on the associated mastery exercise.",
+      "status": "DEEP_WHEN_PASSED"
+    },
+    "boardReady": true
+  },
+  {
     "topicId": "revised2025-jss1-english-tag-questions",
     "classLevel": "JSS1",
     "subject": "English Language",
