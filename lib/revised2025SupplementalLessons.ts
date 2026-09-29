@@ -622,44 +622,94 @@ export const revised2025SupplementalLessons:Revised2025SupplementalLesson[]=[
     "strand": "Reading",
     "topic": "Reading for Summary",
     "objectives": [
-      "Identify central ideas in a short passage",
-      "Separate essential ideas from examples/repetition",
-      "Restate key points concisely in original wording"
+      "Explain what a summary is and what it must preserve",
+      "Reduce long sentences by removing unnecessary words without destroying meaning",
+      "Identify topic sentences in paragraphs and passages",
+      "Identify key ideas that must be retained in a summary",
+      "Recognise words and expressions that redirect attention to important points",
+      "Separate key ideas from examples, repetition, elaboration and minor detail",
+      "Paraphrase key ideas accurately instead of mechanically copying the source",
+      "Combine related ideas into concise grammatical sentences",
+      "Summarize paragraphs and short passages accurately, coherently and concisely",
+      "Check a summary for completeness, faithfulness, concision and unsupported additions"
     ],
-    "prerequisites": [
-      "main/supporting ideas",
-      "basic paraphrase"
-    ],
+    "prerequisites": ["main and supporting ideas","paragraph meaning","basic sentence construction"],
     "teaching": [
-      "A summary keeps the important meaning while removing repetition, minor examples and decoration.",
-      "Read the whole passage first, identify the controlling idea, then select only points needed to represent it.",
-      "Paraphrase by changing structure and wording while preserving meaning; replacing one word with a synonym is not enough.",
-      "Check the required number of points or word limit and avoid adding personal opinions."
+      "A SUMMARY is a shorter statement of the essential meaning of a longer sentence, paragraph or passage. A good summary is shorter, but it must remain faithful to what the original text actually says.",
+      "Think of summary as REDUCE WITHOUT DISTORTING. Remove what is unnecessary, retain what is essential, and express the retained meaning clearly. A shorter sentence that changes the writer's meaning is not a good summary.",
+      "NERDC begins this skill with SENTENCE REDUCTION. Start with a long sentence and remove words or phrases that are decorative, repetitive or non-essential while keeping the central information.",
+      "Sentence reduction example: “The tired and exhausted players, who had just completed a very difficult and demanding match, slowly walked back to their waiting bus.” Core meaning: “The exhausted players walked back to their bus after a difficult match.” Details can be reduced, but the important event and relationship remain.",
+      "Do not delete blindly. Words that carry cause, contrast, condition, time or negation can be essential. Removing “not” from “The bridge is not safe” reverses the meaning. Removing “because the road was flooded” may destroy an important reason.",
+      "A TOPIC SENTENCE expresses the controlling or central idea of a paragraph. It often helps the reader locate what should survive in a summary. It can occur at the beginning, middle or end, and some paragraphs imply their central idea instead of stating it in one sentence.",
+      "KEY IDEAS are the indispensable points needed to represent the writer's message. Ask: If this information disappears, will the reader still understand the main message accurately? If yes, it may be a minor detail; if no, it is probably important.",
+      "Supporting material can include examples, illustrations, lists, anecdotes, repeated explanations, quotations and descriptive detail. Such material helps the original writer explain a point, but a short summary often replaces several examples with the broader point they illustrate.",
+      "Example: “The school saves electricity by switching off unused lights, unplugging idle equipment and using daylight when possible.” If space is limited, the examples may become: “The school reduces electricity use through energy-saving practices.”",
+      "Watch for WORDS AND EXPRESSIONS THAT REDIRECT ATTENTION TO MAIN POINTS. Expressions such as “most importantly,” “the main reason,” “in conclusion,” “therefore,” “as a result,” “however,” “the major problem,” and “the key point” can signal emphasis, conclusion, result or contrast. They are clues, not automatic answers; always check the surrounding meaning.",
+      "Contrast signals matter. In “The journey was long; however, the main difficulty was the flooded road,” the word “however” redirects attention from length to the more important difficulty. A summary that mentions only the long journey misses the emphasis.",
+      "Result signals can expose an important consequence. “Several drains were blocked; as a result, water remained on the road after the rain.” Depending on the task, both the cause and consequence may be key ideas.",
+      "Before summarizing a passage, read it completely. Do not start reducing the first sentence before you know how later paragraphs change, qualify or develop the message.",
+      "Use the AVORA SUMMARY ROUTE: READ → SCOPE → MARK → REDUCE → PARAPHRASE → COMBINE → CHECK. READ the whole text. SCOPE what the question asks. MARK topic sentences/key ideas. REDUCE examples and repetition. PARAPHRASE accurately. COMBINE related points. CHECK against the original.",
+      "SCOPE is essential. If the question asks for “three reasons for school lateness,” do not summarize every idea in the passage. Select only the reasons and obey the requested number of points.",
+      "MARK ideas, not entire paragraphs. A useful note can be only a few words: “high transport cost,” “traffic congestion,” “late departure.” These notes become the raw material for concise summary sentences.",
+      "PARAPHRASING means restating meaning in your own clear wording and structure. It is not merely replacing one word with a synonym. First understand the idea, look away from the exact sentence if necessary, then express the same idea naturally.",
+      "Paraphrase carefully. Technical names, proper nouns or words with no safe equivalent do not have to be changed. The purpose is to demonstrate understanding and concision, not to force every word into a synonym.",
+      "COMBINE related details when doing so preserves meaning. “The clinic lacked nurses. The clinic lacked medicines. The clinic had too few beds.” can become “The clinic lacked adequate staff, medicines and beds.”",
+      "Avoid adding personal opinions, explanations or facts that the original passage does not provide. A summary reports the source's essential message; it is not a commentary unless the question specifically asks for evaluation.",
+      "Avoid examples unless an example itself is one of the required key points. If the passage says several sports—football, basketball, athletics and volleyball—help pupils remain active, a summary can often say “sports help pupils remain active.”",
+      "Avoid repetition. If three sentences restate the same point using different words, represent the idea once unless each sentence contributes a genuinely different key point.",
+      "Avoid telegraphic fragments when the task requires sentences. “Flooding. Bad drainage. Waste.” may be brief but does not clearly express relationships. “Blocked drains and poor waste disposal contribute to flooding” communicates a complete idea.",
+      "A good summary is CONCISE, but concision does not mean removing necessary meaning. “Transport problems” may be too vague if the passage's key point is that high fares force some pupils to walk long distances.",
+      "Preserve logical relationships. If the original says A caused B, do not write merely “A and B.” If it contrasts two ideas, retain the contrast when it matters. If it says something may happen, do not change “may” to “will.”",
+      "Maintain the writer's level of certainty. “The programme may reduce waste” is not the same as “The programme will eliminate waste.” Summary writing must not strengthen or weaken claims without textual support.",
+      "After drafting, compare every summary point with the passage. Ask: Is it supported? Is it important? Is it accurate? Is it concise? Have I repeated anything? Have I added an opinion? Have I obeyed the number of points or word limit?",
+      "Finally read the summary by itself. It should be coherent to someone who has not just read the source. Pronouns should have clear references, sentences should be grammatical, and the selected points should connect logically."
     ],
     "workedExamples": [
-      "Original: “Many pupils walk because fares are high. Some leave home before sunrise.” Summary point: High transport costs make many pupils walk long distances/leave early.",
-      "Three examples of littering can often be reduced to the broader point “Improper waste disposal blocks drainage.”",
-      "A personal comment such as “This is terrible” is removed unless the task asks for evaluation."
+      "SENTENCE REDUCTION: “The small young boy quickly ran at great speed towards the nearby school gate because he was already late.” Better reduction: “The boy ran to the school gate because he was late.” The cause is retained; redundant description is removed.",
+      "DO NOT DELETE ESSENTIAL NEGATION: “Students should not enter the laboratory without permission.” “Students should enter the laboratory” is not a summary—it reverses the instruction.",
+      "TOPIC SENTENCE: “Regular reading develops several useful abilities. It exposes learners to vocabulary, increases familiarity with sentence patterns and provides information about many subjects.” Topic sentence: the first sentence. Key idea: regular reading develops useful abilities; the rest explains how.",
+      "SIGNAL EXPRESSION: “Many pupils mentioned the heat. However, the major problem was the lack of clean drinking water.” “However” and “the major problem” redirect attention. Summary: “The main problem was inadequate clean drinking water.”",
+      "GENERALISE EXAMPLES: “Residents cleared gutters, removed refuse from waterways and opened blocked drainage channels.” Summary point: “Residents cleared obstructions from the drainage system.”",
+      "COMBINE RELATED IDEAS: “The library has too few chairs. Several shelves are damaged. Lighting is poor.” Concise combined point: “The library lacks adequate furniture, shelving and lighting.”",
+      "PARAPHRASE: Original: “High transport fares compel many pupils to walk considerable distances to school.” Paraphrase: “Expensive transport forces many pupils to walk long distances to school.” Meaning is preserved without copying the original structure.",
+      "SCOPE: A passage discusses causes, effects and solutions to lateness. Question: “State two causes of lateness.” A good response selects only two causes; effects and solutions are irrelevant to the requested summary scope.",
+      "REMOVE OPINION: Source: “The council planted 200 trees along major roads.” Poor summary: “The wonderful council wisely planted 200 beautiful trees.” Better: “The council planted 200 trees along major roads.” The added praise is unsupported commentary.",
+      "PRESERVE CERTAINTY: Original: “Better drainage may reduce flooding in the area.” Incorrect: “Better drainage will stop flooding.” Correct: “Improved drainage may reduce flooding.”",
+      "PARAGRAPH SUMMARY: “The school introduced labelled waste bins in every block. Teachers explained how to separate paper, plastic and food waste. An environmental club checked the bins each afternoon. Within a month, mixed waste had reduced.” Summary: “The school reduced mixed waste by introducing labelled bins, teaching waste separation and monitoring their use.”",
+      "MULTI-PARAGRAPH SUMMARY: Paragraph 1: pupils often arrive late because transport is expensive and unreliable. Paragraph 2: lateness causes them to miss opening lessons. Paragraph 3: the school and families are discussing earlier departure and shared transport. Summary: “High and unreliable transport contributes to pupil lateness and missed lessons, so the school and families are considering earlier departure and shared transport.”"
     ],
     "misconceptions": [
-      "copying whole sentences",
-      "including every example",
-      "adding new ideas",
-      "writing notes so short that meaning is lost"
+      "copying whole paragraphs and calling the result a summary",
+      "believing a summary must include every example",
+      "deleting words mechanically without checking whether meaning changes",
+      "assuming the first sentence is always the topic sentence",
+      "confusing a topic such as “pollution” with a key idea about pollution",
+      "replacing individual words with synonyms without actually paraphrasing",
+      "adding personal opinions or outside facts",
+      "changing the writer's degree of certainty",
+      "ignoring words such as not, because, however, therefore or although when they carry important relationships",
+      "writing fragments so compressed that the meaning becomes unclear",
+      "repeating the same key idea in different wording",
+      "ignoring the exact scope or number of points requested",
+      "thinking the shortest possible answer is automatically the best summary",
+      "memorising a model summary instead of learning how to select and reduce ideas"
     ],
     "guidedPractice": [
-      "Reduce a 180-word passage to four key points, compare with source, and remove unnecessary examples."
+      "SENTENCE REDUCTION LADDER: Begin with five long sentences. Cross out only words that can disappear without changing essential meaning. Read the reduced sentence and explain why each retained word or relationship is necessary.",
+      "TOPIC-SENTENCE HUNT: Read five short paragraphs. Identify each topic sentence or state that the central idea is implied. Underline two details that develop the key idea and circle examples that could normally be omitted from a short summary.",
+      "SIGNAL-WORD PRACTICE: In a paragraph containing “for example,” “however,” “most importantly,” “as a result” and “in conclusion,” explain what each expression tells the reader about the organisation or importance of ideas.",
+      "GUIDED PASSAGE — Community Library: “The community library had very few visitors during the school term. Most pupils said they did not know when it opened, while others thought they needed to pay before entering. The librarian therefore placed opening hours on school notice boards and explained that membership for pupils was free. She also organised a weekly reading hour. Within six weeks, pupil visits had increased.” Task: identify topic sentence/key issue, select essential causes/actions/result, remove examples/minor wording, then produce a two-sentence summary.",
+      "SUMMARY AUDIT: Compare three summaries of the same paragraph: one copies too much, one omits a key idea, and one adds an opinion. Diagnose each problem and repair it."
     ],
     "independentPractice": [
-      "Summarise two passages under stated point/word limits and underline where each summary point came from."
+      "PASSAGE A — Water Use: “During the dry season, the school noticed that water from its storage tanks was finishing earlier each day. Some taps were left running after break, and one pipe behind the kitchen had been leaking for weeks. The school repaired the pipe, fitted faulty taps and asked class monitors to report leaks quickly. Teachers also reminded pupils to close taps properly. By the following month, the same amount of stored water lasted considerably longer.” Summarize the causes of water waste and the actions taken to reduce it in no more than two sentences.",
+      "PASSAGE B — Study Routine: “Amaka used to begin homework without deciding which tasks were most urgent. She often spent a long time on easy activities and discovered late at night that an important assignment remained unfinished. She then began listing tasks, checking their deadlines and estimating the time each would require. She also kept her phone away during focused study periods. The new routine did not make every assignment easy, but it helped her use her study time more deliberately.” Summarize the problem and the changes Amaka made. Do not add advice that is absent from the passage.",
+      "PASSAGE C — Market Drainage: “Heavy rain repeatedly left water around the market entrance. Traders initially blamed the amount of rain alone, but an inspection found that plastic waste and silt had blocked several drainage channels. The traders' association organised a clean-up and placed waste containers at key points. The local authority later cleared a larger underground channel. Floodwater still appeared during very heavy storms, but it drained away much faster than before.” Write a three-point summary covering the identified cause, actions taken and result. Preserve the passage's qualification that the problem was reduced rather than completely eliminated.",
+      "Choose a fresh 180–250 word teacher-approved passage. Write margin notes for its key ideas, reduce them to no more than five points, then produce a coherent summary. Underline the source evidence for each retained point and cross out one detail you deliberately omitted as non-essential."
     ],
-    "source": {
-      "authority": "NERDC Revised BEC 2025",
-      "url": authorityUrl,
-      "verified": "OFFICIAL_PLUS_SCHEME_CROSSCHECK"
-    },
+    "source": {"authority":"NERDC Revised BEC 2025","url":authorityUrl,"verified":"OFFICIAL_PLUS_TEXTBOOK_SUMMARY_PEDAGOGY_CROSSCHECK"},
     "mastery": {
-      "criterion": "At least 80% of required key points captured accurately, concisely and without unsupported additions.",
+      "criterion": "Given unfamiliar age-appropriate sentences, paragraphs and short passages, learner identifies topic sentences/key ideas and attention-redirecting expressions, reduces unnecessary wording without changing meaning, paraphrases and combines essential ideas, and produces accurate concise summaries with no unsupported additions at at least 80% mastery.",
       "status": "DEEP_WHEN_PASSED"
     },
     "boardReady": true
