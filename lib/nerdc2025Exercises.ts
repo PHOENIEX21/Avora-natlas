@@ -18,6 +18,7 @@ import {jss1WordFormationQuestions} from './jss1EnglishWordFormationExercises';
 import {jss1LetterQuestions} from './jss1EnglishLetterWritingExercises';
 import {jss1CreativeWritingQuestions} from './jss1EnglishCreativeWritingExercises';
 import {jss1IntroductionLiteratureQuestions} from './jss1EnglishIntroductionLiteratureExercises';
+import {jss1FolktaleQuestions} from './jss1EnglishFolktalesExercises';
 import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
 import {jss2PremiumMathQuestions} from './jss2PremiumMathExercises';
 
@@ -437,6 +438,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Writing Informal and Formal Letters')return jss1LetterQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Start with audience and purpose, choose the correct letter type, then check its required format, tone and task content.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Introduction to Creative writing')return jss1CreativeWritingQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify the creative form or story element, then ask what effect the writer’s language or technique creates.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Introduction to Literature')return jss1IntroductionLiteratureQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Separate category (oral/written) from genre (prose/drama/poetry), then support interpretations about life or values with evidence.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+ if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Folktales')return jss1FolktaleQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Use evidence from the tale: identify features, preserve event sequence when retelling, and distinguish the theme from the moral lesson.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
