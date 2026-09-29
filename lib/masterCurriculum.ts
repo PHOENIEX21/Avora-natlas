@@ -565,7 +565,7 @@ export const masterCurriculum:MasterCurriculumTopic[]=[
     classLevel: "JSS3",
     subject: "Mathematics",
     term: 1,
-    topic: "Whole Numbers (word problems, brackets/fractions, direct/inverse proportion, compound interest)",
+    topic: "Whole Numbers (binary operations and base conversion, quantitative reasoning, computer/calculator use, word problems → numerical expressions)",
     foundation: false,
     id: "jss3-math-t1-whole-numbers-word-problems-brackets-fractions-direct-invers"
   },
