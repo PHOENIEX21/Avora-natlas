@@ -8,6 +8,7 @@ import {jss1OralComprehensionQuestions} from './jss1EnglishOralComprehensionExer
 import {jss1ConversationQuestions} from './jss1EnglishConversationExercises';
 import {jss1SpeechQuestions} from './jss1EnglishSpeechSoundsExercises';
 import {jss1FluencyQuestions} from './jss1EnglishReadingFluencyExercises';
+import {jss1MeaningQuestions} from './jss1EnglishReadingForMeaningExercises';
 import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
 import {jss2PremiumMathQuestions} from './jss2PremiumMathExercises';
 
@@ -417,6 +418,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Conversation on Various Issues')return jss1ConversationQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Check whether the response is relevant, respectful and suitable for the topic, audience and situation; then apply the issue-specific vocabulary or problem-solving rule taught in the lesson.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Speech Sounds (Vowels and Consonants)')return jss1SpeechQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Do not rely on spelling alone. Recall the sound, mouth position, voicing and contrast examples from the interactive pronunciation lesson.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Reading Short passages with fluency')return jss1FluencyQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Judge fluency by accuracy, suitable pace, meaningful phrasing/prosody and understanding—not speed alone.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+ if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Reading passages for meaning')return jss1MeaningQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify the topic, decide what the writer says about it, then test the proposed main idea against the supporting details.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
