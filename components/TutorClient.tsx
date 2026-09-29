@@ -241,7 +241,7 @@ export default function TutorClient(){
  const useJSS2WholeNumbers=classLevel==='JSS2'&&subject==='Mathematics'&&jss2RouteTopicKey==='whole numbers';
  const jss2PremiumTopic=jss2PremiumMathTopics.find(t=>t.trim().toLowerCase().replace(/\s+/g,' ')===jss2RouteTopicKey);
  const useJSS2PremiumMath=classLevel==='JSS2'&&subject==='Mathematics'&&!useJSS2WholeNumbers&&Boolean(jss2PremiumTopic);
- const useJSS2Debate=classLevel==='JSS2'&&subject==='English'&&['debate','debates'].includes(jss2RouteTopicKey);
+ const useJSS2Debate=classLevel==='JSS2'&&subject.toLowerCase().includes('english')&&['debate','debates'].includes(jss2RouteTopicKey);
  const lcmRouteText=(requestedTopicKey+' '+topicKey+' '+unitKey).trim();
  const hcfRouteText=(requestedTopicKey+' '+topicKey+' '+unitKey).trim();
  const useCleanLCM=subject==='Mathematics'&&(requestedTopicKey==='lcm'||topicKey==='lcm'||unitKey==='lcm'||lcmRouteText.includes('lowest common multiple')||/(^|[^a-z])lcm([^a-z]|$)/.test(lcmRouteText));
