@@ -1009,49 +1009,98 @@ export const revised2025SupplementalLessons:Revised2025SupplementalLesson[]=[
     "classLevel": "JSS1",
     "subject": "English Language",
     "strand": "Grammatical Accuracy",
-    "topic": "Subject–Verb Agreement",
+    "topic": "Subject-Verb Agreement",
     "objectives": [
-      "Match verbs with subjects in number/person",
-      "Identify the true subject despite intervening words",
-      "Apply agreement in common present-tense and be/have constructions"
+      "Define subject-verb agreement and identify subjects and verbs in sentences",
+      "Differentiate singular and plural subjects and corresponding verb forms",
+      "Explain and apply basic rules of subject-verb agreement",
+      "Use correct agreement with be, have, do and ordinary present-tense verbs",
+      "Avoid attraction errors caused by words between subject and verb",
+      "Apply agreement with common compound subjects and introductory there constructions",
+      "Construct and edit sentences for correct subject-verb agreement"
     ],
-    "prerequisites": [
-      "subjects and verbs",
-      "singular/plural nouns",
-      "present tense"
-    ],
+    "prerequisites": ["nouns and pronouns","verbs","singular and plural","basic present tense"],
     "teaching": [
-      "Subject–verb agreement means the verb form fits its grammatical subject. In the simple present, third-person singular subjects usually take -s/-es on lexical verbs.",
-      "Words between subject and verb do not change the controlling subject: “The basket of oranges is heavy.”",
-      "Compound subjects joined by “and” are usually plural, while some either/or and neither/nor patterns require attention to the nearer subject at this level.",
-      "Be and have show agreement clearly: I am, he is, they are; she has, they have."
+      "SUBJECT-VERB AGREEMENT means that the form of a verb must fit its grammatical subject in number and, where relevant, person. First find the true subject; then choose the verb form that agrees with it.",
+      "The SUBJECT is the person, thing, idea or noun phrase the clause is about. The VERB element expresses an action, event or state. In “The boy plays football,” boy is the subject and plays is the verb.",
+      "NUMBER means singular or plural. A singular subject refers to one person/thing or is grammatically singular; a plural subject normally refers to more than one. Agreement follows grammatical number, not merely the nearest noun.",
+      "The simple present has a pattern that often confuses learners: I/you/we/they PLAY, but he/she/it/the boy PLAYS. The -s is usually on the third-person singular VERB, whereas plural nouns often take -s. Do not transfer the noun rule to the verb.",
+      "Basic Rule 1: a third-person singular subject normally takes the -s/-es form of an ordinary lexical verb in the simple present: “Amina reads”; “The bus passes”; “My brother watches.”",
+      "Basic Rule 2: plural subjects normally use the base present form: “The pupils read”; “The buses pass”; “My brothers watch.” I and you also use the base form: “I read”; “You read.”",
+      "Spelling changes can occur when forming third-person singular verbs: go→goes, watch→watches, study→studies, have→has. Agreement is a grammatical choice even when spelling changes.",
+      "BE is highly irregular: I am; you/we/they are; he/she/it is in the present. In the past, I/he/she/it was while you/we/they were.",
+      "HAVE contrasts has with have: “She has a book”; “They have books.” DO contrasts does with do: “He does his work”; “They do their work.”",
+      "When an auxiliary carries agreement, the following main verb does not also take the finite agreement ending: “She does work,” not “She does works”; “He is reading,” not “He is reads.”",
+      "Do not let an intervening phrase attract the verb. “The basket of oranges IS heavy.” The subject is basket, not oranges. Remove the extra phrase mentally: “The basket is heavy.”",
+      "Similarly: “The students in the classroom ARE ready.” The head of the subject noun phrase is students. Classroom is inside a prepositional phrase and does not control agreement.",
+      "A useful AVORA method is SUBJECT → NUMBER/PERSON → VERB FORM → CHECK. Underline the complete subject, identify its head, decide singular/plural/person, then select and reread the verb.",
+      "Subjects joined by AND are usually plural because they refer to two or more participants: “Musa and Ada are ready”; “The teacher and the prefect have arrived.”",
+      "However, do not mechanically count every word around and. A single established idea or unit can sometimes be treated as singular in more advanced usage. At JSS1, first master the normal rule that two separate subjects joined by and take a plural verb.",
+      "With EITHER...OR and NEITHER...NOR joining subjects of different number, standard agreement commonly follows the nearer subject: “Either the teacher or the pupils are coming”; “Either the pupils or the teacher is coming.” Keep such sentences clear and, where possible, rewrite awkward combinations.",
+      "Indefinite pronouns such as everyone, everybody, someone, somebody, anyone, nobody, each and either are grammatically singular in standard formal English: “Everyone is ready”; “Each has a card.”",
+      "Words such as many, several, both and few are plural: “Several are missing”; “Both have arrived.” Some words such as all or some depend on what they refer to: “Some water is left”; “Some pupils are waiting.”",
+      "COLLECTIVE NOUNS such as team, committee and family name groups. Agreement can vary with whether the group is viewed as a unit or as individuals, and varieties of English differ. For a basic JSS1 sentence treating the group as one unit, a singular verb is common: “The team is ready.” Follow the meaning and the course text.",
+      "In THERE IS/THERE ARE constructions, there introduces the sentence but the following noun phrase controls the agreement in careful standard usage: “There is a book on the table”; “There are three books on the table.”",
+      "Amounts, distances and periods can be grammatically singular when treated as one total unit: “Ten minutes is enough for this task.” This is an extension; the core NERDC requirement remains basic singular/plural agreement.",
+      "A title or name may look plural but refer to one work/entity. Agreement follows the entity intended, not simply the final letter. This is another reason to identify meaning and grammatical subject rather than counting s endings.",
+      "Questions and negatives can hide agreement inside auxiliaries: “Does the boy play?” “Do the boys play?” “The boy does not play.” Once does carries third-person singular agreement, the lexical verb remains play.",
+      "Agreement also matters in continuous and perfect verb groups: “She is reading / They are reading”; “He has finished / They have finished.” Find the finite auxiliary that agrees with the subject.",
+      "Editing strategy: (1) find each finite verb; (2) ask which subject controls it; (3) ignore interrupting phrases; (4) identify number/person; (5) check the verb form; (6) read the corrected sentence for meaning.",
+      "Agreement is not about which form sounds longer or has more letters. It is a grammatical relationship. Always prove your choice by naming the subject and explaining its number/person."
     ],
     "workedExamples": [
-      "The boy runs; the boys run.",
-      "The list of names is on the desk—“list” is the subject.",
-      "Musa and Ada are ready."
+      "“The boy plays football.” Boy is third-person singular, so simple-present play becomes plays.",
+      "“The boys play football.” Boys is plural, so the base form play is used.",
+      "“I play football.” I is singular in meaning but uses the base present form; the -s rule is specifically third-person singular.",
+      "“The bus passes the school.” Bus is singular; pass takes -es because of its spelling pattern.",
+      "“She studies every evening.” Study becomes studies with third-person singular she.",
+      "“I am ready; she is ready; they are ready.” These are present forms of be.",
+      "“She has a pen; they have pens.” Has agrees with third-person singular; have with plural subjects here.",
+      "“He does his work; they do their work.” Does/do show agreement.",
+      "“The basket of oranges is heavy.” Basket is the subject head; of oranges does not control the verb.",
+      "“The students in the classroom are ready.” Students, not classroom, controls are.",
+      "“Musa and Ada are ready.” Two separate subjects joined by and normally take a plural verb.",
+      "“Either the teacher or the pupils are coming.” The nearer subject pupils is plural.",
+      "“Either the pupils or the teacher is coming.” The nearer subject teacher is singular.",
+      "“Everyone is ready.” Everyone is grammatically singular in standard formal English.",
+      "“Several are absent.” Several is plural.",
+      "“Some water is left; some pupils are outside.” Some agrees according to the noun/meaning it refers to.",
+      "“There is a book on the desk; there are three books on the desk.” The following noun phrase determines the number.",
+      "“Does the boy play?” Does carries agreement, so play remains in its base form.",
+      "“The players are training.” Are agrees with plural players; training does not change for number.",
+      "ERROR REPAIR: “The list of names are on the desk.” Find subject head list (singular), ignore of names, then correct to “The list of names is on the desk.”"
     ],
     "misconceptions": [
-      "making the verb agree with the nearest noun inside a prepositional phrase",
-      "adding -s to plural-subject verbs in present tense",
-      "treating every “and” phrase as singular",
-      "forgetting irregular be/have forms"
+      "thinking every singular subject uses a verb ending in -s, including I and you",
+      "thinking plural subjects take -s on ordinary present-tense verbs",
+      "making the verb agree with the nearest noun instead of the true subject",
+      "treating words inside an of/in/with phrase as the subject head",
+      "forgetting irregular forms of be, have and do",
+      "writing does plays or does goes instead of does play or does go",
+      "assuming every subject joined by and is singular because each noun is singular",
+      "treating everyone, each or somebody as plural",
+      "using there is with every following noun phrase regardless of number",
+      "deciding agreement by whether a word ends in -s",
+      "changing the non-finite main verb instead of the finite auxiliary in a verb group",
+      "memorising answers without being able to identify the controlling subject"
     ],
     "guidedPractice": [
-      "Underline subjects and choose the correct verb in twelve increasingly complex sentences."
+      "SUBJECT-VERB MATCH: Match singular/plural subject cards to suitable present-tense verb cards, including NERDC-style pairs such as “The boy—plays” and “The boys—play,” and explain each match.",
+      "SUBJECT HUNT: In twelve sentences, underline the complete subject once, circle its head word, underline the finite verb twice, then state singular/plural/person.",
+      "ATTRACTION TRAP: Correct sentences such as “The box of pencils are missing” and “The pupils in the bus is singing,” first removing the intervening phrase mentally.",
+      "BE/HAVE/DO TABLE: Complete present forms for I, you, he/she/it, we and they, then use each family in natural sentences.",
+      "COMPOUND SUBJECT LAB: Practise and, either...or and neither...nor patterns, explaining which noun phrase controls the verb.",
+      "EDITING CLINIC: Correct a short paragraph containing ten deliberate agreement errors and justify each correction by naming the subject.",
+      "PEER TEACHING: One learner explains one agreement rule and gives two examples; the partner tests the rule with a new sentence, then roles switch as NERDC recommends."
     ],
     "independentPractice": [
-      "Edit a 120-word paragraph containing twelve deliberate agreement errors and explain five corrections."
+      "PASSAGE A: “The group of new pupils are waiting outside. Each of them have a registration card. The teacher and the prefect is checking the names. There is three empty seats near the door.” Find and correct every agreement error and explain the controlling subject.",
+      "PASSAGE B: “My sister does her homework after dinner. Her friends usually do theirs earlier. The box of old notebooks is under her desk, and several are still useful.” Identify each subject and finite verb and explain why each agrees.",
+      "Write eight original sentences demonstrating: singular lexical verb, plural lexical verb, be, have, do, an intervening phrase, a compound subject with and, and a there is/are construction.",
+      "Create four subject cards and four matching verb cards for a classmate. Include at least one sentence where a noun between the subject and verb could cause an attraction error."
     ],
-    "source": {
-      "authority": "NERDC Revised BEC 2025",
-      "url": authorityUrl,
-      "verified": "OFFICIAL_PLUS_SCHEME_CROSSCHECK"
-    },
-    "mastery": {
-      "criterion": "At least 90% agreement accuracy, including sentences with intervening phrases and compound subjects.",
-      "status": "DEEP_WHEN_PASSED"
-    },
+    "source": {"authority":"NERDC Revised BEC 2025","url":authorityUrl,"verified":"OFFICIAL_SCOPE_WITH_GRAMMAR_REFERENCE_CROSSCHECK"},
+    "mastery": {"criterion":"Learner identifies subjects and verbs, distinguishes singular/plural subjects and corresponding forms, explains at least four core agreement rules, applies them in unfamiliar sentences and constructs accurate examples with at least 80% mastery.","status":"DEEP_WHEN_PASSED"},
     "boardReady": true
   },
   {
