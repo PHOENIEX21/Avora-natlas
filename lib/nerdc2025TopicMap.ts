@@ -40,7 +40,7 @@ const entries:[string,NerdcTopicMapEntry][]=[
  [K('JSS1','English Language','Reading passages for meaning'),m([],['revised2025-jss1-english-reading-for-meaning'])],
  [K('JSS1','English Language','Reading Passages to Answer Literal, Inferential and Critical Questions'),m([],['revised2025-jss1-english-literal-inferential-critical'])],
  [K('JSS1','English Language','Reading for Summary'),m([],['revised2025-jss1-english-summary'])],
- [K('JSS1','English Language','Parts of speech: Nouns, Verbs and Adjectives'),m(['Grammar: nouns (common/proper, countable/uncountable); verbs (action/state); adjectives (comparison); adverbs; present tense & subject-verb agreement; pronouns (subject/object); prepositions & conjunctions (introductory)'],['nerdc-jss1-english-grammatical-accuracy-1'])],
+ [K('JSS1','English Language','Parts of speech: Nouns, Verbs and Adjectives'),m([],['revised2025-jss1-english-nouns-verbs-adjectives'])],
  [K('JSS1','English Language','Parts of speech: Adverbs, Conjunctions, Prepositions and Interjections'),m(['Grammar: prepositions of time vs place; conjunctions (coordinating vs subordinating)'],['nerdc-jss1-english-grammatical-accuracy-2','revised2025-jss1-english-interjections'])],
  [K('JSS1','English Language','Subject-Verb Agreement'),m([],['revised2025-jss1-english-agreement'])],
  [K('JSS1','English Language','Use of Prefixes, Suffixes and Compounds'),m([],['revised2025-jss1-english-word-formation'])],
