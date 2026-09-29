@@ -14,6 +14,7 @@ import {jss1SummaryQuestions} from './jss1EnglishSummaryExercises';
 import {jss1NVAQuestions} from './jss1EnglishNounsVerbsAdjectivesExercises';
 import {jss1ACPIQuestions} from './jss1EnglishAdverbsConjunctionsPrepositionsInterjectionsExercises';
 import {jss1SVAQuestions} from './jss1EnglishSubjectVerbAgreementExercises';
+import {jss1WordFormationQuestions} from './jss1EnglishWordFormationExercises';
 import {wholeNumbersAuthoredQuestions} from './wholeNumbersAuthored';
 import {jss2PremiumMathQuestions} from './jss2PremiumMathExercises';
 
@@ -429,6 +430,7 @@ export function nerdc2025ExerciseQuestions(classLevel:string,subject:string,topi
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Parts of speech: Nouns, Verbs and Adjectives')return jss1NVAQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Use context and grammatical function: identify the predicate/verb, noun phrases and the words that modify or describe them.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Parts of speech: Adverbs, Conjunctions, Prepositions and Interjections')return jss1ACPIQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Classify each word by its grammatical function and the relationship it expresses in context.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Subject-Verb Agreement')return jss1SVAQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Find the true subject first, determine its number/person, then choose the finite verb form that agrees with it.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
+ if(classLevel==='JSS1'&&subject==='English Language'&&topic==='Use of Prefixes, Suffixes and Compounds')return jss1WordFormationQuestions.slice(0,count).map(q=>({...q,type:'MULTIPLE_CHOICE' as const,hint:'Identify the meaningful base and affix or compound parts, then check meaning, spelling and use in context.',source:'AVORA_AUTHORED_NERDC_BANK' as const}));
  const authored=classLevel==='JSS2'&&subject==='English Language'?authoredNerdc2025EnglishQuestions(topic):[];
  if(authored.length){
   return authored.slice(0,count).map(q=>({
