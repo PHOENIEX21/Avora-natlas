@@ -48,7 +48,7 @@ const entries:[string,NerdcTopicMapEntry][]=[
  [K('JSS1','English Language','Introduction to Creative writing'),m([],['revised2025-jss1-english-creative-writing-deep'])],
  [K('JSS1','English Language','Introduction to Literature'),m([],['revised2025-jss1-english-introduction-literature-deep'])],
  [K('JSS1','English Language','Folktales'),m([],['revised2025-jss1-english-folktales-deep'])],
- [K('JSS1','English Language','Myths and Legends'),m(['Literature: literary terms (simile, metaphor, personification, hyperbole, alliteration); myths and legends (vs folktales)'],['nerdc-jss1-english-literature-3'])],
+ [K('JSS1','English Language','Myths and Legends'),m([],['revised2025-jss1-english-myths-legends-deep'])],
  [K('JSS1','English Language','Introduction to Prose Fiction'),m(['Literature: elements of prose (plot, setting, theme, characterisation); introduction to drama (dialogue, stage directions)'],['nerdc-jss1-english-literature-4'])],
 
  // JSS2 Mathematics.
