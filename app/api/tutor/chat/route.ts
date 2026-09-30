@@ -66,6 +66,30 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
  if(!reply)return null;
  return {reply,board:[term?(String(term[0])+' → '+definition):u.title,example].filter(Boolean).slice(0,3),source:{classLevel:hit.classLevel,subject:hit.subject,topic:hit.topic}};
 }
+function generalLearningAnswer(question:string){
+ const q=question.toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
+ const entries=[
+  {keys:['noun'],reply:'A noun is a naming word. It names a person, animal, place, thing or idea. Examples are teacher, goat, Lagos, book and honesty.'},
+  {keys:['verb'],reply:'A verb is a word that expresses an action, occurrence or state. Examples are run, write, become and is.'},
+  {keys:['adverb'],reply:'An adverb gives more information about a verb, an adjective or another adverb. It can tell how, when, where or to what extent. In “Ada runs quickly,” quickly is the adverb.'},
+  {keys:['adjective'],reply:'An adjective describes or gives more information about a noun or pronoun. In “a tall building,” tall is the adjective.'},
+  {keys:['pronoun'],reply:'A pronoun is a word used in place of a noun or noun phrase. Examples include I, you, he, she, it, we and they.'},
+  {keys:['photosynthesis'],reply:'Photosynthesis is the process by which green plants use light energy to make food from carbon dioxide and water. Oxygen is released as a product.'},
+  {keys:['gravity'],reply:'Gravity is the force of attraction between masses. Near Earth, it pulls objects toward the ground and gives them weight.'},
+  {keys:['computer'],reply:'A computer is an electronic device that accepts data, processes it according to instructions, stores data and produces information as output.'},
+  {keys:['operating system'],reply:'An operating system is system software that manages a computer’s hardware and software resources and provides services for applications. Examples include Windows, Linux and Android.'},
+  {keys:['mean','average'],reply:'The arithmetic mean is found by adding all the values and dividing the total by the number of values. For example, the mean of 2, 4 and 6 is (2 + 4 + 6) ÷ 3 = 4.'},
+  {keys:['quadrilateral','total angle'],reply:'The sum of the interior angles of a quadrilateral is 360°. One way to see this is to draw a diagonal: it divides the quadrilateral into two triangles, and 180° + 180° = 360°.'},
+  {keys:['triangle','total angle'],reply:'The sum of the interior angles of a triangle is 180°.'}
+ ];
+ const hit=entries.find(e=>e.keys.some(k=>q.includes(k)));
+ return hit?{reply:hit.reply,board:[],source:{type:'GENERAL_LEARNING'}}:null;
+}
+function isClearlyNonLearning(question:string){
+ const q=question.toLowerCase();
+ return /\b(president|celebrity|football score|weather|price of|latest news|girlfriend|boyfriend|joke)\b/.test(q);
+}
+
 function fallbackReply(d:z.infer<typeof schema>){
  const plan=getCurriculumTutorPlan(d.classLevel,d.subject,d.topic);
  const unit=plan?.units[d.unitIndex]||plan?.units[0];
@@ -99,6 +123,9 @@ export async function POST(req:Request){
   const unit=plan?.units[d.unitIndex]||plan?.units[0];
   const local=localCurriculumAnswer(d);
   if(local)return NextResponse.json({...withGuidanceMeta(d,{reply:local.reply,board:local.board},'HINT'),mode:'grounded-curriculum-local',curriculumSource:local.source});
+  const general=generalLearningAnswer(d.question);
+  if(general)return NextResponse.json({...withGuidanceMeta(d,{reply:general.reply,board:general.board},'HINT'),mode:'general-learning-local',knowledgeSource:general.source});
+  if(isClearlyNonLearning(d.question))return NextResponse.json({...withGuidanceMeta(d,{reply:'AVORA is focused on learning. Ask me a school subject, study, exam, science, mathematics, English, computing or other educational question and I will help.',board:[]},'HINT'),mode:'learning-scope-local'});
   if(!configuredAiProvider())return NextResponse.json({...withGuidanceMeta(d,fallbackReply(d),/model answer|full worked|teach this from my attempt/i.test(d.question)?'RETEACH':'HINT'),mode:'grounded-local'});
   const aiClaim=await claimAiRequest(session.userId,'TUTOR_CHAT');
   if(!aiClaim.allowed)return NextResponse.json({...withGuidanceMeta(d,fallbackReply(d),'HINT'),mode:'budget-safe-local',aiLimit:aiClaim.reason});
