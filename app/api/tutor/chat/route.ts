@@ -2,7 +2,7 @@ import {requirePremiumFeature} from '@/lib/premiumAccess';
 import {NextResponse} from 'next/server';
 import {z} from 'zod';
 import {getSession} from '@/lib/auth';
-import {getCurriculumTutorPlan} from '@/lib/curriculumTutor';
+import {getCurriculumTutorPlan,getOfficialTopicNames} from '@/lib/curriculumTutor';
 import {deepExamples} from '@/lib/deepTeaching';
 import {claimAiRequest,completeAiRequest} from '@/lib/aiCostGuard';
 import {aiStructured,configuredAiProvider} from '@/lib/aiGateway';
@@ -32,6 +32,40 @@ function withGuidanceMeta(d:z.infer<typeof schema>,value:{reply:string;board:str
  return {...value,reguideStepId:safeReguideStep(d),assistanceLevel:level,requiresFreshEvidence:level!=='HINT'};
 }
 
+function localCurriculumAnswer(d:z.infer<typeof schema>){
+ const q=' '+d.question.toLowerCase().replace(/[^a-z0-9°]+/g,' ')+' ';
+ const stop=new Set(['what','whats','which','this','that','about','please','tell','give','example']);
+ const tokens=(v:string)=>v.toLowerCase().replace(/[^a-z0-9°]+/g,' ').split(/\\s+/).filter(x=>x.length>2&&!stop.has(x));
+ const candidates:any[]=[];
+ const add=(plan:any,subject:string,topic:string,classLevel:string,priority:number)=>{
+  if(!plan)return;
+  for(const unit of plan.units||[]){
+   const terms=Array.isArray(unit.terms)?unit.terms:[];
+   const matchedTerm=terms.find((p:any)=>Array.isArray(p)&&typeof p[0]==='string'&&q.includes(' '+p[0].toLowerCase().replace(/[^a-z0-9°]+/g,' ').trim()+' '));
+   const qwords=new Set(tokens(d.question));
+   const overlap=tokens([topic,unit.title,...terms.map((x:any)=>x?.[0]||'')].join(' ')).filter((x:string)=>qwords.has(x)).length;
+   const score=priority+(matchedTerm?12:0)+overlap;
+   if(score>priority)candidates.push({score,unit,subject,topic,classLevel,matchedTerm});
+  }
+ };
+ add(getCurriculumTutorPlan(d.classLevel,d.subject,d.topic),d.subject,d.topic,d.classLevel,20);
+ for(const classLevel of Array.from(new Set([d.classLevel,'JSS1','JSS2','JSS3']))){
+  for(const subject of ['Mathematics','English Language']){
+   for(const topic of getOfficialTopicNames(classLevel,subject)){
+    if(classLevel===d.classLevel&&subject===d.subject&&topic===d.topic)continue;
+    add(getCurriculumTutorPlan(classLevel,subject,topic),subject,topic,classLevel,classLevel===d.classLevel?8:2);
+   }
+  }
+ }
+ candidates.sort((a,b)=>b.score-a.score);
+ const hit=candidates[0]; if(!hit||hit.score<10)return null;
+ const u=hit.unit,term=hit.matchedTerm;
+ const definition=term?String(term[1]||'').trim():'';
+ const explain=String(u.explain||'').trim(),example=String(u.example||'').trim();
+ const reply=[definition?(String(term[0])+' means '+definition+'.'):'',explain,example?('Example: '+example):''].filter(Boolean).join(' ');
+ if(!reply)return null;
+ return {reply,board:[term?(String(term[0])+' → '+definition):u.title,example].filter(Boolean).slice(0,3),source:{classLevel:hit.classLevel,subject:hit.subject,topic:hit.topic}};
+}
 function fallbackReply(d:z.infer<typeof schema>){
  const plan=getCurriculumTutorPlan(d.classLevel,d.subject,d.topic);
  const unit=plan?.units[d.unitIndex]||plan?.units[0];
@@ -63,6 +97,8 @@ export async function POST(req:Request){
   const d=schema.parse(await req.json());
   const plan=getCurriculumTutorPlan(d.classLevel,d.subject,d.topic);
   const unit=plan?.units[d.unitIndex]||plan?.units[0];
+  const local=localCurriculumAnswer(d);
+  if(local)return NextResponse.json({...withGuidanceMeta(d,{reply:local.reply,board:local.board},'HINT'),mode:'grounded-curriculum-local',curriculumSource:local.source});
   if(!configuredAiProvider())return NextResponse.json({...withGuidanceMeta(d,fallbackReply(d),/model answer|full worked|teach this from my attempt/i.test(d.question)?'RETEACH':'HINT'),mode:'grounded-local'});
   const aiClaim=await claimAiRequest(session.userId,'TUTOR_CHAT');
   if(!aiClaim.allowed)return NextResponse.json({...withGuidanceMeta(d,fallbackReply(d),'HINT'),mode:'budget-safe-local',aiLimit:aiClaim.reason});
