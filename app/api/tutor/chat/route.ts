@@ -33,10 +33,16 @@ function withGuidanceMeta(d:z.infer<typeof schema>,value:{reply:string;board:str
 }
 
 function deterministicMathAnswer(question:string){
- let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/×/g,'*').replace(/÷/g,'/');
+ let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/(?<=[a-z])-(?=[a-z])/g,' ').replace(/×/g,'*').replace(/÷/g,'/');
  const nums:Record<string,string>={zero:'0',one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10',eleven:'11',twelve:'12',thirteen:'13',fourteen:'14',fifteen:'15',sixteen:'16',seventeen:'17',eighteen:'18',nineteen:'19',twenty:'20'};
  for(const [w,n] of Object.entries(nums))q=q.replace(new RegExp('\\b'+w+'\\b','g'),n);
  q=q.replace(/\bplus\b/g,'+').replace(/\bminus\b/g,'-').replace(/\b(times|multiplied by)\b/g,'*').replace(/\b(divided by|over)\b/g,'/');
+ const eq=q.match(/\b([a-z])\s*([+\-])\s*(-?\d+(?:\.\d+)?)\s*(?:=|equals?)\s*(-?\d+(?:\.\d+)?)/i);
+ if(eq){
+  const variable=eq[1],n=Number(eq[3]),rhs=Number(eq[4]),op=eq[2];
+  const value=op==='+'?rhs-n:rhs+n;
+  return {reply:`${variable} ${op} ${n} = ${rhs}. Undo ${op==='+'?'adding':'subtracting'} ${n} by ${op==='+'?'subtracting':'adding'} ${n} on both sides. Therefore ${variable} = ${value}. Check: ${value} ${op} ${n} = ${rhs}.`,board:[`${variable} ${op} ${n} = ${rhs}`,`${variable} = ${value}`,`Check ✓`],source:{type:'DETERMINISTIC_MATH'}};
+ }
  const m=q.match(/(-?\d+(?:\.\d+)?)\s*([+\-*\/])\s*(-?\d+(?:\.\d+)?)/);
  if(!m)return null;
  const a=Number(m[1]),b=Number(m[3]),op=m[2];
@@ -84,13 +90,24 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
   }
  }
  candidates.sort((a,b)=>b.score-a.score);
- const hit=candidates[0]; if(!hit||hit.score<8)return null;
+ const hit=candidates[0]; if(!hit||hit.score<12)return null;
  const u=hit.unit,term=hit.matchedTerm;
  const definition=term?String(term[1]||'').trim():'';
  const explain=String(u.explain||'').trim(),example=String(u.example||'').trim();
  const reply=[definition?(String(term[0])+' means '+definition+'.'):'',explain,example?('Example: '+example):''].filter(Boolean).join(' ');
  if(!reply)return null;
  return {reply,board:[term?(String(term[0])+' → '+definition):u.title,example].filter(Boolean).slice(0,3),source:{type:'AVORA_CURRICULUM',classLevel:hit.classLevel,subject:hit.subject,topic:hit.topic,unit:u.title}};
+}
+function focusedLearningAnswer(d:z.infer<typeof schema>){
+ const q=d.question.toLowerCase();
+ if(/simultaneous/.test(q)&&/elimination/.test(q)){
+  return {reply:'Elimination solves two equations together by removing one unknown. Example: x + y = 7 and x - y = 1. Add the equations: (x + y) + (x - y) = 7 + 1, so 2x = 8 and x = 4. Substitute x = 4 into x + y = 7: 4 + y = 7, so y = 3. Check in both original equations: 4 + 3 = 7 and 4 - 3 = 1. Therefore x = 4 and y = 3. If the coefficients do not already cancel, first multiply one or both equations so one variable has equal and opposite coefficients, then add the equations.',board:['x + y = 7','x - y = 1','Add → 2x = 8 → x = 4; then y = 3'],source:{type:'GENERAL_LEARNING'}};
+ }
+ const lastTeacher=[...d.recent].reverse().find(x=>x.role==='teacher')?.text.toLowerCase()||'';
+ if(/\b(steps?|how)\b/.test(q)&&/binary|base two|powers of two/.test(lastTeacher)){
+  return {reply:'For decimal to binary: 1) Divide the decimal number by 2. 2) Write down the remainder, 0 or 1. 3) Divide the new quotient by 2 again. 4) Continue until the quotient becomes 0. 5) Read the remainders from bottom to top. Example: 10 ÷ 2 = 5 r0; 5 ÷ 2 = 2 r1; 2 ÷ 2 = 1 r0; 1 ÷ 2 = 0 r1. Bottom to top gives 1010₂. For binary to decimal, multiply each digit by its power of 2 and add the results.',board:['Decimal → divide repeatedly by 2','Record remainders','Read bottom → top'],source:{type:'AVORA_CONTEXT'}};
+ }
+ return null;
 }
 function generalLearningAnswer(question:string){
  const q=question.toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
@@ -100,6 +117,9 @@ function generalLearningAnswer(question:string){
   {keys:['adverb'],reply:'An adverb gives more information about a verb, an adjective or another adverb. It can tell how, when, where or to what extent. In “Ada runs quickly,” quickly is the adverb.'},
   {keys:['adjective'],reply:'An adjective describes or gives more information about a noun or pronoun. In “a tall building,” tall is the adjective.'},
   {keys:['pronoun'],reply:'A pronoun is a word used in place of a noun or noun phrase. Examples include I, you, he, she, it, we and they.'},
+  {keys:['norm'],reply:'A norm is an accepted standard or expected way of behaving in a group or society. For example, greeting people politely can be a social norm. In mathematics, “norm” can have a different technical meaning, so tell me the subject if that is what you mean.'},
+  {keys:['simile'],reply:'A simile compares two unlike things using words such as “like” or “as”. Example: “Her smile is like sunshine.”'},
+  {keys:['metaphor'],reply:'A metaphor compares by saying one thing is another, without using “like” or “as”. Example: “Time is a thief.”'},
   {keys:['photosynthesis'],reply:'Photosynthesis is the process by which green plants use light energy to make food from carbon dioxide and water. Oxygen is released as a product.'},
   {keys:['gravity'],reply:'Gravity is the force of attraction between masses. Near Earth, it pulls objects toward the ground and gives them weight.'},
   {keys:['computer'],reply:'A computer is an electronic device that accepts data, processes it according to instructions, stores data and produces information as output.'},
@@ -150,6 +170,8 @@ export async function POST(req:Request){
   const unit=plan?.units[d.unitIndex]||plan?.units[0];
   const calculation=deterministicMathAnswer(d.question);
   if(calculation)return NextResponse.json({...withGuidanceMeta(d,{reply:calculation.reply,board:calculation.board},'HINT'),mode:'deterministic-math',knowledgeSource:calculation.source});
+  const focused=focusedLearningAnswer(d);
+  if(focused)return NextResponse.json({...withGuidanceMeta(d,{reply:focused.reply,board:focused.board},'HINT'),mode:'focused-learning-local',knowledgeSource:focused.source});
   const local=localCurriculumAnswer(d);
   if(local)return NextResponse.json({...withGuidanceMeta(d,{reply:local.reply,board:local.board},'HINT'),mode:'grounded-curriculum-local',curriculumSource:local.source});
   const general=generalLearningAnswer(d.question);
