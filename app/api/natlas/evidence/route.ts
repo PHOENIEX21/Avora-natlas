@@ -39,6 +39,13 @@ export async function POST(req:Request){
    (user_id,validation_mode,session_key,interaction_key,language,class_level,subject,topic,asr_provider,asr_model,asr_success,asr_latency_ms,transcript_corrected,answer_source,answer_success,answer_latency_ms,mastery_checked,mastery_success,feedback_rating,failure_code)
    VALUES(${session.userId},${validationMode},${d.sessionKey},${d.interactionKey},${d.language},${d.classLevel||null},${d.subject||null},${d.topic||null},'N-ATLAS',${d.asrModel||null},${d.asrSuccess},${d.asrLatencyMs??null},${d.transcriptCorrected??null},${d.answerSource||null},${d.answerSuccess??null},${d.answerLatencyMs??null},${d.masteryChecked},${d.masterySuccess??null},${d.feedbackRating??null},${d.failureCode||null})
    ON CONFLICT(interaction_key) DO UPDATE SET
+    language=EXCLUDED.language,
+    class_level=COALESCE(EXCLUDED.class_level,natlas_validation_interactions.class_level),
+    subject=COALESCE(EXCLUDED.subject,natlas_validation_interactions.subject),
+    topic=COALESCE(EXCLUDED.topic,natlas_validation_interactions.topic),
+    asr_model=COALESCE(EXCLUDED.asr_model,natlas_validation_interactions.asr_model),
+    asr_success=EXCLUDED.asr_success,
+    asr_latency_ms=COALESCE(EXCLUDED.asr_latency_ms,natlas_validation_interactions.asr_latency_ms),
     transcript_corrected=COALESCE(EXCLUDED.transcript_corrected,natlas_validation_interactions.transcript_corrected),
     answer_source=COALESCE(EXCLUDED.answer_source,natlas_validation_interactions.answer_source),
     answer_success=COALESCE(EXCLUDED.answer_success,natlas_validation_interactions.answer_success),
@@ -46,7 +53,7 @@ export async function POST(req:Request){
     mastery_checked=EXCLUDED.mastery_checked OR natlas_validation_interactions.mastery_checked,
     mastery_success=COALESCE(EXCLUDED.mastery_success,natlas_validation_interactions.mastery_success),
     feedback_rating=COALESCE(EXCLUDED.feedback_rating,natlas_validation_interactions.feedback_rating),
-    failure_code=COALESCE(EXCLUDED.failure_code,natlas_validation_interactions.failure_code)`);
+    failure_code=CASE WHEN EXCLUDED.failure_code IS NOT NULL THEN EXCLUDED.failure_code WHEN EXCLUDED.answer_success=true OR EXCLUDED.asr_success=true THEN NULL ELSE natlas_validation_interactions.failure_code END`);
   return NextResponse.json({ok:true,validationMode});
  }catch(e){console.error('N-ATLAS evidence insert failed',e);return NextResponse.json({error:'Could not record N-ATLAS evidence'},{status:500})}
 }
