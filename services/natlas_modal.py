@@ -12,6 +12,8 @@ of the Federal Ministry of Communications, Innovation and Digital Economy.
 """
 
 import io
+import os
+import secrets
 import subprocess
 import time
 
@@ -26,6 +28,10 @@ app = modal.App("avora-natlas-asr")
 hf_secret = modal.Secret.from_name(
     "huggingface-secret",
     required_keys=["HF_TOKEN"],
+)
+endpoint_secret = modal.Secret.from_name(
+    "natlas-endpoint-secret",
+    required_keys=["NATLAS_ENDPOINT_TOKEN"],
 )
 
 image = (
@@ -93,6 +99,7 @@ def _decode_audio(audio_bytes: bytes):
     timeout=120,
     scaledown_window=60,
     min_containers=0,
+    secrets=[endpoint_secret],
 )
 @modal.fastapi_endpoint(method="POST")
 async def transcribe(request):
@@ -102,6 +109,12 @@ async def transcribe(request):
     from transformers import pipeline
 
     global _asr
+
+    expected = os.environ.get("NATLAS_ENDPOINT_TOKEN", "").strip()
+    authorization = request.headers.get("authorization", "")
+    supplied = authorization[7:].strip() if authorization.lower().startswith("bearer ") else ""
+    if not expected or not supplied or not secrets.compare_digest(supplied, expected):
+        raise HTTPException(status_code=401, detail="Unauthorized.")
 
     audio_bytes = await request.body()
 
