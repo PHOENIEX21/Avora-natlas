@@ -482,7 +482,9 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
     setNatlasTranscribing(true);setNatlasStatus('N-ATLAS is transcribing your question…');
     try{
      const form=new FormData();form.append('audio',blob,'avora-question.webm');
-     const d=await readJson(await fetch('/api/natlas/asr',{method:'POST',body:form}),'N-ATLAS');
+     const asrResponse=await fetch('/api/natlas/asr',{method:'POST',body:form});
+     const d:any=await asrResponse.json().catch(()=>({}));
+     if(!asrResponse.ok){const evidence={sessionKey:evidenceSessionKey(),interactionKey:evidenceKey('voice-failed'),asrModel:String(d.model||'NCAIR1/NigerianAccentedEnglish'),asrLatencyMs:Number.isFinite(Number(d.latencyMs))?Number(d.latencyMs):undefined};void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:'en-NG',classLevel,subject,topic,asrSuccess:false,failureCode:String(d.code||'NATLAS_ASR_ERROR').slice(0,80)});throw new Error(String(d.error||'N-ATLAS could not transcribe that recording.'))}
      const transcript=String(d.transcript||'').trim();
      if(!transcript)throw new Error('N-ATLAS returned no transcript.');
      setNatlasTranscript(transcript);setNatlasTranscriptEdited(false);
@@ -491,8 +493,7 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
      void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:String(d.language||'en-NG'),classLevel,subject,topic,asrSuccess:true});
      setAsk(transcript);setShowAskPanel(true);setNatlasStatus('N-ATLAS understood your question. AVORA is preparing an answer…');voiceSubmitRef.current=true;await askTeacher(transcript);
     }catch(e:any){
-     const evidence={sessionKey:evidenceSessionKey(),interactionKey:evidenceKey('voice-failed')};
-     void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:'en-NG',classLevel,subject,topic,asrSuccess:false,failureCode:'ASR_CLIENT_FAILURE'});
+     if(!String(e?.message||'').includes('N-ATLAS')){const evidence={sessionKey:evidenceSessionKey(),interactionKey:evidenceKey('voice-client-failed')};void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:'en-NG',classLevel,subject,topic,asrSuccess:false,failureCode:'ASR_CLIENT_FAILURE'})}
      setNatlasStatus(e.message||'N-ATLAS could not transcribe that recording. Please retry.');
     }finally{setNatlasTranscribing(false)}
    };
