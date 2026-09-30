@@ -32,6 +32,21 @@ function withGuidanceMeta(d:z.infer<typeof schema>,value:{reply:string;board:str
  return {...value,reguideStepId:safeReguideStep(d),assistanceLevel:level,requiresFreshEvidence:level!=='HINT'};
 }
 
+function deterministicMathAnswer(question:string){
+ let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/×/g,'*').replace(/÷/g,'/');
+ const nums:Record<string,string>={zero:'0',one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10',eleven:'11',twelve:'12',thirteen:'13',fourteen:'14',fifteen:'15',sixteen:'16',seventeen:'17',eighteen:'18',nineteen:'19',twenty:'20'};
+ for(const [w,n] of Object.entries(nums))q=q.replace(new RegExp('\\b'+w+'\\b','g'),n);
+ q=q.replace(/\bplus\b/g,'+').replace(/\bminus\b/g,'-').replace(/\b(times|multiplied by)\b/g,'*').replace(/\b(divided by|over)\b/g,'/');
+ const m=q.match(/(-?\d+(?:\.\d+)?)\s*([+\-*\/])\s*(-?\d+(?:\.\d+)?)/);
+ if(!m)return null;
+ const a=Number(m[1]),b=Number(m[3]),op=m[2];
+ if(op==='/'&&b===0)return {reply:'Division by zero is undefined. You cannot divide a number by 0.',board:['Division by 0 → undefined']};
+ const value=op==='+'?a+b:op==='-'?a-b:op==='*'?a*b:a/b;
+ if(!Number.isFinite(value))return null;
+ const symbol=op==='*'?'×':op==='/'?'÷':op;
+ return {reply:`${a} ${symbol} ${b} = ${value}. ${op==='+'?'Add the two numbers together.':op==='-'?'Subtract the second number from the first.':op==='*'?'Multiply the two numbers.':'Divide the first number by the second.'}`,board:[`${a} ${symbol} ${b} = ${value}`],source:{type:'DETERMINISTIC_MATH'}};
+}
+
 function localCurriculumAnswer(d:z.infer<typeof schema>){
  const normalize=(v:string)=>v.toLowerCase().replace(/[^a-z0-9°]+/g,' ').replace(/\s+/g,' ').trim();
  const aliases:Record<string,string>={questions:'equations',question:'equation',equations:'equation',fractions:'fraction',propositions:'preposition',proposition:'preposition'};
@@ -132,7 +147,7 @@ export async function POST(req:Request){
   const d=schema.parse(await req.json());
   const plan=getCurriculumTutorPlan(d.classLevel,d.subject,d.topic);
   const unit=plan?.units[d.unitIndex]||plan?.units[0];
-  const local=localCurriculumAnswer(d);
+  const calculation=deterministicMathAnswer(d.question);\n  if(calculation)return NextResponse.json({...withGuidanceMeta(d,{reply:calculation.reply,board:calculation.board},'HINT'),mode:'deterministic-math',knowledgeSource:calculation.source});\n  const local=localCurriculumAnswer(d);
   if(local)return NextResponse.json({...withGuidanceMeta(d,{reply:local.reply,board:local.board},'HINT'),mode:'grounded-curriculum-local',curriculumSource:local.source});
   const general=generalLearningAnswer(d.question);
   if(general)return NextResponse.json({...withGuidanceMeta(d,{reply:general.reply,board:general.board},'HINT'),mode:'general-learning-local',knowledgeSource:general.source});
