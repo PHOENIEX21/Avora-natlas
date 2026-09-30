@@ -30,6 +30,7 @@ const schema=z.object({
 export async function POST(req:Request){
  const session=await getSession();
  if(!session)return NextResponse.json({error:'Unauthorized'},{status:401});
+ if(session.role!=='STUDENT')return NextResponse.json({error:'Learner evidence is only accepted from student sessions.'},{status:403});
  let d:z.infer<typeof schema>;
  try{d=schema.parse(await req.json())}catch{return NextResponse.json({error:'Invalid evidence payload'},{status:400})}
  const validationMode=serverEvidenceMode();
