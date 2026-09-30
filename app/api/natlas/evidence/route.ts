@@ -53,7 +53,7 @@ export async function POST(req:Request){
     mastery_checked=EXCLUDED.mastery_checked OR natlas_validation_interactions.mastery_checked,
     mastery_success=COALESCE(EXCLUDED.mastery_success,natlas_validation_interactions.mastery_success),
     feedback_rating=COALESCE(EXCLUDED.feedback_rating,natlas_validation_interactions.feedback_rating),
-    failure_code=CASE WHEN EXCLUDED.failure_code IS NOT NULL THEN EXCLUDED.failure_code WHEN EXCLUDED.answer_success=true OR EXCLUDED.asr_success=true THEN NULL ELSE natlas_validation_interactions.failure_code END`);
+    failure_code=CASE WHEN EXCLUDED.failure_code IS NOT NULL THEN EXCLUDED.failure_code WHEN EXCLUDED.answer_success=true THEN NULL ELSE natlas_validation_interactions.failure_code END`);
   return NextResponse.json({ok:true,validationMode});
  }catch(e){console.error('N-ATLAS evidence insert failed',e);return NextResponse.json({error:'Could not record N-ATLAS evidence'},{status:500})}
 }
