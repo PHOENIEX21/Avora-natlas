@@ -235,7 +235,8 @@ export default function TutorClient(){
  const timer=useRef<number|null>(null);const utterance=useRef<SpeechSynthesisUtterance|null>(null);const started=useRef(false);
  const natlasRecorderRef=useRef<MediaRecorder|null>(null);const natlasChunksRef=useRef<Blob[]>([]);
  const natlasEvidenceRef=useRef<{sessionKey:string;interactionKey:string;asrModel?:string;asrLatencyMs?:number}|null>(null);
- const [natlasRecording,setNatlasRecording]=useState(false);const [natlasTranscribing,setNatlasTranscribing]=useState(false);const [natlasStatus,setNatlasStatus]=useState('');const voiceSubmitRef=useRef(false);const pausedRef=useRef(false);const playToken=useRef(0);const skipPlaybackEffect=useRef(false);
+ const lastNatlasEvidenceRef=useRef<{sessionKey:string;interactionKey:string;asrModel?:string;asrLatencyMs?:number}|null>(null);
+ const [natlasRecording,setNatlasRecording]=useState(false);const [natlasTranscribing,setNatlasTranscribing]=useState(false);const [natlasStatus,setNatlasStatus]=useState('');const [natlasTranscript,setNatlasTranscript]=useState('');const voiceSubmitRef=useRef(false);const pausedRef=useRef(false);const playToken=useRef(0);const skipPlaybackEffect=useRef(false);
  const [ask,setAsk]=useState('');const [asking,setAsking]=useState(false);const [chat,setChat]=useState<ChatTurn[]>([]);const [checkpoint,setCheckpoint]=useState('');const [checkpointReply,setCheckpointReply]=useState('');const [checkingPoint,setCheckingPoint]=useState(false);
  const [questionHelp,setQuestionHelp]=useState('');const [revealed,setRevealed]=useState<Feedback|null>(null);const [helping,setHelping]=useState(false);
  const [reguideStepId,setReguideStepId]=useState<string|null>(null);const [assistanceLevel,setAssistanceLevel]=useState<'HINT'|'RETEACH'|'ANSWER'|null>(null);const [freshEvidenceRequired,setFreshEvidenceRequired]=useState(false);
@@ -413,11 +414,12 @@ function explanationName(unit:any,index:number){const title=String(unit?.title||
   if(plan&&unitIndex<plan.units.length-1){let n=unitIndex+1;while(n<plan.units.length&&isNerdcObjectiveUnit(plan.units[n]))n++;if(n<plan.units.length){setUnitIndex(n);setEventIndex(0);setPhase('teach');pausedRef.current=false;setPaused(false);void saveProgress(n,cov,false)}else if(exerciseQuestions.length){startExercise();void saveProgress(unitIndex,cov,true)}else{setPhase('success');void saveProgress(unitIndex,cov,true);void logInteraction('LESSON_COMPLETE','','Topic teaching coverage completed.','COVERED')}}else if(exerciseQuestions.length){setExerciseIndex(0);setExerciseAnswer('');setExerciseFeedback(null);setExerciseCorrect(0);setExerciseFinished(false);setPhase('exercise');void saveProgress(unitIndex,cov,true);trackEvent('TUTOR_TOPIC_EXERCISE_STARTED',{subject,topic,exam,classLevel,questions:exerciseQuestions.length})}else{setPhase('success');void saveProgress(unitIndex,cov,true);void logInteraction('LESSON_COMPLETE','','Topic teaching coverage completed.','COVERED');trackEvent('TUTOR_LESSON_COMPLETED',{subject,topic,exam,classLevel,outcome:'COVERED'})}
  }
 
+ function markLatestVoiceMastery(success:boolean){const evidence=lastNatlasEvidenceRef.current;if(!evidence)return;void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:'en-NG',classLevel,subject,topic,asrSuccess:true,masteryChecked:true,masterySuccess:success})}
  async function checkExercise(){
   if(!exerciseQ||!exerciseAnswer||exerciseChecking||exerciseFeedback)return;
   if(!online){setError('Reconnect to let AVORA mark this exercise.');return}
   setExerciseChecking(true);setError('');
-  try{const d=await readJson(await fetch('/api/tutor/exercise-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({questionId:exerciseQ.id,answer:exerciseAnswer})}),'NERDC exercise');setExerciseFeedback(d);if(d.correct)setExerciseCorrect(v=>v+1)}catch(e:any){setError(e.message||'Could not mark this exercise.')}finally{setExerciseChecking(false)}
+  try{const d=await readJson(await fetch('/api/tutor/exercise-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({questionId:exerciseQ.id,answer:exerciseAnswer})}),'NERDC exercise');setExerciseFeedback(d);markLatestVoiceMastery(Boolean(d.correct));if(d.correct)setExerciseCorrect(v=>v+1)}catch(e:any){setError(e.message||'Could not mark this exercise.')}finally{setExerciseChecking(false)}
  }
  function nextExercise(){
   if(!exerciseFeedback)return;
@@ -436,7 +438,7 @@ ${d.feedback||''}
 
 ${d.correction||''}
 
-AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;setCheckpointReply(reply);applyGuidanceMeta({assistanceLevel:d.correct?'HINT':'RETEACH',requiresFreshEvidence:!d.correct});void logInteraction('CHECKPOINT',response,reply,d.correct?'CORRECT':'INCORRECT');if(Array.isArray(d.board)&&d.board.length)setExtraBoard(x=>[...x,...d.board].slice(-8))}catch(e:any){setCheckpointReply(e.message||'I could not check that just now. Try again.')}finally{setCheckingPoint(false)}
+AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;setCheckpointReply(reply);applyGuidanceMeta({assistanceLevel:d.correct?'HINT':'RETEACH',requiresFreshEvidence:!d.correct});void logInteraction('CHECKPOINT',response,reply,d.correct?'CORRECT':'INCORRECT');markLatestVoiceMastery(Boolean(d.correct));if(Array.isArray(d.board)&&d.board.length)setExtraBoard(x=>[...x,...d.board].slice(-8))}catch(e:any){setCheckpointReply(e.message||'I could not check that just now. Try again.')}finally{setCheckingPoint(false)}
  }
  function evidenceKey(prefix:string){return prefix+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)}
  async function recordNatlasEvidence(payload:Record<string,unknown>){
@@ -481,8 +483,9 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
      const d=await readJson(await fetch('/api/natlas/asr',{method:'POST',body:form}),'N-ATLAS');
      const transcript=String(d.transcript||'').trim();
      if(!transcript)throw new Error('N-ATLAS returned no transcript.');
+     setNatlasTranscript(transcript);
      const evidence={sessionKey:activeSessionKeyRef.current||evidenceKey('session'),interactionKey:evidenceKey('voice'),asrModel:String(d.model||'NCAIR1/NigerianAccentedEnglish'),asrLatencyMs:Number(d.latencyMs||0)};
-     natlasEvidenceRef.current=evidence;
+     natlasEvidenceRef.current=evidence;lastNatlasEvidenceRef.current=evidence;
      void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:String(d.language||'en-NG'),classLevel,subject,topic,asrSuccess:true});
      setAsk(transcript);setShowAskPanel(true);setNatlasStatus('N-ATLAS understood your question. AVORA is preparing an answer…');voiceSubmitRef.current=true;await askTeacher(transcript);
     }catch(e:any){
