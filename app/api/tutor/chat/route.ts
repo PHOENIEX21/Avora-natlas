@@ -126,9 +126,9 @@ export async function POST(req:Request){
   const general=generalLearningAnswer(d.question);
   if(general)return NextResponse.json({...withGuidanceMeta(d,{reply:general.reply,board:general.board},'HINT'),mode:'general-learning-local',knowledgeSource:general.source});
   if(isClearlyNonLearning(d.question))return NextResponse.json({...withGuidanceMeta(d,{reply:'AVORA is focused on learning. Ask me a school subject, study, exam, science, mathematics, English, computing or other educational question and I will help.',board:[]},'HINT'),mode:'learning-scope-local'});
-  if(!configuredAiProvider())return NextResponse.json({...withGuidanceMeta(d,fallbackReply(d),/model answer|full worked|teach this from my attempt/i.test(d.question)?'RETEACH':'HINT'),mode:'grounded-local'});
+  if(!configuredAiProvider())return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'}});
   const aiClaim=await claimAiRequest(session.userId,'TUTOR_CHAT');
-  if(!aiClaim.allowed)return NextResponse.json({...withGuidanceMeta(d,fallbackReply(d),'HINT'),mode:'budget-safe-local',aiLimit:aiClaim.reason});
+  if(!aiClaim.allowed)return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'},aiLimit:aiClaim.reason});
 
   const context={learner:{classLevel:d.classLevel,exam:d.exam},lesson:{subject:d.subject,topic:d.topic,unit:unit?{title:unit.title,terms:unit.terms,explain:unit.explain,example:unit.example,check:unit.check,why:unit.why,prerequisites:unit.prerequisites,outcomes:unit.outcomes,commonMistakes:unit.commonMistakes}:null},board:d.board,recent:d.recent,currentStepId:d.currentStepId,lessonSteps:d.lessonSteps};
   const ai=await aiStructured<any>({
@@ -138,7 +138,7 @@ export async function POST(req:Request){
     maxOutputTokens:1800,
     schema:{type:'object',additionalProperties:false,properties:{reply:{type:'string'},board:{type:'array',items:{type:'string'},maxItems:3},reguideStepId:{type:['string','null']},assistanceLevel:{type:'string',enum:['HINT','RETEACH','ANSWER']},requiresFreshEvidence:{type:'boolean'}},required:['reply','board','reguideStepId','assistanceLevel','requiresFreshEvidence']}
   });
-  if(!ai.ok){await completeAiRequest(aiClaim.eventId,null,'FAILED');console.warn('AVORA AI tutor unavailable',ai.error,ai.status||'',ai.detail||'');return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I could not generate a reliable answer just now, so I will not replace it with a generic ${d.topic} explanation. Please try the question again.`,board:[]},'HINT'),mode:'answer-unavailable',answerUnavailable:true});}
+  if(!ai.ok){await completeAiRequest(aiClaim.eventId,null,'FAILED');console.warn('AVORA AI tutor unavailable',ai.error,ai.status||'',ai.detail||'');return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'}});}
   await completeAiRequest(aiClaim.eventId,ai.usage,'COMPLETED');
   const parsed=ai.json as any;
   return NextResponse.json({...parsed,reguideStepId:safeReguideStep(d,parsed?.reguideStepId),mode:`ai-${ai.usage.provider}`});
