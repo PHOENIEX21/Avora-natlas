@@ -2,12 +2,14 @@ import fs from 'node:fs';
 const asr=fs.readFileSync('app/api/natlas/asr/route.ts','utf8');
 const client=fs.readFileSync('components/TutorClient.tsx','utf8');
 const evidence=fs.readFileSync('app/api/natlas/evidence/route.ts','utf8');
+const modal=fs.readFileSync('services/natlas_modal.py','utf8');
 const checks=[
  ['ASR requires signed-in AVORA session',asr.includes('getSession()')&&asr.includes("code:'UNAUTHORIZED'")],
  ['audio has upper bound',asr.includes('MAX_AUDIO_BYTES=8*1024*1024')],
  ['tiny/empty recordings are rejected',asr.includes('MIN_AUDIO_BYTES=900')&&asr.includes('audio.size<MIN_AUDIO_BYTES')],
  ['audio MIME allowlist exists',asr.includes('ALLOWED_TYPES')&&asr.includes('Unsupported audio format')],
  ['N-ATLAS upstream token stays server-side',asr.includes('process.env.NATLAS_ASR_TOKEN')&&!client.includes('NATLAS_ASR_TOKEN')],
+ ['Modal ASR rejects unauthenticated callers',modal.includes('NATLAS_ENDPOINT_TOKEN')&&modal.includes('compare_digest')&&modal.includes('status_code=401')],
  ['ASR upstream has bounded timeout',asr.includes('AbortSignal.timeout(120_000)')],
  ['ASR upstream bypasses response cache',asr.includes("cache:'no-store'")],
  ['provider is reported as N-ATLAS',asr.includes("provider:'N-ATLAS'")],
