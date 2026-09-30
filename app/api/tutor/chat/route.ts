@@ -108,7 +108,8 @@ function generalLearningAnswer(question:string){
   {keys:['quadrilateral','total angle'],reply:'The sum of the interior angles of a quadrilateral is 360°. One way to see this is to draw a diagonal: it divides the quadrilateral into two triangles, and 180° + 180° = 360°.'},
   {keys:['triangle','total angle'],reply:'The sum of the interior angles of a triangle is 180°.'}
  ];
- const padded=' '+q+' ';\n const hit=entries.find(e=>e.keys.some(k=>padded.includes(' '+k+' ')));
+ const padded=' '+q+' ';
+ const hit=entries.find(e=>e.keys.some(k=>padded.includes(' '+k+' ')));
  return hit?{reply:hit.reply,board:[],source:{type:'GENERAL_LEARNING'}}:null;
 }
 function isClearlyNonLearning(question:string){
