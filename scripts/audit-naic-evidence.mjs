@@ -15,6 +15,8 @@ const checks=[
  ['answer latency is recorded',tutor.includes('answerLatencyMs:Date.now()-answerStarted')],
  ['development is default during engineering',tutor.includes("validationMode:'DEVELOPMENT'")],
  ['evidence API restricts official modes',evidence.includes("z.enum(['DEVELOPMENT','PILOT','VALIDATION'])")],
+ ['official mode is assigned by server environment',evidence.includes('NATLAS_EVIDENCE_MODE')&&evidence.includes('const validationMode=serverEvidenceMode()')],
+ ['client cannot promote its own validation row',evidence.includes('Ignoring client evidence mode')&&evidence.includes('${validationMode}')],
  ['validation table separates modes',migration.includes("CHECK (validation_mode IN ('DEVELOPMENT','PILOT','VALIDATION'))")],
  ['dashboard counts validation only',dashboard.includes("validation_mode='VALIDATION'")],
  ['dashboard exposes failures',dashboard.includes('Failure evidence')],
