@@ -6,6 +6,7 @@ const evidence=read('app/api/natlas/evidence/route.ts');
 const migration=read('database/migrations/033_natlas_naic_evidence.sql');
 const dashboard=read('app/admin/natlas-evidence/page.tsx');
 const snapshot=read('app/api/admin/natlas-evidence/snapshot/route.ts');
+const exportRoute=read('app/api/admin/natlas-evidence/export/route.ts');
 
 const checks=[
  ['N-ATLAS ASR is the voice endpoint',tutor.includes("fetch('/api/natlas/asr'")],
@@ -21,6 +22,13 @@ const checks=[
  ['dashboard counts validation only',dashboard.includes("validation_mode='VALIDATION'")],
  ['dashboard exposes failures',dashboard.includes('Failure evidence')],
  ['snapshot counts validation only',snapshot.includes("validation_mode='VALIDATION'")],
+ ['voice evidence uses anonymous browser session key',tutor.includes("avora:natlas:evidence-session")&&tutor.includes('evidenceSessionKey()')],
+ ['learner can flag corrected N-ATLAS transcript',tutor.includes('transcriptCorrected:true')&&tutor.includes('Use my correction')],
+ ['voice interaction can receive mastery outcome',tutor.includes('markLatestVoiceMastery')&&tutor.includes('masteryChecked:true')],
+ ['dashboard exposes latency quality',dashboard.includes('ASR median / p95')&&dashboard.includes('Answer median / p95')],
+ ['dashboard exposes learning outcome',dashboard.includes('Mastery success')&&dashboard.includes('Transcript corrections')],
+ ['validation export is validation-only',exportRoute.includes("validation_mode='VALIDATION'")],
+ ['validation export excludes raw transcript and audio',!exportRoute.includes('raw_audio')&&!exportRoute.includes('transcript_text')],
  ['privacy boundary documented in schema',migration.includes('Never store raw audio')]
 ];
 
