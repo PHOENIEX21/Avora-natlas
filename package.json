@@ -88,7 +88,8 @@
     "audit:v14.9.1-tutor-ui": "node scripts/audit-v14.9.1-tutor-ui.mjs",
     "audit:v14.9.2-jss1-math-slides": "node --experimental-strip-types scripts/audit-v14.9.2-jss1-math-slides.mjs",
     "audit:naic-evidence": "node scripts/audit-naic-evidence.mjs",
-    "audit:natlas-tutor-reliability": "node scripts/audit-natlas-tutor-reliability.mjs"
+    "audit:natlas-tutor-reliability": "node scripts/audit-natlas-tutor-reliability.mjs",
+    "audit:natlas-boundary": "node scripts/audit-natlas-boundary.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
