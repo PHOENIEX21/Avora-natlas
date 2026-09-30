@@ -58,12 +58,17 @@ async function geminiStructured<T>(instructions:string,input:string,schema:any,m
   return {ok:false,error:'GEMINI_REQUEST_FAILED',provider:'gemini',status:response.status,detail:safeProviderError(raw)||undefined};
  }
  const raw:any=await response.json();
- const text=raw?.candidates?.[0]?.content?.parts?.map((p:any)=>p?.text||'').join('').trim();
- if(!text)return {ok:false,error:'GEMINI_EMPTY_RESPONSE',provider:'gemini'};
+ const candidate=raw?.candidates?.[0];
+ const text=candidate?.content?.parts?.map((p:any)=>p?.text||'').join('').trim();
+ if(!text)return {ok:false,error:'GEMINI_EMPTY_RESPONSE',provider:'gemini',detail:String(candidate?.finishReason||'').slice(0,80)||undefined};
  try{
   const json=JSON.parse(text) as T;const meta=raw.usageMetadata||{};
   return {ok:true,text,json,usage:{inputTokens:Number(meta.promptTokenCount||0),outputTokens:Number(meta.candidatesTokenCount||0),provider:'gemini',model,estimatedCostUsd:0}};
- }catch{return {ok:false,error:'GEMINI_INVALID_JSON',provider:'gemini'};}
+ }catch{
+  const finish=String(candidate?.finishReason||'UNKNOWN').slice(0,80);
+  const preview=text.replace(/[\r\n\t]+/g,' ').replace(/\s+/g,' ').slice(0,180);
+  return {ok:false,error:'GEMINI_INVALID_JSON',provider:'gemini',detail:`finish=${finish}; output=${preview}`};
+ }
 }
 
 async function openaiStructured<T>(instructions:string,input:string,schema:any,name:string,maxOutputTokens=180):Promise<AiResult<T>>{
