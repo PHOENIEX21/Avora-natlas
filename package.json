@@ -86,7 +86,8 @@
     "audit:v14.9-nerdc-official": "node scripts/audit-v14.9-nerdc-official.mjs",
     "audit:v14.9-authored-english-bank": "node --experimental-strip-types scripts/audit-v14.9-authored-jss2-english-bank.mjs",
     "audit:v14.9.1-tutor-ui": "node scripts/audit-v14.9.1-tutor-ui.mjs",
-    "audit:v14.9.2-jss1-math-slides": "node --experimental-strip-types scripts/audit-v14.9.2-jss1-math-slides.mjs"
+    "audit:v14.9.2-jss1-math-slides": "node --experimental-strip-types scripts/audit-v14.9.2-jss1-math-slides.mjs",
+    "audit:naic-evidence": "node scripts/audit-naic-evidence.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
