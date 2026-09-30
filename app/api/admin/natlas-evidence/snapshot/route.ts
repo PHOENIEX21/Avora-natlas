@@ -14,7 +14,15 @@ export async function POST(){
    COALESCE(ROUND(AVG(asr_latency_ms)),0)::int avg_asr_latency_ms,
    COUNT(*) FILTER (WHERE answer_success=true)::int answer_successes,
    COUNT(*) FILTER (WHERE answer_success=false)::int answer_failures,
-   COALESCE(ROUND(AVG(answer_latency_ms)),0)::int avg_answer_latency_ms
+   COALESCE(ROUND(AVG(answer_latency_ms)),0)::int avg_answer_latency_ms,
+   COALESCE(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY asr_latency_ms),0)::int median_asr_latency_ms,
+   COALESCE(PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY asr_latency_ms),0)::int p95_asr_latency_ms,
+   COALESCE(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY answer_latency_ms),0)::int median_answer_latency_ms,
+   COALESCE(PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY answer_latency_ms),0)::int p95_answer_latency_ms,
+   COUNT(*) FILTER (WHERE transcript_corrected=true)::int transcript_corrections,
+   COUNT(*) FILTER (WHERE mastery_checked=true)::int mastery_checks,
+   COUNT(*) FILTER (WHERE mastery_success=true)::int mastery_successes,
+   COALESCE(ROUND(AVG(feedback_rating)::numeric,2),0)::numeric avg_feedback
    FROM natlas_validation_interactions WHERE validation_mode='VALIDATION'`,1);
   const payload={capturedAt:new Date().toISOString(),scope:'VALIDATION_ONLY',...m};
   const label='NAIC evidence '+payload.capturedAt;
