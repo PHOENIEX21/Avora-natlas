@@ -8,7 +8,10 @@ const required=[
  ['app/api/admin/natlas-evidence/export/route.ts',["validation_mode='VALIDATION'","VALIDATION_ONLY","Content-Disposition"]],
  ['database/migrations/033_natlas_naic_evidence.sql',["natlas_validation_interactions","validation_mode","asr_latency_ms"]],
  ['database/migrations/034_natlas_evidence_snapshots.sql',["natlas_evidence_snapshots"]],
- ['NAIC-REQUIREMENT-TRACEABILITY.md',["minimum 50 genuine","3–5 minute","Seven submission components"]]
+ ['NAIC-REQUIREMENT-TRACEABILITY.md',["minimum 50 genuine","3–5 minute","Seven submission components"]],
+ ['NAIC-VALIDATION-PROTOCOL.md',["at least 50 genuine VALIDATION interactions","Never manufacture","Raw audio"]],
+ ['NATLAS-RUNTIME-DEPLOYMENT.md',["natlas-endpoint-secret","NATLAS_ASR_TOKEN","fail with 401"]],
+ ['NAIC-DEMO-RUNBOOK.md',["3–5 Minute","visible N-ATLAS transcript","Do not claim 50 interactions"]]
 ];
 let failed=0;
 for(const [file,needles] of required){const body=fs.readFileSync(file,'utf8');for(const needle of needles){const ok=body.includes(needle);console.log(ok?'PASS':'FAIL',file,'→',needle);if(!ok)failed++}}
