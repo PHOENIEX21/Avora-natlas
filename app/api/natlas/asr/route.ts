@@ -1,17 +1,21 @@
 import {NextResponse} from 'next/server';
+import {getSession} from '@/lib/auth';
 
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 
 const MAX_AUDIO_BYTES=8*1024*1024;
+const MIN_AUDIO_BYTES=900;
 const ALLOWED_TYPES=new Set(['audio/webm','audio/webm;codecs=opus','audio/ogg','audio/ogg;codecs=opus','audio/wav','audio/x-wav','audio/mpeg','audio/mp4','audio/flac','audio/x-flac','application/ogg']);
 
 export async function POST(req:Request){
  try{
+  const session=await getSession();
+  if(!session)return NextResponse.json({error:'Please sign in again.',code:'UNAUTHORIZED'},{status:401});
   const form=await req.formData();
   const audio=form.get('audio');
   if(!(audio instanceof File))return NextResponse.json({error:'Record or attach an audio sample first.'},{status:400});
-  if(audio.size===0||audio.size>MAX_AUDIO_BYTES)return NextResponse.json({error:'Audio must be between 1 byte and 8 MB.'},{status:400});
+  if(audio.size<MIN_AUDIO_BYTES||audio.size>MAX_AUDIO_BYTES)return NextResponse.json({error:'Recording is too short or too large. Record a clear question and try again.'},{status:400});
   const audioType=(audio.type||'').toLowerCase().replace(/\s/g,'');
   const baseAudioType=audioType.split(';')[0];
   if(audioType&&!ALLOWED_TYPES.has(audioType)&&!ALLOWED_TYPES.has(baseAudioType))return NextResponse.json({error:`Unsupported audio format: ${audio.type}`},{status:415});
@@ -21,7 +25,7 @@ export async function POST(req:Request){
   const token=process.env.NATLAS_ASR_TOKEN?.trim();
   if(token)headers.Authorization=`Bearer ${token}`;
   const started=Date.now();
-  const response=await fetch(endpoint,{method:'POST',headers,body:await audio.arrayBuffer(),signal:AbortSignal.timeout(120_000)});
+  const response=await fetch(endpoint,{method:'POST',headers,body:await audio.arrayBuffer(),signal:AbortSignal.timeout(120_000),cache:'no-store'});
   const latencyMs=Date.now()-started;
   const contentType=response.headers.get('content-type')||'';
   const payload:any=contentType.includes('application/json')?await response.json():{text:await response.text()};
