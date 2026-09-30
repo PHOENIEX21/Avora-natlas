@@ -12,6 +12,7 @@ const checks=[
  ['ASR upstream bypasses response cache',asr.includes("cache:'no-store'")],
  ['provider is reported as N-ATLAS',asr.includes("provider:'N-ATLAS'")],
  ['evidence endpoint requires session',evidence.includes('getSession()')&&evidence.includes("status:401")],
+ ['evidence endpoint accepts learner sessions only',evidence.includes("session.role!=='STUDENT'")&&evidence.includes('status:403')],
  ['evidence does not accept transcript text',!evidence.includes('transcript:z.')],
  ['evidence does not accept raw audio',!evidence.includes('audio:z.')],
  ['client records failures without raw learner content',client.includes("failureCode:'ASR_CLIENT_FAILURE'")&&!client.includes('transcript:transcript')]
