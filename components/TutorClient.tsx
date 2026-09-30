@@ -234,6 +234,7 @@ export default function TutorClient(){
  const [voiceChoices,setVoiceChoices]=useState<VoiceChoice[]>([]);const [voiceURI,setVoiceURI]=useState('');const [speechAvailable,setSpeechAvailable]=useState(true);const [narrationSegment,setNarrationSegment]=useState(0);const [narrationChar,setNarrationChar]=useState(0);const [syncing,setSyncing]=useState(false);
  const timer=useRef<number|null>(null);const utterance=useRef<SpeechSynthesisUtterance|null>(null);const started=useRef(false);
  const natlasRecorderRef=useRef<MediaRecorder|null>(null);const natlasChunksRef=useRef<Blob[]>([]);
+ const natlasEvidenceRef=useRef<{sessionKey:string;interactionKey:string;asrModel?:string;asrLatencyMs?:number}|null>(null);
  const [natlasRecording,setNatlasRecording]=useState(false);const [natlasTranscribing,setNatlasTranscribing]=useState(false);const [natlasStatus,setNatlasStatus]=useState('');const voiceSubmitRef=useRef(false);const pausedRef=useRef(false);const playToken=useRef(0);const skipPlaybackEffect=useRef(false);
  const [ask,setAsk]=useState('');const [asking,setAsking]=useState(false);const [chat,setChat]=useState<ChatTurn[]>([]);const [checkpoint,setCheckpoint]=useState('');const [checkpointReply,setCheckpointReply]=useState('');const [checkingPoint,setCheckingPoint]=useState(false);
  const [questionHelp,setQuestionHelp]=useState('');const [revealed,setRevealed]=useState<Feedback|null>(null);const [helping,setHelping]=useState(false);
@@ -437,6 +438,16 @@ ${d.correction||''}
 
 AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;setCheckpointReply(reply);applyGuidanceMeta({assistanceLevel:d.correct?'HINT':'RETEACH',requiresFreshEvidence:!d.correct});void logInteraction('CHECKPOINT',response,reply,d.correct?'CORRECT':'INCORRECT');if(Array.isArray(d.board)&&d.board.length)setExtraBoard(x=>[...x,...d.board].slice(-8))}catch(e:any){setCheckpointReply(e.message||'I could not check that just now. Try again.')}finally{setCheckingPoint(false)}
  }
+ function evidenceKey(prefix:string){return prefix+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)}
+ async function recordNatlasEvidence(payload:Record<string,unknown>){
+  try{await fetch('/api/natlas/evidence',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})}catch{}
+ }
+ function answerSourceFromTutor(d:any){
+  const raw=String(d?.knowledgeSource?.type||d?.curriculumSource?.type||'').toUpperCase();
+  if(['AVORA_CURRICULUM','AVORA_CONTEXT','GENERAL_LEARNING','DETERMINISTIC_MATH'].includes(raw))return raw;
+  if(String(d?.mode||'').startsWith('ai-'))return 'EXTERNAL_AI';
+  return 'NONE';
+ }
  async function toggleNatlasRecording(){
   if(natlasTranscribing)return;
   if(natlasRecording){
@@ -470,15 +481,23 @@ AVORA's worked solution:\n${d.solution||'No worked solution was returned.'}`;set
      const d=await readJson(await fetch('/api/natlas/asr',{method:'POST',body:form}),'N-ATLAS');
      const transcript=String(d.transcript||'').trim();
      if(!transcript)throw new Error('N-ATLAS returned no transcript.');
+     const evidence={sessionKey:activeSessionKeyRef.current||evidenceKey('session'),interactionKey:evidenceKey('voice'),asrModel:String(d.model||'NCAIR1/NigerianAccentedEnglish'),asrLatencyMs:Number(d.latencyMs||0)};
+     natlasEvidenceRef.current=evidence;
+     void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:String(d.language||'en-NG'),classLevel,subject,topic,asrSuccess:true});
      setAsk(transcript);setShowAskPanel(true);setNatlasStatus('N-ATLAS understood your question. AVORA is preparing an answer…');voiceSubmitRef.current=true;await askTeacher(transcript);
-    }catch(e:any){setNatlasStatus(e.message||'N-ATLAS could not transcribe that recording. Please retry.')}finally{setNatlasTranscribing(false)}
+    }catch(e:any){
+     const evidence={sessionKey:activeSessionKeyRef.current||evidenceKey('session'),interactionKey:evidenceKey('voice-failed')};
+     void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:'en-NG',classLevel,subject,topic,asrSuccess:false,failureCode:'ASR_CLIENT_FAILURE'});
+     setNatlasStatus(e.message||'N-ATLAS could not transcribe that recording. Please retry.');
+    }finally{setNatlasTranscribing(false)}
    };
    natlasRecorderRef.current=recorder;recorder.start(250);setNatlasRecording(true);setNatlasStatus('Listening clearly… speak naturally, then tap Stop when you finish.');
   }catch{setNatlasStatus('Microphone permission was not granted. Allow microphone access and try again.')}
  }
  async function askTeacher(presetQuestion?:string){
   const question=(presetQuestion||ask).trim();if(!question||(asking&&!voiceSubmitRef.current))return;voiceSubmitRef.current=false;if(!online){setChat((x:ChatTurn[])=>[...x,{role:'student' as const,text:question},{role:'teacher' as const,text:'You are offline. I saved your lesson position; reconnect and ask this again for a live answer.'}].slice(-30));setAsk('');return;}pause();setAsking(true);const recent=[...chat,{role:'student' as const,text:question}].slice(-30);const apiRecent=recent.slice(-8).map(turn=>({...turn,text:turn.text.slice(0,1200)}));setChat(recent);setAsk('');
-  try{const d=await readJson(await fetch('/api/tutor/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({subject,topic,classLevel,exam,unitIndex,question,board:[...(event?.lines||[]),...extraBoard],recent:apiRecent,currentStepId:event?.stepId,lessonSteps})}),'AVORA');applyGuidanceMeta(d);setChat((x:ChatTurn[])=>[...x,{role:'teacher' as const,text:String(d.reply||'')}].slice(-30));void logInteraction('QUESTION',question,String(d.reply||''),'ANSWERED');if(Array.isArray(d.board)&&d.board.length)setExtraBoard(x=>[...x,...d.board].slice(-6))}catch(e:any){setChat((x:ChatTurn[])=>[...x,{role:'teacher' as const,text:String(e.message||'I could not answer that just now. Ask me again.')}])}finally{setAsking(false)}
+  const answerStarted=Date.now();
+  try{const d=await readJson(await fetch('/api/tutor/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({subject,topic,classLevel,exam,unitIndex,question,board:[...(event?.lines||[]),...extraBoard],recent:apiRecent,currentStepId:event?.stepId,lessonSteps})}),'AVORA');applyGuidanceMeta(d);setChat((x:ChatTurn[])=>[...x,{role:'teacher' as const,text:String(d.reply||'')}].slice(-30));void logInteraction('QUESTION',question,String(d.reply||''),'ANSWERED');if(Array.isArray(d.board)&&d.board.length)setExtraBoard(x=>[...x,...d.board].slice(-6));const evidence=natlasEvidenceRef.current;if(evidence){void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:'en-NG',classLevel,subject,topic,asrSuccess:true,answerSource:answerSourceFromTutor(d),answerSuccess:!d.answerUnavailable,answerLatencyMs:Date.now()-answerStarted,failureCode:d.answerUnavailable?'ANSWER_UNAVAILABLE':undefined});natlasEvidenceRef.current=null}}catch(e:any){const evidence=natlasEvidenceRef.current;if(evidence){void recordNatlasEvidence({validationMode:'DEVELOPMENT',...evidence,language:'en-NG',classLevel,subject,topic,asrSuccess:true,answerSource:'NONE',answerSuccess:false,answerLatencyMs:Date.now()-answerStarted,failureCode:'TUTOR_REQUEST_FAILED'});natlasEvidenceRef.current=null}setChat((x:ChatTurn[])=>[...x,{role:'teacher' as const,text:String(e.message||'I could not answer that just now. Ask me again.')}])}finally{setAsking(false)}
  }
 
  if(loading)return <section className="tutor-loading"><b>AVORA is preparing your lesson…</b><span>Loading the topic map, learner context and reviewed questions.</span></section>;
