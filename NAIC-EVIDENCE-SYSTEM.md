@@ -22,3 +22,6 @@ Anonymous session/interaction keys, language, class/subject/topic, N-ATLAS ASR p
 
 ## Integrity
 Never convert DEVELOPMENT/PILOT rows into VALIDATION merely to increase totals. Official figures must be computed only from genuine VALIDATION interactions.
+
+## Server-controlled mode
+The browser cannot promote its own interactions into official validation. The server assigns every row from `NATLAS_EVIDENCE_MODE`. Keep it `DEVELOPMENT` while engineering, use `PILOT` for the pre-validation pilot, and switch deliberately to `VALIDATION` only for genuine documented real-user sessions. A client-supplied conflicting mode is ignored.
