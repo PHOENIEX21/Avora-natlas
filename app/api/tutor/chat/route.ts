@@ -33,38 +33,49 @@ function withGuidanceMeta(d:z.infer<typeof schema>,value:{reply:string;board:str
 }
 
 function localCurriculumAnswer(d:z.infer<typeof schema>){
- const q=' '+d.question.toLowerCase().replace(/[^a-z0-9°]+/g,' ')+' ';
- const stop=new Set(['what','whats','which','this','that','about','please','tell','give','example']);
- const tokens=(v:string)=>v.toLowerCase().replace(/[^a-z0-9°]+/g,' ').split(/\\s+/).filter(x=>x.length>2&&!stop.has(x));
+ const normalize=(v:string)=>v.toLowerCase().replace(/[^a-z0-9°]+/g,' ').replace(/\s+/g,' ').trim();
+ const aliases:Record<string,string>={questions:'equations',question:'equation',equations:'equation',fractions:'fraction',propositions:'preposition',proposition:'preposition'};
+ const stop=new Set(['what','whats','which','this','that','about','please','tell','give','example','examples','define','explain','understand','carefully','with','from','into','does','mean','means','show','teach','could','would','should']);
+ const stem=(x:string)=>aliases[x]||x.replace(/(ing|ed|es|s)$/,'');
+ const tokens=(v:string)=>normalize(v).split(/\s+/).filter(x=>x.length>2&&!stop.has(x)).map(stem);
+ const qwords=new Set(tokens(d.question));
  const candidates:any[]=[];
- const add=(plan:any,subject:string,topic:string,classLevel:string,priority:number)=>{
+ const add=(plan:any,subject:string,topic:string,classLevel:string,current:boolean)=>{
   if(!plan)return;
   for(const unit of plan.units||[]){
    const terms=Array.isArray(unit.terms)?unit.terms:[];
-   const matchedTerm=terms.find((p:any)=>Array.isArray(p)&&typeof p[0]==='string'&&q.includes(' '+p[0].toLowerCase().replace(/[^a-z0-9°]+/g,' ').trim()+' '));
-   const qwords=new Set(tokens(d.question));
-   const overlap=tokens([topic,unit.title,...terms.map((x:any)=>x?.[0]||'')].join(' ')).filter((x:string)=>qwords.has(x)).length;
-   const score=priority+(matchedTerm?12:0)+overlap;
-   if(score>priority)candidates.push({score,unit,subject,topic,classLevel,matchedTerm});
+   const searchable=[
+    topic,unit.title,unit.explain,unit.example,unit.check,unit.why,
+    ...(unit.prerequisites||[]),...(unit.outcomes||[]),...(unit.commonMistakes||[]),
+    ...terms.flatMap((x:any)=>Array.isArray(x)?[x[0],x[1]]:[]),
+    ...((unit.sourceSteps||[]) as string[])
+   ].filter(Boolean).join(' ');
+   const words=tokens(searchable);
+   const overlap=[...new Set(words.filter((x:string)=>qwords.has(x)))];
+   const topicWords=tokens(topic+' '+unit.title);
+   const topicOverlap=[...new Set(topicWords.filter((x:string)=>qwords.has(x)))];
+   const matchedTerm=terms.find((p:any)=>Array.isArray(p)&&typeof p[0]==='string'&&tokens(p[0]).some((x:string)=>qwords.has(x)));
+   const score=overlap.length*4+topicOverlap.length*8+(matchedTerm?12:0)+(current&&overlap.length?2:0);
+   if(score>0)candidates.push({score,unit,subject,topic,classLevel,matchedTerm,overlap});
   }
  };
- add(getCurriculumTutorPlan(d.classLevel,d.subject,d.topic),d.subject,d.topic,d.classLevel,20);
+ add(getCurriculumTutorPlan(d.classLevel,d.subject,d.topic),d.subject,d.topic,d.classLevel,true);
  for(const classLevel of Array.from(new Set([d.classLevel,'JSS1','JSS2','JSS3']))){
   for(const subject of ['Mathematics','English Language']){
    for(const topic of getOfficialTopicNames(classLevel,subject)){
     if(classLevel===d.classLevel&&subject===d.subject&&topic===d.topic)continue;
-    add(getCurriculumTutorPlan(classLevel,subject,topic),subject,topic,classLevel,classLevel===d.classLevel?8:2);
+    add(getCurriculumTutorPlan(classLevel,subject,topic),subject,topic,classLevel,false);
    }
   }
  }
  candidates.sort((a,b)=>b.score-a.score);
- const hit=candidates[0]; if(!hit||hit.score<10)return null;
+ const hit=candidates[0]; if(!hit||hit.score<8)return null;
  const u=hit.unit,term=hit.matchedTerm;
  const definition=term?String(term[1]||'').trim():'';
  const explain=String(u.explain||'').trim(),example=String(u.example||'').trim();
  const reply=[definition?(String(term[0])+' means '+definition+'.'):'',explain,example?('Example: '+example):''].filter(Boolean).join(' ');
  if(!reply)return null;
- return {reply,board:[term?(String(term[0])+' → '+definition):u.title,example].filter(Boolean).slice(0,3),source:{classLevel:hit.classLevel,subject:hit.subject,topic:hit.topic}};
+ return {reply,board:[term?(String(term[0])+' → '+definition):u.title,example].filter(Boolean).slice(0,3),source:{type:'AVORA_CURRICULUM',classLevel:hit.classLevel,subject:hit.subject,topic:hit.topic,unit:u.title}};
 }
 function generalLearningAnswer(question:string){
  const q=question.toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
@@ -82,7 +93,7 @@ function generalLearningAnswer(question:string){
   {keys:['quadrilateral','total angle'],reply:'The sum of the interior angles of a quadrilateral is 360°. One way to see this is to draw a diagonal: it divides the quadrilateral into two triangles, and 180° + 180° = 360°.'},
   {keys:['triangle','total angle'],reply:'The sum of the interior angles of a triangle is 180°.'}
  ];
- const hit=entries.find(e=>e.keys.some(k=>q.includes(k)));
+ const padded=' '+q+' ';\n const hit=entries.find(e=>e.keys.some(k=>padded.includes(' '+k+' ')));
  return hit?{reply:hit.reply,board:[],source:{type:'GENERAL_LEARNING'}}:null;
 }
 function isClearlyNonLearning(question:string){
