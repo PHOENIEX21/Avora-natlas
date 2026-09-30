@@ -148,7 +148,9 @@ export async function POST(req:Request){
   const d=schema.parse(await req.json());
   const plan=getCurriculumTutorPlan(d.classLevel,d.subject,d.topic);
   const unit=plan?.units[d.unitIndex]||plan?.units[0];
-  const calculation=deterministicMathAnswer(d.question);\n  if(calculation)return NextResponse.json({...withGuidanceMeta(d,{reply:calculation.reply,board:calculation.board},'HINT'),mode:'deterministic-math',knowledgeSource:calculation.source});\n  const local=localCurriculumAnswer(d);
+  const calculation=deterministicMathAnswer(d.question);
+  if(calculation)return NextResponse.json({...withGuidanceMeta(d,{reply:calculation.reply,board:calculation.board},'HINT'),mode:'deterministic-math',knowledgeSource:calculation.source});
+  const local=localCurriculumAnswer(d);
   if(local)return NextResponse.json({...withGuidanceMeta(d,{reply:local.reply,board:local.board},'HINT'),mode:'grounded-curriculum-local',curriculumSource:local.source});
   const general=generalLearningAnswer(d.question);
   if(general)return NextResponse.json({...withGuidanceMeta(d,{reply:general.reply,board:general.board},'HINT'),mode:'general-learning-local',knowledgeSource:general.source});
