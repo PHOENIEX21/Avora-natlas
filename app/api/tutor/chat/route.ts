@@ -2,7 +2,8 @@ import {requirePremiumFeature} from '@/lib/premiumAccess';
 import {NextResponse} from 'next/server';
 import {z} from 'zod';
 import {getSession} from '@/lib/auth';
-import {getCurriculumTutorPlan,getOfficialTopicNames} from '@/lib/curriculumTutor';
+import {getCurriculumTutorPlan} from '@/lib/curriculumTutor';
+import {masterTopics} from '@/lib/masterCurriculum';
 import {deepExamples} from '@/lib/deepTeaching';
 import {claimAiRequest,completeAiRequest} from '@/lib/aiCostGuard';
 import {aiStructured,configuredAiProvider} from '@/lib/aiGateway';
@@ -55,7 +56,7 @@ function deterministicMathAnswer(question:string){
 
 function localCurriculumAnswer(d:z.infer<typeof schema>){
  const normalize=(v:string)=>v.toLowerCase().replace(/[^a-z0-9°]+/g,' ').replace(/\s+/g,' ').trim();
- const aliases:Record<string,string>={questions:'equations',question:'equation',equations:'equation',fractions:'fraction',propositions:'preposition',proposition:'preposition'};
+ const aliases:Record<string,string>={questions:'equation',equations:'equation',fractions:'fraction'};
  const stop=new Set(['what','whats','which','this','that','about','please','tell','give','example','examples','define','explain','understand','carefully','with','from','into','does','mean','means','show','teach','could','would','should']);
  const stem=(x:string)=>aliases[x]||x.replace(/(ing|ed|es|s)$/,'');
  const tokens=(v:string)=>normalize(v).split(/\s+/).filter(x=>x.length>2&&!stop.has(x)).map(stem);
@@ -82,8 +83,9 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
  };
  add(getCurriculumTutorPlan(d.classLevel,d.subject,d.topic),d.subject,d.topic,d.classLevel,true);
  for(const classLevel of Array.from(new Set([d.classLevel,'JSS1','JSS2','JSS3']))){
-  for(const subject of ['Mathematics','English Language']){
-   for(const topic of getOfficialTopicNames(classLevel,subject)){
+  for(const subject of ['Mathematics','English Language'] as const){
+   for(const item of masterTopics(classLevel,subject)){
+    const topic=item.topic;
     if(classLevel===d.classLevel&&subject===d.subject&&topic===d.topic)continue;
     add(getCurriculumTutorPlan(classLevel,subject,topic),subject,topic,classLevel,false);
    }
@@ -94,7 +96,8 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
  const u=hit.unit,term=hit.matchedTerm;
  const definition=term?String(term[1]||'').trim():'';
  const explain=String(u.explain||'').trim(),example=String(u.example||'').trim();
- const reply=[definition?(String(term[0])+' means '+definition+'.'):'',explain,example?('Example: '+example):''].filter(Boolean).join(' ');
+ const concise=(value:string,max=900)=>{const clean=value.replace(/\s+/g,' ').trim();if(clean.length<=max)return clean;const cut=clean.slice(0,max);const stop=Math.max(cut.lastIndexOf('. '),cut.lastIndexOf('; '));return (stop>300?cut.slice(0,stop+1):cut).trim()};
+ const reply=[definition?(String(term[0])+' means '+concise(definition,420)+'.'):'',concise(explain,900),example?('Example: '+concise(example,520)):''].filter(Boolean).join(' ');
  if(!reply)return null;
  return {reply,board:[term?(String(term[0])+' → '+definition):u.title,example].filter(Boolean).slice(0,3),source:{type:'AVORA_CURRICULUM',classLevel:hit.classLevel,subject:hit.subject,topic:hit.topic,unit:u.title}};
 }
@@ -119,7 +122,8 @@ function generalLearningAnswer(question:string){
   {keys:['pronoun'],reply:'A pronoun is a word used in place of a noun or noun phrase. Examples include I, you, he, she, it, we and they.'},
   {keys:['norm'],reply:'A norm is an accepted standard or expected way of behaving in a group or society. For example, greeting people politely can be a social norm. In mathematics, “norm” can have a different technical meaning, so tell me the subject if that is what you mean.'},
   {keys:['simile'],reply:'A simile compares two unlike things using words such as “like” or “as”. Example: “Her smile is like sunshine.”'},
-  {keys:['metaphor'],reply:'A metaphor compares by saying one thing is another, without using “like” or “as”. Example: “Time is a thief.”'},
+  {keys:['simile and metaphor','simile metaphor'],reply:'A simile and a metaphor both make comparisons. A simile uses words such as “like” or “as”: “Her smile is like sunshine.” A metaphor states the comparison directly: “Time is a thief.” The quick test is: if the comparison uses “like” or “as”, it is usually a simile; if it says one thing is another, it is a metaphor.'},
+  {keys:['metaphor'],reply:'A metaphor compares by saying one thing is another, without using “like” or “as”. Example: “Time is a thief.” Compare it with a simile, which normally uses “like” or “as”.'},
   {keys:['photosynthesis'],reply:'Photosynthesis is the process by which green plants use light energy to make food from carbon dioxide and water. Oxygen is released as a product.'},
   {keys:['gravity'],reply:'Gravity is the force of attraction between masses. Near Earth, it pulls objects toward the ground and gives them weight.'},
   {keys:['computer'],reply:'A computer is an electronic device that accepts data, processes it according to instructions, stores data and produces information as output.'},
