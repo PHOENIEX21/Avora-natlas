@@ -19,9 +19,6 @@ jobs:
         id: naic-audit
         continue-on-error: true
         run: npm run audit:naic
-      - name: Re-run behavioral gate with diagnostics
-        if: steps.naic-audit.outcome == 'failure'
-        run: npm run test:natlas-behavior
       - name: Fail if NAIC audit failed
         if: steps.naic-audit.outcome == 'failure'
         run: exit 1
