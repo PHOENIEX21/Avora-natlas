@@ -249,6 +249,6 @@ export async function POST(req:Request){
   if(!ai.ok){await completeAiRequest(aiClaim.eventId,null,'FAILED');console.warn('AVORA AI tutor unavailable',ai.error,ai.status||'',ai.detail||'');return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'}});}
   await completeAiRequest(aiClaim.eventId,ai.usage,'COMPLETED');
   const parsed=ai.json as any;
-  return NextResponse.json({...parsed,reguideStepId:safeReguideStep(d,parsed?.reguideStepId),mode:`ai-${ai.usage.provider}`});
+  return NextResponse.json({...parsed,reguideStepId:safeReguideStep(d,parsed?.reguideStepId),mode:`ai-${ai.usage.provider}`,knowledgeSource:{type:'EXTERNAL_AI',provider:ai.usage.provider}});
  }catch(e){console.error('tutor chat',e);return NextResponse.json({error:'AVORA could not answer that just now. Please try again.'},{status:400});}
 }
