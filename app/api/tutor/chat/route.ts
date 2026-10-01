@@ -37,7 +37,7 @@ function deterministicMathAnswer(question:string){
  let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/(?<=[a-z])-(?=[a-z])/g,' ').replace(/×/g,'*').replace(/÷/g,'/');
  const nums:Record<string,string>={zero:'0',one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10',eleven:'11',twelve:'12',thirteen:'13',fourteen:'14',fifteen:'15',sixteen:'16',seventeen:'17',eighteen:'18',nineteen:'19',twenty:'20'};
  for(const [w,n] of Object.entries(nums))q=q.replace(new RegExp('\\b'+w+'\\b','g'),n);
- q=q.replace(/\bplus\b/g,'+').replace(/\bminus\b/g,'-').replace(/\b(times|multiplied by)\b/g,'*').replace(/\b(divided by|over)\b/g,'/');
+ q=q.replace(/\b(plus|add|added to)\b/g,'+').replace(/\b(minus|subtract|take away)\b/g,'-').replace(/\b(times|multiplied by|multiply by)\b/g,'*').replace(/\b(divided by|divide by|over)\b/g,'/');
  const eq=q.match(/\b([a-z])\s*([+\-])\s*(-?\d+(?:\.\d+)?)\s*(?:=|equals?)\s*(-?\d+(?:\.\d+)?)/i);
  if(eq){
   const variable=eq[1],n=Number(eq[3]),rhs=Number(eq[4]),op=eq[2];
@@ -61,8 +61,10 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
  const stem=(x:string)=>aliases[x]||x.replace(/(ing|ed|es|s)$/,'');
  const tokens=(v:string)=>normalize(v).split(/\s+/).filter(x=>x.length>2&&!stop.has(x)).map(stem);
  const qwords=new Set(tokens(d.question));
- const mathTerms=['place value','digit','number','tens','hundreds','thousands','fraction','decimal','integer','algebra','equation','geometry','factor','multiple','binary','base two'];
- const mathHint=mathTerms.some(term=>d.question.toLowerCase().includes(term));
+ const lowerQuestion=d.question.toLowerCase();
+ const mathTerms=['place value','digit','number','tens','hundreds','thousands','fraction','decimal','integer','algebra','equation','geometry','angle','shape','factor','multiple','hcf','lcm','binary','base two','addition','subtraction','multiplication','division','percentage','ratio'];
+ const englishTerms=['noun','verb','adjective','adverb','pronoun','grammar','vowel','consonant','oral english','speech','pronunciation','comprehension','essay','letter writing','phoneme','sound contrast'];
+ const hintedSubject=mathTerms.some(term=>lowerQuestion.includes(term))?'Mathematics':englishTerms.some(term=>lowerQuestion.includes(term))?'English Language':null;
  const candidates:any[]=[];
  const add=(plan:any,subject:string,topic:string,classLevel:string,current:boolean)=>{
   if(!plan)return;
@@ -79,7 +81,9 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
    const topicWords=tokens(topic+' '+unit.title);
    const topicOverlap=[...new Set(topicWords.filter((x:string)=>qwords.has(x)))];
    const matchedTerm=terms.find((p:any)=>Array.isArray(p)&&typeof p[0]==='string'&&tokens(p[0]).some((x:string)=>qwords.has(x)));
-   const score=overlap.length*4+topicOverlap.length*8+(matchedTerm?12:0)+(current&&overlap.length?2:0);
+   const exactTopic=normalize(topic).length>2&&normalize(d.question).includes(normalize(topic));
+   const exactUnit=normalize(unit.title||'').length>2&&normalize(d.question).includes(normalize(unit.title||''));
+   const score=overlap.length*4+topicOverlap.length*8+(matchedTerm?12:0)+(exactTopic?30:0)+(exactUnit?24:0)+(current&&overlap.length?2:0);
    if(score>0)candidates.push({score,unit,subject,topic,classLevel,matchedTerm,overlap});
   }
  };
@@ -94,7 +98,7 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
   }
  }
  candidates.sort((a,b)=>b.score-a.score);
- const ranked=mathHint?candidates.filter(x=>x.subject==='Mathematics'):candidates;
+ const ranked=hintedSubject?candidates.filter(x=>x.subject===hintedSubject):candidates;
  const hit=ranked[0]; if(!hit||hit.score<12)return null;
  const u=hit.unit,term=hit.matchedTerm;
  const definition=term?String(term[1]||'').trim():'';
@@ -107,7 +111,7 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
 function focusedLearningAnswer(d:z.infer<typeof schema>){
  const q=d.question.toLowerCase();
  if(/\bplace\s+value\b/.test(q)){
-  return {reply:'Place value tells us the value of a digit because of the position it occupies in a number. Starting from the right, the places are ones, tens, hundreds, thousands, ten-thousands, hundred-thousands, millions, and so on. For example, in 3,472: 2 is in the ones place, so its value is 2; 7 is in the tens place, so its value is 70; 4 is in the hundreds place, so its value is 400; and 3 is in the thousands place, so its value is 3,000. Therefore 3,472 = 3,000 + 400 + 70 + 2. Notice the difference between a digit and its place value: the digit is 4, but in 3,472 its place value is 400. To find any digit’s place value, identify its position, then multiply the digit by the value of that position. Example: in 58,216, the digit 8 is in the thousands place, so its place value is 8,000. Your turn: in 6,351, what is the place value of 3?',board:['3,472 → 3 thousands | 4 hundreds | 7 tens | 2 ones','3,472 = 3,000 + 400 + 70 + 2','Your turn: value of 3 in 6,351?'],source:{type:'GENERAL_LEARNING'}};
+  return {reply:'Place value tells us the value of a digit because of the position it occupies in a number. Starting from the right, the places are ones, tens, hundreds, thousands, ten-thousands, hundred-thousands, millions, and so on. For example, in 3,472: 2 is in the ones place, so its value is 2; 7 is in the tens place, so its value is 70; 4 is in the hundreds place, so its value is 400; and 3 is in the thousands place, so its value is 3,000. Therefore 3,472 = 3,000 + 400 + 70 + 2. Notice the difference between a digit and its place value: the digit is 4, but in 3,472 its place value is 400. To find any digit’s place value, identify its position, then multiply the digit by the value of that position. Example: in 58,216, the digit 8 is in the thousands place, so its place value is 8,000. Your turn: in 6,351, what is the place value of 3?',board:['3,472 → 3 thousands | 4 hundreds | 7 tens | 2 ones','3,472 = 3,000 + 400 + 70 + 2','Your turn: value of 3 in 6,351?'],source:{type:'GENERAL_LEARNING',subject:'Mathematics',concept:'Place Value'}};
  }
  if(/simultaneous/.test(q)&&/elimination/.test(q)){
   return {reply:'Elimination solves two equations together by removing one unknown. Example: x + y = 7 and x - y = 1. Add the equations: (x + y) + (x - y) = 7 + 1, so 2x = 8 and x = 4. Substitute x = 4 into x + y = 7: 4 + y = 7, so y = 3. Check in both original equations: 4 + 3 = 7 and 4 - 3 = 1. Therefore x = 4 and y = 3. If the coefficients do not already cancel, first multiply one or both equations so one variable has equal and opposite coefficients, then add the equations.',board:['x + y = 7','x - y = 1','Add → 2x = 8 → x = 4; then y = 3'],source:{type:'GENERAL_LEARNING'}};
