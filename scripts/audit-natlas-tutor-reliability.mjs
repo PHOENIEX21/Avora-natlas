@@ -6,7 +6,7 @@ const checks=[
  ['curriculum responses are bounded',route.includes("const concise=(value:string,max=900)")],
  ['deterministic math precedes retrieval',route.indexOf('const calculation=deterministicMathAnswer')<route.indexOf('const local=localCurriculumAnswer')],
  ['focused follow-up precedes broad retrieval',route.indexOf('const focused=focusedLearningAnswer')<route.indexOf('const local=localCurriculumAnswer')],
- ['curriculum precedes general knowledge',route.indexOf('const local=localCurriculumAnswer')<route.indexOf('const general=generalLearningAnswer')],
+ ['exact local knowledge precedes fuzzy curriculum',route.indexOf('const general=generalLearningAnswer')<route.indexOf('const local=localCurriculumAnswer')],
  ['unavailable answer remains truthful',route.includes("knowledgeSource:{type:'NONE'}")&&route.includes('answerUnavailable:true')],
  ['combined simile/metaphor teaching exists',route.includes("simile and metaphor")&&route.includes("both make comparisons")],
  ['source provenance returned for curriculum',route.includes("type:'AVORA_CURRICULUM'")],
