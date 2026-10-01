@@ -15,5 +15,14 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run audit:naic\n        id: naic-audit\n        continue-on-error: true\n      - name: Re-run behavioral gate with diagnostics\n        if: steps.naic-audit.outcome == 'failure'\n        run: npm run test:natlas-behavior\n      - name: Fail if NAIC audit failed\n        if: steps.naic-audit.outcome == 'failure'\n        run: exit 1
+      - name: Run NAIC audit
+        id: naic-audit
+        continue-on-error: true
+        run: npm run audit:naic
+      - name: Re-run behavioral gate with diagnostics
+        if: steps.naic-audit.outcome == 'failure'
+        run: npm run test:natlas-behavior
+      - name: Fail if NAIC audit failed
+        if: steps.naic-audit.outcome == 'failure'
+        run: exit 1
       - run: npm run typecheck
