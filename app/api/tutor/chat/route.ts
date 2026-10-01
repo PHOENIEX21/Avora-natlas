@@ -106,6 +106,9 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
 }
 function focusedLearningAnswer(d:z.infer<typeof schema>){
  const q=d.question.toLowerCase();
+ if(/\bplace\s+value\b/.test(q)){
+  return {reply:'Place value tells us the value of a digit because of the position it occupies in a number. Starting from the right, the places are ones, tens, hundreds, thousands, ten-thousands, hundred-thousands, millions, and so on. For example, in 3,472: 2 is in the ones place, so its value is 2; 7 is in the tens place, so its value is 70; 4 is in the hundreds place, so its value is 400; and 3 is in the thousands place, so its value is 3,000. Therefore 3,472 = 3,000 + 400 + 70 + 2. Notice the difference between a digit and its place value: the digit is 4, but in 3,472 its place value is 400. To find any digit’s place value, identify its position, then multiply the digit by the value of that position. Example: in 58,216, the digit 8 is in the thousands place, so its place value is 8,000. Your turn: in 6,351, what is the place value of 3?',board:['3,472 → 3 thousands | 4 hundreds | 7 tens | 2 ones','3,472 = 3,000 + 400 + 70 + 2','Your turn: value of 3 in 6,351?'],source:{type:'GENERAL_LEARNING'}};
+ }
  if(/simultaneous/.test(q)&&/elimination/.test(q)){
   return {reply:'Elimination solves two equations together by removing one unknown. Example: x + y = 7 and x - y = 1. Add the equations: (x + y) + (x - y) = 7 + 1, so 2x = 8 and x = 4. Substitute x = 4 into x + y = 7: 4 + y = 7, so y = 3. Check in both original equations: 4 + 3 = 7 and 4 - 3 = 1. Therefore x = 4 and y = 3. If the coefficients do not already cancel, first multiply one or both equations so one variable has equal and opposite coefficients, then add the equations.',board:['x + y = 7','x - y = 1','Add → 2x = 8 → x = 4; then y = 3'],source:{type:'GENERAL_LEARNING'}};
  }
