@@ -3,7 +3,7 @@ import {getStudentAccessTier} from '@/lib/billing';
 import type {Session} from '@/lib/auth';
 
 export function competitionDevelopmentAccessEnabled(){
- return process.env.NATLAS_EVIDENCE_MODE==='DEVELOPMENT' && process.env.VERCEL_ENV!=='production';
+ return process.env.NATLAS_EVIDENCE_MODE==='DEVELOPMENT' && process.env.VERCEL_ENV==='preview';
 }
 
 export async function requirePremiumFeature(session:Session|null,feature:string){
