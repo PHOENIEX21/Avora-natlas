@@ -100,7 +100,7 @@ def _decode_audio(audio_bytes: bytes):
     timeout=120,
     scaledown_window=60,
     min_containers=0,
-    secrets=[endpoint_secret],
+    secrets=[endpoint_secret, hf_secret],
 )
 @modal.fastapi_endpoint(method="POST")
 async def transcribe(request: Request):
@@ -133,11 +133,16 @@ async def transcribe(request: Request):
     if _asr is None:
         device = 0 if torch.cuda.is_available() else -1
         dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+        hf_token = os.environ.get("HF_TOKEN", "").strip()
+        if not hf_token:
+            raise HTTPException(status_code=503, detail="N-ATLAS model authentication is not configured.")
+
         _asr = pipeline(
             "automatic-speech-recognition",
             model=MODEL_ID,
             device=device,
-            torch_dtype=dtype,
+            dtype=dtype,
+            token=hf_token,
         )
 
     started = time.perf_counter()
