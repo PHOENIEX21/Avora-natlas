@@ -99,7 +99,13 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
  }
  candidates.sort((a,b)=>b.score-a.score);
  const ranked=hintedSubject?candidates.filter(x=>x.subject===hintedSubject):candidates;
- const hit=ranked[0]; if(!hit||hit.score<12)return null;
+ const hit=ranked[0];
+ if(!hit)return null;
+ // Never let a few generic overlapping words hijack a learner's question.
+ // Cross-topic retrieval must have a strong topic/unit/term signal; otherwise
+ // defer to the general learning/AI layer or return a truthful unavailable answer.
+ const strongTopic=hit.score>=24&&(hit.overlap?.length>=2||hit.matchedTerm);
+ if(hit.score<12||(!strongTopic&&hit.score<30))return null;
  const u=hit.unit,term=hit.matchedTerm;
  const definition=term?String(term[1]||'').trim():'';
  const explain=String(u.explain||'').trim(),example=String(u.example||'').trim();
@@ -222,10 +228,10 @@ export async function POST(req:Request){
   const focused=focusedLearningAnswer(d);
   if(focused)return NextResponse.json({...withGuidanceMeta(d,{reply:focused.reply,board:focused.board},'HINT'),mode:'focused-learning-local',knowledgeSource:focused.source});
   if(isClearlyNonLearning(d.question))return NextResponse.json({...withGuidanceMeta(d,{reply:'AVORA is focused on learning. Ask me a school subject, study, exam, science, mathematics, English, computing or other educational question and I will help.',board:[]},'HINT'),mode:'learning-scope-local'});
-  const local=localCurriculumAnswer(d);
-  if(local)return NextResponse.json({...withGuidanceMeta(d,{reply:local.reply,board:local.board},'HINT'),mode:'grounded-curriculum-local',curriculumSource:local.source});
   const general=generalLearningAnswer(d.question);
   if(general)return NextResponse.json({...withGuidanceMeta(d,{reply:general.reply,board:general.board},'HINT'),mode:'general-learning-local',knowledgeSource:general.source});
+  const local=localCurriculumAnswer(d);
+  if(local)return NextResponse.json({...withGuidanceMeta(d,{reply:local.reply,board:local.board},'HINT'),mode:'grounded-curriculum-local',curriculumSource:local.source});
   if(!configuredAiProvider())return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'}});
   const aiClaim=await claimAiRequest(session.userId,'TUTOR_CHAT');
   if(!aiClaim.allowed)return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'},aiLimit:aiClaim.reason});
