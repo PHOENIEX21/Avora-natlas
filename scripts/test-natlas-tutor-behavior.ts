@@ -3,7 +3,7 @@ import ts from 'typescript';
 import vm from 'node:vm';
 const source=fs.readFileSync('app/api/tutor/chat/route.ts','utf8');
 const extract=(name:string,endMarker:string)=>{const s=source.indexOf('export function '+name);const e=source.indexOf(endMarker,s);if(s<0||e<0)throw new Error('handler '+name+' not found');return source.slice(s,e).replace('export function ','function ')};
-const block=extract('deterministicMathAnswer','function localCurriculumAnswer')+extract('focusedLearningAnswer','function isClearlyNonLearning')+extract('generalLearningAnswer','export async function POST');
+const block=extract('deterministicMathAnswer','function localCurriculumAnswer')+extract('focusedLearningAnswer','function isClearlyNonLearning')+extract('generalLearningAnswer','function isClearlyNonLearning');
 const js=ts.transpileModule(block,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;
 const sandbox:any={};vm.createContext(sandbox);vm.runInContext(js+';this.deterministicMathAnswer=deterministicMathAnswer;this.focusedLearningAnswer=focusedLearningAnswer;this.generalLearningAnswer=generalLearningAnswer;',sandbox);
 const {deterministicMathAnswer,focusedLearningAnswer,generalLearningAnswer}=sandbox;
