@@ -15,11 +15,5 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Run NAIC audit
-        id: naic-audit
-        continue-on-error: true
-        run: npm run audit:naic
-      - name: Fail if NAIC audit failed
-        if: steps.naic-audit.outcome == 'failure'
-        run: exit 1
+      - run: npm run audit:naic
       - run: npm run typecheck
