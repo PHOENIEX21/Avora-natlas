@@ -1,4 +1,4 @@
-import {deterministicMathAnswer,focusedLearningAnswer,generalLearningAnswer} from '../app/api/tutor/chat/route.ts';
+import {deterministicMathAnswer,focusedLearningAnswer,generalLearningAnswer} from '../app/api/tutor/chat/route';
 const d=(question:string)=>({question,subject:'Mathematics',topic:'Algebra',classLevel:'JSS2',exam:'BECE',unitIndex:0,board:[],recent:[],lessonSteps:[]});
 const cases:[string,()=>boolean][]=[
  ['70 x 80 = 5600',()=>deterministicMathAnswer('what is 70 x 80?')?.reply.includes('5600')===true],
