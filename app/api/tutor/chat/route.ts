@@ -110,6 +110,17 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
 }
 function focusedLearningAnswer(d:z.infer<typeof schema>){
  const q=d.question.toLowerCase();
+ const money=q.match(/(?:have|had|got|with)\s*(?:₦|\$|ngn|naira)?\s*(\d+(?:\.\d+)?).*?(?:spent|spend|used|paid)\s*(?:₦|\$|ngn|naira)?\s*(\d+(?:\.\d+)?)/i);
+ if(money){
+  const start=Number(money[1]),spent=Number(money[2]),left=start-spent;
+  return {reply:`You started with ${start} and spent ${spent}. To find how much is left, subtract the amount spent from the starting amount: ${start} − ${spent} = ${left}. So you have ${left} left.`,board:[`Start: ${start}`,`Spent: ${spent}`,`Left: ${start} − ${spent} = ${left}`],source:{type:'DETERMINISTIC_MATH',concept:'Money subtraction'}};
+ }
+ const linear=q.match(/\b(\d*)\s*x\s*(plus|minus|\+|-)\s*(\d+(?:\.\d+)?)\s*(?:equals?|=)\s*(-?\d+(?:\.\d+)?)/i);
+ if(linear){
+  const a=Number(linear[1]||1),op=linear[2],b=Number(linear[3]),rhs=Number(linear[4]);
+  const after=op==='minus'||op==='-'?rhs+b:rhs-b, x=after/a;
+  return {reply:`Solve ${a}x ${op==='minus'||op==='-'?'−':'+'} ${b} = ${rhs}. First isolate the term containing x. ${op==='minus'||op==='-'?'Add':'Subtract'} ${b} on both sides, giving ${a}x = ${after}. Now divide both sides by ${a}: x = ${after} ÷ ${a} = ${x}. Check by substituting x = ${x} into the original equation: ${a}×${x} ${op==='minus'||op==='-'?'−':'+'} ${b} = ${rhs}. Therefore x = ${x}.`,board:[`${a}x ${op==='minus'||op==='-'?'−':'+'} ${b} = ${rhs}`,`${a}x = ${after}`,`x = ${x} ✓`],source:{type:'DETERMINISTIC_MATH',concept:'Linear equation'}};
+ }
  if(/\b(binary|base two|base 2)\b/.test(q)){
   return {reply:'Binary, or base two, is a number system that uses only the digits 0 and 1. Each position has a place value that is a power of 2: from right to left, 2⁰=1, 2¹=2, 2²=4, 2³=8, 2⁴=16, and so on. To convert binary to decimal, multiply each binary digit by its place value and add. Example: 10001₂ = 1×2⁴ + 0×2³ + 0×2² + 0×2¹ + 1×2⁰ = 16 + 1 = 17₁₀. To convert decimal to binary, repeatedly divide by 2, record each remainder, and read the remainders from bottom to top. Binary arithmetic also includes addition, subtraction and multiplication. In binary addition: 0+0=0, 0+1=1, 1+0=1, and 1+1=10₂, so write 0 and carry 1. Example: 101₂ + 11₂ = 1000₂. The main skills are reading place values, converting between binary and decimal, and performing binary operations. We can take them one at a time.',board:['Binary uses 0 and 1','Place values: 1, 2, 4, 8, 16, ...','10001₂ = 16 + 1 = 17₁₀'],source:{type:'GENERAL_LEARNING',subject:'Mathematics',concept:'Binary / Base Two'}};
  }
