@@ -12,6 +12,7 @@ const checks=[
  ['source provenance returned for curriculum',route.includes("type:'AVORA_CURRICULUM'")],
  ['external AI remains after zero-cost grounded routes',route.indexOf('configuredAiProvider()')>route.indexOf('generalLearningAnswer(d.question)')],
  ['spoken division normalization is deterministic',route.includes("divided by|divide by|divide|divided|diffide|define")&&route.includes("replace(/\\bover\\b/g,'/')")],
+ ['multiplication x normalization is numeric-context only',route.includes("replace(/(?<=\\d)\\s*x\\s*(?=\\d)/gi,'*')")&&!route.includes("replace(/[×xX]/g,'*')")],
  ['math subject boundary exists',route.includes("hintedSubject")&&route.includes("'Mathematics'")],
  ['english subject boundary exists',route.includes("englishTerms")&&route.includes("'English Language'")],
  ['exact curriculum matches receive ranking boost',route.includes('exactTopic?30')&&route.includes('exactUnit?24')],
