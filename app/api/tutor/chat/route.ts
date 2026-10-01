@@ -133,7 +133,7 @@ function focusedLearningAnswer(d:z.infer<typeof schema>){
   const start=Number(money[1]),spent=Number(money[2]),left=start-spent;
   return {reply:`You started with ${start} and spent ${spent}. To find how much is left, subtract the amount spent from the starting amount: ${start} − ${spent} = ${left}. So you have ${left} left.`,board:[`Start: ${start}`,`Spent: ${spent}`,`Left: ${start} − ${spent} = ${left}`],source:{type:'DETERMINISTIC_MATH',concept:'Money subtraction'}};
  }
- const linear=q.match(/\b(\d*)\s*x\s*(plus|minus|\+|-)\s*(\d+(?:\.\d+)?)\s*(?:equals?|=)\s*(-?\d+(?:\.\d+)?)/i);
+ const linear=q.match(/\b(\d*)\s*x\s*(plus|minus|\+|-)\s*(\d+(?:\.\d+)?)\s*(?:(?:is\s+)?equal(?:s)?\s+to|equals?|=)\s*(-?\d+(?:\.\d+)?)/i);
  if(linear){
   const a=Number(linear[1]||1),op=linear[2],b=Number(linear[3]),rhs=Number(linear[4]);
   const after=op==='minus'||op==='-'?rhs+b:rhs-b, x=after/a;
