@@ -1,4 +1,12 @@
-import fs from 'node:fs';\nimport ts from 'typescript';\nimport vm from 'node:vm';\nconst source=fs.readFileSync('app/api/tutor/chat/route.ts','utf8');\nconst start=source.indexOf('export function deterministicMathAnswer');\nconst end=source.indexOf('export async function POST');\nif(start<0||end<0)throw new Error('Tutor handler block not found');\nlet block=source.slice(start,end).replaceAll('export function ','function ');\nconst js=ts.transpileModule(block,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;\nconst sandbox:any={};vm.createContext(sandbox);vm.runInContext(js+';this.deterministicMathAnswer=deterministicMathAnswer;this.focusedLearningAnswer=focusedLearningAnswer;this.generalLearningAnswer=generalLearningAnswer;',sandbox);\nconst {deterministicMathAnswer,focusedLearningAnswer,generalLearningAnswer}=sandbox;
+import fs from 'node:fs';
+import ts from 'typescript';
+import vm from 'node:vm';
+const source=fs.readFileSync('app/api/tutor/chat/route.ts','utf8');
+const extract=(name:string,endMarker:string)=>{const s=source.indexOf('export function '+name);const e=source.indexOf(endMarker,s);if(s<0||e<0)throw new Error('handler '+name+' not found');return source.slice(s,e).replace('export function ','function ')};
+const block=extract('deterministicMathAnswer','function localCurriculumAnswer')+extract('focusedLearningAnswer','function isClearlyNonLearning')+extract('generalLearningAnswer','export async function POST');
+const js=ts.transpileModule(block,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;
+const sandbox:any={};vm.createContext(sandbox);vm.runInContext(js+';this.deterministicMathAnswer=deterministicMathAnswer;this.focusedLearningAnswer=focusedLearningAnswer;this.generalLearningAnswer=generalLearningAnswer;',sandbox);
+const {deterministicMathAnswer,focusedLearningAnswer,generalLearningAnswer}=sandbox;
 const d=(question:string)=>({question,subject:'Mathematics',topic:'Algebra',classLevel:'JSS2',exam:'BECE',unitIndex:0,board:[],recent:[],lessonSteps:[]});
 const cases:[string,()=>boolean][]=[
  ['70 x 80 = 5600',()=>deterministicMathAnswer('what is 70 x 80?')?.reply.includes('5600')===true],
