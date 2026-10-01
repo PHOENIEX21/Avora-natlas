@@ -34,7 +34,7 @@ function withGuidanceMeta(d:z.infer<typeof schema>,value:{reply:string;board:str
 }
 
 function deterministicMathAnswer(question:string){
- let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/(?<=[a-z])-(?=[a-z])/g,' ').replace(/×/g,'*').replace(/÷/g,'/');
+ let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/(?<=[a-z])-(?=[a-z])/g,' ').replace(/[×xX]/g,'*').replace(/÷/g,'/');
  const nums:Record<string,string>={zero:'0',one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10',eleven:'11',twelve:'12',thirteen:'13',fourteen:'14',fifteen:'15',sixteen:'16',seventeen:'17',eighteen:'18',nineteen:'19',twenty:'20'};
  for(const [w,n] of Object.entries(nums))q=q.replace(new RegExp('\\b'+w+'\\b','g'),n);
  q=q.replace(/\b(plus|add|added to)\b/g,'+').replace(/\b(minus|subtract|take away)\b/g,'-').replace(/\b(times|multiplied by|multiply by)\b/g,'*').replace(/\b(divided by|divide by|divide|divided|diffide|define)(?:\s+by)?\b/g,'/').replace(/\bover\b/g,'/');
@@ -110,6 +110,18 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
 }
 function focusedLearningAnswer(d:z.infer<typeof schema>){
  const q=d.question.toLowerCase();
+ const numberWords=q.match(/\b(\d{1,3}(?:,\d{3})+)\b.*\b(?:in words|to words|write.*words|read.*number)\b/i);
+ if(numberWords){
+  const n=Number(numberWords[1].replace(/,/g,''));
+  const small=(v:number):string=>{const one=['','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];const tens=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];if(v<20)return one[v];if(v<100)return tens[Math.floor(v/10)]+(v%10?'-'+one[v%10]:'');if(v<1000)return one[Math.floor(v/100)]+' hundred'+(v%100?' and '+small(v%100):'');return ''};
+  const parts:string[]=[];let rest=n;for(const [value,name] of [[1_000_000_000,'billion'],[1_000_000,'million'],[1000,'thousand']] as const){if(rest>=value){const chunk=Math.floor(rest/value);parts.push(small(chunk)+' '+name);rest%=value;}}if(rest)parts.push(small(rest));const words=parts.join(', ');
+  return {reply:`${numberWords[1]} is written in words as: ${words}.`,board:[numberWords[1],words],source:{type:'DETERMINISTIC_MATH',concept:'Reading whole numbers'}};
+ }
+ const triangle=q.match(/triangle.*?(\d+(?:\.\d+)?)\s*(?:degrees?|°).*?(\d+(?:\.\d+)?)\s*(?:degrees?|°)/i);
+ if(triangle){
+  const a=Number(triangle[1]),b=Number(triangle[2]),third=180-a-b;
+  return {reply:`The interior angles of every triangle add up to 180°. The two known angles are ${a}° and ${b}°. First add them: ${a}° + ${b}° = ${a+b}°. Then subtract that total from 180°: 180° − ${a+b}° = ${third}°. Therefore the third angle is ${third}°. Check: ${a}° + ${b}° + ${third}° = 180°.`,board:['Triangle angles = 180°',`${a}° + ${b}° = ${a+b}°`,`180° − ${a+b}° = ${third}° ✓`],source:{type:'DETERMINISTIC_MATH',concept:'Triangle angle sum'}};
+ }
  const money=q.match(/(?:have|had|got|with)\s*(?:₦|\$|ngn|naira)?\s*(\d+(?:\.\d+)?).*?(?:spent|spend|used|paid)\s*(?:₦|\$|ngn|naira)?\s*(\d+(?:\.\d+)?)/i);
  if(money){
   const start=Number(money[1]),spent=Number(money[2]),left=start-spent;
