@@ -223,14 +223,16 @@ export async function POST(req:Request){
   const d=schema.parse(await req.json());
   const plan=getCurriculumTutorPlan(d.classLevel,d.subject,d.topic);
   const unit=plan?.units[d.unitIndex]||plan?.units[0];
-  const calculation=deterministicMathAnswer(d.question);
+  const equationLike=/\b(?:\d*\s*x\s*(?:plus|minus|\+|-)\s*\d+|\d+\s*x\s*[+\-])\b/i.test(d.question)&&/\b(?:equal(?:s)?(?:\s+to)?|=)\b/i.test(d.question);
+ const calculation=deterministicMathAnswer(d.question);
   if(calculation)return NextResponse.json({...withGuidanceMeta(d,{reply:calculation.reply,board:calculation.board},'HINT'),mode:'deterministic-math',knowledgeSource:calculation.source});
   const focused=focusedLearningAnswer(d);
   if(focused)return NextResponse.json({...withGuidanceMeta(d,{reply:focused.reply,board:focused.board},'HINT'),mode:'focused-learning-local',knowledgeSource:focused.source});
   if(isClearlyNonLearning(d.question))return NextResponse.json({...withGuidanceMeta(d,{reply:'AVORA is focused on learning. Ask me a school subject, study, exam, science, mathematics, English, computing or other educational question and I will help.',board:[]},'HINT'),mode:'learning-scope-local'});
   const general=generalLearningAnswer(d.question);
   if(general)return NextResponse.json({...withGuidanceMeta(d,{reply:general.reply,board:general.board},'HINT'),mode:'general-learning-local',knowledgeSource:general.source});
-  const local=localCurriculumAnswer(d);
+  if(equationLike)return NextResponse.json({reply:'I heard a linear equation, but I could not parse it reliably. Please say it again in a form such as “2x plus 5 equals 40” or edit the transcript before I answer.',board:['Equation heard — clarification needed'],knowledgeSource:{type:'NONE'},answerUnavailable:true,failureCode:'AMBIGUOUS_EQUATION'});
+ const local=localCurriculumAnswer(d);
   if(local)return NextResponse.json({...withGuidanceMeta(d,{reply:local.reply,board:local.board},'HINT'),mode:'grounded-curriculum-local',curriculumSource:local.source});
   if(!configuredAiProvider())return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'}});
   const aiClaim=await claimAiRequest(session.userId,'TUTOR_CHAT');
