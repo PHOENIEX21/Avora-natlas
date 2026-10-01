@@ -7,7 +7,9 @@ function sessionKey(){try{const k='avora:natlas:evidence-session',v=sessionStora
 function source(d:any){const x=String(d?.knowledgeSource?.type||d?.curriculumSource?.type||'').toUpperCase();if(['AVORA_CURRICULUM','AVORA_CONTEXT','GENERAL_LEARNING','DETERMINISTIC_MATH'].includes(x))return x;if(String(d?.mode||'').startsWith('ai-'))return 'EXTERNAL_AI';return 'NONE'}
 export default function GlobalAskAvora({classLevel='JSS1',exam='BECE'}:{classLevel?:string;exam?:string}){
  const [open,setOpen]=useState(false),[ask,setAsk]=useState(''),[busy,setBusy]=useState(false),[recording,setRecording]=useState(false),[status,setStatus]=useState('');
- const [transcript,setTranscript]=useState(''),[edited,setEdited]=useState(false),[rating,setRating]=useState<number|null>(null),[turns,setTurns]=useState<Turn[]>([]);\n const turnsRef=useRef<Turn[]>([]);\n useEffect(()=>{turnsRef.current=turns},[turns]);
+ const [transcript,setTranscript]=useState(''),[edited,setEdited]=useState(false),[rating,setRating]=useState<number|null>(null),[turns,setTurns]=useState<Turn[]>([]);
+ const turnsRef=useRef<Turn[]>([]);
+ useEffect(()=>{turnsRef.current=turns},[turns]);
  const recorder=useRef<MediaRecorder|null>(null),chunks=useRef<Blob[]>([]),activeEvidence=useRef<Evidence|null>(null),lastEvidence=useRef<Evidence|null>(null);
  const queueKey='avora:natlas:evidence-queue';
  function queue(payload:any){try{const q=JSON.parse(localStorage.getItem(queueKey)||'[]');const a=Array.isArray(q)?q:[],k=String(payload.interactionKey||'');if(!k){localStorage.setItem(queueKey,JSON.stringify([...a,payload].slice(-100)));return}const prior=a.find((x:any)=>String(x.interactionKey||'')===k);localStorage.setItem(queueKey,JSON.stringify([...a.filter((x:any)=>String(x.interactionKey||'')!==k),prior?{...prior,...payload}:payload].slice(-100)))}catch{}}
