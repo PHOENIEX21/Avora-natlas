@@ -61,6 +61,8 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
  const stem=(x:string)=>aliases[x]||x.replace(/(ing|ed|es|s)$/,'');
  const tokens=(v:string)=>normalize(v).split(/\s+/).filter(x=>x.length>2&&!stop.has(x)).map(stem);
  const qwords=new Set(tokens(d.question));
+ const mathTerms=['place value','digit','number','tens','hundreds','thousands','fraction','decimal','integer','algebra','equation','geometry','factor','multiple','binary','base two'];
+ const mathHint=mathTerms.some(term=>d.question.toLowerCase().includes(term));
  const candidates:any[]=[];
  const add=(plan:any,subject:string,topic:string,classLevel:string,current:boolean)=>{
   if(!plan)return;
@@ -92,7 +94,8 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
   }
  }
  candidates.sort((a,b)=>b.score-a.score);
- const hit=candidates[0]; if(!hit||hit.score<12)return null;
+ const ranked=mathHint?candidates.filter(x=>x.subject==='Mathematics'):candidates;
+ const hit=ranked[0]; if(!hit||hit.score<12)return null;
  const u=hit.unit,term=hit.matchedTerm;
  const definition=term?String(term[1]||'').trim():'';
  const explain=String(u.explain||'').trim(),example=String(u.example||'').trim();
