@@ -34,7 +34,7 @@ function withGuidanceMeta(d:z.infer<typeof schema>,value:{reply:string;board:str
 }
 
 function deterministicMathAnswer(question:string){
- let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/(?<=[a-z])-(?=[a-z])/g,' ').replace(/[×xX]/g,'*').replace(/÷/g,'/');
+ let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/(?<=[a-z])-(?=[a-z])/g,' ').replace(/×/g,'*').replace(/(?<=\d)\s*x\s*(?=\d)/gi,'*').replace(/÷/g,'/');
  const nums:Record<string,string>={zero:'0',one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10',eleven:'11',twelve:'12',thirteen:'13',fourteen:'14',fifteen:'15',sixteen:'16',seventeen:'17',eighteen:'18',nineteen:'19',twenty:'20'};
  for(const [w,n] of Object.entries(nums))q=q.replace(new RegExp('\\b'+w+'\\b','g'),n);
  q=q.replace(/\b(plus|add|added to)\b/g,'+').replace(/\b(minus|subtract|take away)\b/g,'-').replace(/\b(times|multiplied by|multiply by)\b/g,'*').replace(/\b(divided by|divide by|divide|divided|diffide|define)(?:\s+by)?\b/g,'/').replace(/\bover\b/g,'/');
