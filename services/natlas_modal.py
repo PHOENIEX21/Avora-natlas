@@ -18,6 +18,7 @@ import subprocess
 import time
 
 import modal
+from fastapi import Request
 
 MODEL_ID = "NCAIR1/NigerianAccentedEnglish"
 SAMPLE_RATE = 16_000
@@ -102,7 +103,7 @@ def _decode_audio(audio_bytes: bytes):
     secrets=[endpoint_secret],
 )
 @modal.fastapi_endpoint(method="POST")
-async def transcribe(request):
+async def transcribe(request: Request):
     """Transcribe raw audio with the official N-ATLAS Nigerian English ASR model."""
     from fastapi import HTTPException
     import torch
