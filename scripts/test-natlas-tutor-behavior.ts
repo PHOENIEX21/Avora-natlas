@@ -3,7 +3,7 @@ import ts from 'typescript';
 import vm from 'node:vm';
 const source=fs.readFileSync('app/api/tutor/chat/route.ts','utf8');
 const extract=(name:string,endMarker:string)=>{const exportMark='export function '+name;const plainMark='function '+name;let s=source.indexOf(exportMark);let mark=exportMark;if(s<0){s=source.indexOf(plainMark);mark=plainMark}const e=source.indexOf(endMarker,s);if(s<0||e<0)throw new Error('handler '+name+' not found');return source.slice(s,e).replace(mark,plainMark)};
-const block=extract('deterministicMathAnswer','function localCurriculumAnswer')+extract('focusedLearningAnswer','\nfunction generalLearningAnswer')+extract('generalLearningAnswer','\nfunction isClearlyNonLearning');
+const block=extract('deterministicMathAnswer','function localCurriculumAnswer')+extract('focusedLearningAnswer','\nfunction generalLearningAnswer')+extract('generalLearningAnswer','\nfunction isClearlyNonLearning');\nconsole.log('behavior harness extracted bytes',block.length);
 const js=ts.transpileModule(block,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;
 const sandbox:any={};vm.createContext(sandbox);vm.runInContext(js+';this.deterministicMathAnswer=deterministicMathAnswer;this.focusedLearningAnswer=focusedLearningAnswer;this.generalLearningAnswer=generalLearningAnswer;',sandbox);
 const {deterministicMathAnswer,focusedLearningAnswer,generalLearningAnswer}=sandbox;
@@ -20,4 +20,4 @@ const cases:[string,()=>boolean][]=[
  ['garbled text is not arithmetic',()=>deterministicMathAnswer('what is 45-valued fashion into rich soil')===null],
  ['division by zero truthful',()=>deterministicMathAnswer('12 divided by 0')?.reply.toLowerCase().includes('undefined')===true]
 ];
-let failed=0;for(const [name,test] of cases){let ok=false;try{ok=test()}catch{}console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}console.log(`${cases.length-failed}/${cases.length} behavioral tutor checks passed`);if(failed)process.exit(1);
+let failed=0;for(const [name,test] of cases){let ok=false;try{ok=test()}catch(e){console.error('CASE ERROR',name,e)}console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}console.log(`${cases.length-failed}/${cases.length} behavioral tutor checks passed`);if(failed)process.exit(1);
