@@ -33,7 +33,7 @@ function withGuidanceMeta(d:z.infer<typeof schema>,value:{reply:string;board:str
  return {...value,reguideStepId:safeReguideStep(d),assistanceLevel:level,requiresFreshEvidence:level!=='HINT'};
 }
 
-export function deterministicMathAnswer(question:string){
+function deterministicMathAnswer(question:string){
  let q=question.toLowerCase().replace(/[–—]/g,'-').replace(/(?<=[a-z])-(?=[a-z])/g,' ').replace(/×/g,'*').replace(/(?<=\d)\s*x\s*(?=\d)/gi,'*').replace(/÷/g,'/');
  const nums:Record<string,string>={zero:'0',one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10',eleven:'11',twelve:'12',thirteen:'13',fourteen:'14',fifteen:'15',sixteen:'16',seventeen:'17',eighteen:'18',nineteen:'19',twenty:'20'};
  for(const [w,n] of Object.entries(nums))q=q.replace(new RegExp('\\b'+w+'\\b','g'),n);
@@ -114,7 +114,7 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
  if(!reply)return null;
  return {reply,board:[term?(String(term[0])+' → '+definition):u.title,example].filter(Boolean).slice(0,3),source:{type:'AVORA_CURRICULUM',classLevel:hit.classLevel,subject:hit.subject,topic:hit.topic,unit:u.title}};
 }
-export function focusedLearningAnswer(d:z.infer<typeof schema>){
+function focusedLearningAnswer(d:z.infer<typeof schema>){
  const q=d.question.toLowerCase();
  const numberWords=q.match(/\b(\d{1,3}(?:,\d{3})+)\b.*\b(?:in words|to words|write.*words|read.*number)\b/i);
  if(numberWords){
@@ -163,7 +163,7 @@ export function focusedLearningAnswer(d:z.infer<typeof schema>){
  }
  return null;
 }
-export function generalLearningAnswer(question:string){
+function generalLearningAnswer(question:string){
  const q=question.toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
  const entries=[
   {keys:['noun'],reply:'A noun is a naming word. It names a person, animal, place, thing or idea. Examples are teacher, goat, Lagos, book and honesty.'},
