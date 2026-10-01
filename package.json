@@ -91,7 +91,8 @@
     "audit:natlas-tutor-reliability": "node scripts/audit-natlas-tutor-reliability.mjs",
     "audit:natlas-boundary": "node scripts/audit-natlas-boundary.mjs",
     "audit:naic-full-flow": "node scripts/audit-naic-full-flow.mjs",
-    "audit:naic": "npm run audit:naic-evidence && npm run audit:natlas-tutor-reliability && npm run audit:natlas-boundary && npm run audit:naic-full-flow"
+    "audit:naic": "npm run audit:naic-evidence && npm run audit:natlas-tutor-reliability && npm run test:natlas-behavior && npm run audit:natlas-boundary && npm run audit:naic-full-flow",
+    "test:natlas-behavior": "node --experimental-strip-types scripts/test-natlas-tutor-behavior.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
