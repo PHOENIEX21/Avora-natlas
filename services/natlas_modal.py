@@ -98,8 +98,8 @@ def _decode_audio(audio_bytes: bytes):
 @app.function(
     image=image,
     timeout=120,
-    scaledown_window=60,
-    min_containers=0,
+    scaledown_window=300,
+    min_containers=1,
     secrets=[endpoint_secret, hf_secret],
 )
 @modal.fastapi_endpoint(method="POST")
