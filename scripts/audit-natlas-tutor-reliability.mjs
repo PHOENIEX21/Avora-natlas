@@ -42,6 +42,7 @@ const checks=[
  ['simultaneous equations explanation does not depend on fuzzy headings',route.includes("concept:'Simultaneous equations'")&&route.includes('Common methods are elimination')],
  ['parallelogram has a reliable local definition',route.includes("concept:'Parallelogram'")],
  ['ASR noun-like ambiguity is surfaced rather than silently rewritten',route.includes('Possible voice ambiguity: no/known')],
+ ['multi-term adjective/noun ASR corruption is stopped before retrieval',route.includes('agenda → adjective?')&&route.includes('no/known → noun?')&&route.includes("failureCode:'AMBIGUOUS_TRANSCRIPT'")),
  ['argumentative essay ASR variant is handled transparently',route.includes('augmentative essay')&&route.includes('If you meant “argumentative essay”')],
  ['clear spoken quadratics have a safe dedicated route',route.includes("concept:'Quadratic equation'")],
  ['loose right-triangle wording has deterministic angle handling',route.includes('180° − 90° − ${known}° = ${other}°')],
