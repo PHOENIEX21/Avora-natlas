@@ -12,7 +12,7 @@ const checks=[
  ['unavailable answer remains truthful',route.includes("knowledgeSource:{type:'NONE'}")&&route.includes('answerUnavailable:true')],
  ['combined simile/metaphor teaching exists',route.includes("simile and metaphor")&&route.includes("both make comparisons")],
  ['source provenance returned for curriculum',route.includes("type:'AVORA_CURRICULUM'")],
- ['external AI provenance is explicit',route.includes("knowledgeSource:{type:'EXTERNAL_AI',provider:ai.usage.provider}")],
+ ['external AI provenance is explicit',route.includes("{type:'EXTERNAL_AI',provider:ai.usage.provider}")&&route.includes("parsed?.grounding==='AVORA_CURRICULUM'")],
  ['external AI remains after zero-cost grounded routes',route.indexOf('configuredAiProvider()')>route.indexOf('generalLearningAnswer(d.question)')],
  ['spoken division normalization is deterministic',route.includes("divided by|divide by|divide|divided|diffide|define")&&route.includes("replace(/\\bover\\b/g,'/')")],
  ['ambiguous equation routing fails safely',route.includes("failureCode:'AMBIGUOUS_EQUATION'")&&route.includes('equationLike')],
