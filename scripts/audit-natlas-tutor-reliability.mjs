@@ -58,7 +58,13 @@ const checks=[
  ['clear spoken x-squared quadratics are solved',route.includes("concept:'Quadratic equation'")&&route.includes('const qm=quadText.match')],
  ['inconsistent squared variables are clarified safely',route.includes('variable terms are inconsistent in the transcript')],
  ['heading-only curriculum hits are rejected',route.includes('const titleLike=')&&route.includes('usefulExplain')],
- ['augmentative exercise is transparently mapped only as a possible argumentative request',route.includes('/augmentative (?:exercise|essay)/')&&route.includes('If “augmentative” was intentional') ]
+ ['augmentative exercise is transparently mapped only as a possible argumentative request',route.includes('/augmentative (?:exercise|essay)/')&&route.includes('If “augmentative” was intentional') ],
+ ['generic arithmetic cannot hijack multi-topic learner questions',route.includes('A tiny calculator must never swallow a larger learning request')],
+ ['fuzzy curriculum requires semantic topic evidence',route.includes('strongTopic=Boolean')&&route.includes('Generic word overlap is not enough')],
+ ['grandma grammar ASR ambiguity is transparent',route.includes('Possible voice ambiguity: grandma → grammar?')],
+ ['simple sentence ASR ambiguity is transparent',route.includes('simple sentence + compound sentence?')],
+ ['essay-type request has a reliable English path',route.includes("concept:'Essay types'")],
+ ['interest teaching starts from first-principles vocabulary',route.includes('PRINCIPAL (P)')&&route.includes('RATE (R)')&&route.includes('TIME (T)')]
 ];
 let failed=0;for(const [name,ok] of checks){console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}
 console.log(`${checks.length-failed}/${checks.length} tutor reliability checks passed`);if(failed)process.exit(1);
