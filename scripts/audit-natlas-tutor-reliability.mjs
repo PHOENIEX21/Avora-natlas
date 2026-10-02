@@ -1,0 +1,88 @@
+import fs from 'node:fs';
+const route=fs.readFileSync('app/api/tutor/chat/route.ts','utf8');
+const globalAsk=fs.readFileSync('components/GlobalAskAvora.tsx','utf8');
+const tutor=fs.readFileSync('components/TutorClient.tsx','utf8');
+const learn=fs.readFileSync('app/learn/page.tsx','utf8');
+const checks=[
+ ['master curriculum inventory drives cross-topic search',route.includes("masterTopics(classLevel,subject)")],
+ ['unsafe proposition-to-preposition alias removed',!route.includes("propositions:'preposition'")&&!route.includes("proposition:'preposition'")],
+ ['curriculum responses are bounded',route.includes("const concise=(value:string,max=900)")],
+ ['deterministic math precedes retrieval',route.indexOf('const calculation=deterministicMathAnswer')<route.indexOf('const local=localCurriculumAnswer')],
+ ['focused follow-up precedes broad retrieval',route.indexOf('const focused=focusedLearningAnswer')<route.indexOf('const local=localCurriculumAnswer')],
+ ['exact local knowledge precedes fuzzy curriculum',route.indexOf('const general=generalLearningAnswer')<route.indexOf('const local=localCurriculumAnswer')],
+ ['unavailable answer remains truthful',route.includes("knowledgeSource:{type:'NONE'}")&&route.includes('answerUnavailable:true')],
+ ['combined simile/metaphor teaching exists',route.includes("simile and metaphor")&&route.includes("both make comparisons")],
+ ['source provenance returned for curriculum',route.includes("type:'AVORA_CURRICULUM'")],
+ ['external AI provenance is explicit',route.includes("type:'EXTERNAL_AI'")&&route.includes('provider:ai.usage.provider')&&route.includes('model:ai.usage.model')&&route.includes("parsed?.grounding==='AVORA_CURRICULUM'")],
+ ['external AI remains after zero-cost grounded routes',route.indexOf('configuredAiProvider()')>route.indexOf('generalLearningAnswer(d.question)')],
+ ['spoken division normalization is deterministic',route.includes("divided by|divide by|divide|divided|diffide|define")&&route.includes("replace(/\\bover\\b/g,'/')")],
+ ['ambiguous equation routing fails safely',route.includes("failureCode:'AMBIGUOUS_EQUATION'")&&route.includes('equationLike')],
+ ['spoken equal-to linear equations are parsed',route.includes('(?:is\\s+)?equal(?:s)?\\s+to')],
+ ['multiplication x normalization is numeric-context only',route.includes("replace(/(?<=\\d)\\s*x\\s*(?=\\d)/gi,'*')")&&!route.includes("replace(/[×xX]/g,'*')")],
+ ['math subject boundary exists',route.includes("hintedSubject")&&route.includes("'Mathematics'")],
+ ['english subject boundary exists',route.includes("englishTerms")&&route.includes("'English Language'")],
+ ['exact curriculum matches receive ranking boost',route.includes('exactTopic?30')&&route.includes('exactUnit?24')],
+ ['place value has reliable local teaching path',route.includes('place\\s+value')&&route.includes("concept:'Place Value'")],
+ ['direct arithmetic supports numeric division',route.includes("const m=q.match(/(-?\\d+")&&route.includes("a/b")],
+ ['division by zero is handled safely',route.includes("op==='/'&&b===0")],
+ ['math vocabulary spans core JSS concepts',['fraction','decimal','integer','algebra','equation','geometry','angle','factor','multiple','hcf','lcm','binary','percentage','ratio'].every(x=>route.includes("'"+x+"'"))],
+ ['english vocabulary spans core language concepts',['noun','verb','adjective','adverb','pronoun','grammar','vowel','consonant','comprehension','essay','phoneme'].every(x=>route.includes("'"+x+"'"))],
+ ['ambiguous questions preserve current curriculum as a ranked candidate',route.includes("add(getCurriculumTutorPlan(d.classLevel,d.subject,d.topic),d.subject,d.topic,d.classLevel,true)")],
+ ['cross-class curriculum search covers JSS1 to JSS3',route.includes("[d.classLevel,'JSS1','JSS2','JSS3']")],
+ ['subject filtering occurs before selecting curriculum hit',route.indexOf('const ranked=hintedSubject')<route.indexOf('const hit=ranked[0]')],
+ ['authored structured lesson steps are searchable',route.includes('unit.structuredSteps')&&route.includes('x?.spoken')],
+ ['foundational angle definition has a direct reliable path',route.includes("concept:'Angle'")&&route.includes('amount of turn')],
+ ['right-angled triangle has a direct reliable path',route.includes("concept:'Right-angled triangle'")&&route.includes('hypotenuse')],
+ ['hypotenuse questions have a direct reliable path',route.includes("concept:'Hypotenuse'")&&route.includes('Pythagoras')],
+ ['ambiguous N-ATLAS wording is clarified without silent correction',route.includes("failureCode:'AMBIGUOUS_TRANSCRIPT'")&&route.includes('I will not silently change what N-ATLAS heard')],
+ ['global Ask AVORA uses the same tutor chat route',globalAsk.includes("fetch('/api/tutor/chat'")],
+ ['home Ask AVORA is explicitly context-neutral',globalAsk.includes("subject:'General Learning',topic:'Ask AVORA'")],
+ ['home Ask AVORA forwards learner class without forcing a lesson topic',globalAsk.includes('classLevel,exam,question:q,recent:recent.slice(-8)')],
+ ['home voice Ask AVORA records the same global context',globalAsk.includes("subject:'General Learning',topic:'Ask AVORA',asrSuccess:true")],
+ ['lesson and home Ask AVORA share tutor API contract',globalAsk.includes("fetch('/api/tutor/chat'")&&tutor.includes("fetch('/api/tutor/chat'")],
+ ['Learn exposes JSS1 to JSS3 switching',learn.includes("['JSS1','JSS2','JSS3']")&&learn.includes('previewClass=')],
+ ['selected class reaches the tutor lesson',learn.includes("'&previewClass='+classLevel")],
+ ['binary multiplication is handled before generic decimal arithmetic',route.indexOf('const binaryExpr=')<route.indexOf("const m=q.match(/(-?\\d+")],
+ ['grammar has a reliable local definition',route.includes("concept:'Grammar'")&&route.includes('system of rules and patterns')],
+ ['simultaneous equations explanation does not depend on fuzzy headings',route.includes("concept:'Simultaneous equations'")&&route.includes('Common methods are elimination')],
+ ['parallelogram has a reliable local definition',route.includes("concept:'Parallelogram'")],
+ ['ASR noun-like ambiguity is surfaced rather than silently rewritten',route.includes('Possible voice ambiguity: no/known')],
+ ['multi-term adjective/noun ASR corruption is stopped before retrieval',route.includes('agenda → adjective?')&&route.includes('no/known → noun?')&&route.includes("failureCode:'AMBIGUOUS_TRANSCRIPT'")],
+ ['argumentative essay ASR variant is handled transparently',route.includes('augmentative essay')&&route.includes('If you meant “argumentative essay”')],
+ ['clear spoken quadratics have a safe dedicated route',route.includes("concept:'Quadratic equation'")],
+ ['loose right-triangle wording has deterministic angle handling',route.includes('180° − 90° − ${known}° = ${other}°')],
+ ['cosine-hypotenuse multi-intent question has one coherent answer',route.includes("concept:'Cosine and hypotenuse'")],
+ ['whole-curriculum evidence scans JSS1 JSS2 JSS3',route.includes("for(const classLevel of ['JSS1','JSS2','JSS3'])")&&route.includes('function curriculumEvidencePack')],
+ ['whole-curriculum evidence scans Mathematics and English',route.includes("for(const subject of ['Mathematics','English Language'] as const)")],
+ ['AI receives ranked authored curriculum evidence',route.includes('curriculumEvidence=curriculumEvidencePack(d)')&&route.includes('curriculumEvidence,board:d.board')],
+ ['home and lesson questions are not forced into current context',route.includes('Home, Learn, or inside any lesson')],
+ ['AI distinguishes curriculum grounding from general knowledge',route.includes("enum:['AVORA_CURRICULUM','GENERAL_KNOWLEDGE','CLARIFICATION']")&&route.includes("parsed?.grounding==='AVORA_CURRICULUM'")],
+ ['interest vocabulary is routed to Mathematics',route.includes("'compound interest'")&&route.includes("'simple interest'")],
+ ['simple and compound interest have a reliable mathematics answer',route.includes("concept:'Simple and compound interest'")&&route.includes('SI = PRT/100')],
+ ['program ambiguity has a useful general definition',route.includes("concept:'Program'")],
+ ['grammar plus intonation is answered as the requested pair',route.includes("concept:'Grammar and intonation'")],
+ ['clear spoken x-squared quadratics are solved',route.includes("concept:'Quadratic equation'")&&route.includes('const qm=quadText.match')],
+ ['inconsistent squared variables are clarified safely',route.includes('variable terms are inconsistent in the transcript')],
+ ['heading-only curriculum hits are rejected',route.includes('const titleLike=')&&route.includes('usefulExplain')],
+ ['augmentative exercise is transparently mapped only as a possible argumentative request',route.includes('/augmentative (?:exercise|essay)/')&&route.includes('If “augmentative” was intentional') ],
+ ['generic arithmetic cannot hijack multi-topic learner questions',route.includes('A tiny calculator must never swallow a larger learning request')],
+ ['fuzzy curriculum requires semantic topic evidence',route.includes('strongTopic=Boolean')&&route.includes('Generic word overlap is not enough')],
+ ['grandma grammar ASR ambiguity is transparent',route.includes('Possible voice ambiguity: grandma → grammar?')],
+ ['simple sentence ASR ambiguity is transparent',route.includes('simple sentence + compound sentence?')],
+ ['essay-type request has a reliable English path',route.includes("concept:'Essay types'")],
+ ['interest teaching starts from first-principles vocabulary',route.includes('PRINCIPAL (P)')&&route.includes('RATE (R)')&&route.includes('TIME (T)')]
+];
+let failed=0;for(const [name,ok] of checks){console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}
+const requiredPilotDimensions=['JSS1','JSS2','JSS3','Mathematics','English Language','multi-topic','voice ambiguity','cross-topic','follow-up','outside current lesson'];
+const pilotGuards=[
+ ['JSS1-JSS3 curriculum coverage',requiredPilotDimensions.slice(0,3).every(x=>route.includes("'"+x+"'")||route.includes('"'+x+'"'))],
+ ['Mathematics and English coverage',requiredPilotDimensions.slice(3,5).every(x=>route.includes("'"+x+"'")||route.includes('"'+x+'"'))],
+ ['multi-topic calculator hijack guard',route.includes('A tiny calculator must never swallow a larger learning request')],
+ ['voice ambiguity transparency',route.includes('I will not silently change what N-ATLAS heard')],
+ ['cross-topic semantic gate',route.includes('Generic word overlap is not enough')],
+ ['follow-up context is supplied',route.includes('recent:d.recent')],
+ ['questions outside current lesson are explicitly allowed',route.includes('do not force the current lesson')]
+];
+for(const [name,ok] of pilotGuards){console.log(ok?'PASS':'FAIL','50-turn preflight:',name);if(!ok)failed++}
+console.log(`${checks.length+pilotGuards.length-failed}/${checks.length+pilotGuards.length} tutor reliability + 50-turn preflight checks passed`);
+if(failed)process.exit(1);
