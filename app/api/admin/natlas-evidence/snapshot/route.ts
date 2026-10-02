@@ -23,7 +23,7 @@ export async function POST(){
    COUNT(*) FILTER (WHERE mastery_checked=true)::int mastery_checks,
    COUNT(*) FILTER (WHERE mastery_success=true)::int mastery_successes,
    COALESCE(ROUND(AVG(feedback_rating)::numeric,2),0)::numeric avg_feedback
-   FROM natlas_validation_interactions WHERE validation_mode='VALIDATION'`,1);
+   FROM natlas_validation_interactions WHERE validation_mode='VALIDATION' AND created_at >= COALESCE((SELECT MAX(started_at) FROM natlas_validation_runs WHERE status='ACTIVE'),'infinity'::timestamptz)`,1);
   const payload={capturedAt:new Date().toISOString(),scope:'VALIDATION_ONLY',...m};
   const label='NAIC evidence '+payload.capturedAt;
   const rows=await withDbRetry(()=>sql`INSERT INTO natlas_evidence_snapshots
