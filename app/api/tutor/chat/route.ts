@@ -53,10 +53,10 @@ function deterministicMathAnswer(question:string){
   const value=op==='+'?rhs-n:rhs+n;
   return {reply:`${variable} ${op} ${n} = ${rhs}. Undo ${op==='+'?'adding':'subtracting'} ${n} by ${op==='+'?'subtracting':'adding'} ${n} on both sides. Therefore ${variable} = ${value}. Check: ${value} ${op} ${n} = ${rhs}.`,board:[`${variable} ${op} ${n} = ${rhs}`,`${variable} = ${value}`,`Check ✓`],source:{type:'DETERMINISTIC_MATH'}};
  }
- const nonArithmeticWords=q.replace(/-?\d+(?:\.\d+)?/g,' ').replace(/[+\\-*\\/=]/g,' ').split(/\\s+/).filter(Boolean).filter(w=>!['what','whats','is','are','calculate','solve','find','please','the','answer','and','then','equals','equal','to','of','by'].includes(w));
+ const nonArithmeticWords=q.replace(/-?\d+(?:\.\d+)?/g,' ').replace(/[+*\/=\\-]/g,' ').split(/\s+/).filter(Boolean).filter(w=>!['what','whats','is','are','calculate','solve','find','please','the','answer','and','then','equals','equal','to','of','by'].includes(w));
  // A tiny calculator must never swallow a larger learning request just because it contains "7 + 2" somewhere inside it.
  if(nonArithmeticWords.length>0)return null;
- const m=q.match(/(-?\\d+(?:\\.\\d+)?)\\s*([+\\-*\\/])\\s*(-?\\d+(?:\\.\\d+)?)/);
+ const m=q.match(/(-?\d+(?:\.\d+)?)\s*([+*\/\-])\s*(-?\d+(?:\.\d+)?)/);
  if(!m)return null;
  const a=Number(m[1]),b=Number(m[3]),op=m[2];
  if(op==='/'&&b===0)return {reply:'Division by zero is undefined. You cannot divide a number by 0.',board:['Division by 0 → undefined']};
