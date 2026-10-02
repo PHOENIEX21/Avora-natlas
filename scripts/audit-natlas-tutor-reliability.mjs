@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 const route=fs.readFileSync('app/api/tutor/chat/route.ts','utf8');
 const globalAsk=fs.readFileSync('components/GlobalAskAvora.tsx','utf8');
+const tutor=fs.readFileSync('components/TutorClient.tsx','utf8');
 const learn=fs.readFileSync('app/learn/page.tsx','utf8');
 const checks=[
  ['master curriculum inventory drives cross-topic search',route.includes("masterTopics(classLevel,subject)")],
@@ -35,6 +36,10 @@ const checks=[
  ['hypotenuse questions have a direct reliable path',route.includes("concept:'Hypotenuse'")&&route.includes('Pythagoras')],
  ['ambiguous N-ATLAS wording is clarified without silent correction',route.includes("failureCode:'AMBIGUOUS_TRANSCRIPT'")&&route.includes('I will not silently change what N-ATLAS heard')],
  ['global Ask AVORA uses the same tutor chat route',globalAsk.includes("fetch('/api/tutor/chat'")],
+ ['home Ask AVORA is explicitly context-neutral',globalAsk.includes("subject:'General Learning',topic:'Ask AVORA'")],
+ ['home Ask AVORA forwards learner class without forcing a lesson topic',globalAsk.includes('classLevel,exam,question:q,recent:recent.slice(-8)')],
+ ['home voice Ask AVORA records the same global context',globalAsk.includes("subject:'General Learning',topic:'Ask AVORA',asrSuccess:true")],
+ ['lesson and home Ask AVORA share tutor API contract',globalAsk.includes("fetch('/api/tutor/chat'")&&tutor.includes("fetch('/api/tutor/chat'")),
  ['Learn exposes JSS1 to JSS3 switching',learn.includes("['JSS1','JSS2','JSS3']")&&learn.includes('previewClass=')],
  ['selected class reaches the tutor lesson',learn.includes("'&previewClass='+classLevel")],
  ['binary multiplication is handled before generic decimal arithmetic',route.indexOf('const binaryExpr=')<route.indexOf("const m=q.match(/(-?\\d+")],
