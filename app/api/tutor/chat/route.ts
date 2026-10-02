@@ -74,7 +74,7 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
     topic,unit.title,unit.explain,unit.example,unit.check,unit.why,
     ...(unit.prerequisites||[]),...(unit.outcomes||[]),...(unit.commonMistakes||[]),
     ...terms.flatMap((x:any)=>Array.isArray(x)?[x[0],x[1]]:[]),
-    ...((unit.sourceSteps||[]) as string[])
+    ...((unit.sourceSteps||[]) as string[]),...((unit.structuredSteps||[]) as any[]).flatMap((x:any)=>[x?.title,x?.label,x?.spoken,x?.text,...(x?.lines||[])])
    ].filter(Boolean).join(' ');
    const words=tokens(searchable);
    const overlap=[...new Set(words.filter((x:string)=>qwords.has(x)))];
