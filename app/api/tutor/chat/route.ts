@@ -233,6 +233,9 @@ export async function POST(req:Request){
   const equationLike=/\b(?:\d*\s*x\s*(?:plus|minus|\+|-)\s*\d+|\d+\s*x\s*[+\-])\b/i.test(d.question)&&/\b(?:equal(?:s)?(?:\s+to)?|=)\b/i.test(d.question);
  const calculation=deterministicMathAnswer(d.question);
   if(calculation)return NextResponse.json({...withGuidanceMeta(d,{reply:calculation.reply,board:calculation.board},'HINT'),mode:'deterministic-math',knowledgeSource:calculation.source});
+  const heard=d.question.toLowerCase().trim();
+  if(/\b(?:sign|sine)\b.*\b(?:alangi|alange)\b/.test(heard))return NextResponse.json({reply:`I heard: “${d.question}” If you meant “sine of an angle”, say that again or correct the transcript and I will explain it. I will not silently change what N-ATLAS heard.`,board:['Possible voice ambiguity — confirm the term'],mode:'natlas-clarification',answerUnavailable:true,knowledgeSource:{type:'NONE'},failureCode:'AMBIGUOUS_TRANSCRIPT'});
+  if(/^(?:what(?:'s| is) )?(?:the )?speech[?.! ]*$/.test(heard))return NextResponse.json({reply:'Do you mean speech work in English, a figure of speech, direct and indirect speech, or a particular speech sound? Tell me which one and I will explain it.',board:['Clarify the kind of speech'],mode:'learning-clarification',answerUnavailable:true,knowledgeSource:{type:'NONE'},failureCode:'AMBIGUOUS_QUESTION'});
   const focused=focusedLearningAnswer(d);
   if(focused)return NextResponse.json({...withGuidanceMeta(d,{reply:focused.reply,board:focused.board},'HINT'),mode:'focused-learning-local',knowledgeSource:focused.source});
   if(isClearlyNonLearning(d.question))return NextResponse.json({...withGuidanceMeta(d,{reply:'AVORA is focused on learning. Ask me a school subject, study, exam, science, mathematics, English, computing or other educational question and I will help.',board:[]},'HINT'),mode:'learning-scope-local'});
