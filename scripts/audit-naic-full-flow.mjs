@@ -3,7 +3,7 @@ const required=[
  ['app/api/natlas/asr/route.ts',["provider:'N-ATLAS'","NATLAS_ASR_ENDPOINT","getSession()"]],
  ['app/api/natlas/evidence/route.ts',["DEVELOPMENT","PILOT","VALIDATION","answerSource","session.role!=='STUDENT'","serverEvidenceMode"]],
  ['lib/learningAccess.ts',["competitionPreviewAccessEnabled()","getStudentEntitlement"]],
- ['lib/premiumAccess.ts',["competitionPreviewAccessEnabled","PILOT","VALIDATION","VERCEL_ENV==='preview'"]],
+ ['lib/premiumAccess.ts',["competitionPreviewAccessEnabled","PILOT","VALIDATION","env==='preview'","env==='production'"]],
  ['components/GlobalAskAvora.tsx',["fetch('/api/natlas/asr'","/api/natlas/evidence","N-ATLAS heard","transcriptCorrected:true","feedbackRating:n"]],
  ['components/TutorClient.tsx',["fetch('/api/natlas/asr'","askTeacher(transcript)","/api/natlas/evidence","N-ATLAS heard","transcriptCorrected:true","markLatestVoiceMastery"]],
  ['app/admin/natlas-evidence/page.tsx',["validation_mode='VALIDATION'","Failure evidence","Answer provenance","ASR median / p95","Mastery success","Export validation CSV"]],
