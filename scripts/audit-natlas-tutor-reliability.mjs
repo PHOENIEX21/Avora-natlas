@@ -45,7 +45,12 @@ const checks=[
  ['argumentative essay ASR variant is handled transparently',route.includes('augmentative essay')&&route.includes('If you meant “argumentative essay”')],
  ['possible quadratic transcript is clarified before linear solving',route.includes('Possible quadratic equation — confirm x² term')],
  ['loose right-triangle wording has deterministic angle handling',route.includes('180° − 90° − ${known}° = ${other}°')],
- ['cosine-hypotenuse multi-intent question has one coherent answer',route.includes("concept:'Cosine and hypotenuse'")]
+ ['cosine-hypotenuse multi-intent question has one coherent answer',route.includes("concept:'Cosine and hypotenuse'")],
+ ['whole-curriculum evidence scans JSS1 JSS2 JSS3',route.includes("for(const classLevel of ['JSS1','JSS2','JSS3'])")&&route.includes('function curriculumEvidencePack')],
+ ['whole-curriculum evidence scans Mathematics and English',route.includes("for(const subject of ['Mathematics','English Language'] as const)")],
+ ['AI receives ranked authored curriculum evidence',route.includes('curriculumEvidence=curriculumEvidencePack(d)')&&route.includes('curriculumEvidence,board:d.board')],
+ ['home and lesson questions are not forced into current context',route.includes('Home, Learn, or inside any lesson')],
+ ['AI distinguishes curriculum grounding from general knowledge',route.includes("enum:['AVORA_CURRICULUM','GENERAL_KNOWLEDGE','CLARIFICATION']")&&route.includes("parsed?.grounding==='AVORA_CURRICULUM'")]
 ];
 let failed=0;for(const [name,ok] of checks){console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}
 console.log(`${checks.length-failed}/${checks.length} tutor reliability checks passed`);if(failed)process.exit(1);
