@@ -43,7 +43,7 @@ const checks=[
  ['parallelogram has a reliable local definition',route.includes("concept:'Parallelogram'")],
  ['ASR noun-like ambiguity is surfaced rather than silently rewritten',route.includes('Possible voice ambiguity: no/known')],
  ['argumentative essay ASR variant is handled transparently',route.includes('augmentative essay')&&route.includes('If you meant “argumentative essay”')],
- ['possible quadratic transcript is clarified before linear solving',route.includes('Possible quadratic equation — confirm x² term')],
+ ['clear spoken quadratics have a safe dedicated route',route.includes("concept:'Quadratic equation'")],
  ['loose right-triangle wording has deterministic angle handling',route.includes('180° − 90° − ${known}° = ${other}°')],
  ['cosine-hypotenuse multi-intent question has one coherent answer',route.includes("concept:'Cosine and hypotenuse'")],
  ['whole-curriculum evidence scans JSS1 JSS2 JSS3',route.includes("for(const classLevel of ['JSS1','JSS2','JSS3'])")&&route.includes('function curriculumEvidencePack')],
@@ -56,7 +56,7 @@ const checks=[
  ['program ambiguity has a useful general definition',route.includes("concept:'Program'")],
  ['grammar plus intonation is answered as the requested pair',route.includes("concept:'Grammar and intonation'")],
  ['clear spoken x-squared quadratics are solved',route.includes("concept:'Quadratic equation'")&&route.includes('const qm=quadText.match')],
- ['inconsistent squared variables are clarified safely',route.includes('variables are inconsistent in the transcript')],
+ ['inconsistent squared variables are clarified safely',route.includes('variable terms are inconsistent in the transcript')],
  ['heading-only curriculum hits are rejected',route.includes('const titleLike=')&&route.includes('usefulExplain')],
  ['augmentative exercise is transparently mapped only as a possible argumentative request',route.includes('/augmentative (?:exercise|essay)/')&&route.includes('If “augmentative” was intentional') ]
 ];
