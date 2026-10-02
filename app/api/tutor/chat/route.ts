@@ -116,6 +116,13 @@ function localCurriculumAnswer(d:z.infer<typeof schema>){
 }
 function focusedLearningAnswer(d:z.infer<typeof schema>){
  const q=d.question.toLowerCase();
+ const normalized=q.replace(/[’]/g,"'").replace(/[^a-z0-9°' .-]+/g,' ').replace(/\s+/g,' ').trim();
+ if(/^(?:what(?:'s| is)|define|explain) (?:an? )?angle[?. ]*$/.test(normalized))return {reply:'An angle is the amount of turn between two rays or lines that meet at a point called the vertex. Angles are measured in degrees (°). A right angle measures 90°.',board:['Angle → amount of turn','Meeting point → vertex','Right angle = 90°'],source:{type:'GENERAL_LEARNING',subject:'Mathematics',concept:'Angle'}};
+ if(/^(?:what(?:'s| is)|define|explain) (?:a )?right[- ]angle(?:d)? triangle[?. ]*$/.test(normalized))return {reply:'A right-angled triangle is a triangle with one angle equal to 90°. The side opposite the 90° angle is the hypotenuse, and it is the longest side.',board:['One angle = 90°','Opposite 90° → hypotenuse'],source:{type:'GENERAL_LEARNING',subject:'Mathematics',concept:'Right-angled triangle'}};
+ const rightOne=normalized.match(/(?:right[- ]angle(?:d)? triangle|right angle).*?(\d+(?:\.\d+)?) ?(?:degrees?|°)/i);
+ if(rightOne&&/other angle|remaining angle/.test(normalized)){const known=Number(rightOne[1]);if(known>0&&known<90){const other=90-known;return {reply:`A right-angled triangle already has one 90° angle. Since all three angles total 180°, the other two angles total 90°. So the missing angle is 90° − ${known}° = ${other}°.`,board:['Triangle total = 180°',`90° − ${known}° = ${other}°`],source:{type:'DETERMINISTIC_MATH',concept:'Right-triangle angle sum'}};}}
+ if(/\bhypotenuse\b/.test(normalized)&&/\b(find|calculate|work out|what is|what's)\b/.test(normalized))return {reply:'The hypotenuse is the side opposite the 90° angle in a right-angled triangle. If you know the other two side lengths, use Pythagoras: h² = a² + b². If you know one acute angle and one side, tell me which side and its length so I can choose sine or cosine. An angle alone is not enough to calculate the hypotenuse length.',board:['Hypotenuse → opposite 90°','Two sides → h² = a² + b²','Angle + side → use trig'],source:{type:'GENERAL_LEARNING',subject:'Mathematics',concept:'Hypotenuse'}};
+
  const numberWords=q.match(/\b(\d{1,3}(?:,\d{3})+)\b.*\b(?:in words|to words|write.*words|read.*number)\b/i);
  if(numberWords){
   const n=Number(numberWords[1].replace(/,/g,''));
