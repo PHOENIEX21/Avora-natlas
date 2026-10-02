@@ -63,6 +63,33 @@ function deterministicMathAnswer(question:string){
  return {reply:`${a} ${symbol} ${b} = ${value}. ${op==='+'?'Add the two numbers together.':op==='-'?'Subtract the second number from the first.':op==='*'?'Multiply the two numbers.':'Divide the first number by the second.'}`,board:[`${a} ${symbol} ${b} = ${value}`],source:{type:'DETERMINISTIC_MATH'}};
 }
 
+function curriculumEvidencePack(d:z.infer<typeof schema>,limit=6){
+ const normalize=(v:string)=>v.toLowerCase().replace(/[^a-z0-9°]+/g,' ').replace(/\s+/g,' ').trim();
+ const aliases:Record<string,string>={questions:'equation',equations:'equation',fractions:'fraction',nouns:'noun',verbs:'verb',adjectives:'adjective',pronouns:'pronoun',angles:'angle',triangles:'triangle',essays:'essay'};
+ const stop=new Set(['what','whats','which','this','that','about','please','tell','give','example','examples','define','explain','understand','carefully','with','from','into','does','mean','means','show','teach','could','would','should','find','types','type']);
+ const stem=(x:string)=>aliases[x]||x.replace(/(ing|ed|es|s)$/,'');
+ const qwords=new Set(normalize(d.question).split(/\s+/).filter(x=>x.length>2&&!stop.has(x)).map(stem));
+ const rows:any[]=[];
+ for(const classLevel of ['JSS1','JSS2','JSS3']){
+  for(const subject of ['Mathematics','English Language'] as const){
+   for(const item of masterTopics(classLevel,subject)){
+    const plan=getCurriculumTutorPlan(classLevel,subject,item.topic); if(!plan)continue;
+    for(const unit of plan.units||[]){
+     const terms=Array.isArray(unit.terms)?unit.terms:[];
+     const structured=(unit.structuredSteps||[]).flatMap((x:any)=>[x?.title,x?.label,x?.spoken,x?.text,...(x?.lines||[])]).filter(Boolean);
+     const fields=[item.topic,unit.title,unit.explain,unit.example,unit.check,unit.why,...(unit.prerequisites||[]),...(unit.outcomes||[]),...(unit.commonMistakes||[]),...terms.flatMap((x:any)=>Array.isArray(x)?[x[0],x[1]]:[]),...((unit.sourceSteps||[]) as string[]),...structured].filter(Boolean);
+     const words=fields.flatMap((v:any)=>normalize(String(v)).split(/\s+/)).filter(x=>x.length>2).map(stem);
+     const overlap=[...new Set(words.filter((x:string)=>qwords.has(x)))];
+     const exact=normalize(item.topic).length>2&&normalize(d.question).includes(normalize(item.topic))||normalize(unit.title||'').length>2&&normalize(d.question).includes(normalize(unit.title||''));
+     const score=overlap.length*6+(exact?30:0)+(classLevel===d.classLevel?2:0)+(subject===d.subject?2:0);
+     if(score>0)rows.push({score,classLevel,subject,topic:item.topic,unit:unit.title,explain:unit.explain,example:unit.example,terms:terms.slice(0,8),structured:structured.slice(0,10),outcomes:(unit.outcomes||[]).slice(0,6),commonMistakes:(unit.commonMistakes||[]).slice(0,5)});
+    }
+   }
+  }
+ }
+ return rows.sort((a,b)=>b.score-a.score).slice(0,limit);
+}
+
 function localCurriculumAnswer(d:z.infer<typeof schema>){
  const normalize=(v:string)=>v.toLowerCase().replace(/[^a-z0-9°]+/g,' ').replace(/\s+/g,' ').trim();
  const aliases:Record<string,string>={questions:'equation',equations:'equation',fractions:'fraction'};
@@ -273,17 +300,18 @@ export async function POST(req:Request){
   const aiClaim=await claimAiRequest(session.userId,'TUTOR_CHAT');
   if(!aiClaim.allowed)return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'},aiLimit:aiClaim.reason});
 
-  const context={learner:{classLevel:d.classLevel,exam:d.exam},lesson:{subject:d.subject,topic:d.topic,unit:unit?{title:unit.title,terms:unit.terms,explain:unit.explain,example:unit.example,check:unit.check,why:unit.why,prerequisites:unit.prerequisites,outcomes:unit.outcomes,commonMistakes:unit.commonMistakes}:null},board:d.board,recent:d.recent,currentStepId:d.currentStepId,lessonSteps:d.lessonSteps};
+  const curriculumEvidence=curriculumEvidencePack(d);
+  const context={learner:{classLevel:d.classLevel,exam:d.exam},currentLesson:{subject:d.subject,topic:d.topic,unit:unit?{title:unit.title,terms:unit.terms,explain:unit.explain,example:unit.example,check:unit.check,why:unit.why,prerequisites:unit.prerequisites,outcomes:unit.outcomes,commonMistakes:unit.commonMistakes}:null},curriculumEvidence,board:d.board,recent:d.recent,currentStepId:d.currentStepId,lessonSteps:d.lessonSteps};
   const ai=await aiStructured<any>({
     name:'avora_teacher_turn',
-    instructions:`You are AVORA, a warm, rigorous Nigerian digital teacher. Teach naturally like a skilled private tutor, not a chatbot and not a textbook reader. Use the supplied lesson context when the learner's question is about the current lesson. Answer the learner's exact question first. If the learner asks a different educational question, answer that question directly and do not force the current lesson into the answer. If the question is unrelated to learning, briefly say AVORA is focused on learning and invite an educational question. Use age-appropriate language for the class level. Explain reasoning, not just procedures. If the learner is confused, change approach. Do not falsely claim mastery. Teach with enough depth to satisfy a serious classroom teacher: define terms, connect prerequisites, explain the reason for each step, work at least one concrete example when useful, and then give the learner a meaningful turn. Do not dump long notes, but do not be shallow. If the learner asks about a worked problem, explicitly explain the working rather than merely state the answer. Keep the response focused enough for a live lesson. When the learner says they do not understand, reduce the task to one smaller prerequisite or step and use a different example. Never praise an answer as correct unless the reasoning supports it. If uncertain, ask a checking question. When the learner is confused or makes a mistake, choose reguideStepId ONLY from the supplied lessonSteps. Point to the earliest useful teaching step that repairs the misconception; do not invent an ID. assistanceLevel is HINT for a small prompt, RETEACH when you substantially re-explain or work through the idea, and ANSWER only when a full answer/solution has been revealed. If substantial help is given, requiresFreshEvidence must be true because assisted work cannot prove independent mastery. Return structured JSON only. board should contain at most 3 short lines that genuinely help the live whiteboard.`,
+    instructions:`You are AVORA, a warm, rigorous Nigerian digital teacher. Teach naturally like a skilled private tutor, not a chatbot and not a textbook reader. The request includes the current lesson plus ranked evidence retrieved from AVORA's authored JSS1-JSS3 Mathematics and English curriculum. Answer the learner's exact educational question first. When curriculumEvidence supports the question, ground the answer in that evidence and preserve its academic meaning; synthesize an actual explanation instead of repeating a heading. The learner may ask from Home, Learn, or inside any lesson: do not force the current lesson, class or subject onto a different educational question. If the question is clearly educational but no retrieved evidence is relevant, you may answer from sound general school knowledge, while never claiming it came from AVORA curriculum. If the N-ATLAS transcript is ambiguous enough to change the academic meaning, explicitly ask the learner to confirm the likely term rather than silently rewriting it. If the question is unrelated to learning, briefly say AVORA is focused on learning and invite an educational question. Use age-appropriate language for the class level. Explain reasoning, not just procedures. If the learner is confused, change approach. Do not falsely claim mastery. Teach with enough depth to satisfy a serious classroom teacher: define terms, connect prerequisites, explain the reason for each step, work at least one concrete example when useful, and then give the learner a meaningful turn. Do not dump long notes, but do not be shallow. If the learner asks about a worked problem, explicitly explain the working rather than merely state the answer. Keep the response focused enough for a live lesson. When the learner says they do not understand, reduce the task to one smaller prerequisite or step and use a different example. Never praise an answer as correct unless the reasoning supports it. If uncertain, ask a checking question. When the learner is confused or makes a mistake, choose reguideStepId ONLY from the supplied lessonSteps. Point to the earliest useful teaching step that repairs the misconception; do not invent an ID. assistanceLevel is HINT for a small prompt, RETEACH when you substantially re-explain or work through the idea, and ANSWER only when a full answer/solution has been revealed. If substantial help is given, requiresFreshEvidence must be true because assisted work cannot prove independent mastery. Return structured JSON only. board should contain at most 3 short lines that genuinely help the live whiteboard.`,
     input:`LESSON CONTEXT\n${JSON.stringify(context)}\n\nLEARNER: ${d.question}`,
     maxOutputTokens:1800,
-    schema:{type:'object',additionalProperties:false,properties:{reply:{type:'string'},board:{type:'array',items:{type:'string'},maxItems:3},reguideStepId:{type:['string','null']},assistanceLevel:{type:'string',enum:['HINT','RETEACH','ANSWER']},requiresFreshEvidence:{type:'boolean'}},required:['reply','board','reguideStepId','assistanceLevel','requiresFreshEvidence']}
+    schema:{type:'object',additionalProperties:false,properties:{reply:{type:'string'},board:{type:'array',items:{type:'string'},maxItems:3},reguideStepId:{type:['string','null']},assistanceLevel:{type:'string',enum:['HINT','RETEACH','ANSWER']},requiresFreshEvidence:{type:'boolean'},grounding:{type:'string',enum:['AVORA_CURRICULUM','GENERAL_KNOWLEDGE','CLARIFICATION']}},required:['reply','board','reguideStepId','assistanceLevel','requiresFreshEvidence','grounding']}
   });
   if(!ai.ok){await completeAiRequest(aiClaim.eventId,null,'FAILED');console.warn('AVORA AI tutor unavailable',ai.error,ai.status||'',ai.detail||'');return NextResponse.json({...withGuidanceMeta(d,{reply:`I heard your question as: “${d.question}” I do not have a reliable answer for that yet. Try asking it in another way, or ask me another learning question.`,board:[]},'HINT'),mode:'reliable-answer-unavailable',answerUnavailable:true,knowledgeSource:{type:'NONE'}});}
   await completeAiRequest(aiClaim.eventId,ai.usage,'COMPLETED');
   const parsed=ai.json as any;
-  return NextResponse.json({...parsed,reguideStepId:safeReguideStep(d,parsed?.reguideStepId),mode:`ai-${ai.usage.provider}`,knowledgeSource:{type:'EXTERNAL_AI',provider:ai.usage.provider}});
+  return NextResponse.json({...parsed,reguideStepId:safeReguideStep(d,parsed?.reguideStepId),mode:`ai-${ai.usage.provider}`,knowledgeSource:parsed?.grounding==='AVORA_CURRICULUM'?{type:'AVORA_CURRICULUM',provider:ai.usage.provider}:{type:'EXTERNAL_AI',provider:ai.usage.provider}});
  }catch(e){console.error('tutor chat',e);return NextResponse.json({error:'AVORA could not answer that just now. Please try again.'},{status:400});}
 }
