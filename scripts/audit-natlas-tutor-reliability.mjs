@@ -39,7 +39,7 @@ const checks=[
  ['home Ask AVORA is explicitly context-neutral',globalAsk.includes("subject:'General Learning',topic:'Ask AVORA'")],
  ['home Ask AVORA forwards learner class without forcing a lesson topic',globalAsk.includes('classLevel,exam,question:q,recent:recent.slice(-8)')],
  ['home voice Ask AVORA records the same global context',globalAsk.includes("subject:'General Learning',topic:'Ask AVORA',asrSuccess:true")],
- ['lesson and home Ask AVORA share tutor API contract',globalAsk.includes("fetch('/api/tutor/chat'")&&tutor.includes("fetch('/api/tutor/chat'")),
+ ['lesson and home Ask AVORA share tutor API contract',globalAsk.includes("fetch('/api/tutor/chat'")&&tutor.includes("fetch('/api/tutor/chat'")],
  ['Learn exposes JSS1 to JSS3 switching',learn.includes("['JSS1','JSS2','JSS3']")&&learn.includes('previewClass=')],
  ['selected class reaches the tutor lesson',learn.includes("'&previewClass='+classLevel")],
  ['binary multiplication is handled before generic decimal arithmetic',route.indexOf('const binaryExpr=')<route.indexOf("const m=q.match(/(-?\\d+")],
