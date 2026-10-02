@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-const route=fs.readFileSync('app/api/tutor/chat/route.ts','utf8');
+const route=fs.readFileSync('app/api/tutor/chat/route.ts','utf8');\nconst globalAsk=fs.readFileSync('components/GlobalAskAvora.tsx','utf8');\nconst learn=fs.readFileSync('app/learn/page.tsx','utf8');
 const checks=[
  ['master curriculum inventory drives cross-topic search',route.includes("masterTopics(classLevel,subject)")],
  ['unsafe proposition-to-preposition alias removed',!route.includes("propositions:'preposition'")&&!route.includes("proposition:'preposition'")],
@@ -26,7 +26,7 @@ const checks=[
  ['english vocabulary spans core language concepts',['noun','verb','adjective','adverb','pronoun','grammar','vowel','consonant','comprehension','essay','phoneme'].every(x=>route.includes("'"+x+"'"))],
  ['ambiguous questions preserve current curriculum as a ranked candidate',route.includes("add(getCurriculumTutorPlan(d.classLevel,d.subject,d.topic),d.subject,d.topic,d.classLevel,true)")],
  ['cross-class curriculum search covers JSS1 to JSS3',route.includes("[d.classLevel,'JSS1','JSS2','JSS3']")],
- ['subject filtering occurs before selecting curriculum hit',route.indexOf('const ranked=hintedSubject')<route.indexOf('const hit=ranked[0]')]
+ ['subject filtering occurs before selecting curriculum hit',route.indexOf('const ranked=hintedSubject')<route.indexOf('const hit=ranked[0]')],\n ['authored structured lesson steps are searchable',route.includes('unit.structuredSteps')&&route.includes('x?.spoken')],\n ['foundational angle definition has a direct reliable path',route.includes("concept:'Angle'")&&route.includes('amount of turn')],\n ['right-angled triangle has a direct reliable path',route.includes("concept:'Right-angled triangle'")&&route.includes('hypotenuse')],\n ['hypotenuse questions have a direct reliable path',route.includes("concept:'Hypotenuse'")&&route.includes('Pythagoras')],\n ['ambiguous N-ATLAS wording is clarified without silent correction',route.includes("failureCode:'AMBIGUOUS_TRANSCRIPT'")&&route.includes('I will not silently change what N-ATLAS heard')],\n ['global Ask AVORA uses the same tutor chat route',globalAsk.includes("fetch('/api/tutor/chat'")],\n ['Learn exposes JSS1 to JSS3 switching',learn.includes("['JSS1','JSS2','JSS3']")&&learn.includes('previewClass=')],\n ['selected class reaches the tutor lesson',learn.includes("'&previewClass='+classLevel")]
 ];
 let failed=0;for(const [name,ok] of checks){console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}
 console.log(`${checks.length-failed}/${checks.length} tutor reliability checks passed`);if(failed)process.exit(1);
