@@ -71,7 +71,7 @@ type ChatTurn={role:'student'|'teacher';text:string};
 type StructuredExample={title:string;problem:string;steps:string[];why:string;check:string;verification?:string;difficulty?:number;curriculumFocus?:string};
 type Phase='probe'|'teach'|'guided'|'exercise'|'success';
 const VOICE_TEACHING_ENABLED=process.env.NEXT_PUBLIC_VOICE_TEACHING_ENABLED==='true';
-const NATLAS_VOICE_ENABLED=process.env.NEXT_PUBLIC_NATLAS_VOICE_ENABLED==='true';
+const NATLAS_VOICE_ENABLED=process.env.NEXT_PUBLIC_NATLAS_VOICE_ENABLED!=='false';
 type GuidanceMeta={reguideStepId?:string|null;assistanceLevel?:'HINT'|'RETEACH'|'ANSWER';requiresFreshEvidence?:boolean};
 
 async function parseJson(r:Response,label:string){const text=await r.text();if(!text.trim())throw new Error(`${label} returned no data.`);let d:any;try{d=JSON.parse(text)}catch{throw new Error(`${label} returned an invalid response.`)}if(r.status===401){const e:any=new Error('Session expired.');e.code='SESSION_EXPIRED';throw e}if(!r.ok)throw new Error(d.error||`${label} failed.`);return d}
