@@ -50,7 +50,15 @@ const checks=[
  ['whole-curriculum evidence scans Mathematics and English',route.includes("for(const subject of ['Mathematics','English Language'] as const)")],
  ['AI receives ranked authored curriculum evidence',route.includes('curriculumEvidence=curriculumEvidencePack(d)')&&route.includes('curriculumEvidence,board:d.board')],
  ['home and lesson questions are not forced into current context',route.includes('Home, Learn, or inside any lesson')],
- ['AI distinguishes curriculum grounding from general knowledge',route.includes("enum:['AVORA_CURRICULUM','GENERAL_KNOWLEDGE','CLARIFICATION']")&&route.includes("parsed?.grounding==='AVORA_CURRICULUM'")]
+ ['AI distinguishes curriculum grounding from general knowledge',route.includes("enum:['AVORA_CURRICULUM','GENERAL_KNOWLEDGE','CLARIFICATION']")&&route.includes("parsed?.grounding==='AVORA_CURRICULUM'")],
+ ['interest vocabulary is routed to Mathematics',route.includes("'compound interest'")&&route.includes("'simple interest'")],
+ ['simple and compound interest have a reliable mathematics answer',route.includes("concept:'Simple and compound interest'")&&route.includes('SI = PRT/100')],
+ ['program ambiguity has a useful general definition',route.includes("concept:'Program'")],
+ ['grammar plus intonation is answered as the requested pair',route.includes("concept:'Grammar and intonation'")],
+ ['clear spoken x-squared quadratics are solved',route.includes("concept:'Quadratic equation'")&&route.includes('const qm=quadText.match')],
+ ['inconsistent squared variables are clarified safely',route.includes('variables are inconsistent in the transcript')],
+ ['heading-only curriculum hits are rejected',route.includes('const titleLike=')&&route.includes('usefulExplain')],
+ ['augmentative exercise is transparently mapped only as a possible argumentative request',route.includes('/augmentative (?:exercise|essay)/')&&route.includes('If “augmentative” was intentional') ]
 ];
 let failed=0;for(const [name,ok] of checks){console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}
 console.log(`${checks.length-failed}/${checks.length} tutor reliability checks passed`);if(failed)process.exit(1);
