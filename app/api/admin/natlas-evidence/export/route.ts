@@ -7,7 +7,7 @@ export async function GET(req:Request){
  await requireAdmin();
  const url=new URL(req.url);const format=url.searchParams.get('format')==='json'?'json':'csv';
  try{
-  const rows=await withDbRetry(()=>sql`SELECT interaction_key,session_key,language,class_level,subject,topic,asr_provider,asr_model,asr_success,asr_latency_ms,transcript_corrected,answer_source,answer_success,answer_latency_ms,mastery_checked,mastery_success,feedback_rating,failure_code,created_at FROM natlas_validation_interactions WHERE validation_mode='VALIDATION' ORDER BY created_at ASC`,1);
+  const rows=await withDbRetry(()=>sql`SELECT interaction_key,session_key,language,class_level,subject,topic,asr_provider,asr_model,asr_success,asr_latency_ms,transcript_corrected,answer_source,answer_success,answer_latency_ms,mastery_checked,mastery_success,feedback_rating,failure_code,created_at FROM natlas_validation_interactions WHERE validation_mode='VALIDATION' AND created_at >= COALESCE((SELECT MAX(started_at) FROM natlas_validation_runs WHERE status='ACTIVE'),'infinity'::timestamptz) ORDER BY created_at ASC`,1);
   const exportedAt=new Date().toISOString();
   if(format==='json')return NextResponse.json({scope:'VALIDATION_ONLY',exportedAt,count:rows.length,interactions:rows},{headers:{'Cache-Control':'no-store','Content-Disposition':'attachment; filename="avora-natlas-validation-evidence.json"'}});
   const headers=['interaction_key','session_key','language','class_level','subject','topic','asr_provider','asr_model','asr_success','asr_latency_ms','transcript_corrected','answer_source','answer_success','answer_latency_ms','mastery_checked','mastery_success','feedback_rating','failure_code','created_at'];
