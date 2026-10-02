@@ -8,6 +8,7 @@ const dashboard=read('app/admin/natlas-evidence/page.tsx');
 const snapshot=read('app/api/admin/natlas-evidence/snapshot/route.ts');
 const globalAsk=read('components/GlobalAskAvora.tsx');
 const exportRoute=read('app/api/admin/natlas-evidence/export/route.ts');
+const runMigration=read('database/migrations/036_natlas_official_validation_boundary.sql');
 
 const checks=[
  ['N-ATLAS ASR is the voice endpoint',tutor.includes("fetch('/api/natlas/asr'")],
@@ -36,6 +37,10 @@ const checks=[
  ['dashboard exposes latency quality',dashboard.includes('ASR median / p95')&&dashboard.includes('Answer median / p95')],
  ['dashboard exposes learning outcome',dashboard.includes('Mastery success')&&dashboard.includes('Transcript corrections')],
  ['validation export is validation-only',exportRoute.includes("validation_mode='VALIDATION'")],
+ ['official evidence has an auditable run boundary',runMigration.includes('natlas_validation_runs')&&runMigration.includes("status IN ('ACTIVE','CLOSED')")],
+ ['dashboard excludes pre-run validation setup traffic',dashboard.includes('natlas_validation_runs')&&dashboard.includes("status='ACTIVE'")],
+ ['export excludes pre-run validation setup traffic',exportRoute.includes('natlas_validation_runs')&&exportRoute.includes("status='ACTIVE'")],
+ ['snapshot excludes pre-run validation setup traffic',snapshot.includes('natlas_validation_runs')&&snapshot.includes("status='ACTIVE'")],
  ['validation export excludes raw transcript and audio',!exportRoute.includes('raw_audio')&&!exportRoute.includes('transcript_text')],
  ['privacy boundary documented in schema',migration.includes('Never store raw audio')]
 ];
