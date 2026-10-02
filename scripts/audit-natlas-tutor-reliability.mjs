@@ -67,4 +67,16 @@ const checks=[
  ['interest teaching starts from first-principles vocabulary',route.includes('PRINCIPAL (P)')&&route.includes('RATE (R)')&&route.includes('TIME (T)')]
 ];
 let failed=0;for(const [name,ok] of checks){console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}
-console.log(`${checks.length-failed}/${checks.length} tutor reliability checks passed`);if(failed)process.exit(1);
+const requiredPilotDimensions=['JSS1','JSS2','JSS3','Mathematics','English Language','multi-topic','voice ambiguity','cross-topic','follow-up','outside current lesson'];
+const pilotGuards=[
+ ['JSS1-JSS3 curriculum coverage',requiredPilotDimensions.slice(0,3).every(x=>route.includes("'"+x+"'")||route.includes('"'+x+'"'))],
+ ['Mathematics and English coverage',requiredPilotDimensions.slice(3,5).every(x=>route.includes("'"+x+"'")||route.includes('"'+x+'"'))],
+ ['multi-topic calculator hijack guard',route.includes('A tiny calculator must never swallow a larger learning request')],
+ ['voice ambiguity transparency',route.includes('I will not silently change what N-ATLAS heard')],
+ ['cross-topic semantic gate',route.includes('Generic word overlap is not enough')],
+ ['follow-up context is supplied',route.includes('recent:d.recent')],
+ ['questions outside current lesson are explicitly allowed',route.includes('do not force the current lesson')]
+];
+for(const [name,ok] of pilotGuards){console.log(ok?'PASS':'FAIL','50-turn preflight:',name);if(!ok)failed++}
+console.log(`${checks.length+pilotGuards.length-failed}/${checks.length+pilotGuards.length} tutor reliability + 50-turn preflight checks passed`);
+if(failed)process.exit(1);
