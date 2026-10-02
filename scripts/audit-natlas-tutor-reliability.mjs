@@ -36,7 +36,16 @@ const checks=[
  ['ambiguous N-ATLAS wording is clarified without silent correction',route.includes("failureCode:'AMBIGUOUS_TRANSCRIPT'")&&route.includes('I will not silently change what N-ATLAS heard')],
  ['global Ask AVORA uses the same tutor chat route',globalAsk.includes("fetch('/api/tutor/chat'")],
  ['Learn exposes JSS1 to JSS3 switching',learn.includes("['JSS1','JSS2','JSS3']")&&learn.includes('previewClass=')],
- ['selected class reaches the tutor lesson',learn.includes("'&previewClass='+classLevel")]
+ ['selected class reaches the tutor lesson',learn.includes("'&previewClass='+classLevel")],
+ ['binary multiplication is handled before generic decimal arithmetic',route.indexOf('const binaryExpr=')<route.indexOf("const m=q.match(/(-?\\d+")],
+ ['grammar has a reliable local definition',route.includes("concept:'Grammar'")&&route.includes('system of rules and patterns')],
+ ['simultaneous equations explanation does not depend on fuzzy headings',route.includes("concept:'Simultaneous equations'")&&route.includes('Common methods are elimination')],
+ ['parallelogram has a reliable local definition',route.includes("concept:'Parallelogram'")],
+ ['ASR noun-like ambiguity is surfaced rather than silently rewritten',route.includes('Possible voice ambiguity: no/known')],
+ ['argumentative essay ASR variant is handled transparently',route.includes('augmentative essay')&&route.includes('If you meant “argumentative essay”')],
+ ['possible quadratic transcript is clarified before linear solving',route.includes('Possible quadratic equation — confirm x² term')],
+ ['loose right-triangle wording has deterministic angle handling',route.includes('180° − 90° − ${known}° = ${other}°')],
+ ['cosine-hypotenuse multi-intent question has one coherent answer',route.includes("concept:'Cosine and hypotenuse'")]
 ];
 let failed=0;for(const [name,ok] of checks){console.log(ok?'PASS':'FAIL',name);if(!ok)failed++}
 console.log(`${checks.length-failed}/${checks.length} tutor reliability checks passed`);if(failed)process.exit(1);
