@@ -6,7 +6,7 @@ Official challenge evidence is counted only while `NATLAS_EVIDENCE_MODE=VALIDATI
 ## Before validation
 1. Complete development and pilot testing.
 2. Deploy the authenticated N-ATLAS ASR runtime and set the matching server-only `NATLAS_ASR_TOKEN`.
-3. Apply evidence migrations 033 and 034.
+3. Apply evidence migrations 033, 034 and 035 before validation. Migration 035 records AI provider/model/fallback provenance; verify all three migrations on the production database before collecting official evidence.
 4. Confirm the learner is signed in with a STUDENT account and the correct class/exam profile.
 5. Confirm the admin evidence dashboard is accessible only to administrators.
 6. Change the deployment environment to `NATLAS_EVIDENCE_MODE=VALIDATION` only for the genuine validation period.
