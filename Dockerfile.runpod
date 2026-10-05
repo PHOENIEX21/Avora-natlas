@@ -4,5 +4,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3 python3
 WORKDIR /app
 COPY services/runpod-requirements.txt /app/requirements.txt
 RUN python3 -m pip install --upgrade pip && python3 -m pip install -r /app/requirements.txt
-COPY services/natlas_runpod.py /app/natlas_runpod.py
-CMD ["python3","-u","/app/natlas_runpod.py"]
+COPY services /app/services
+COPY handler.py /app/handler.py
+CMD ["python3","-u","/app/handler.py"]
