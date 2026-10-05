@@ -53,4 +53,3 @@ def handler(job):
     return {"text":text,"model":MODEL_ID,"language":"en-NG",
             "inferenceMs":round((time.perf_counter()-started)*1000)}
 
-runpod.serverless.start({"handler":handler})
