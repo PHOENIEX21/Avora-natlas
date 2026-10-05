@@ -1,7 +1,13 @@
 import { sql } from '@/lib/db';
 export type AiClaimResult={allowed:false;reason:'DAILY_USER_LIMIT'|'MONTHLY_GLOBAL_LIMIT'|'MONTHLY_USD_BUDGET'}|{allowed:true;eventId:string};
 export async function claimAiRequest(userId:string,feature:string):Promise<AiClaimResult>{
- const daily=Math.max(1,Number(process.env.AI_DAILY_REQUEST_LIMIT_PER_USER||50));
+ const validationMode=String(process.env.NATLAS_EVIDENCE_MODE||'DEVELOPMENT').toUpperCase()==='VALIDATION';
+ // Official voice validation requires 50+ documented interactions and may legitimately
+ // concentrate many tests on a small number of signed-in devices. Keep the commercial
+ // default at 50, but do not let that default silently turn genuine validation into
+ // ANSWER_UNAVAILABLE. An explicit env limit always wins.
+ const defaultDaily=validationMode?500:50;
+ const daily=Math.max(1,Number(process.env.AI_DAILY_REQUEST_LIMIT_PER_USER||defaultDaily));
  const monthly=Math.max(daily,Number(process.env.AI_MONTHLY_REQUEST_LIMIT_GLOBAL||10000));
  const monthlyUsd=Math.max(0,Number(process.env.AI_MONTHLY_BUDGET_USD||5));
  const [u]=await sql`SELECT COUNT(*)::int n FROM ai_usage_events WHERE user_id=${userId} AND created_at>=date_trunc('day',now()) AND status<>'FAILED'`;

@@ -22,6 +22,10 @@ export async function POST(req:Request){
  try{
   const raw=await req.json();
   if(raw?.kind){
+   // Interaction text is evidence/logging, not an API reason to reject an otherwise valid turn.
+   // Bound it at the server edge so older/newer clients cannot break progress recording.
+   if(typeof raw.learnerText==='string')raw.learnerText=raw.learnerText.slice(0,1600);
+   if(typeof raw.teacherText==='string')raw.teacherText=raw.teacherText.slice(0,2200);
    const d=interactionBody.parse(raw),slug=subjectSlug(d.subject);
    await withDbRetry(()=>sql`INSERT INTO tutor_interactions(student_id,exam_name,subject_slug,topic_name,unit_title,interaction_kind,learner_text,teacher_text,outcome) VALUES(${s.userId},${d.exam},${slug},${d.topic},${d.unitTitle||null},${d.kind},${d.learnerText||null},${d.teacherText||null},${d.outcome||null})`);
    if(d.kind==='CHECKPOINT')await withDbRetry(()=>sql`UPDATE tutor_topic_progress SET checkpoint_attempts=checkpoint_attempts+1,checkpoint_successes=checkpoint_successes+CASE WHEN ${d.outcome||''}='CORRECT' THEN 1 ELSE 0 END,last_unit_title=${d.unitTitle||null},last_interaction_at=now(),updated_at=now() WHERE student_id=${s.userId} AND exam_name=${d.exam} AND subject_slug=${slug} AND lower(topic_name)=lower(${d.topic})`);
